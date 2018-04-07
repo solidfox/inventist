@@ -1,0 +1,55 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "ED3E5FDD-EB83-44A6-BAC2-8E27E959D132",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "DA68BD87-6FFE-487B-B054-96E1F9BA140E",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "341BFB8F-D604-499C-BB6F-3B439C905F46",
+    "height": 40,
+    "width": 1024,
+    "x": 0,
+    "y": 0
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Browser",
+  "nameIsFixed": false,
+  "overrideValues": [
+    {
+      "_class": "overrideValue",
+      "overrideName": "8E52184F-761F-41D4-868D-A9E7D1B53981_stringValue",
+      "value": "Contractors - GripsHolmsSkolan"
+    }
+  ],
+  "overrides": {
+    "8E52184F-761F-41D4-868D-A9E7D1B53981": "Contractors - GripsHolmsSkolan"
+  },
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "1828EDB6-9207-464C-8BEB-2832D6E620F4",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "7EF3E881-64E2-43F2-A10C-0A744E4196D4",
+  "verticalSpacing": 0
+}

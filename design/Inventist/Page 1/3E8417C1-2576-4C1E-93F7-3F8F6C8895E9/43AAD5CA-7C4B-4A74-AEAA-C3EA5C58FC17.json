@@ -1,0 +1,49 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "43AAD5CA-7C4B-4A74-AEAA-C3EA5C58FC17",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "DD5F5E2D-3058-46D8-8B0D-0DBB2F7B56FA",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "B7102A0A-2B6E-48A9-B86F-8CD6CE268185",
+    "height": 50,
+    "width": 675,
+    "x": 349,
+    "y": 40
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Header/Breadcrumb",
+  "nameIsFixed": false,
+  "overrideValues": [
+  ],
+  "overrides": {
+  },
+  "resizingConstraint": 11,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "196587C9-6EF2-43CF-B6E2-E653D4A3A0D9",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "C7053B6C-A056-4E37-BDC3-B61D500E9EBB",
+  "verticalSpacing": 0
+}

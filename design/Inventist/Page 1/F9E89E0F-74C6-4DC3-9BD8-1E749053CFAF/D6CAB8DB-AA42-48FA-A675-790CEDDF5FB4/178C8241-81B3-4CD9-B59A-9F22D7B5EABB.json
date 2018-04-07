@@ -1,0 +1,56 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "178C8241-81B3-4CD9-B59A-9F22D7B5EABB",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "315BAD37-047E-4D95-8FB3-841F3D20567A",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "A14397A6-6DC9-4A05-A372-5D6F78C3CBE5",
+    "height": 50,
+    "width": 300,
+    "x": 0,
+    "y": 0
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Input/Search",
+  "nameIsFixed": false,
+  "overrideValues": [
+    {
+      "_class": "overrideValue",
+      "do_objectID": "FC0152DB-E39A-43E3-8D9E-D8719D165160",
+      "overrideName": "17EE7209-61B6-4994-B68F-F398820F8154_stringValue",
+      "value": "Search Contractors"
+    }
+  ],
+  "overrides": {
+    "17EE7209-61B6-4994-B68F-F398820F8154": "Search Contractors"
+  },
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "FF0D05E5-208E-4E99-BA1F-44E18F664AF8",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "4056480F-D59A-45A2-9FDA-1F2C61E9E533",
+  "verticalSpacing": 0
+}

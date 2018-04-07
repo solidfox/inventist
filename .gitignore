@@ -16,3 +16,8 @@ pom.xml.asc
 \.idea/
 
 \.DS_Store
+
+
+# Ignore sketch files
+*.sketch
+design/.DS_Store

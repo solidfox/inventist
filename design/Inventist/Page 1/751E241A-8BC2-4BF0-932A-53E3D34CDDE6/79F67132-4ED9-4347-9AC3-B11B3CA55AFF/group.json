@@ -1,0 +1,57 @@
+{
+  "_class": "group",
+  "do_objectID": "79F67132-4ED9-4347-9AC3-B11B3CA55AFF",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 379,
+    "width": 380,
+    "x": 322,
+    "y": 195
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "symbolInstance",
+      "id": "EB42225B-F779-438D-882A-226B465DDFD3"
+    },
+    {
+      "class": "group",
+      "id": "F9AD2378-53AD-49E2-9370-5CE71149E20F"
+    },
+    {
+      "class": "group",
+      "id": "79AB8DC5-767E-44B9-B183-D281C7BCC808"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "9C8672A6-A942-4CF5-8049-8FE178AD6A1E"
+    }
+  ],
+  "name": "Login box",
+  "nameIsFixed": true,
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

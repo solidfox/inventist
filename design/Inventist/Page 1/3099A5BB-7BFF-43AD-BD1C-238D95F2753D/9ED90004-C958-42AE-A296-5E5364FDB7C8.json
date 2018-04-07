@@ -1,0 +1,56 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "9ED90004-C958-42AE-A296-5E5364FDB7C8",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "DEE9FDB7-16F5-4306-B7EC-5D8308207D24",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "B5799CB4-FBC2-420F-A012-5DA47719DC97",
+    "height": 120,
+    "width": 200,
+    "x": 784,
+    "y": 80
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Dropzone/File drop Copy 2",
+  "nameIsFixed": false,
+  "overrideValues": [
+    {
+      "_class": "overrideValue",
+      "do_objectID": "7586A888-0565-4DF2-8B3B-511A51EB33BC",
+      "overrideName": "47B7EBD9-CB97-4F1B-924D-58F9EDA508E7_stringValue",
+      "value": "Widget 4"
+    }
+  ],
+  "overrides": {
+    "47B7EBD9-CB97-4F1B-924D-58F9EDA508E7": "Widget 4"
+  },
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "1C956E0F-8080-4371-BD1E-A13B5DB8C5C5",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "E6F7FB9C-C2B6-4621-9D5F-C841A9D2C467",
+  "verticalSpacing": 0
+}
