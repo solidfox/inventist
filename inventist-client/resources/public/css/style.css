@@ -1,6 +1,54 @@
 /* some style */
 
 body {
-    font-family: Lato;
+    font-family: Lato, SansSerif;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
 
+.detail-container {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-header {
+    height: 50px;
+    background-color: #ccc;
+}
+
+.detail-main {
+    flex: auto;
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.detail-identity {
+    flex: auto;
+}
+
+.detail-image {
+    flex: 200px;
+}
+.detail-footer {
+    height: 50px;
+    background-color: #ccc;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.line-ht-none {
+    line-height: 0px;
+}
+
+.bold {
+    font-weight: bold;
 }
