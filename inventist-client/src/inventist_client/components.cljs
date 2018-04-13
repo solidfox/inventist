@@ -26,7 +26,7 @@
 
 (defc app [state]
       [:div
-       (people-details (:person state))])
+       (people-details (:person state) (:history state))])
 
 
 
