@@ -21,3 +21,4 @@ pom.xml.asc
 # Ignore sketch files
 *.sketch
 design/.DS_Store
+**/node_modules/

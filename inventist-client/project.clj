@@ -10,8 +10,8 @@
 
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.9.946"]
-                 [org.clojure/core.async  "0.4.474"]
-                 [reagent "0.7.0"]]
+                 ;[org.clojure/core.async  "0.4.474"]
+                 [rum "0.11.2"]]
 
   :plugins [[lein-figwheel "0.5.15"]
             [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]
@@ -25,28 +25,30 @@
                 ;; The presence of a :figwheel configuration here
                 ;; will cause figwheel to inject the figwheel client
                 ;; into your build
-                :figwheel {:on-jsload "inventist-client.core/on-js-reload"
+                :figwheel {:on-jsload "inventist-client.main/on-js-reload"
                            ;; :open-urls will pop open your application
                            ;; in the default browser once Figwheel has
                            ;; started and compiled your application.
                            ;; Comment this out once it no longer serves you.
                            :open-urls ["http://localhost:3449/index.html"]}
 
-                :compiler {:main inventist-client.core
+                :compiler {:main inventist-client.main
                            :asset-path "js/compiled/out"
                            :output-to "resources/public/js/compiled/inventist_client.js"
                            :output-dir "resources/public/js/compiled/out"
                            :source-map-timestamp true
                            ;; To console.log CLJS data-structures make sure you enable devtools in Chrome
                            ;; https://github.com/binaryage/cljs-devtools
-                           :preloads [devtools.preload]}}
+                           :preloads [devtools.preload]
+                           :install-deps true
+                           :npm-deps {:firebaseui "2.7.0"}}}
                ;; This next build is a compressed minified build for
                ;; production. You can build this with:
                ;; lein cljsbuild once min
                {:id "min"
                 :source-paths ["src"]
                 :compiler {:output-to "resources/public/js/compiled/inventist_client.js"
-                           :main inventist-client.core
+                           :main inventist-client.main
                            :optimizations :advanced
                            :pretty-print false}}]}
 
@@ -54,7 +56,7 @@
              ;; :server-port 3449 ;; default
              ;; :server-ip "127.0.0.1"
 
-             :css-dirs ["resources/public/css"] ;; watch and update CSS
+             :css-dirs ["resources/public/css"]} ;; watch and update CSS
 
              ;; Start an nREPL server into the running figwheel process
              ;; :nrepl-port 7888
@@ -87,7 +89,7 @@
 
              ;; to pipe all the output to the repl
              ;; :server-logfile false
-             }
+
 
 
   ;; Setting up nREPL for Figwheel and ClojureScript dev
