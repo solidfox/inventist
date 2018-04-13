@@ -8,17 +8,23 @@
 
 ;; define your app data so that it doesn't get over-written on reload
 
-(defonce app-state (atom {:text "Hello world!"
-                          :person
-                                {:id       44
-                                 :type     "teacher"
-                                 :image    "http://www.suthersgeorge.com/wp-content/uploads/2017/06/person-placeholder.jpg"
-                                 :fname    "Hanna"
-                                 :lname    "Alenius"
-                                 :email    "hanna.alenius@gripsholmsskolan.se"
-                                 :username "hanna.alenius"
-                                 :sex      "m"
-                                 :phone    "0701039070"}}))
+(defonce app-state (atom {:text    "Hello world!"
+                          :person  {:id       44
+                                    :type     "teacher"
+                                    :image    "http://www.suthersgeorge.com/wp-content/uploads/2017/06/person-placeholder.jpg"
+                                    :fname    "Hanna"
+                                    :lname    "Alenius"
+                                    :email    "hanna.alenius@gripsholmsskolan.se"
+                                    :username "hanna.alenius"
+                                    :sex      "m"
+                                    :phone    "0701039070"}
+                          :history [
+                                    {:id   01
+                                     :date "2017-09-20"
+                                     :desc "Assigned Macbook Pro 13"}
+                                    {:id   02
+                                     :date "2017-10-10"
+                                     :desc "Returned Macbook Pro 13"}]}))
 
 (rum/mount (c/app (deref app-state))
            (. js/document (getElementById "app")))
