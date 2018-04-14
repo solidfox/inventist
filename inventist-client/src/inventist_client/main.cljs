@@ -1,7 +1,8 @@
 (ns inventist-client.main
   (:require [inventist-client.components :as c]
             [rum.core :as rum]
-            [authentication.core :as auth]))
+            [authentication.core :as auth]
+            [people.core :as people]))
 
 (enable-console-print!)
 
@@ -9,23 +10,16 @@
 
 ;; define your app data so that it doesn't get over-written on reload
 
-(defonce app-state (atom {:authentication (auth/create-state)
-                          :person  {:id       44
-                                    :type     "teacher"
-                                    :image    "http://www.suthersgeorge.com/wp-content/uploads/2017/06/person-placeholder.jpg"
-                                    :fname    "Hanna"
-                                    :lname    "Alenius"
-                                    :email    "hanna.alenius@gripsholmsskolan.se"
-                                    :username "hanna.alenius"
-                                    :sex      "m"
-                                    :phone    "0701039070"}
-                          :history [
-                                    {:id   01
-                                     :date "2017-09-20"
-                                     :desc "Assigned Macbook Pro 13"}
-                                    {:id   02
-                                     :date "2017-10-10"
-                                     :desc "Returned Macbook Pro 13"}]}))
+(defonce app-state (atom {:authentication   (auth/create-state)
+                          :persons          [(people/create-person-detail)
+                                             (people/create-person-detail)]
+                          :inventory        []
+                          :ownership-ledger [{:owner-id     44
+                                              :inventory-id 01
+                                              :date         "2018-04-14T10:37:46Z"}
+                                             {:owner-id     44
+                                              :inventory-id 01
+                                              :date         "2018-04-14T10:37:46Z"}]}))
 
 (rum/mount (c/app (deref app-state))
            (. js/document (getElementById "app")))
