@@ -1,4 +1,5 @@
-(ns inventory.core)
+(ns inventory.core
+  (:require [clojure.string :refer [lower-case]]))
 
 (defn create-inventory-summary
   []
@@ -37,13 +38,19 @@
                        :fname     "Winston"
                        :lname     "Hill"}]})
 
-(defn inventory-icon [{id :id
-                       brand :brand
-                       model :model-name
-                       color :color
-                       identifier :model-identifier
+(defn inventory-icon [{id            :id
+                       brand         :brand
+                       model         :model-name
+                       color         :color
+                       identifier    :model-identifier
                        serial-number :serial-number}]
-  )
+  (cond (= (lower-case brand) (lower-case "Apple"))
+        (let [brand-map {:brand "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"}]
+          (cond (= identifier "MacBookPro13,2")
+                (assoc brand-map :model "https://www.shareicon.net/download/2016/12/30/867032_display.svg")
+                :else brand-map))))
+
+
 
 
 

@@ -1,5 +1,6 @@
 (ns people.component
-  (:require [rum.core :refer [defc]]))
+  (:require [rum.core :refer [defc]]
+            [inventory.core :as inventory]))
 
 (defc people-details [person]
       (println person)
@@ -21,18 +22,21 @@
         [:div {:class "detail-inventory"}
          [:h3 "Products Assigned"]
          [:ul {:class "inventory-list"}
-          (for [{id    :id
-                 photo :photo
-                 brand :brand
-                 model :model-name
-                 serial-number :serial-number} (:inventory person)]
-            [:li {:key id} [:dl
-                            [:dt "Image "]
-                            [:dd [:img {:src photo :style {:width "100px"}}]]
-                            [:dt "Name"]
-                            [:dd brand " " model]
-                            [:dt "Serial Number"]
-                            [:dd serial-number]]])]]
+          (for [{id            :id
+                 photo         :photo
+                 brand         :brand
+                 model         :model-name
+                 serial-number :serial-number
+                 :as           item} (:inventory person)]
+            [:li {:key id} [:img {:src photo :style {:width "100px"}}]
+             [:dl
+              [:dt "Name"]
+              [:dd brand " " model]
+              [:dt "Serial Number"]
+              [:dd serial-number]
+              [:dt "Icon"]
+              [:dd [:img {:class "icon" :src (:brand (inventory/inventory-icon item))}]
+               [:img {:class "icon" :src (:model (inventory/inventory-icon item))}]]]])]]
 
 
         [:div {:class "detail-timeline"}

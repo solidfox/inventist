@@ -58,3 +58,7 @@ body {
 .bold {
     font-weight: bold;
 }
+
+.icon {
+    height: 20px;
+}
