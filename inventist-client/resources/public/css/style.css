@@ -20,25 +20,31 @@ body {
 .detail-header {
     height: 50px;
     background-color: #ccc;
+    position: fixed;
+    top: 0px;
+    width: 100%;
 }
 
 .detail-main {
     flex: auto;
-    margin: 20px;
+    padding: 20px;
+    margin-top: 50px;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    flex-direction: column;
 }
 .detail-identity {
     flex: auto;
 }
 
 .detail-image {
-    flex: 200px;
+    flex: auto;
 }
 .detail-footer {
     height: 50px;
     background-color: #ccc;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
 }
 
 .capitalize {

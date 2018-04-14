@@ -36,3 +36,14 @@
                        :image     "http://www.suthersgeorge.com/wp-content/uploads/2017/06/person-placeholder.jpg"
                        :fname     "Winston"
                        :lname     "Hill"}]})
+
+(defn inventory-icon [{id :id
+                       brand :brand
+                       model :model-name
+                       color :color
+                       identifier :model-identifier
+                       serial-number :serial-number}]
+  )
+
+
+

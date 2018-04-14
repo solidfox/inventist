@@ -32,6 +32,15 @@
                 :color            "Space Gray"
                 :model-identifier "MacBookPro13,2"
                 :serial-number    "C02SVXXXXF1R"
+                :photo            "https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP748/SP748-mbp13touch-gray.jpeg"}
+               {:id               02
+                :date             "2018-04-14T10:37:46Z"
+                :brand            "Apple"
+                :supplier         "MediaMarkt"
+                :model-name       "MacBook Pro (13-inch, 2016, Four Thunderbolt 3 Ports)"
+                :color            "Space Gray"
+                :model-identifier "MacBookPro13,2"
+                :serial-number    "C02SVXXXXF1R"
                 :photo            "https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP748/SP748-mbp13touch-gray.jpeg"}]
    :history   [{:inventory-id     01
                 :date             "2018-04-14T10:37:46Z"
