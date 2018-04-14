@@ -1,6 +1,7 @@
 (ns inventist-client.main
   (:require [inventist-client.components :as c]
-            [rum.core :as rum]))
+            [rum.core :as rum]
+            [authentication.core :as auth]))
 
 (enable-console-print!)
 
@@ -8,7 +9,8 @@
 
 ;; define your app data so that it doesn't get over-written on reload
 
-(defonce app-state (atom {:text "Hello world!"
+(defonce app-state (atom {:authentication (auth/create-state)
+                          :text "Hello world!"
                           :person
                                 {:id       44
                                  :type     "teacher"

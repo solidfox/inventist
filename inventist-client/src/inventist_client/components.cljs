@@ -22,6 +22,7 @@
 
 (defc app [state]
   [:div
+   (auth/login)
    (people-details (:person state))])
 
 
