@@ -48,4 +48,11 @@
                 :model-name       "MacBook Pro (13-inch, 2016, Four Thunderbolt 3 Ports)"
                 :model-identifier "MacBookPro13,2"
                 :serial-number    "C02SVXXXXF1R"
+                :comment          "New MacBook"}
+               {:inventory-id     02
+                :date             "2018-04-14T10:37:46Z"
+                :brand            "Apple"
+                :model-name       "MacBook Pro (13-inch, 2016, Four Thunderbolt 3 Ports)"
+                :model-identifier "MacBookPro13,2"
+                :serial-number    "C02SVXXXXF1R"
                 :comment          "New MacBook"}]})
