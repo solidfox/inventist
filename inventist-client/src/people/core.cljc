@@ -3,6 +3,7 @@
 (defn create-person-summary []
   {:id        44
    :type      "teacher"
+   :group     "Lågstadiet"
    :image     "http://www.suthersgeorge.com/wp-content/uploads/2017/06/person-placeholder.jpg"
    :fname     "Hanna"
    :lname     "Alenius"
@@ -11,7 +12,13 @@
                 :supplier         "MediaMarkt"
                 :model-name       "MacBook Pro (13-inch, 2016, Four Thunderbolt 3 Ports)"
                 :color            "Space Gray"
-                :model-identifier "MacBookPro13,2"}]})
+                :model-identifier "MacBookPro13,2"}
+               {:id               02
+                :brand            "Android"
+                :supplier         "MediaMarkt"
+                :model-name       "Samsung Galaxy S9"
+                :color            "Blue"
+                :model-identifier "phone"}]})
 
 (defn create-person-detail []
   {:id        44

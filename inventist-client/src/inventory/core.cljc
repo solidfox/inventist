@@ -39,7 +39,7 @@
                        :lname     "Hill"}
                       {:person-id 34
                        :date      "2018-04-14T10:37:46Z"
-                       :comment   "New MacBook"
+                       :comment   ""
                        :type      "student"
                        :group     "Vargar"
                        :image     "http://www.suthersgeorge.com/wp-content/uploads/2017/06/person-placeholder.jpg"

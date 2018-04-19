@@ -3,9 +3,35 @@
             [antizer.rum :as ant]
             [inventory.core :as inventory]))
 
+(defc people-list [people]
+  (println (:inventory (first people)))
+  [:div {:id "list-container"}
+   (ant/layout
+     (ant/layout-sider {:style {:backgroundColor "#f2f2f2"} :width 300}
+                       (ant/input-search {:placeholder "Search the list" :size "large"})
+                       ;listing people
+                       (for [person people]
+                         (ant/card {:bordered true}
+                                   (ant/row {:gutter "16"}
+                                            (ant/col {:span "6"}
+                                                     [:img {:src (:image person) :style {:width "100%" :borderRadius "50px"}}])
+                                            (ant/col {:span "18"}
+                                                     [:p {:class "bold capitalize"} (str (:fname person) " " (:lname person))]
+                                                     [:p {:class "italic capitalize"} (str (:type person) " - " (:group person))]
+                                                     [:p (for [item (:inventory person)]
+                                                           [:span " • "
+                                                            [:img {:class "icon" :src (:brand (inventory/inventory-icon item))}]
+                                                            [:img {:class "icon" :src (:model (inventory/inventory-icon item))}]])])))))
+     
+     ;this is a fake body to be replaced by detail-view
+     (ant/layout
+       (ant/layout-header {:style {:color "white"}} "This is Header")
+       (ant/layout-content "This is content body" (ant/card {:title "Loading Animation" :type "inner" :loading true}))
+       (ant/layout-footer "This is footer")))])
+
+
 (defc people-details [person]
-  (println person)
-  [:div {:class "detail-container"}
+  [:div {:id "detail-container"}
    (ant/layout
      (ant/affix (ant/layout-header {:style {:color "white"}} "Action 1"))
 
@@ -19,10 +45,11 @@
                                                             :columns    [{:title "Field" :dataIndex "field" :width 100}
                                                                          {:title "Value" :dataIndex "value"}]
                                                             :dataSource [{:key "1" :field "Type" :value (:type person)}
-                                                                         {:key "2" :field "Username" :value (:username person)}
-                                                                         {:key "3" :field "Email" :value (:email person)}
-                                                                         {:key "4" :field "Phone" :value (:phone person)}
-                                                                         {:key "5" :field "Gender" :value (cond (= (:sex person) "f") "Female"
+                                                                         {:key "2" :field "Group" :value (:group person)}
+                                                                         {:key "3" :field "Username" :value (:username person)}
+                                                                         {:key "4" :field "Email" :value (:email person)}
+                                                                         {:key "5" :field "Phone" :value (:phone person)}
+                                                                         {:key "6" :field "Gender" :value (cond (= (:sex person) "f") "Female"
                                                                                                                 (= (:sex person) "m") "Male")}]})))
                           (ant/col {:span "8"} (ant/card {:title "Products Assigned" :type "inner"}
                                                          (for [{id            :id
@@ -34,7 +61,8 @@
                                                                 :as           item} (:inventory person)]
                                                            [(ant/card {:bordered true :class "card-photo"}
                                                                       (ant/col {:span 12}
-                                                                               [:div [:img {:class "icon" :src (:brand (inventory/inventory-icon item))}]
+                                                                               [:div
+                                                                                [:img {:class "icon" :src (:brand (inventory/inventory-icon item))}]
                                                                                 [:img {:class "icon" :src (:model (inventory/inventory-icon item))}]] [:br]
                                                                                [:div [:img {:src photo :style {:width "100px"}}]])
 
@@ -52,7 +80,7 @@
                                                                        (for [{id          :inventory-id
                                                                               date        :date
                                                                               description :comment} (:history person)]
-                                                                         (ant/timeline-item {:key id} date " --- " description)))))
+                                                                         (ant/timeline-item {:key id} [:p date] [:p description])))))
 
                           (ant/col {:span "8"} (ant/card {:title "Loading Animation" :type "inner" :loading true})))))
 

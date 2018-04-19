@@ -5,9 +5,9 @@
 
 (defc inventory-details [item]
   (println (:lname (first (:history item))))
-  [:div {:class "detail-container"}
+  [:div {:id "detail-container"}
    (ant/layout
-     (ant/affix (ant/layout-header {:style {:color "white"}} "Assign to User"))
+     (ant/affix (ant/layout-header {:style {:color "white"}} "Assign to New User"))
 
      (ant/layout-content
        (ant/card {:title [(ant/avatar {:icon "desktop" :shape "square" :size "large"})
@@ -43,14 +43,19 @@
 
 
                           (ant/col {:span "8"} (ant/card {:title "Timeline" :type "inner"}
-                                                         (ant/timeline {:pending [(:delivery-date (:purchase-details item)) " --- Purchased from " (:supplier (:purchase-details item))]}
+                                                         (ant/timeline {:pending [[:p (:delivery-date (:purchase-details item))]
+                                                                                  [:p "Purchased from " (:supplier (:purchase-details item))]]}
                                                                        (for [{id      :person-id
                                                                               date    :date
                                                                               comment :comment
                                                                               fname   :fname
                                                                               lname   :lname
-                                                                              type    :type} (:history item)]
-                                                                         (ant/timeline-item {:key id} [:span date] [:span " --- Allotted to " fname " " lname " (" type ")"])))))
+                                                                              type    :type
+                                                                              group   :group} (:history item)]
+                                                                         (ant/timeline-item {:key id}
+                                                                                            [:p date]
+                                                                                            [:p "Allotted to " fname " " lname " (" type " - " group ")"]
+                                                                                            [:p {:class "italic"} comment])))))
 
                           (ant/col {:span "8"} (ant/card {:title "Loading Animation" :type "inner" :loading true})))))
 

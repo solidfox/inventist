@@ -12,10 +12,10 @@
 ;; define your app data so that it doesn't get over-written on reload
 
 (defonce app-state (atom {:authentication   (auth/create-state)
-                          :persons          [(people/create-person-detail)
-                                             (people/create-person-detail)]
-                          :inventory        [(inventory/create-inventory-detail)
-                                             (inventory/create-inventory-detail)]
+                          :person          [(people/create-person-detail)]
+                          :people           [(people/create-person-summary)
+                                             (people/create-person-summary)]
+                          :inventory        [(inventory/create-inventory-detail)]
                           :ownership-ledger [{:owner-id     44
                                               :inventory-id 01
                                               :date         "2018-04-14T10:37:46Z"}

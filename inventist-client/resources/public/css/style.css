@@ -1,8 +1,14 @@
 /* some style */
-
+p {
+    line-height: normal;
+}
 
 .bold {
     font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
 }
 
 .icon {

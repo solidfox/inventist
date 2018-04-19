@@ -8,8 +8,9 @@
 (defc app [state]
   [:div]
   ;(auth/login)
-  ;(inventory/inventory-details (first (:inventory state)))
-  (people/people-details (first (:persons state))))
+  (people/people-list (:people state)))
+  ;(inventory/inventory-details (first (:inventory state))))
+ ; (people/people-details (first (:person state))))
 
 
 
