@@ -11,7 +11,22 @@
    :color            "Space Gray"
    :model-identifier "MacBookPro13,2"
    :serial-number    "C02SVXXXXF1R"
-   :photo            "https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP748/SP748-mbp13touch-gray.jpeg"})
+   :photo            "https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP748/SP748-mbp13touch-gray.jpeg"
+   :assignee         "Hill Winston"})
+
+;Test summary
+(defn create-inventory-summary-2
+  []
+  {:id               02
+   :date             "2018-04-14T10:37:46Z"
+   :brand            "Android"
+   :supplier         "MediaMarkt"
+   :model-name       "Samsung Galaxy S9"
+   :color            "Blue"
+   :model-identifier "phone"
+   :serial-number    "C02SVXXXXF1R"
+   :photo            "https://i.gadgets360cdn.com/products/large/1519585124_635_samsung_galaxy_s9_blue.jpg"
+   :assignee         "Hill Winston"})
 
 (defn create-inventory-detail
   []
@@ -67,7 +82,7 @@
                 (assoc brand-map :model "https://image.flaticon.com/icons/svg/483/483147.svg")
                 (= "phone" (re-find #"phone" (lower-case identifier)))
                 (assoc brand-map :model "https://image.flaticon.com/icons/svg/15/15874.svg")
-                (= "tablet" (re-find #"pad" (lower-case identifier)))
+                (= "tab" (re-find #"tab" (lower-case identifier)))
                 (assoc brand-map :model "https://image.flaticon.com/icons/svg/0/319.svg")
                 :else brand-map))))
 

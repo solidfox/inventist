@@ -12,17 +12,17 @@
                        ;listing people
                        (for [person people]
                          (ant/card {:bordered true}
-                                   (ant/row {:gutter "16"}
-                                            (ant/col {:span "6"}
+                                   (ant/row {:gutter 16}
+                                            (ant/col {:span 6}
                                                      [:img {:src (:image person) :style {:width "100%" :borderRadius "50px"}}])
-                                            (ant/col {:span "18"}
+                                            (ant/col {:span 18}
                                                      [:p {:class "bold capitalize"} (str (:fname person) " " (:lname person))]
                                                      [:p {:class "italic capitalize"} (str (:type person) " - " (:group person))]
                                                      [:p (for [item (:inventory person)]
                                                            [:span " • "
                                                             [:img {:class "icon" :src (:brand (inventory/inventory-icon item))}]
                                                             [:img {:class "icon" :src (:model (inventory/inventory-icon item))}]])])))))
-     
+
      ;this is a fake body to be replaced by detail-view
      (ant/layout
        (ant/layout-header {:style {:color "white"}} "This is Header")
@@ -38,8 +38,8 @@
      (ant/layout-content
        (ant/card {:title [(ant/avatar {:icon "user" :shape "square" :size "large"})
                           (str " " (:fname person) " " (:lname person))]}
-                 (ant/row {:gutter "16"}
-                          (ant/col {:span "8"} (ant/card {:title "Information" :type "inner"}
+                 (ant/row {:gutter 16}
+                          (ant/col {:span 8} (ant/card {:title "Information" :type "inner"}
                                                          (ant/table
                                                            {:showHeader false :pagination false
                                                             :columns    [{:title "Field" :dataIndex "field" :width 100}
@@ -51,7 +51,7 @@
                                                                          {:key "5" :field "Phone" :value (:phone person)}
                                                                          {:key "6" :field "Gender" :value (cond (= (:sex person) "f") "Female"
                                                                                                                 (= (:sex person) "m") "Male")}]})))
-                          (ant/col {:span "8"} (ant/card {:title "Products Assigned" :type "inner"}
+                          (ant/col {:span 8} (ant/card {:title "Products Assigned" :type "inner"}
                                                          (for [{id            :id
                                                                 photo         :photo
                                                                 brand         :brand
@@ -75,14 +75,14 @@
 
 
 
-                          (ant/col {:span "8"} (ant/card {:title "Timeline" :type "inner"}
+                          (ant/col {:span 8} (ant/card {:title "Timeline" :type "inner"}
                                                          (ant/timeline {:pending "Timeline Begins"}
                                                                        (for [{id          :inventory-id
                                                                               date        :date
                                                                               description :comment} (:history person)]
                                                                          (ant/timeline-item {:key id} [:p date] [:p description])))))
 
-                          (ant/col {:span "8"} (ant/card {:title "Loading Animation" :type "inner" :loading true})))))
+                          (ant/col {:span 8} (ant/card {:title "Loading Animation" :type "inner" :loading true})))))
 
 
 
