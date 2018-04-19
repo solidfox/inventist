@@ -3,12 +3,33 @@
             [antizer.rum :as ant]
             [inventory.core :as inventory]))
 
+;React function to filter (cascader) [case-insensitive]
+;function filter(inputValue, path) {return (path.some(option => (option.label).toLowerCase().indexOf(inputValue.toLowerCase()) > -1))};
+
+(def inventory-filter [{:value    "apple"
+                        :label "Apple"
+                        :children [{:value "macbook" :label "MacBook"}
+                                   {:value "ipad" :label "iPad"}
+                                   {:value "iphone" :label "iPhone"}]}
+                       {:value    "android"
+                        :label "Android"
+                        :children [{:value "notebook" :label "Noteook"}
+                                   {:value "tab" :label "Tablet"}
+                                   {:value "phone" :label "Phone"}]}])
+
 (defc inventory-list [items]
-  (println items)
   [:div {:id "list-container"}
    (ant/layout
      (ant/layout-sider {:style {:backgroundColor "#f2f2f2"} :width 300}
-                       (ant/input-search {:placeholder "Search the list" :size "large"})
+                       ;Normal Search
+                       (ant/input-search {:placeholder "Type here to Print in console" :size "large" :on-search (fn [value] (println value))})
+                       ;Filter Search
+                       (ant/cascader {:showSearch     true
+                                      :changeOnSelect true
+                                      :size           "large"
+                                      :placeholder    "Filter Search"
+                                      :style          {:width "100%"}
+                                      :options        inventory-filter})
                        ;listing people
                        (for [item items]
                          (ant/card {:bordered true}
@@ -24,18 +45,6 @@
                                                      [:p {:class "bold capitalize"} (str (:model-name item) " - " (:color item))]
                                                      [:p [:span {:class "italic capitalize"} (str (:assignee item))]])))))
 
-     ;                       (ant/card {:bordered true}
-     ;                                 (ant/row {:gutter "16"}
-     ;                                          (ant/col {:span "6"}
-     ;                                                   [:img {:src (:image person) :style {:width "100%" :borderRadius "50px"}}])
-     ;                                          (ant/col {:span "18"}
-     ;                                                   [:p {:class "bold capitalize"} (str (:fname person) " " (:lname person))]
-     ;                                                   [:p {:class "italic capitalize"} (str (:type person) " - " (:group person))]
-     ;                                                   [:p (for [item (:inventory person)]
-     ;                                                         [:span " • "
-     ;                                                          [:img {:class "icon" :src (:brand (inventory/inventory-icon item))}]
-     ;                                                          [:img {:class "icon" :src (:model (inventory/inventory-icon item))}]])])))))
-
      ;this is a fake body to be replaced by detail-view
      (ant/layout
        (ant/layout-header {:style {:color "white"}} "This is Header")
@@ -44,7 +53,6 @@
 
 
 (defc inventory-details [item]
-  (println (:lname (first (:history item))))
   [:div {:id "detail-container"}
    (ant/layout
      (ant/affix (ant/layout-header {:style {:color "white"}} "Assign to New User"))

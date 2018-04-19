@@ -3,12 +3,31 @@
             [antizer.rum :as ant]
             [inventory.core :as inventory]))
 
+
+(def people-filter [{:value    "student"
+                     :label "Student"
+                     :children [{:value "vargar" :label "Vargar"}
+                                {:value "group1" :label "Group1"}
+                                {:value "group2" :label "Group2"}]}
+                    {:value    "teacher"
+                     :label "Teacher"
+                     :children [{:value "Lågstadiet" :label "Lågstadiet"}
+                                {:value "group3" :label "Group3"}
+                                {:value "group4" :label "Group4"}]}])
+
 (defc people-list [people]
-  (println (:inventory (first people)))
   [:div {:id "list-container"}
    (ant/layout
      (ant/layout-sider {:style {:backgroundColor "#f2f2f2"} :width 300}
-                       (ant/input-search {:placeholder "Search the list" :size "large"})
+                       ;Normal Search
+                       (ant/input-search {:placeholder "Type here to Print in console" :size "large" :on-search (fn [value] (println value))})
+                       ;Filter Search
+                       (ant/cascader {:showSearch     true
+                                      :changeOnSelect true
+                                      :size           "large"
+                                      :placeholder    "Filter Search"
+                                      :style          {:width "100%"}
+                                      :options        people-filter})
                        ;listing people
                        (for [person people]
                          (ant/card {:bordered true}
@@ -40,47 +59,47 @@
                           (str " " (:fname person) " " (:lname person))]}
                  (ant/row {:gutter 16}
                           (ant/col {:span 8} (ant/card {:title "Information" :type "inner"}
-                                                         (ant/table
-                                                           {:showHeader false :pagination false
-                                                            :columns    [{:title "Field" :dataIndex "field" :width 100}
-                                                                         {:title "Value" :dataIndex "value"}]
-                                                            :dataSource [{:key "1" :field "Type" :value (:type person)}
-                                                                         {:key "2" :field "Group" :value (:group person)}
-                                                                         {:key "3" :field "Username" :value (:username person)}
-                                                                         {:key "4" :field "Email" :value (:email person)}
-                                                                         {:key "5" :field "Phone" :value (:phone person)}
-                                                                         {:key "6" :field "Gender" :value (cond (= (:sex person) "f") "Female"
-                                                                                                                (= (:sex person) "m") "Male")}]})))
+                                                       (ant/table
+                                                         {:showHeader false :pagination false
+                                                          :columns    [{:title "Field" :dataIndex "field" :width 100}
+                                                                       {:title "Value" :dataIndex "value"}]
+                                                          :dataSource [{:key "1" :field "Type" :value (:type person)}
+                                                                       {:key "2" :field "Group" :value (:group person)}
+                                                                       {:key "3" :field "Username" :value (:username person)}
+                                                                       {:key "4" :field "Email" :value (:email person)}
+                                                                       {:key "5" :field "Phone" :value (:phone person)}
+                                                                       {:key "6" :field "Gender" :value (cond (= (:sex person) "f") "Female"
+                                                                                                              (= (:sex person) "m") "Male")}]})))
                           (ant/col {:span 8} (ant/card {:title "Products Assigned" :type "inner"}
-                                                         (for [{id            :id
-                                                                photo         :photo
-                                                                brand         :brand
-                                                                model         :model-name
-                                                                color         :color
-                                                                serial-number :serial-number
-                                                                :as           item} (:inventory person)]
-                                                           [(ant/card {:bordered true :class "card-photo"}
-                                                                      (ant/col {:span 12}
-                                                                               [:div
-                                                                                [:img {:class "icon" :src (:brand (inventory/inventory-icon item))}]
-                                                                                [:img {:class "icon" :src (:model (inventory/inventory-icon item))}]] [:br]
-                                                                               [:div [:img {:src photo :style {:width "100px"}}]])
+                                                       (for [{id            :id
+                                                              photo         :photo
+                                                              brand         :brand
+                                                              model         :model-name
+                                                              color         :color
+                                                              serial-number :serial-number
+                                                              :as           item} (:inventory person)]
+                                                         [(ant/card {:bordered true :class "card-photo"}
+                                                                    (ant/col {:span 12}
+                                                                             [:div
+                                                                              [:img {:class "icon" :src (:brand (inventory/inventory-icon item))}]
+                                                                              [:img {:class "icon" :src (:model (inventory/inventory-icon item))}]] [:br]
+                                                                             [:div [:img {:src photo :style {:width "100px"}}]])
 
-                                                                      (ant/col {:span 12} [:dl
-                                                                                           [:dt "Name"]
-                                                                                           [:dd brand " " model " - " color]
-                                                                                           [:dt "Serial Number"]
-                                                                                           [:dd serial-number]]))
-                                                            [:br]])))
+                                                                    (ant/col {:span 12} [:dl
+                                                                                         [:dt "Name"]
+                                                                                         [:dd brand " " model " - " color]
+                                                                                         [:dt "Serial Number"]
+                                                                                         [:dd serial-number]]))
+                                                          [:br]])))
 
 
 
                           (ant/col {:span 8} (ant/card {:title "Timeline" :type "inner"}
-                                                         (ant/timeline {:pending "Timeline Begins"}
-                                                                       (for [{id          :inventory-id
-                                                                              date        :date
-                                                                              description :comment} (:history person)]
-                                                                         (ant/timeline-item {:key id} [:p date] [:p description])))))
+                                                       (ant/timeline {:pending "Timeline Begins"}
+                                                                     (for [{id          :inventory-id
+                                                                            date        :date
+                                                                            description :comment} (:history person)]
+                                                                       (ant/timeline-item {:key id} [:p date] [:p description])))))
 
                           (ant/col {:span 8} (ant/card {:title "Loading Animation" :type "inner" :loading true})))))
 
