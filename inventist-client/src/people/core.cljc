@@ -35,13 +35,13 @@
                 :photo            "https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP748/SP748-mbp13touch-gray.jpeg"}
                {:id               02
                 :date             "2018-04-14T10:37:46Z"
-                :brand            "Apple"
+                :brand            "Android"
                 :supplier         "MediaMarkt"
-                :model-name       "MacBook Pro (13-inch, 2016, Four Thunderbolt 3 Ports)"
-                :color            "Space Gray"
-                :model-identifier "MacBookPro13,2"
+                :model-name       "Samsung Galaxy S9"
+                :color            "Blue"
+                :model-identifier "Phone"
                 :serial-number    "C02SVXXXXF1R"
-                :photo            "https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP748/SP748-mbp13touch-gray.jpeg"}]
+                :photo            "https://i.gadgets360cdn.com/products/large/1519585124_635_samsung_galaxy_s9_blue.jpg"}]
    :history   [{:inventory-id     01
                 :date             "2018-04-14T10:37:46Z"
                 :brand            "Apple"
