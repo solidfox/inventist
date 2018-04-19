@@ -25,11 +25,19 @@
    :photo            "https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP748/SP748-mbp13touch-gray.jpeg"
    :purchase-details {:id                1
                       :documents         [""]
-                      :supplier          "MediaMarkt"
+                      :supplier          "MediaMart"
                       :delivery-date     "2018-04-14T10:37:46Z"
                       :insurance-expires "2020-04-14T10:37:46Z"
                       :warranty-expires  "2019-04-14T10:37:46Z"}
    :history          [{:person-id 33
+                       :date      "2018-04-14T10:37:46Z"
+                       :comment   "New MacBook"
+                       :type      "student"
+                       :group     "Vargar"
+                       :image     "http://www.suthersgeorge.com/wp-content/uploads/2017/06/person-placeholder.jpg"
+                       :fname     "Winston"
+                       :lname     "Hill"}
+                      {:person-id 34
                        :date      "2018-04-14T10:37:46Z"
                        :comment   "New MacBook"
                        :type      "student"

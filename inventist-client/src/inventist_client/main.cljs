@@ -2,7 +2,8 @@
   (:require [inventist-client.components :as c]
             [rum.core :as rum]
             [authentication.core :as auth]
-            [people.core :as people]))
+            [people.core :as people]
+            [inventory.core :as inventory]))
 
 (enable-console-print!)
 
@@ -13,7 +14,8 @@
 (defonce app-state (atom {:authentication   (auth/create-state)
                           :persons          [(people/create-person-detail)
                                              (people/create-person-detail)]
-                          :inventory        []
+                          :inventory        [(inventory/create-inventory-detail)
+                                             (inventory/create-inventory-detail)]
                           :ownership-ledger [{:owner-id     44
                                               :inventory-id 01
                                               :date         "2018-04-14T10:37:46Z"}

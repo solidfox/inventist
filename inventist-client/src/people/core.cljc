@@ -22,7 +22,7 @@
    :lname     "Alenius"
    :email     "hanna.alenius@gripsholmsskolan.se"
    :username  "hanna.alenius"
-   :sex       "m"
+   :sex       "f"
    :phone     "0701039070"
    :inventory [{:id               01
                 :date             "2018-04-14T10:37:46Z"
