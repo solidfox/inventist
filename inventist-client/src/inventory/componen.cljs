@@ -1,4 +1,4 @@
-(ns inventory.component
+(ns inventory.componen
   (:require [rum.core :refer [defc]]
             [antizer.rum :as ant]
             [inventory.core :as inventory]))
