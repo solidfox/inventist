@@ -13,13 +13,11 @@
                  [antizer "0.2.2"]
                  ;[org.clojure/core.async  "0.4.474"]
                  [rum "0.11.2"]
-                 ^{:voom {:repo "https://github.com/solidfox/remodular" :branch "master"}}
-                 [remodular "0.1.0-20180420_121253-g2633fc7"]
+                 [remodular "0.1.0-SNAPSHOT"]
                  [ysera "1.2.0"]]
 
   :plugins [[lein-figwheel "0.5.15"]
-            [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]
-            [lein-voom "0.1.0-20171225_233657-g7962d1d"]]
+            [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]
 
   :source-paths ["src"]
 

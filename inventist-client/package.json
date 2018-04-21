@@ -4,5 +4,12 @@
     "firebase": "^4.12.1",
     "firebaseui": "^2.7.0",
     "react-firebaseui": "^1.2.3"
+  },
+  "scripts": {
+    "predeploy": "lein do clean, cljsbuild once min",
+    "deploy": "cp resources/public/index.html resources/public/404.html; gh-pages --repo 'https://github.com/inventest/inventest.github.io.git' --branch master --dist resources/public; rm resources/public/404.html"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.1.0"
   }
 }
