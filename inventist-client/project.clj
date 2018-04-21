@@ -53,7 +53,7 @@
                 :source-paths ["src"]
                 :compiler {:output-to "resources/public/js/compiled/inventist_client.js"
                            :main inventist-client.main
-                           :optimizations :advanced
+                           :optimizations :simple
                            :pretty-print false}}]}
 
   :figwheel {;; :http-server-root "public" ;; default and assumes "resources"

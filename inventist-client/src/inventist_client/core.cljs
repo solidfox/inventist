@@ -31,7 +31,6 @@
    :state-path authentication-state-path})
 
 (defn get-authenticated-user [state]
-  (js/console.log (.-currentUser (js/firebase.auth)))
   (auth/get-authenticated-user (get-in state authentication-state-path)))
 
 (defn logged-in?

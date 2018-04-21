@@ -2,17 +2,15 @@
 
 (defn create-state
   []
-  (let [firebase-auth-state (js/firebase.auth)
-        firebase-auth-ui    (js/firebaseui.auth.AuthUI. firebase-auth-state)]
+  (let [firebase-auth-state (js/firebase.auth)]
     {:fetching-login-status true
      :logged-in-user        nil
-     :firebase-auth-state   firebase-auth-state
-     :firebase-auth-ui      firebase-auth-ui}))
+     :firebase-auth-state   firebase-auth-state}))
 
 (defn status
   [state]
-  (cond (:fetching-log-in-status state)
-        :pending
+  (cond (:fetching-login-status state)
+        :loading
         (:logged-in-user state)
         :logged-in
         :else
