@@ -4,7 +4,7 @@
             [authentication.core :as auth.core]
             [people.component :as people]
             [inventory.componen :as inventory]
-            [rum.core :refer [defc]]))
+            [rum.core :refer [defc with-key]]))
 
 
 (defc app
@@ -17,7 +17,10 @@
      ;(people/people-list (:people state))
      ;(inventory/inventory-list (:inventory-list state))])
      ;(inventory/inventory-details (first (:inventory state)))])
-     (people/people-details (first (:person state))))])
+     [(with-key (auth/toolbar-login-status (core/authentication-args state))
+        "auth")
+      (with-key (people/people-details (first (:person state)))
+        "people")])])
 
 
 
