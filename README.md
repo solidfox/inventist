@@ -7,6 +7,8 @@ The inventory manager will keep track of the material assets of Gripsholmsskolan
 We use ClojureScript with React and Redux (Rum in Clojure-land).
 
 # Data and APIs
+    For demo purpose, currently anyone can login with their Google account. 
+    No data will be taken except Name, Email and Profile photo.
 We will use Google G Suite’s directory API for authentication. We will also use different APIs to look up details like warranty or pictures of the inventory.
 
 ## From APIs
