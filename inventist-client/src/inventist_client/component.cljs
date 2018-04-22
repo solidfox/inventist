@@ -4,6 +4,7 @@
             [authentication.core :as auth.core]
             [people.component :as people]
             [inventory.component :as inventory]
+            [inventist-client.navbar.component :as navbar]
             [inventist-client.page.inventory.component :as inventory-page]
             [rum.core :refer [defc with-key]]))
 
@@ -19,8 +20,10 @@
      ;(inventory/inventory-list (:inventory-list state)))])
      ;(inventory/inventory-details (first (:inventory state))))])
      ;(people/people-details (first (:person state)))
-     [(with-key (auth/toolbar-login-status (core/authentication-args state))
-        "auth")
+     [(with-key (navbar/navigation-bar (core/authentication-args state))
+                "auth")
+      ;(with-key (auth/toolbar-login-status (core/authentication-args state))
+      ;  "auth")])])
       (with-key (inventory-page/component (core/create-inventory-page-args state))
         "inventory")])])
 
