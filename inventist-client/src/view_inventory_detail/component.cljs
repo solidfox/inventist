@@ -3,6 +3,25 @@
             [antizer.rum :as ant]
             [remodular.core :refer [modular-component]]))
 
+(defc person-card
+  [{fname :fname
+    lname :lname
+    image :image
+    type  :type
+    group :group
+    date  :date}]
+  (ant/card {:bordered true :class "card-photo"}
+            (ant/col {:span 12}
+                     [:div [:img {:src image :style {:width "80%"}}]])
+
+            (ant/col {:span 12} [:dl
+                                 [:dt "Name"]
+                                 [:dd fname " " lname]
+                                 [:dt "Type"]
+                                 [:dd type " - " group]
+                                 [:dt "Assigned on"]
+                                 [:dd date]])))
+
 (defc inventory-detail < modular-component
   [{{state :state} :input
     trigger-event  :trigger-event}]
@@ -30,21 +49,8 @@
                                                                           {:key "5" :field "Serial Number" :value (:serial-number item)}]})
                                                           [:img {:src (:photo item) :style {:width "100%"}}]]))
 
-
                             (ant/col {:span 8} (ant/card {:title "Assigned to" :type "inner"}
-
-                                                         (ant/card {:bordered true :class "card-photo"}
-                                                                   (ant/col {:span 12}
-                                                                            [:div [:img {:src (:image (first (:history item))) :style {:width "80%"}}]])
-
-                                                                   (ant/col {:span 12} [:dl
-                                                                                        [:dt "Name"]
-                                                                                        [:dd (:fname (first (:history item))) " " (:lname (first (:history item)))]
-                                                                                        [:dt "Type"]
-                                                                                        [:dd (:type (first (:history item))) " - " (:group (first (:history item)))]
-                                                                                        [:dt "Assigned on"]
-                                                                                        [:dd (:date (first (:history item)))]]))))
-
+                                                         (person-card (first (:history item)))))
 
                             (ant/col {:span 8} (ant/card {:title "Timeline" :type "inner"}
                                                          (ant/timeline {:pending [[:p (:delivery-date (:purchase-details item))]
