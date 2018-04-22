@@ -1,39 +1,6 @@
 (ns inventory.core
   (:require [clojure.string :refer [lower-case]]))
 
-(defn create-state []
-  {:filter nil})
-
-
-(defn create-inventory-summary
-  []
-  {:id               01
-   :date             "2018-04-14T10:37:46Z"
-   :brand            "Apple"
-   :supplier         "MediaMarkt"
-   :model-name       "MacBook Pro (13-inch, 2016, Four Thunderbolt 3 Ports)"
-   :color            "Space Gray"
-   :model-identifier "MacBookPro13,2"
-   :class            "laptop"
-   :serial-number    "C02SVXXXXF1R"
-   :photo            "https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP748/SP748-mbp13touch-gray.jpeg"
-   :assignee         "Hill Winston"})
-
-;Test summary
-(defn create-inventory-summary-2
-  []
-  {:id               02
-   :date             "2018-04-14T10:37:46Z"
-   :brand            "Android"
-   :supplier         "MediaMarkt"
-   :model-name       "Samsung Galaxy S9"
-   :color            "Blue"
-   :model-identifier "A198"
-   :class            "smartphone"
-   :serial-number    "C02SVXXXXF1R"
-   :photo            "https://i.gadgets360cdn.com/products/large/1519585124_635_samsung_galaxy_s9_blue.jpg"
-   :assignee         "Hill Winston"})
-
 (def android-brands #{"samsung" "google" "android"})
 
 (defn inventory-icon [{id            :id

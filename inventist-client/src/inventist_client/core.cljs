@@ -15,9 +15,6 @@
        :people           [(people/create-person-summary)
                           (people/create-person-summary)
                           (people/create-person-summary)]
-       :inventory-list   [(inventory/create-inventory-summary)
-                          (inventory/create-inventory-summary-2)
-                          (inventory/create-inventory-summary)]
        :ownership-ledger [{:owner-id     44
                            :inventory-id 01
                            :date         "2018-04-14T10:37:46Z"}
