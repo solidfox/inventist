@@ -3,7 +3,8 @@
             [authentication.component :as auth]
             [authentication.core :as auth.core]
             [people.component :as people]
-            [inventory.componen :as inventory]
+            [inventory.component :as inventory]
+            [inventist-client.page.inventory.component :as inventory-page]
             [rum.core :refer [defc with-key]]))
 
 
@@ -15,12 +16,13 @@
    (if (not (core/logged-in? state))
      (auth/login (core/authentication-args state))
      ;(people/people-list (:people state))
-     ;(inventory/inventory-list (:inventory-list state))])
-     ;(inventory/inventory-details (first (:inventory state)))])
+     ;(inventory/inventory-list (:inventory-list state)))])
+     ;(inventory/inventory-details (first (:inventory state))))])
+     ;(people/people-details (first (:person state)))
      [(with-key (auth/toolbar-login-status (core/authentication-args state))
         "auth")
-      (with-key (people/people-details (first (:person state)))
-        "people")])])
+      (with-key (inventory-page/component (core/create-inventory-page-args state))
+        "inventory")])])
 
 
 

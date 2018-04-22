@@ -65,7 +65,7 @@
                                                                        {:title "Value" :dataIndex "value"}]
                                                           :dataSource [{:key "1" :field "Type" :value (:type person)}
                                                                        {:key "2" :field "Group" :value (:group person)}
-                                                                       {:key "3" :field "Username" :value (:username person)}
+                                                                       {:key " 3" :field "Username" :value (:username person)}
                                                                        {:key "4" :field "Email" :value (:email person)}
                                                                        {:key "5" :field "Phone" :value (:phone person)}
                                                                        {:key "6" :field "Gender" :value (cond (= (:sex person) "f") "Female"
