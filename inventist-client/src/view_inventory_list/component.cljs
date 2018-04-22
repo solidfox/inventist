@@ -34,18 +34,21 @@
                     :placeholder    "Filter Search"
                     :style          {:width "100%"}
                     :options        inventory-filter})
-     ;listing people
-     (for [item items]
-       [:div {:style {:padding "3rem"}}
-        (ant/row {:gutter 16}
-                 (ant/col {:span 6}
-                          [:p
-                           [:span
-                            [:img {:class "icon" :src (:brand (inventory/inventory-icon item))}]
-                            [:img {:class "icon" :src (:model (inventory/inventory-icon item))}]]]
-                          [:p [:img {:src (:photo item) :style {:width "100%" :borderRadius "5px"}}]])
 
-                 (ant/col {:span 18}
-                          [:p {:class "bold capitalize"} (str (:model-name item) " - " (:color item))]
-                          [:p [:span {:class "italic capitalize"} (str (:assignee item))]]))])]))
+     ;listing people
+     [:div {:style {:overflow-x "hidden"
+                    :overflow-y "scroll"}}
+
+      (for [item items]
+         (ant/row {:gutter 16 :style {:padding "1rem"}}
+                  (ant/col {:span 6}
+                           [:p
+                            [:span
+                             [:img {:class "icon" :src (:brand (inventory/inventory-icon item))}]
+                             [:img {:class "icon" :src (:model (inventory/inventory-icon item))}]]]
+                           [:p [:img {:src (:photo item) :style {:width "100%" :borderRadius "5px"}}]])
+
+                  (ant/col {:span 18}
+                           [:p {:class "bold capitalize"} (str (:model-name item) " - " (:color item))]
+                           [:p [:span {:class "italic capitalize"} (str (:assignee item))]])))]]))
 

@@ -8,6 +8,8 @@
 (defc component < modular-component
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  [:div {:id (str ::component-id)}
+  [:div {:id (str ::component-id)
+         :style {:display "grid"
+                 :grid-template-columns "20rem 1fr"}}
    (inventory-list (core/create-inventory-list-args state {}))
    (inventory-detail (core/create-inventory-detail-args state "mock-id"))])

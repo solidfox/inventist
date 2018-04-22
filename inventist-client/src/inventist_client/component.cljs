@@ -13,7 +13,8 @@
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (js/console.log (core/get-authenticated-user state))
-  [:div
+  [:div {:style {:overflow "none"
+                 :height "100vh"}}
    (if (not (core/logged-in? state))
      (auth/login (core/authentication-args state))
      ;(people/people-list (:people state))
