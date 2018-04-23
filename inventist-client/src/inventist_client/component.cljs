@@ -12,19 +12,15 @@
 (defc app
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (js/console.log (core/get-authenticated-user state))
-  [:div {:style {:height "100vh"
-                 :display "grid"
-                 :grid-template-rows "5rem calc(100% - 5rem)"}}
-   (if (not (core/logged-in? state))
-     (auth/login (core/authentication-args state))
-     ;(people/people-list (:people state))
-     ;(inventory/inventory-list (:inventory-list state)))])
-     ;(inventory/inventory-details (first (:inventory state))))])
-     ;(people/people-details (first (:person state)))
-     [(with-key (navbar/navigation-bar (core/authentication-args state))
-                "auth")
-      ;(with-key (auth/toolbar-login-status (core/authentication-args state))
-      ;  "auth")])])
-      (with-key (inventory-page/component (core/create-inventory-page-args state))
-        "inventory")])])
+  (if (not (core/logged-in? state))
+    (auth/login (core/authentication-args state))
+    ;(people/people-list (:people state))
+    ;(inventory/inventory-list (:inventory-list state)))])
+    ;(inventory/inventory-details (first (:inventory state))))])
+    ;(people/people-details (first (:person state)))
+    [:div {:style {:height             "100vh"
+                   :display            "grid"
+                   :grid-template-rows "5rem calc(100% - 5rem)"}}
+     (navbar/navigation-bar {:auth-status-item
+                             (auth/bar-item-login-status (core/authentication-args state))})
+     (inventory-page/component (core/create-inventory-page-args state))]))

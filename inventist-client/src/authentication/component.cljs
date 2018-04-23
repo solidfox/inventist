@@ -26,7 +26,7 @@
                 :tip   "Checking login status..."
                 :style {:margin "1rem"}}))])
 
-(defc toolbar-login-status < rem/modular-component
+(defc bar-item-login-status < rem/modular-component
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (if-let [logged-in-user (core/get-authenticated-user state)]
