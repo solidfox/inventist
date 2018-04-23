@@ -20,18 +20,17 @@
                  :align-items    "center"}}
    [:h1 "Inventist"]
    [:h2 "Reinvented inventory."]
-   (ant/button {:on-click log-in-with-redirect} "Sign in with Google")
-   (when (= :loading (core/status state))
-     (ant/spin {:size  "large"
-                :tip   "Checking login status..."
-                :style {:margin "1rem"}}))])
+   (ant/button {:type     "primary"
+                :size     "large"
+                :loading  (= :loading (core/status state))
+                :on-click log-in-with-redirect} "Sign in with Google")])
 
 (defc bar-item-login-status < rem/modular-component
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (if-let [logged-in-user (core/get-authenticated-user state)]
     [:div {:style
-           {:margin "1rem"
+           {:margin        "1rem"
             :height        "3rem"
             :display       "flex"
             :align-items   "center"
