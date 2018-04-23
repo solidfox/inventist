@@ -9,7 +9,9 @@
   [{{state :state} :input
     trigger-event  :trigger-event}]
   [:div {:id (str ::component-id)
-         :style {:display "grid"
-                 :grid-template-columns "20rem 1fr"}}
+         :style {:height "100%"
+                 :display "grid"
+                 :grid-template-columns "22rem 1fr"
+                 :grid-template-rows "100%"}}
    (inventory-list (core/create-inventory-list-args state {}))
    (inventory-detail (core/create-inventory-detail-args state "mock-id"))])

@@ -24,7 +24,9 @@
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (let [items (get-in state [:get-inventory-list-response :response :items])]
-    [:div
+    [:div {:style {:height             "100%"
+                   :display            "grid"
+                   :grid-template-rows "auto auto 1fr"}}
      ;Normal Search
      (ant/input-search {:placeholder "Type here to Print in console" :size "large" :on-search (fn [value] (println value))})
      ;Filter Search
@@ -51,4 +53,3 @@
                   (ant/col {:span 18}
                            [:p {:class "bold capitalize"} (str (:model-name item) " - " (:color item))]
                            [:p [:span {:class "italic capitalize"} (str (:assignee item))]])))]]))
-

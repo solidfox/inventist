@@ -13,8 +13,9 @@
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (js/console.log (core/get-authenticated-user state))
-  [:div {:style {:overflow "none"
-                 :height "100vh"}}
+  [:div {:style {:height "100vh"
+                 :display "grid"
+                 :grid-template-rows "5rem calc(100% - 5rem)"}}
    (if (not (core/logged-in? state))
      (auth/login (core/authentication-args state))
      ;(people/people-list (:people state))
@@ -27,7 +28,3 @@
       ;  "auth")])])
       (with-key (inventory-page/component (core/create-inventory-page-args state))
         "inventory")])])
-
-
-
-

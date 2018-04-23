@@ -26,7 +26,9 @@
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (let [item (get-in state [:get-inventory-details-response :response])]
-    [:div {:id "detail-container"}
+    [:div {:id    "detail-container"
+           :style {:height   "100%"
+                   :overflow "scroll"}}
      (ant/layout
        (ant/affix (ant/layout-header {:style {:color "white"}} "Assign to New User"))
 
