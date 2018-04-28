@@ -1,0 +1,64 @@
+{
+  "_class": "group",
+  "do_objectID": "A8B619B2-C09A-4DFD-B2B2-315B55A7761D",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "83703085-2FCF-450A-A5F5-FBA70E63DF5A",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "94ECD3B0-6514-41E7-BA96-F9A29D006070",
+    "height": 93,
+    "width": 155,
+    "x": 3,
+    "y": 4
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "group",
+      "id": "B4603B2C-A285-410C-9FA5-9C81C756749D"
+    },
+    {
+      "class": "group",
+      "id": "D832E2A7-9AA4-4F8A-AB0C-D838E0D13D54"
+    },
+    {
+      "class": "group",
+      "id": "E84F7183-080C-417F-8774-38AC64F125D0"
+    },
+    {
+      "class": "group",
+      "id": "CE718FEE-5578-47E9-8BB9-BF60EC71A68E"
+    },
+    {
+      "class": "group",
+      "id": "6C8CAA2A-77B1-402F-A90C-69D462AFB485"
+    }
+  ],
+  "name": "Gripsholmsskolans icon",
+  "nameIsFixed": false,
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "45CFC9E0-867D-4AE8-8689-B6FB73FAECF5",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

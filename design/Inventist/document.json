@@ -20,9 +20,58 @@
       {
         "_class": "color",
         "alpha": 1,
-        "blue": 0.9607843137254902,
-        "green": 0.9607843137254902,
-        "red": 0.9607843137254902
+        "blue": 0.9647058823529412,
+        "green": 0.9647058823529412,
+        "red": 0.9647058823529412
+      },
+      {
+        "_class": "color",
+        "alpha": 0.25,
+        "blue": 0,
+        "green": 0,
+        "red": 0
+      },
+      {
+        "_class": "color",
+        "alpha": 0.5,
+        "blue": 0,
+        "green": 0,
+        "red": 0
+      },
+      {
+        "_class": "color",
+        "alpha": 1,
+        "blue": 0.5,
+        "green": 0.9166666666666667,
+        "red": 1
+      },
+      {
+        "_class": "color",
+        "alpha": 1,
+        "blue": 0.7803921568627451,
+        "green": 0.7647058823529411,
+        "red": 0.7411764705882353
+      },
+      {
+        "_class": "color",
+        "alpha": 1,
+        "blue": 0.9450980392156862,
+        "green": 0.9411764705882353,
+        "red": 0.9254901960784314
+      },
+      {
+        "_class": "color",
+        "alpha": 1,
+        "blue": 0.6509803921568628,
+        "green": 0.6470588235294118,
+        "red": 0.5843137254901961
+      },
+      {
+        "_class": "color",
+        "alpha": 1,
+        "blue": 0.5529411764705883,
+        "green": 0.5490196078431373,
+        "red": 0.4980392156862745
       }
     ],
     "gradients": [
@@ -35,7 +84,7 @@
     "images": [
     ]
   },
-  "colorSpace": 0,
+  "colorSpace": 1,
   "do_objectID": "19C04DD1-6E5D-43D6-94FA-5072508F2149",
   "foreignSymbols": [
     {
@@ -30423,7 +30472,9 @@
     "version": 101
   },
   "pages": [
-    "Page 1"
+    "MVP",
+    "Symbols",
+    "Wireframe"
   ],
   "userInfo": {
     "com.invisionlabs.sync": {

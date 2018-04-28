@@ -1,0 +1,71 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "42DBC1F0-998B-4782-A340-B83BB8DC7C4D",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "8502C96D-A364-4BF9-8F52-CC3028FD4A1A",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "86935652-AC24-41B8-85A8-A3F142B89654",
+    "height": 48,
+    "width": 64,
+    "x": 64,
+    "y": 0
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Nav_Button Copy",
+  "nameIsFixed": false,
+  "overrideValues": [
+    {
+      "_class": "overrideValue",
+      "do_objectID": "F39A5DCC-EF50-43C6-A05E-1FB8D69A9749",
+      "overrideName": "2DA2CC86-2EA8-4D18-9979-4775614F4D70_symbolID",
+      "value": "DD2C4D38-CBDD-4A40-B1B7-D9AEE0334422"
+    },
+    {
+      "_class": "overrideValue",
+      "do_objectID": "31A8CAB9-4A8E-4C98-932C-E8165AEE85A6",
+      "overrideName": "83637734-A485-4C40-B28E-AEB9E0456A7C_stringValue",
+      "value": "People"
+    }
+  ],
+  "overrides": {
+    "2DA2CC86-2EA8-4D18-9979-4775614F4D70": {
+      "symbolID": "DD2C4D38-CBDD-4A40-B1B7-D9AEE0334422"
+    },
+    "83637734-A485-4C40-B28E-AEB9E0456A7C": "People"
+  },
+  "resizingConstraint": 13,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "contextSettings": {
+      "_class": "graphicsContextSettings",
+      "blendMode": 0,
+      "do_objectID": "8492EBD4-61DD-4511-88CC-09408C406E8F",
+      "opacity": 0.5
+    },
+    "do_objectID": "A63CC92E-B807-41AB-A74E-6EED4A46DA05",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "F5B67219-D825-4234-AB19-A0A0A8C3D675",
+  "verticalSpacing": 0
+}

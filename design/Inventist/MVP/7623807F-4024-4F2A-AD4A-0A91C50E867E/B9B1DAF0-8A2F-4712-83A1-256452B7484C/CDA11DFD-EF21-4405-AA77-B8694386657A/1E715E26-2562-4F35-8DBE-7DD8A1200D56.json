@@ -1,0 +1,71 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "1E715E26-2562-4F35-8DBE-7DD8A1200D56",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "420C053F-1013-4B3D-8670-E28AAD363A39",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "E35DE6DC-3C0B-425D-8302-3A22675807EC",
+    "height": 48,
+    "width": 64,
+    "x": 192,
+    "y": 0
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Nav_Button Copy 3",
+  "nameIsFixed": false,
+  "overrideValues": [
+    {
+      "_class": "overrideValue",
+      "do_objectID": "F39A5DCC-EF50-43C6-A05E-1FB8D69A9749",
+      "overrideName": "2DA2CC86-2EA8-4D18-9979-4775614F4D70_symbolID",
+      "value": "A42BA0EE-64A6-4FDB-A952-B0B8F60CC2B9"
+    },
+    {
+      "_class": "overrideValue",
+      "do_objectID": "31A8CAB9-4A8E-4C98-932C-E8165AEE85A6",
+      "overrideName": "83637734-A485-4C40-B28E-AEB9E0456A7C_stringValue",
+      "value": "Contractor"
+    }
+  ],
+  "overrides": {
+    "2DA2CC86-2EA8-4D18-9979-4775614F4D70": {
+      "symbolID": "A42BA0EE-64A6-4FDB-A952-B0B8F60CC2B9"
+    },
+    "83637734-A485-4C40-B28E-AEB9E0456A7C": "Contractor"
+  },
+  "resizingConstraint": 13,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "contextSettings": {
+      "_class": "graphicsContextSettings",
+      "blendMode": 0,
+      "do_objectID": "B7EA99DC-7247-42D2-A9F8-4EFB5BFA608E",
+      "opacity": 0.5
+    },
+    "do_objectID": "22F997E8-5FF8-412D-A7B9-2487C7F852C7",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "F5B67219-D825-4234-AB19-A0A0A8C3D675",
+  "verticalSpacing": 0
+}

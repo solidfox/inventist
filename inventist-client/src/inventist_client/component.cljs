@@ -20,7 +20,8 @@
     ;(people/people-details (first (:person state)))
     [:div {:style {:height             "100vh"
                    :display            "grid"
-                   :grid-template-rows "5rem calc(100% - 5rem)"}}
+                   :backgroundColor    "#f6f6f6"
+                   :grid-template-rows "3rem calc(100% - 3rem)"}}
      (navbar/navigation-bar {:auth-status-item
                              (auth/bar-item-login-status (core/authentication-args state))})
      (inventory-page/component (core/create-inventory-page-args state))]))

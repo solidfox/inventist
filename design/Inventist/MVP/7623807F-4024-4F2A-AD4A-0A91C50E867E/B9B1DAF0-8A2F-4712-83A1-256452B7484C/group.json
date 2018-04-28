@@ -1,0 +1,57 @@
+{
+  "_class": "group",
+  "do_objectID": "B9B1DAF0-8A2F-4712-83A1-256452B7484C",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 48,
+    "width": 1280,
+    "x": 0,
+    "y": 40
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "1B10FD67-E9DF-4928-832F-C9B8D3162723"
+    },
+    {
+      "class": "group",
+      "id": "CDA11DFD-EF21-4405-AA77-B8694386657A"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "FCA2CBAC-2AFB-4F1D-ACA1-C48CED082F57"
+    },
+    {
+      "class": "group",
+      "id": "AAF6FFDD-CCCE-4C4A-B8B5-A9743DA623F7"
+    }
+  ],
+  "name": "Nav-Bar",
+  "nameIsFixed": true,
+  "resizingConstraint": 15,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

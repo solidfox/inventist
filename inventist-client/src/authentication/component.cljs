@@ -30,14 +30,14 @@
     trigger-event  :trigger-event}]
   (if-let [logged-in-user (core/get-authenticated-user state)]
     [:div {:style
-           {:margin        "1rem"
-            :height        "3rem"
+           {;:margin        "1rem"
+            :height        "100%"
             :display       "flex"
             :align-items   "center"
-            :justify-items "center"}}
+            :justify-items "space-between"}}
 
+     ;[:span {:style {:margin "0 1rem"}} (:display-name logged-in-user)]
+     (ant/button {:style {:margin "1rem"} :type "danger" :on-click log-out} "Sign out")
      [:img {:src   (:photo-url logged-in-user)
             :style {:height       "100%"
-                    :borderRadius "1.5rem"}}]
-     [:span {:style {:margin "0 1rem"}} (:display-name logged-in-user)]
-     (ant/button {:on-click log-out} "Sign out")]))
+                    :borderRadius "1.5rem"}}]]))

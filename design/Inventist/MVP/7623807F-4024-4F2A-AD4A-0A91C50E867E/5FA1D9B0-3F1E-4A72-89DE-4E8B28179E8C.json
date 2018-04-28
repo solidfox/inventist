@@ -1,0 +1,55 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "5FA1D9B0-3F1E-4A72-89DE-4E8B28179E8C",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "A240AABF-C5D4-4699-83B0-F6211B8989B3",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "071705C5-5248-42F0-9243-04CB589B3BBD",
+    "height": 40,
+    "width": 1280,
+    "x": 0,
+    "y": 0
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Browser",
+  "nameIsFixed": false,
+  "overrideValues": [
+    {
+      "_class": "overrideValue",
+      "overrideName": "8E52184F-761F-41D4-868D-A9E7D1B53981_stringValue",
+      "value": "Inventory - GripsHolmsSkolan"
+    }
+  ],
+  "overrides": {
+    "8E52184F-761F-41D4-868D-A9E7D1B53981": "Inventory - GripsHolmsSkolan"
+  },
+  "resizingConstraint": 10,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "87F7178C-19B7-4020-BB14-9C1D072D9108",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "7EF3E881-64E2-43F2-A10C-0A744E4196D4",
+  "verticalSpacing": 0
+}

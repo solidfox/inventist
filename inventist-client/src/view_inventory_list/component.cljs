@@ -15,10 +15,10 @@
                                    {:value "tab" :label "Tablet"}
                                    {:value "phone" :label "Phone"}]}])
 
-(defn showSearch [inputValue path]
-  (println inputValue path)
-  (.some path (fn [option]
-                (not (nil? (index-of (lower-case (.-label option)) (lower-case inputValue)))))))
+;(defn showSearch [inputValue path]
+;  (println inputValue path))
+;  (.some path (fn [option]
+;               (not (nil? (index-of (lower-case (.-label option)) (lower-case inputValue)))))))
 
 (defc inventory-list < remodular.core/modular-component
   [{{state :state} :input
@@ -30,12 +30,12 @@
      ;Normal Search
      (ant/input-search {:placeholder "Type here to Print in console" :size "large" :on-search (fn [value] (println value))})
      ;Filter Search
-     (ant/cascader {:showSearch     showSearch
-                    :changeOnSelect true
-                    :size           "large"
-                    :placeholder    "Filter Search"
-                    :style          {:width "100%"}
-                    :options        inventory-filter})
+     ;(ant/cascader {:showSearch     showSearch
+     ;               :changeOnSelect true
+     ;               :size           "large"
+     ;               :placeholder    "Filter Search"
+     ;               :style          {:width "100%"}
+     ;               :options        inventory-filter})
 
      ;listing people
      [:div {:style {:overflow-x "hidden"
