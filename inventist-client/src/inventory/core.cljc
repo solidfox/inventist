@@ -11,22 +11,22 @@
                        class         :class
                        serial-number :serial-number}]
   (cond (= (lower-case brand) (lower-case "Apple"))
-        (let [brand-map {:brand "https://image.flaticon.com/icons/svg/152/152752.svg"}]
+        (let [brand-map {:brand "fab fa-apple"}]
           (cond (re-find #"macbook" (lower-case identifier))
-                (assoc brand-map :model "https://image.flaticon.com/icons/svg/483/483147.svg")
+                (assoc brand-map :model "fas fa-laptop")
                 (re-find #"smartphone" (lower-case class))
-                (assoc brand-map :model "https://image.flaticon.com/icons/svg/15/15874.svg")
+                (assoc brand-map :model "fas fa-mobile-alt")
                 (re-find #"tablet" (lower-case class))
-                (assoc brand-map :model "https://image.flaticon.com/icons/svg/0/319.svg")
+                (assoc brand-map :model "fas fa-tablet-alt")
                 :else brand-map))
         (contains? android-brands (lower-case brand))
-        (let [brand-map {:brand "https://image.flaticon.com/icons/svg/14/14415.svg"}]
+        (let [brand-map {:brand "fab fa-android"}]
           (cond (re-find #"laptop" (lower-case class))
-                (assoc brand-map :model "https://image.flaticon.com/icons/svg/483/483147.svg")
+                (assoc brand-map :model "fas fa-laptop")
                 (re-find #"phone" (lower-case class))
-                (assoc brand-map :model "https://image.flaticon.com/icons/svg/15/15874.svg")
+                (assoc brand-map :model "fas fa-mobile-alt")
                 (re-find #"tab" (lower-case class))
-                (assoc brand-map :model "https://image.flaticon.com/icons/svg/0/319.svg")
+                (assoc brand-map :model "fas fa-tablet-alt")
                 :else brand-map))))
 
 

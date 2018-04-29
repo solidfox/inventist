@@ -20,16 +20,20 @@ p {
     text-transform: capitalize;
 }
 
-/*
-
 body {
-    font-family: Lato, SansSerif;
+    font-family: 'Roboto', sans-serif;
     width: 100%;
     height: 100%;
     padding: 0;
     margin: 0;
 }
 
+dt {
+    color: #95A5A6;
+}
+
+
+/*
 .detail-container {
     height: 100%;
     width: 100%;

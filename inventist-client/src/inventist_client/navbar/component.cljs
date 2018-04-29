@@ -11,24 +11,24 @@
   [:div {:style {:height     "100%"
                  :text-align "center"
                  :opacity    opaque
-                 :margin     "0 1rem"
+                 :width      "4rem"
+                 :margin     "0"
                  :cursor     "pointer"}}
-   [:span {:style {:height "100%" :text-align "center"}}
-    [:img {:src image :style {:height       "100%"
-                              :borderRadius "2rem"}}]]
+   [:div {:style {:height "1.75rem" :text-align "center"}}
+    [:img {:src image :style {:height "100%"}}]]
 
-   [:span {:style {:font-size "0.8rem"
-                   :margin    "0 0.5rem"
-                   :color     "#000000"}} title]])
+   [:div {:style {:font-size "0.7rem"
+                  :margin    "0rem"
+                  :color     "#000000"}} title]])
 
 (defc navigation-bar [{auth-status-item :auth-status-item}]
   [:div {:style
          {:padding         "0.5rem"
-          :height          "3rem"
+          :height          "3.5rem"
           :display         "flex"
           :flex-direction  "row"
           :align-items     "center"
-          :backgroundColor "#FFEA80"
+          :backgroundColor "#ECF0F1"
           :justify-content "space-between"}}
    [:div {:style {:height "100%" :text-align "left"}}
     [:span [:img {:src   "image/GHS-logotype-horizontal.svg"
@@ -50,5 +50,8 @@
                       :opacity "0.9"})
     (navigation-icon {:title   "Contractor"
                       :image   "image/contractor.svg"
+                      :opacity "0.4"})
+    (navigation-icon {:title   "Settings"
+                      :image   "image/setting.svg"
                       :opacity "0.4"})]
    auth-status-item])

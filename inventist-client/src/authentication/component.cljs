@@ -36,8 +36,14 @@
             :align-items   "center"
             :justify-items "space-between"}}
 
-     ;[:span {:style {:margin "0 1rem"}} (:display-name logged-in-user)]
-     (ant/button {:style {:margin "1rem"} :type "danger" :on-click log-out} "Sign out")
+     ;(ant/button {:style {:margin "1rem"} :type "danger" :on-click log-out} "Sign out")
+
+     [:div {:style {:margin "0 1rem" :text-align "right" :line-height "1rem"}}
+      [:span {:style {:font-weight "500" :font-size "1rem"}} (:display-name logged-in-user)[:br]]
+      [:span {:style {:font-weight "400" :font-size "0.8rem" :color "#4a4a4a"}} "Admin • "]
+      [:span {:style {:font-weight "400" :font-size "0.8rem" :color "red" :cursor "pointer"}
+              :on-click log-out} "Logout"]]
+
      [:img {:src   (:photo-url logged-in-user)
             :style {:height       "100%"
                     :borderRadius "1.5rem"}}]]))
