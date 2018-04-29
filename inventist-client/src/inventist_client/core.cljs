@@ -1,7 +1,6 @@
 (ns inventist-client.core
   (:require [authentication.core :as auth]
             [people.core :as people]
-            [inventory.core :as inventory]
             [inventist-client.page.inventory.core :as inventory-page]
             [cljs.pprint]))
 

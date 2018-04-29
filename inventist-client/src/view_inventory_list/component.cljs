@@ -1,6 +1,6 @@
 (ns view-inventory-list.component
   (:require [rum.core :refer [defc]]
-            [inventory.core :as inventory]
+            [inventist-client.page.inventory.core :as inventory]
             [clojure.string :refer [index-of lower-case]]))
 
 
@@ -30,7 +30,7 @@
                      :display               "grid"
                      :grid-template-columns "auto 1fr auto"
                      :box-shadow            "0px 0px 5px rgba(0,0,0,0.25) inset"}}
-       [:div {:style {:margin "0.75rem" :font-size "1rem" :color "rgba(0,0,0,0.5)"}}
+       [:div {:style {:margin "0.75rem" :font-size "1.0rem" :color "rgba(0,0,0,0.5)"}}
         [:i {:class "fas fa-search"}]]
        [:input {:type        "search"
                 :id          "inventory-search"

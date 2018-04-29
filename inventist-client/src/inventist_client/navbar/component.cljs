@@ -7,19 +7,20 @@
 (defc navigation-icon
   [{title  :title
     image  :image
+    color  :color
     opaque :opacity}]
-  [:div {:style {:height     "100%"
-                 :text-align "center"
+  [:div {:style {:text-align "center"
                  :opacity    opaque
+                 :color      (or color "#000000")
                  :width      "4rem"
                  :margin     "0"
                  :cursor     "pointer"}}
    [:div {:style {:height "1.75rem" :text-align "center"}}
-    [:img {:src image :style {:height "100%"}}]]
+    [:i {:class image :style {:font-size "1.5rem"}}]]
 
    [:div {:style {:font-size "0.7rem"
-                  :margin    "0rem"
-                  :color     "#000000"}} title]])
+                  :margin    "0rem"}}
+    title]])
 
 (defc navigation-bar [{auth-status-item :auth-status-item}]
   [:div {:style
@@ -40,18 +41,19 @@
 
    [:div {:style {:height "100%" :text-align "center" :display "flex"}}
     (navigation-icon {:title   "Dashboard"
-                      :image   "image/dashboard.svg"
+                      :image   "fas fa-tachometer-alt"
                       :opacity "0.4"})
     (navigation-icon {:title   "People"
-                      :image   "image/people.svg"
+                      :image   "fas fa-users"
                       :opacity "0.4"})
     (navigation-icon {:title   "Inventory"
-                      :image   "image/inventory.svg"
-                      :opacity "0.9"})
+                      :image   "fas fa-sitemap"
+                      :opacity "0.9"
+                      :color   "#e67e22"})
     (navigation-icon {:title   "Contractor"
-                      :image   "image/contractor.svg"
+                      :image   "fas fa-ribbon"
                       :opacity "0.4"})
     (navigation-icon {:title   "Settings"
-                      :image   "image/setting.svg"
+                      :image   "fas fa-cog"
                       :opacity "0.4"})]
    auth-status-item])

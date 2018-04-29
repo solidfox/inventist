@@ -1,7 +1,7 @@
 (ns people.component
   (:require [rum.core :refer [defc]]
             [antizer.rum :as ant]
-            [inventory.core :as inventory]))
+            [inventist-client.page.inventory.core :as inventory]))
 
 
 (def people-filter [{:value    "student"

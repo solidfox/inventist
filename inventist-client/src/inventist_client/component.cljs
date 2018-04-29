@@ -3,7 +3,6 @@
             [authentication.component :as auth]
             [authentication.core :as auth.core]
             [people.component :as people]
-            [inventory.component :as inventory]
             [inventist-client.navbar.component :as navbar]
             [inventist-client.page.inventory.component :as inventory-page]
             [rum.core :refer [defc with-key]]))

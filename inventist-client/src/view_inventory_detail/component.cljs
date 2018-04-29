@@ -1,6 +1,6 @@
 (ns view-inventory-detail.component
   (:require [rum.core :refer [defc]]
-            [inventory.core :as inventory]
+            [inventist-client.page.inventory.core :as inventory]
             [remodular.core :refer [modular-component]]))
 
 (def col-width "9rem")
@@ -15,15 +15,15 @@
                    :grid-template-rows "auto 1fr"}}
      ;Toolbar
      [:div {:style {:height          "3rem"
-                    :backgroundColor "#BDC3C7"
+                    :backgroundColor "#4a4a4a"
                     :cursor          "pointer"}}
-      [:div {:style {:margin "0.7rem"}}
+      [:div {:style {:margin "0.75rem"}}
        [:span {:style {:color  "rgba(255,255,255,1)"
                        :margin "0 1rem 0 0"}}
         [:i {:class "fas fa-arrow-circle-left"}]]
        [:span {:style {:color  "rgba(255,255,255,0.75)"
                        :margin "0 0.5rem 0 0"}} "Dashboard / Inventory /"]
-       [:span {:style {:color "rgba(255,255,255,1)" :font-size "1rem"}}
+       [:span {:style {:color "rgba(255,255,255,1)" :font-size "0.9rem"}}
         [:i {:class (:brand (inventory/inventory-icon item))}] " "
         [:i {:class (:model (inventory/inventory-icon item))}]
         (str " - " (:fname (first (:history item))) " " (:lname (first (:history item))))]]]
@@ -48,7 +48,6 @@
        [:div {:style {:width      "6rem"
                       :text-align "right"
                       :margin     "0"}}]
-       ;[:img {:src (:image (first (:history item))) :style {:width "3rem" :borderRadius "2rem"}}]]
        [:div {:style {:margin "0 0 0 1rem" :display "flex" :flex-direction "column"}}
         [:div {:style {:font-size "1.5rem" :color "#7F8C8D"}} "Information"]
         [:div {:style {:display        "flex"
@@ -63,7 +62,8 @@
           [:div {:style {:margin "0.5rem 0"}} (:serial-number item)]
           [:div {:style {:margin "0.5rem 0"}} (:color item)]
           [:div {:style {:margin "0.5rem 0"}} (:model-identifier item)]
-          [:div {:style {:margin "0.5rem 0"}} (:insurance-expires (:purchase-details item))]
+          [:div {:style {:margin "0.5rem 0"}}
+           (:insurance-expires (:purchase-details item))]
           [:div {:style {:margin "0.5rem 0"}} (:warranty-expires (:purchase-details item))]]]]]
 
       [:div {:id "divider" :style {:margin        "1rem 0 1rem 9.5rem"
@@ -86,7 +86,7 @@
                        :flex-direction "row"}}
          [:div {:style {:width col-width :color "#95A5A6" :text-align "left"}}
           [:div {:style {:margin "0.5rem 0"}} "Name"]
-          [:div {:style {:margin "0.5rem 0"}} "Type-Group"]
+          [:div {:style {:margin "0.5rem 0"}} "Type - Group"]
           [:div {:style {:margin "0.5rem 0"}} "Assigned on"]]
          [:div {:style {:color "#4A4A4A" :text-transform "capitalize" :margin "0 0 0 1rem"}}
           [:div {:style {:margin "0.5rem 0"}} (str (:fname (first (:history item))) " " (:lname (first (:history item))))]
@@ -105,8 +105,6 @@
        [:div {:style {:width      "6rem"
                       :text-align "right"
                       :margin     "3rem 0 0"}}]
-       ;[:img {:src (:image (first (:history item))) :style {:width "3rem" :borderRadius "2rem"}}]]
-
        [:div {:style {:margin "0 0 0 1rem"}}
         [:div {:style {:font-size "1.5rem" :color "#7F8C8D"}} "Timeline"]
         [:div {:style {:display        "flex"
@@ -122,14 +120,17 @@
             [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"} :key id}
              [:div {:style {:color "#95A5A6" :width col-width}} date]
              [:div {:style {:margin "0 0 0 1rem"}}
-              (str "Allotted to " fname " " lname " (" type " - " group ")")
+              [:span "Allotted to "]
+              [:span {:style {:font-weight "500"}} fname " " lname]
+              [:span " (" type " - " group ")"]
               [:br]
               [:span {:class "italic"} comment]]])
 
           [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"}}
            [:div {:style {:color "#95A5A6" :width col-width}} (:delivery-date (:purchase-details item))]
            [:div {:style {:margin "0 0 0 1rem"}}
-            (str "Purchased from " (:supplier (:purchase-details item)))
+            [:span "Purchased from "]
+            [:span {:style {:font-weight "500"}} (:supplier (:purchase-details item))]
             [:span {:style {:color "#4A90E2" :cursor "pointer"}} " (PDF)"]]]]]]]
 
       [:div {:id "divider" :style {:margin        "1rem 0 1rem 9.5rem"
