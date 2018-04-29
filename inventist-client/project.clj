@@ -10,7 +10,6 @@
 
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.9.946"]
-                 [antizer "0.2.2"]
                  ;[org.clojure/core.async  "0.4.474"]
                  [rum "0.11.2"]
                  [remodular "0.1.0-SNAPSHOT"]

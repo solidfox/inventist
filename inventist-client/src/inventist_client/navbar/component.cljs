@@ -45,11 +45,11 @@
                       :opacity "0.4"})
     (navigation-icon {:title   "People"
                       :image   "fas fa-users"
-                      :opacity "0.4"})
-    (navigation-icon {:title   "Inventory"
-                      :image   "fas fa-sitemap"
                       :opacity "0.9"
                       :color   "#e67e22"})
+    (navigation-icon {:title   "Inventory"
+                      :image   "fas fa-sitemap"
+                      :opacity "0.4"})
     (navigation-icon {:title   "Contractor"
                       :image   "fas fa-ribbon"
                       :opacity "0.4"})
