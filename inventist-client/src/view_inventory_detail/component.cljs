@@ -30,7 +30,9 @@
     [:span {:style {:font-size "1rem" :color "#4a4a4a" :line-height "1rem" :text-transform "capitalize"}}
      (str (:brand item) " " (:model-name item))] [:br]
     [:span {:style {:font-size "0.8rem" :color "#7F8C8D" :line-height "1rem" :text-transform "capitalize"}}
-     (str (:color item) " - " (:serial-number item))]]])
+     (str (:color item) " - " (:serial-number item))] [:br]
+    [:span {:style {:font-size "0.8rem" :color "#7F8C8D" :line-height "1rem" :text-transform "capitalize"}}
+     (str "Assigned on " (:date item))]]])
     ; [:br]
     ;[:span {:style {:font-size "1rem" :color "#4a4a4a" :line-height "1.5rem" :text-transform "capitalize"}}
     ; [:i {:class (:brand (inventory/inventory-icon item))}] " "
