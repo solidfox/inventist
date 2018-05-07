@@ -1,4 +1,4 @@
-(ns view-inventory-list.mock-data)
+(ns view-inventory-overview.mock-data)
 
 (defn create-apple-summary
   [{id :id}]

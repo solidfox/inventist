@@ -1,6 +1,6 @@
-(ns view-inventory-list.component
+(ns view-people-overview.component
   (:require [rum.core :refer [defc]]
-            [inventist-client.page.inventory.core :as inventory]))
+            [util.inventory.core :as inventory]))
 
 
 
@@ -14,11 +14,10 @@
                     (+ 1 (length (rest list)))))
 
 
-(defc inventory-list < remodular.core/modular-component
+(defc people-list < remodular.core/modular-component
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [items (get-in state [:get-inventory-list-response :response :items])]
-
+  (let [items (get-in state [:get-people-list-response :response :items])]
     [:div {:style {:height             "100%"
                    :display            "grid"
                    :grid-template-rows "auto 1fr auto"}}

@@ -7,6 +7,5 @@
   {:inventory-id                   inventory-id
    :fetching-inventory-details     false
    :get-inventory-details-response {:status 200
-                                    :response (mock-people/create-person-detail)}})
-                                    ;:response (mock-data/create-inventory-detail)}})
+                                    :response (mock-data/create-inventory-detail)}})
 

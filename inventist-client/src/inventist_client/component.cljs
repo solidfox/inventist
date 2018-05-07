@@ -5,6 +5,7 @@
             [people.component :as people]
             [inventist-client.navbar.component :as navbar]
             [inventist-client.page.inventory.component :as inventory-page]
+            [inventist-client.page.people.component :as people-page]
             [rum.core :refer [defc with-key]]))
 
 
@@ -23,4 +24,9 @@
                    :grid-template-rows "3.5rem calc(100% - 3.5rem)"}}
      (navbar/navigation-bar {:auth-status-item
                              (auth/bar-item-login-status (core/authentication-args state))})
-     (inventory-page/component (core/create-inventory-page-args state))]))
+     (condp = (first (:path state))
+            :people
+            (people-page/component (core/create-people-page-args state))
+            :inventory
+            (inventory-page/component (core/create-inventory-page-args state)))]))
+

@@ -1,19 +1,15 @@
 (ns inventist-client.page.inventory.core
   (:require [view-inventory-detail.core :as view-inventory-detail]
-            [view-inventory-list.core :as view-inventory-list]
-            [view-person-detail.core :as view-person-detail]
-            [clojure.string :refer [lower-case]]))
+            [view-inventory-overview.core :as view-inventory-overview]))
 
 (defn inventory-detail-state-path [item-id] [:view-modules :view-inventory-detail item-id])
-(defn person-detail-state-path [person-id] [:view-modules :view-person-detail person-id])
-(defn inventory-list-state-path [{filter :filter}] [:view-modules :view-inventory-list filter])
+(defn inventory-overview-state-path [{filter :filter}] [:view-modules :view-inventory-overview filter])
 
 (defn create-state
   []
   (-> {}
       (assoc-in (inventory-detail-state-path "mock-item-id") (view-inventory-detail/create-state "mock-item-id"))
-      (assoc-in (inventory-list-state-path {}) (view-inventory-list.core/create-state))
-      (assoc-in (person-detail-state-path "mock-person-id") (view-person-detail/create-state "mock-person-id"))))
+      (assoc-in (inventory-overview-state-path {}) (view-inventory-overview/create-state))))
 
 (defn create-inventory-detail-args
   [state item-id]
@@ -21,45 +17,9 @@
     {:input      {:state (get-in state state-path)}
      :state-path state-path}))
 
-(defn create-person-detail-args
-  [state person-id]
-  (let [state-path (person-detail-state-path person-id)]
-    {:input      {:state (get-in state state-path)}
-     :state-path state-path}))
-
-(defn create-inventory-list-args
+(defn create-inventory-overview-args
   [state state-path-deps]
-  (let [state-path (inventory-list-state-path state-path-deps)]
+  (let [state-path (inventory-overview-state-path state-path-deps)]
     {:input      {:state (get-in state state-path)}
      :state-path state-path}))
-
-(def android-brands #{"samsung" "google" "android"})
-
-(defn inventory-icon [{id            :id
-                       brand         :brand
-                       model         :model-name
-                       color         :color
-                       identifier    :model-identifier
-                       class         :class
-                       serial-number :serial-number}]
-  (cond (= (lower-case brand) (lower-case "Apple"))
-        (let [brand-map {:brand "fab fa-apple"}]
-          (cond (re-find #"macbook" (lower-case identifier))
-                (assoc brand-map :model "fas fa-laptop")
-                (re-find #"smartphone" (lower-case class))
-                (assoc brand-map :model "fas fa-mobile-alt")
-                (re-find #"tablet" (lower-case class))
-                (assoc brand-map :model "fas fa-tablet-alt")
-                :else brand-map))
-        (contains? android-brands (lower-case brand))
-        (let [brand-map {:brand "fab fa-android"}]
-          (cond (re-find #"laptop" (lower-case class))
-                (assoc brand-map :model "fas fa-laptop")
-                (re-find #"phone" (lower-case class))
-                (assoc brand-map :model "fas fa-mobile-alt")
-                (re-find #"tab" (lower-case class))
-                (assoc brand-map :model "fas fa-tablet-alt")
-                :else brand-map))))
-
-
 
