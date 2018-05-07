@@ -1,6 +1,5 @@
 (ns view-inventory-overview.core
- (:require [view-inventory-overview.mock-data :as mock-data]
-           [people.core :as mock-people]))
+ (:require [view-inventory-overview.mock-data :as mock-data]))
 
 (defn create-state
   []

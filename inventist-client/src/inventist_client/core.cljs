@@ -1,6 +1,5 @@
 (ns inventist-client.core
   (:require [authentication.core :as auth]
-            [people.core :as people]
             [inventist-client.page.inventory.core :as inventory-page]
             [inventist-client.page.people.core :as people-page]
             [cljs.pprint]))
@@ -11,17 +10,7 @@
 
 (defn create-state
   []
-  (-> {:path             [:people]
-       :person           [(people/create-person-detail)]
-       :people           [(people/create-person-summary {:id "01"})
-                          (people/create-person-summary {:id "02"})
-                          (people/create-person-summary {:id "03"})]
-       :ownership-ledger [{:owner-id     44
-                           :inventory-id 01
-                           :date         "2018-04-14T10:37:46Z"}
-                          {:owner-id     44
-                           :inventory-id 01
-                           :date         "2018-04-14T10:37:46Z"}]}
+  (-> {:path [:inventory]}
       (assoc-in authentication-state-path (auth/create-state))
       (assoc-in inventory-page-state-path (inventory-page/create-state))
       (assoc-in people-page-state-path (people-page/create-state))))
