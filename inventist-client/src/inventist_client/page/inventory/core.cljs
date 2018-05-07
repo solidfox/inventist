@@ -1,20 +1,29 @@
 (ns inventist-client.page.inventory.core
   (:require [view-inventory-detail.core :as view-inventory-detail]
             [view-inventory-list.core :as view-inventory-list]
+            [view-person-detail.core :as view-person-detail]
             [clojure.string :refer [lower-case]]))
 
 (defn inventory-detail-state-path [item-id] [:view-modules :view-inventory-detail item-id])
+(defn person-detail-state-path [person-id] [:view-modules :view-person-detail person-id])
 (defn inventory-list-state-path [{filter :filter}] [:view-modules :view-inventory-list filter])
 
 (defn create-state
   []
   (-> {}
-      (assoc-in (inventory-detail-state-path "mock-id") (view-inventory-detail/create-state "mock-id"))
-      (assoc-in (inventory-list-state-path {}) (view-inventory-list.core/create-state))))
+      (assoc-in (inventory-detail-state-path "mock-item-id") (view-inventory-detail/create-state "mock-item-id"))
+      (assoc-in (inventory-list-state-path {}) (view-inventory-list.core/create-state))
+      (assoc-in (person-detail-state-path "mock-person-id") (view-person-detail/create-state "mock-person-id"))))
 
 (defn create-inventory-detail-args
   [state item-id]
   (let [state-path (inventory-detail-state-path item-id)]
+    {:input      {:state (get-in state state-path)}
+     :state-path state-path}))
+
+(defn create-person-detail-args
+  [state person-id]
+  (let [state-path (person-detail-state-path person-id)]
     {:input      {:state (get-in state state-path)}
      :state-path state-path}))
 

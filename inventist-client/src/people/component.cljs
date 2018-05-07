@@ -1,6 +1,6 @@
 (ns people.component
   (:require [rum.core :refer [defc]]
-            ;[antizer.rum :as ant]
+            [antizer.rum :as ant]
             [inventist-client.page.inventory.core :as inventory]))
 
 
