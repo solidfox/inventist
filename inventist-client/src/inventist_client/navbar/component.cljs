@@ -1,8 +1,8 @@
 (ns inventist-client.navbar.component
   (:require [rum.core :refer [defc]]
             [remodular.core :as rem]
-            [authentication.core :as core]
-            [antizer.rum :as ant]))
+            [authentication.core :as core]))
+
 
 (defc navigation-icon
   [{title  :title

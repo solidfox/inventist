@@ -18,7 +18,7 @@
                  :minWidth              "22rem"
                  :maxWidth              "22rem"
                  :padding               "1rem"
-                 :borderRadius "0.5rem"
+                 :borderRadius          "0.5rem"
                  :margin                "0.5rem 1rem 0.5rem 0"
                  :display               "grid"
                  :grid-template-columns "auto 1fr"
@@ -33,10 +33,10 @@
      (str (:color item) " - " (:serial-number item))] [:br]
     [:span {:style {:font-size "0.8rem" :color "#7F8C8D" :line-height "1rem" :text-transform "capitalize"}}
      (str "Assigned on " (:date item))]]])
-    ; [:br]
-    ;[:span {:style {:font-size "1rem" :color "#4a4a4a" :line-height "1.5rem" :text-transform "capitalize"}}
-    ; [:i {:class (:brand (inventory/inventory-icon item))}] " "
-    ; [:i {:class (:model (inventory/inventory-icon item))}]]]])
+; [:br]
+;[:span {:style {:font-size "1rem" :color "#4a4a4a" :line-height "1.5rem" :text-transform "capitalize"}}
+; [:i {:class (:brand (inventory/inventory-icon item))}] " "
+; [:i {:class (:model (inventory/inventory-icon item))}]]]])
 
 
 (defc inventory-detail < modular-component
