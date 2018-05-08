@@ -25,7 +25,7 @@
 (defc navigation-bar [{auth-status-item :auth-status-item}]
   [:div {:style
          {:padding         "0.5rem"
-          :height          "3.5rem"
+          :height          "2.5rem"
           :display         "flex"
           :flex-direction  "row"
           :align-items     "center"

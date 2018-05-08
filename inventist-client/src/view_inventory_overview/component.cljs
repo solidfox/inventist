@@ -44,7 +44,10 @@
                               :font-size       "1rem"
                               :backgroundColor "transparent"
                               :border          0}}]]
-      [:div {:style {:height "2rem" :padding "0.25rem 1rem" :backgroundColor "#e5e5e5" :display "flex" :justify-content "space-between"}}
+      [:div {:style {:height "auto" :padding "0.25rem 1rem"
+                     :font-size "0.9rem"
+                     :backgroundColor "#e5e5e5"
+                     :display "flex" :justify-content "space-between"}}
        [:div (str "Total " (length items) " results")]
        [:div {:style {:color "#4A90E2" :cursor "pointer"}} (str "View Table")]]]
 
