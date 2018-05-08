@@ -3,7 +3,8 @@
             [rum.core :as rum]
             [authentication.core :as auth]
             [remodular.runtime :as a]
-            [inventist-client.core :as core]))
+            [inventist-client.core :as core]
+            [oops.core :refer [oget ocall]]))
 
 (enable-console-print!)
 
@@ -16,8 +17,11 @@
                                       :services      true
                                       :events        true}})
 
-(.onAuthStateChanged
-  (js/firebase.auth)
+(def firebase-auth (oget js/firebase :auth))
+
+(ocall
+  (firebase-auth)
+  :onAuthStateChanged
   (fn [user]
     (swap! app-state-atom
            update-in

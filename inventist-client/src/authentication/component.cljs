@@ -2,15 +2,18 @@
   (:require [rum.core :refer [defc]]
             [remodular.core :as rem]
             [authentication.core :as core]
-            [antizer.rum :as ant]))
+            [antizer.rum :as ant]
+            [oops.core :refer [oget ocall]]))
+
+(def ^:private firebase-auth (oget js/firebase :auth))
 
 (defn log-in-with-redirect
   []
-  (let [provider (js/firebase.auth.GoogleAuthProvider.)]
-    (.signInWithRedirect (js/firebase.auth) provider)))
+  (let [provider ((oget firebase-auth :GoogleAuthProvider).)]
+    (ocall (firebase-auth) :signInWithRedirect provider)))
 
 (defn log-out []
-  (.signOut (js/firebase.auth)))
+  (ocall (firebase-auth) :signOut))
 
 (defc login < rem/modular-component
   [{{state :state} :input}]
