@@ -3,7 +3,7 @@
             [util.inventory.core :as inventory]
             [remodular.core :refer [modular-component]]))
 
-(def col-width "9rem")
+(def col-width "11rem")
 
 (defn length
   [list]
@@ -156,7 +156,7 @@
                  group   :group} (:history item)]
             [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"} :key id}
              [:div {:style {:color "#95A5A6" :width col-width}} date]
-             [:div {:style {:margin "0 0 0 1rem"}}
+             [:div {:style {:color "#4A4A4A" :margin "0 0 0 1rem"}}
               [:span "Allotted to "]
               [:span {:style {:font-weight "500"}} fname " " lname]
               [:span " (" type " - " group ")"]
@@ -165,7 +165,7 @@
 
           [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"}}
            [:div {:style {:color "#95A5A6" :width col-width}} (:delivery-date (:purchase-details item))]
-           [:div {:style {:margin "0 0 0 1rem"}}
+           [:div {:style {:color "#4A4A4A" :margin "0 0 0 1rem"}}
             [:span "Purchased from "]
             [:span {:style {:font-weight "500"}} (:supplier (:purchase-details item))]
             [:span {:style {:color "#4A90E2" :cursor "pointer"}} " (PDF)"]]]]]]]

@@ -3,7 +3,7 @@
             [util.inventory.core :as inventory]
             [remodular.core :refer [modular-component]]))
 
-(def col-width "9rem")
+(def col-width "11rem")
 
 (defn length
   [list]
@@ -151,7 +151,7 @@
           (for [item (:history person)]
             [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"} :key (:inventory-id item)}
              [:div {:style {:color "#95A5A6" :width col-width}} (:date item)]
-             [:div {:style {:margin "0 0 0 1rem"}}
+             [:div {:style {:color "#4A4A4A" :margin "0 0 0 1rem"}}
               [:span (:brand item) " " (:model-name item) " ("
                [:i {:class (:brand (inventory/inventory-icon item))}] " "
                [:i {:class (:model (inventory/inventory-icon item))}] ")"]
