@@ -32,14 +32,14 @@
                      :box-shadow            "0px 0px 5px rgba(0,0,0,0.25) inset"}}
        [:div {:style {:margin "0.75rem" :font-size "1.0rem" :color "rgba(0,0,0,0.5)"}}
         [:i {:class "fas fa-search"}]]
-       [:input {:type        "search"
+       [:input {:type        "input"
                 :id          "search"
                 :name        "search"
                 :autoFocus   true
                 :placeholder "Search"
                 :style       {:width           "100%"
                               :margin          "0"
-                              :height          "3rem"
+                              :height          "100%"
                               :font-size       "1rem"
                               :backgroundColor "transparent"
                               :border          0}}]]
