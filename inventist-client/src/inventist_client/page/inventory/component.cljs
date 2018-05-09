@@ -5,7 +5,7 @@
             [inventist-client.page.inventory.core :as core]
             [rum.core :refer [defc]]))
 
-(defc component < modular-component
+(defc component < (modular-component identity)
   [{{state :state} :input
     trigger-event  :trigger-event}]
   [:div {:id (str ::component-id)

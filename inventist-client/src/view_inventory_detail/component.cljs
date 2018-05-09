@@ -39,11 +39,10 @@
 ; [:i {:class (:model (inventory/inventory-icon item))}]]]])
 
 
-(defc inventory-detail < modular-component
+(defc inventory-detail < (modular-component identity)
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (let [item (get-in state [:get-inventory-details-response :response])]
-    (println state)
 
     ;INVENTORY DETAILS
     [:div {:id    "detail-container"

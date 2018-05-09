@@ -33,3 +33,7 @@
 (defn logged-in?
   [state]
   (not (nil? (get-authenticated-user state))))
+
+(defn set-active-page
+  [state page-id]
+  (assoc state :path [page-id]))

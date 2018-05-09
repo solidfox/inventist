@@ -39,7 +39,7 @@
 ; [:i {:class (:model (inventory/inventory-icon item))}]]]])
 
 
-(defc person-detail < modular-component
+(defc person-detail < (modular-component identity)
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (let [person (get-in state [:get-person-details-response :response])]

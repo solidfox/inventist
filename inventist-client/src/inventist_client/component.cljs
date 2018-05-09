@@ -4,10 +4,12 @@
             [inventist-client.navbar.component :as navbar]
             [inventist-client.page.inventory.component :as inventory-page]
             [inventist-client.page.people.component :as people-page]
-            [rum.core :refer [defc with-key]]))
+            [rum.core :refer [defc with-key]]
+            [remodular.core :refer [modular-component]]
+            [inventist-client.event :refer [handle-event]]))
 
 
-(defc app
+(defc app < (modular-component handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (if (not (core/logged-in? state))
@@ -16,10 +18,12 @@
                    :display            "grid"
                    :backgroundColor    "#ffffff"
                    :grid-template-rows "3.5rem calc(100% - 3.5rem)"}}
-     (navbar/navigation-bar {:auth-status-item
-                             (auth/bar-item-login-status (core/authentication-args state))})
+     (navbar/navigation-bar
+       {:auth-status-item (auth/bar-item-login-status (core/authentication-args state))
+        :current-path     (:path state)
+        :trigger-event    trigger-event})
      (condp = (first (:path state))
-            :people
-            (people-page/component (core/create-people-page-args state))
-            :inventory
-            (inventory-page/component (core/create-inventory-page-args state)))]))
+       :people
+       (people-page/component (core/create-people-page-args state))
+       :inventory
+       (inventory-page/component (core/create-inventory-page-args state)))]))

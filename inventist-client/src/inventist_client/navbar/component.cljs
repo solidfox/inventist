@@ -1,28 +1,52 @@
 (ns inventist-client.navbar.component
   (:require [rum.core :refer [defc]]
             [remodular.core :as rem]
-            [authentication.core :as core]))
+            [authentication.core :as core]
+            [inventist-client.event :as event]))
 
 
 (defc navigation-icon
-  [{title  :title
-    image  :image
-    color  :color
-    opaque :opacity}]
-  [:div {:style {:text-align "center"
-                 :opacity    opaque
-                 :color      (or color "#000000")
-                 :width      "4rem"
-                 :margin     "0"
-                 :cursor     "pointer"}}
-   [:div {:style {:height "1.75rem" :text-align "center"}}
-    [:i {:class image :style {:font-size "1.5rem"}}]]
+  [{title    :title
+    image    :image
+    color    :color
+    opaque   :opacity
+    on-click :on-click}]
+  (let [opaque (or opaque 0.4)]
+    [:div {:style    {:text-align "center"
+                      :opacity    opaque
+                      :color      (or color "#000000")
+                      :width      "4rem"
+                      :margin     "0"
+                      :cursor     "pointer"}
+           :on-click on-click}
+     [:div {:style {:height "1.75rem" :text-align "center"}}
+      [:i {:class image :style {:font-size "1.5rem"}}]]
 
-   [:div {:style {:font-size "0.7rem"
-                  :margin    "0rem"}}
-    title]])
+     [:div {:style {:font-size "0.7rem"
+                    :margin    "0rem"}}
+      title]]))
 
-(defc navigation-bar [{auth-status-item :auth-status-item}]
+(def navbar-main-sections
+  [{:title          "Dashboard"
+    :image          "fas fa-tachometer-alt"
+    :target-page-id :dashboard}
+   {:title          "People"
+    :image          "fas fa-users"
+    :target-page-id :people}
+   {:title          "Inventory"
+    :image          "fas fa-sitemap"
+    :target-page-id :inventory}
+   {:title          "Contractors"
+    :image          "fas fa-ribbon"
+    :target-page-id :contractors}
+   {:title          "Settings"
+    :image          "fas fa-cog"
+    :target-page-id :settings}])
+
+
+(defc navigation-bar [{trigger-event    :trigger-event
+                       current-path     :current-path
+                       auth-status-item :auth-status-item}]
   [:div {:style
          {:padding         "0.5rem"
           :height          "2.5rem"
@@ -40,20 +64,14 @@
    ;                :color       "black"}} " Inventist"]]
 
    [:div {:style {:height "100%" :text-align "center" :display "flex"}}
-    (navigation-icon {:title   "Dashboard"
-                      :image   "fas fa-tachometer-alt"
-                      :opacity "0.4"})
-    (navigation-icon {:title   "People"
-                      :image   "fas fa-users"
-                      :opacity "0.9"
-                      :color   "#e67e22"})
-    (navigation-icon {:title   "Inventory"
-                      :image   "fas fa-sitemap"
-                      :opacity "0.4"})
-    (navigation-icon {:title   "Contractor"
-                      :image   "fas fa-ribbon"
-                      :opacity "0.4"})
-    (navigation-icon {:title   "Settings"
-                      :image   "fas fa-cog"
-                      :opacity "0.4"})]
+    (for [{title          :title
+           image          :image
+           target-page-id :target-page-id} navbar-main-sections]
+      (navigation-icon (merge {:title    title
+                               :image    image
+                               :on-click (fn [] (trigger-event (event/clicked-navigation-icon {:target-page-id target-page-id})))}
+                              (when (= (first current-path) target-page-id)
+                                {:selected true
+                                 :opacity  0.9
+                                 :color    "#e67e22"}))))]
    auth-status-item])
