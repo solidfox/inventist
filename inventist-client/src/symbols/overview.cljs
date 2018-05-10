@@ -1,6 +1,6 @@
-(ns symbols.sidebar
+(ns symbols.overview
   (:require [rum.core :refer [defc]]
-            [util.inventory.core :as inventory]))
+            [symbols.general :as symbol-general]))
 
 ;to calculate length of an array
 (defn length
@@ -33,8 +33,7 @@
     [:span {:style {:font-size "1rem" :color "#4a4a4a" :line-height "1.5rem" :text-transform "capitalize"}}
      (for [item (:inventory person)]
        [:span {:style {:margin "0 1rem 0 0"}}
-        [:i {:class (:brand (inventory/inventory-icon item))}] " "
-        [:i {:class (:model (inventory/inventory-icon item))}]])]]])
+        (symbol-general/device-icon-set item)])]]])
 
 
 ;Inventory-list card
@@ -48,9 +47,8 @@
                  :display               "grid"
                  :grid-template-columns "auto 1fr"
                  :cursor                "pointer"}}
-   [:div {:style {:width "2.5rem"}}
-    [:span {:style {:font-size "1.2rem"}} [:i {:class (:brand (inventory/inventory-icon item))}] " "]
-    [:span {:style {:font-size "1rem"}} [:i {:class (:model (inventory/inventory-icon item))}]]]
+   [:div {:style {:width "2.5rem" :font-size "1.1rem"}}
+    (symbol-general/device-icon-set item)]
    [:div {:style {:margin "0 0 0 1rem"}}
     [:span {:style {:font-size "1rem" :color "#4a4a4a" :line-height "1rem" :text-transform "capitalize"}}
      (str (:model-name item) " - " (:color item))] [:br]
@@ -58,7 +56,7 @@
      (str (:assignee item))]]])
 
 ;Search component
-(defc sidebar-search [list-items]
+(defc overview-search [list-items]
   [:div
    [:div {:style {:width                 "100%"
                   :height                "3rem"
@@ -87,7 +85,7 @@
     [:div {:style {:color "#4A90E2" :cursor "pointer"}} (str "View Table")]]])
 
 ;Sidebar-Footer
-(defc sidebar-footer []
+(defc overview-footer []
   [:div {:style {:width                 "100%"
                  :height                "3rem"
                  :backgroundColor       "#ECF0F1"
@@ -102,14 +100,14 @@
     [:i {:class "fas fa-caret-left"}]]])
 
 
-;sidebar with search and listing
-(defc sidebar-list
+;overview with search and listing
+(defc overview-list
   [type list-items]
   [:div {:style {:height             "100%"
                  :display            "grid"
                  :grid-template-rows "auto 1fr auto"}}
    ;Normal Search
-   (sidebar-search list-items)
+   (overview-search list-items)
 
    ;listing
    [:div {:style {:overflow-x      "hidden"
@@ -120,6 +118,6 @@
             (= type "inventory") (inventory-list-card list-item)))]
 
    ;Footer
-   (sidebar-footer)])
+   (overview-footer)])
 
 
