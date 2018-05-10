@@ -6,7 +6,8 @@
             [inventist-client.page.people.component :as people-page]
             [rum.core :refer [defc with-key]]
             [remodular.core :refer [modular-component]]
-            [inventist-client.event :refer [handle-event]]))
+            [inventist-client.event :refer [handle-event]]
+            [symbols.color :as c]))
 
 
 (defc app < (modular-component handle-event)
@@ -16,7 +17,7 @@
     (auth/login (core/authentication-args state))
     [:div {:style {:height             "100vh"
                    :display            "grid"
-                   :backgroundColor    "#ffffff"
+                   :backgroundColor    c/white
                    :grid-template-rows "3.5rem calc(100% - 3.5rem)"}}
      (navbar/navigation-bar
        {:auth-status-item (auth/bar-item-login-status (core/authentication-args state))

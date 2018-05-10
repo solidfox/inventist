@@ -2,7 +2,9 @@
   (:require [rum.core :refer [defc]]
             [remodular.core :as rem]
             [authentication.core :as core]
-            [inventist-client.event :as event]))
+            [inventist-client.event :as event]
+            [symbols.color :as c]))
+
 
 
 (defc navigation-icon
@@ -14,7 +16,7 @@
   (let [opaque (or opaque 0.4)]
     [:div {:style    {:text-align "center"
                       :opacity    opaque
-                      :color      (or color "#000000")
+                      :color      (or color c/black)
                       :width      "4rem"
                       :margin     "0"
                       :cursor     "pointer"}
@@ -53,15 +55,12 @@
           :display         "flex"
           :flex-direction  "row"
           :align-items     "center"
-          :backgroundColor "#ECF0F1"
+          :backgroundColor c/silver
           :justify-content "space-between"}}
    [:div {:style {:height "100%" :text-align "left"}}
     [:span [:img {:src   "image/GHS-logotype-horizontal.svg"
                   :style {:height       "100%"
                           :borderRadius "0rem"}}]]]
-   ;[:span {:style {:font-size   "24px"
-   ;                :font-weight "bold"
-   ;                :color       "black"}} " Inventist"]]
 
    [:div {:style {:height "100%" :text-align "center" :display "flex"}}
     (for [{title          :title
@@ -73,5 +72,5 @@
                               (when (= (first current-path) target-page-id)
                                 {:selected true
                                  :opacity  0.9
-                                 :color    "#e67e22"}))))]
+                                 :color    c/theme}))))]
    auth-status-item])
