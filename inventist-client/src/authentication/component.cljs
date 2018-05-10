@@ -10,7 +10,8 @@
 
 (defn log-in-with-redirect
   []
-  (let [provider ((oget firebase-auth :GoogleAuthProvider).)]
+  (let [provider (new (.-GoogleAuthProvider firebase-auth))]
+    (js/console.log provider)
     (ocall (firebase-auth) :signInWithRedirect provider)))
 
 (defn log-out []
