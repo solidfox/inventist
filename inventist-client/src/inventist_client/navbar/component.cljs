@@ -11,22 +11,21 @@
   [{title    :title
     image    :image
     color    :color
-    opaque   :opacity
     on-click :on-click}]
-  (let [opaque (or opaque 0.4)]
-    [:div {:style    {:text-align "center"
-                      :opacity    opaque
-                      :color      (or color c/black)
-                      :width      "4rem"
-                      :margin     "0"
-                      :cursor     "pointer"}
-           :on-click on-click}
-     [:div {:style {:height "1.75rem" :text-align "center"}}
-      [:i {:class image :style {:font-size "1.5rem"}}]]
+  [:div {:style    {:text-align "center"
+                    :color      (or color c/grey-normal)
+                    :width      "4rem"
+                    :margin     "0"
+                    :cursor     "pointer"}
+         :on-click on-click}
+   [:div {:style {:height "1.75rem" :text-align "center"}}
+    [:i {:class image :style {:font-size "1.5rem"}}]]
 
-     [:div {:style {:font-size "0.7rem"
-                    :margin    "0rem"}}
-      title]]))
+   [:div {:style {:font-size "0.7rem"
+                  :margin    "0rem"}}
+    title]])
+  ;(let [opaque (or opaque 0.4)]))
+
 
 (def navbar-main-sections
   [{:title          "Dashboard"
@@ -71,6 +70,5 @@
                                :on-click (fn [] (trigger-event (event/clicked-navigation-icon {:target-page-id target-page-id})))}
                               (when (= (first current-path) target-page-id)
                                 {:selected true
-                                 :opacity  0.9
                                  :color    c/theme}))))]
    auth-status-item])

@@ -4,7 +4,7 @@
             [symbols.color :as c]))
 
 ;To change listing bg color on hover.
-(def listBGcolor c/grey-list)
+(def listBGcolor c/highlight)
 
 ;Person-list card
 (defc person-list-card [person]
@@ -13,7 +13,7 @@
                  :backgroundColor       listBGcolor
                  :minHeight             "3rem"
                  :padding               "1rem"
-                 :margin                "0 0 2px 0"
+                 :margin                "2px 0"
                  :display               "grid"
                  :grid-template-columns "auto 1fr"
                  :cursor                "pointer"}}
@@ -38,7 +38,7 @@
                  :backgroundColor       listBGcolor
                  :minHeight             "3rem"
                  :padding               "1rem"
-                 :margin                "0 0 2px 0"
+                 :margin                "2px 0"
                  :display               "grid"
                  :grid-template-columns "auto 1fr"
                  :cursor                "pointer"}}
@@ -68,12 +68,13 @@
              :placeholder "Search"
              :style       {:width           "100%"
                            :margin          "0"
+                           :font-size       "1rem"
                            :height          "100%"
                            :backgroundColor c/tp
                            :border          0}}]]
    [:div {:style {:height          "auto" :padding "0.25rem 1rem"
                   :font-size       "0.9rem"
-                  :backgroundColor c/grey-light
+                  :backgroundColor c/silver
                   :display         "flex" :justify-content "space-between"}}
     [:div (str "Total " (s-general/length list-items) " results")]
     [:div {:style {:color c/link-active :cursor "pointer"}} (str "View Table")]]])

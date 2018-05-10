@@ -66,7 +66,7 @@
        [:div {:style {:minWidth   "6rem"
                       :text-align "right"
                       :margin     "3rem 0 0"}}
-        [:img {:src (:image (first (:history item))) :style {:width "3rem" :height "3rem" :object-fit "cover" :backgroundColor "#f6f6f6" :borderRadius "2rem"}}]]
+        [:img {:src (:image (first (:history item))) :style {:width "3rem" :height "3rem" :object-fit "cover" :backgroundColor c/grey-light :borderRadius "2rem"}}]]
 
        [:div {:style {:margin "0 0 0 1rem" :width "100%"}}
         (s-detailview/section-title "Assignee")

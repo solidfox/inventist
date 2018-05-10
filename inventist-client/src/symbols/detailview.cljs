@@ -12,7 +12,7 @@
     (cond (= type "dashboard")
           [:span {:style {:margin "0 0.5rem 0 0"}} "Welcome to Inventist's Dashboard"]
           :else
-          [:span
+          [:span {:style {:margin "0 0.5rem 0 0"}}
            ;;0-Back Button (Only required in mobile-view)
            ;[:span {:style {:margin "0 1rem 0 0"}}
            ; [:i {:class "fas fa-arrow-circle-left"}]]
@@ -66,7 +66,7 @@
 (defc section-divider []
   [:div {:id    "divider"
          :style {:margin          "1rem 0"
-                 :backgroundColor c/grey-light
+                 :backgroundColor c/silver
                  :width           "100%"
                  :height          "1px"}}])
 

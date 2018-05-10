@@ -1,15 +1,15 @@
 (ns symbols.color)
 
 ;Color-Palette
-(def theme "#e67e22") ;orange
-(def black "#000000")
-(def white "#FFFFFFF")
-(def grey-dark "#4A4A4A")
-(def grey-blue "#95A5A6") ;"#7F8C8D"
-(def grey-light "#F6F6F6") ;e5e5e5
-(def grey-list "#E5E5E5")
-(def grey-normal "7F7F7F")
-(def silver "#ECF0F1")
-(def tp "transparent") ;No color
-(def danger "#FF0000") ;red
-(def link-active "#4A90E2") ;blue
+(def silver "#ECF0F1")                                      ;Primary Color - Selected Nav-Icon
+(def theme "#e67e22")                                       ;Theme Color - GMS orange
+(def black "#000000")                                       ;Page Heading & shadows
+(def white "#FFFFFF")                                       ;Page BG
+(def grey-normal "#7F7F7F")                                 ;UnSelected Nav-Icon
+(def grey-dark "#4A4A4A")                                   ;Text-Primary
+(def grey-blue "#7F8C8D")                                   ;Text-Secondary
+(def grey-light "#F6F6F6")                                  ;BG for cards, overview, etc.
+(def highlight "#EEEEEE")                                   ;Highlight (overview-list)
+(def tp "transparent")                                      ;Search Bar / No color
+(def danger "#FF0000")                                      ;CTA-logout / red
+(def link-active "#4A90E2")                                 ;CTA-link / blue
