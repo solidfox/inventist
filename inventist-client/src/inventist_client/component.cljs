@@ -4,6 +4,7 @@
             [inventist-client.navbar.component :as navbar]
             [inventist-client.page.inventory.component :as inventory-page]
             [inventist-client.page.people.component :as people-page]
+            [inventist-client.page.contractors.component :as contractors-page]
             [rum.core :refer [defc with-key]]
             [remodular.core :refer [modular-component]]
             [inventist-client.event :refer [handle-event]]
@@ -26,5 +27,7 @@
      (condp = (first (:path state))
        :people
        (people-page/component (core/create-people-page-args state))
+       :contractors
+       (contractors-page/component (core/create-contractors-page-args state))
        :inventory
        (inventory-page/component (core/create-inventory-page-args state)))]))

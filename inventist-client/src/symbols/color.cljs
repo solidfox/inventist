@@ -9,7 +9,7 @@
 (def grey-dark "#4A4A4A")                                   ;Text-Primary
 (def grey-blue "#7F8C8D")                                   ;Text-Secondary
 (def grey-light "#F6F6F6")                                  ;BG for cards, overview, etc.
-(def highlight "#EEEEEE")                                   ;Highlight (overview-list)
+(def highlight "#e5e5e5")                                   ;Highlight (overview-list)
 (def tp "transparent")                                      ;Search Bar / No color
 (def danger "#FF0000")                                      ;CTA-logout / red
 (def link-active "#4A90E2")                                 ;CTA-link / blue

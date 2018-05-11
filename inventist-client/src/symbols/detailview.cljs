@@ -23,7 +23,8 @@
           [:span {:style {:opacity "0.75"
                           :margin  "0 0.5rem 0 0"}}
            (cond (= type "people") "People"
-                 (= type "inventory") "Inventory")]
+                 (= type "inventory") "Inventory"
+                 (= type "contractors") "Contractors")]
           [:span {:style {:opacity "0.75"
                           :margin  "0 0.5rem 0 0"}} "/"]
           ;3-Current Item
@@ -31,7 +32,8 @@
            (cond (= type "people") [:span (str (:fname item) " " (:lname item))]
                  (= type "inventory") [:span
                                        (s-general/device-icon-set {:item item})
-                                       (str " - " (:fname (first (:history item))) " " (:lname (first (:history item))))])]])])
+                                       (str " - " (:fname (first (:history item))) " " (:lname (first (:history item))))]
+                 (= type "contractors") [:span (str (:name item))])]])])
 
 ;Toolbar contains breadcrumb and action-buttons
 (defc toolbar [{items-left  :items-left
@@ -44,7 +46,7 @@
                  :color           color/white}}
    [:div {:style {:display "flex"}}
     ;(s-general/button-light {:icon "fas fa-arrow-circle-left"}) ;back button for mobile view
-    items-left]                             ;breadcrumb for desktop view
+    items-left]                                             ;breadcrumb for desktop view
    [:div {:style {:display        "flex"
                   :flex-direction "row"
                   :margin         "0 1rem"}}
@@ -58,7 +60,8 @@
                       sub-heading-2 :sub-heading-2}]
   [:div {:style {:margin "2.5rem 2.5rem 0" :display "flex" :flex-direction "row"}
          :id    "header"}
-   [:div [:img {:src   image
+   [:div [:img {:src   (cond (and image (not= image "")) image
+                             :else "image/no-image.png")
                 :style {:width      "6rem" :height "6rem"
                         :object-fit "cover" :backgroundColor color/grey-light}}]]
    [:div {:style {:margin "0 0 0 1rem"}}
@@ -150,6 +153,18 @@
                 [:span {:style {:font-weight "500"}} "Assigned "]
                 [:span {:class "italic"} (:comment item)]]])
 
+            (= type "contractors")
+            (for [item history]
+              [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"}
+                     :key   (:inventory-id item)}
+               [:div {:style {:color color/grey-blue :width field-col-width}} (:date item)]
+               [:div {:style {:color color/grey-dark :margin "0 0 0 1rem"}}
+                [:span (:brand item) " " (:model-name item)
+                 " (" (s-general/device-icon-set {:item item}) ")"]
+                [:br]
+                [:span {:style {:font-weight "500"}} "Purchased "]
+                [:span {:class "italic"} (:comment item)]]])
+
             (= type "inventory")
             [(for [{id      :person-id
                     date    :date
@@ -181,7 +196,7 @@
     image-url :image-url
     content   :content}]
   [:div {:key   key
-         :style (merge symbols.style/card
+         :style (merge style/card
                        style)}
    [:div [:img {:src   image-url
                 :style style/card-image}]]
@@ -196,8 +211,8 @@
                      [:span {:style style/card-title}
                       (str (:brand item) " " (:model-name item))] [:br]
                      [:span {:style style/card-subtitle}
-                      (str (:color item) " - " (:serial-number item)) [:br]
-                      (str "Assigned on " (:date item))]]}))
+                      (str (:serial-number item) " - " (:color item)) [:br]
+                      (str "Date: " (:date item))]]}))
 
 
 ;Card to show Person
@@ -209,4 +224,4 @@
                       (str (:fname person) " " (:lname person))] [:br]
                      [:span {:style style/card-subtitle}
                       (str (:type person) " - " (:group person)) [:br]
-                      (str "Assigned on " (:date person))]]}))
+                      (str "Date: " (:date person))]]}))

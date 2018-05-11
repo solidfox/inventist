@@ -1,4 +1,4 @@
-(ns view-person-detail.component
+(ns view-contractor-detail.component
   (:require [rum.core :refer [defc]]
             [symbols.detailview :as s-detailview]
             [symbols.general :as s-general]
@@ -7,10 +7,10 @@
 
 (def col-width "11rem")
 
-(defc person-detail < (modular-component identity)
+(defc contractor-detail < (modular-component identity)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [person (get-in state [:get-person-details-response :response])]
+  (let [contractor (get-in state [:get-contractor-details-response :response])]
 
     ;PEOPLE DETAILS
     [:div {:id    "detail-container"
@@ -18,10 +18,10 @@
                    :display            "grid"
                    :grid-template-rows "auto 1fr"}}
      ;Toolbar
-     (s-detailview/toolbar {:items-left  (s-detailview/breadcrumb {:type "people"
-                                                                   :item person})
+     (s-detailview/toolbar {:items-left  (s-detailview/breadcrumb {:type "contractors"
+                                                                   :item contractor})
                             :items-right [(s-general/button {:color color/grey-normal
-                                                             :text  "Assign New Device"
+                                                             :text  "Add New Device"
                                                              :icon  "fas fa-plus-square"})]})
 
 
@@ -32,24 +32,20 @@
 
       ;Page Header
       (s-detailview/detail-header
-        {:image         (:image person)
-         :heading       (str (:fname person) " " (:lname person))
-         :sub-heading-1 (:type person)
-         :sub-heading-2 (:group person)})
+        {:image         (:image contractor)
+         :heading       (:name contractor)
+         :sub-heading-1 (:type contractor)})
 
       ;Information
       (s-detailview/section-information
         {:fields ["Email"
                   "Phone"
-                  "Gender"
                   "Address"
-                  "Assigned Devices"]
-         :values [(:email person)
-                  (:phone person)
-                  (cond (= (:sex person) "f") "Female"
-                        (= (:sex person) "m") "Male")
-                  (:address person)
-                  (s-general/length (:inventory person))]})
+                  "Linked Devices"]
+         :values [(:email contractor)
+                  (:phone contractor)
+                  (:address contractor)
+                  (s-general/length (:inventory contractor))]})
 
       ;Assigned Devices
       [:div {:style {:margin         "1rem 2.5rem 1rem"
@@ -59,14 +55,14 @@
        (s-detailview/section-left)
        [:div {:style {:margin "0 0 0 1rem" :display "flex" :flex-direction "column"
                       :width  "100%"}}
-        (s-detailview/section-title {:title "Assigned Devices"})
+        (s-detailview/section-title {:title "Linked Devices"})
         [:div {:style {:display        "flex"
                        :flex-direction "row"
                        :flex-wrap      "wrap"}}
-         (for [item (:inventory person)]
+         (for [item (:inventory contractor)]
            (s-detailview/device-card {:item item}))]
         (s-detailview/section-divider)]]
 
       ;Timeline
-      (s-detailview/section-timeline {:type    "people"
-                                      :history (:history person)})]]))
+      (s-detailview/section-timeline {:type    "contractors"
+                                      :history (:history contractor)})]]))

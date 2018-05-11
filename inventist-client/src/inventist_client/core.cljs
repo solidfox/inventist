@@ -2,17 +2,20 @@
   (:require [authentication.core :as auth]
             [inventist-client.page.inventory.core :as inventory-page]
             [inventist-client.page.people.core :as people-page]
+            [inventist-client.page.contractors.core :as contractors-page]
             [cljs.pprint]))
 
 (def authentication-state-path [:view-modules :authentication])
 (def inventory-page-state-path [:pages :inventory])
 (def people-page-state-path [:pages :people])
+(def contractors-page-state-path [:pages :contractors])
 
 (defn create-state
   []
   (-> {:path [:inventory]}
       (assoc-in authentication-state-path (auth/create-state))
       (assoc-in inventory-page-state-path (inventory-page/create-state))
+      (assoc-in contractors-page-state-path (contractors-page/create-state))
       (assoc-in people-page-state-path (people-page/create-state))))
 
 (defn authentication-args [state]
@@ -26,6 +29,10 @@
 (defn create-people-page-args [state]
   {:input      {:state (get-in state people-page-state-path)}
    :state-path people-page-state-path})
+
+(defn create-contractors-page-args [state]
+  {:input      {:state (get-in state contractors-page-state-path)}
+   :state-path contractors-page-state-path})
 
 (defn get-authenticated-user [state]
   (auth/get-authenticated-user (get-in state authentication-state-path)))

@@ -18,15 +18,12 @@
                    :display            "grid"
                    :grid-template-rows "auto 1fr"}}
      ;Toolbar
-     (s-detailview/toolbar {:items-left (s-detailview/breadcrumb {:type "inventory"
-                                                                  :item item})
-                            :items-right [(s-general/button {:color color/white
-                                                             :icon  "fas fa-share-square"})
-                                          (s-general/button {:color color/grey-normal
+     (s-detailview/toolbar {:items-left  (s-detailview/breadcrumb {:type "inventory"
+                                                                   :item item})
+                            :items-right [(s-general/button {:color color/grey-normal
                                                              :text  "Transfer Device"
-                                                             :icon  "fas fa-share-square"})
-                                          (s-general/button {:color color/grey-normal
-                                                             :text  "Transfer Device"})]})
+                                                             :icon  "fas fa-share-square"})]})
+
 
      ;Main Details Container
      [:div {:style {:overflow-x      "hidden"

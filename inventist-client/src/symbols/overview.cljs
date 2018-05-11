@@ -1,7 +1,8 @@
 (ns symbols.overview
   (:require [rum.core :refer [defc]]
             [symbols.general :as s-general]
-            [symbols.color :as c]))
+            [symbols.color :as c]
+            [symbols.style :as style]))
 
 ;To change listing bg color on hover.
 (def list-bg-color c/highlight)
@@ -10,46 +11,54 @@
 (defc person-list-card [{person   :person
                          on-click :on-click}]
   [:div {:key   (:id person)
-         :style {:width                 "100%"
-                 :backgroundColor       list-bg-color
-                 :minHeight             "3rem"
-                 :padding               "1rem"
-                 :margin                "2px 0"
-                 :display               "grid"
-                 :grid-template-columns "auto 1fr"
-                 :cursor                "pointer"}}
+         :style style/card-listing}
    [:div {:style {:width "3rem"}}
-    [:img {:src   (:image person)
-           :style {:width "3rem" :height "3rem" :object-fit "cover" :borderRadius "2rem" :backgroundColor c/white}}]]
+    [:img {:style style/card-image
+           :src   (cond (and (:image person) (not= (:image person) "")) (:image person)
+                        :else "image/person-placeholder.png")}]]
    [:div {:style {:margin "0 0 0 1rem"}}
-    [:span {:style {:font-size "1rem" :color c/grey-dark :line-height "1rem" :text-transform "capitalize"}}
+    [:span {:style style/card-title}
      (str (:fname person) " " (:lname person))] [:br]
-    [:span {:style {:font-size "0.8rem" :color c/grey-blue :line-height "1rem" :text-transform "capitalize"}}
+    [:span {:style style/card-subtitle}
      (str (:type person) " - " (:group person))] [:br]
-    [:span {:style {:font-size "1rem" :color c/grey-dark :line-height "1.5rem" :text-transform "capitalize"}}
+    [:span {:style style/card-title}
      (for [item (:inventory person)]
        [:span {:style {:margin "0 1rem 0 0"}}
         (s-general/device-icon-set {:item item})])]]])
+
+;Contractor-list card
+(defc contractor-list-card [{contractor :contractor
+                             on-click   :on-click}]
+  [:div {:key   (:id contractor)
+         :style style/card-listing}
+   [:div {:style {:width "3rem"}}
+    [:img {:style style/card-image
+           :src   (cond (and (:image contractor) (not= (:image contractor) "")) (:image contractor)
+                        :else "image/contractor-placeholder.png")}]]
+   [:div {:style {:margin "0 0 0 1rem"}}
+    [:span {:style style/card-title}
+     (str (:name contractor))] [:br]
+    [:span {:style style/card-subtitle}
+     (str (:type contractor) " - " (s-general/length (:inventory contractor)) " Products")]]])
 
 
 ;Inventory-list card
 (defc inventory-list-card [{item     :item
                             on-click :on-click}]
   [:div {:key   (:id item)
-         :style {:width                 "100%"
-                 :backgroundColor       list-bg-color
-                 :minHeight             "3rem"
-                 :padding               "1rem"
-                 :margin                "2px 0"
-                 :display               "grid"
-                 :grid-template-columns "auto 1fr"
-                 :cursor                "pointer"}}
-   [:div {:style {:width "2.5rem" :font-size "1.1rem"}}
-    (s-general/device-icon-set {:item item})]
+         :style style/card-listing}
+   (cond (and (:photo item) (not= (:photo item) ""))
+         [:div {:style {:width "3rem"}}
+          [:img {:style style/card-image
+                 :src   (:photo item)}]]
+         :else
+         [:div {:style {:width "3rem" :font-size "1.25rem"}}
+          (s-general/device-icon-set {:item item})])
+
    [:div {:style {:margin "0 0 0 1rem"}}
-    [:span {:style {:font-size "1rem" :color c/grey-dark :line-height "1rem" :text-transform "capitalize"}}
+    [:span {:style style/card-title}
      (str (:model-name item) " - " (:color item))] [:br]
-    [:span {:style {:font-size "1rem" :color c/grey-blue :line-height "1rem" :text-transform "capitalize"}}
+    [:span {:style style/card-subtitle}
      (str (:assignee item))]]])
 
 ;Search component
@@ -111,7 +120,8 @@
                   :backgroundColor c/grey-light}}
     (for [list-item list-items]
       (cond (= type "people") (person-list-card {:person list-item})
-            (= type "inventory") (inventory-list-card {:item list-item})))]
+            (= type "inventory") (inventory-list-card {:item list-item})
+            (= type "contractors") (contractor-list-card {:contractor list-item})))]
 
    ;Footer
    (overview-footer)])

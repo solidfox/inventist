@@ -6,6 +6,7 @@
   [{target-page-id :target-page-id}]
   {:name :clicked-navigation-icon
    :data {:target-page-id target-page-id}})
+
 (defn clicked-navigation-icon-action
   [event]
   (arch/create-action {:name        "Navigate to page"

@@ -29,12 +29,40 @@
    :photo            "https://i.gadgets360cdn.com/products/large/1519585124_635_samsung_galaxy_s9_blue.jpg"
    :assignee         "Hill Winston"})
 
+(defn create-pixel-summary
+  [{id :id}]
+  {:id               (or id "mock-android")
+   :date             "2018-04-14T10:37:46Z"
+   :brand            "Google"
+   :supplier         "MediaMarkt"
+   :model-name       "Pixel XL"
+   :color            "Blue"
+   :model-identifier "A198"
+   :class            "smartphone"
+   :serial-number    "C02SVXXXXF1R"
+   :photo            ""
+   :assignee         "Hill Winston"})
+
+(defn create-chromebook-summary
+  [{id :id}]
+  {:id               (or id "mock-chrome")
+   :date             "2018-04-14T10:37:46Z"
+   :brand            "Google"
+   :supplier         "MediaMarkt"
+   :model-name       "Chromebook LG"
+   :color            "Silver"
+   :model-identifier "A198"
+   :class            "laptop"
+   :serial-number    "C02SVXXXXF1R"
+   :photo            ""
+   :assignee         "Hill Winston"})
+
 (defn create-get-inventory-list-response
   []
   {:items [(create-apple-summary {:id "01"})
            (create-android-summary {:id "02"})
-           (create-apple-summary {:id "03"})
-           (create-android-summary {:id "04"})
+           (create-chromebook-summary {:id "03"})
+           (create-pixel-summary {:id "04"})
            (create-apple-summary {:id "05"})
            (create-android-summary {:id "06"})
            (create-apple-summary {:id "07"})
