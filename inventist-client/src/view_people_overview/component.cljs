@@ -6,4 +6,5 @@
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (let [people (get-in state [:get-people-list-response :response :items])]
-    (s-overview/overview-list "people" people)))
+    (s-overview/overview-list {:type "people"
+                               :list-items people})))

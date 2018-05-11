@@ -21,7 +21,7 @@
                        :comment   "New MacBook"
                        :type      "student"
                        :group     "Vargar"
-                       :image     "http://www.suthersgeorge.com/wp-content/uploads/2017/06/person-placeholder.jpg"
+                       :image     "http://www.theswiftlift.com/wp-content/uploads/2017/06/person-placeholder.png"
                        :fname     "Winston"
                        :lname     "Hill"}
                       {:person-id 34
