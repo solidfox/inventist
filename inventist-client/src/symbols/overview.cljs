@@ -4,14 +4,14 @@
             [symbols.color :as c]))
 
 ;To change listing bg color on hover.
-(def listBGcolor c/highlight)
+(def list-bg-color c/highlight)
 
 ;Person-list card
 (defc person-list-card [{person   :person
                          on-click :on-click}]
   [:div {:key   (:id person)
          :style {:width                 "100%"
-                 :backgroundColor       listBGcolor
+                 :backgroundColor       list-bg-color
                  :minHeight             "3rem"
                  :padding               "1rem"
                  :margin                "2px 0"
@@ -37,7 +37,7 @@
                             on-click :on-click}]
   [:div {:key   (:id item)
          :style {:width                 "100%"
-                 :backgroundColor       listBGcolor
+                 :backgroundColor       list-bg-color
                  :minHeight             "3rem"
                  :padding               "1rem"
                  :margin                "2px 0"
@@ -60,6 +60,7 @@
                   :backgroundColor       c/white
                   :display               "grid"
                   :grid-template-columns "auto 1fr auto"
+                  :align-items           "center"
                   :box-shadow            "0px 0px 5px rgba(0,0,0,0.25) inset"}}
     [:div {:style {:margin "0.75rem" :color c/grey-normal}}
      [:i {:class "fas fa-search"}]]

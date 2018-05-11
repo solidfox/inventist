@@ -3,7 +3,7 @@
             [symbols.general :as s-general]
             [symbols.detailview :as s-detailview]
             [remodular.core :refer [modular-component]]
-            [symbols.color :as c]))
+            [symbols.color :as color]))
 
 (def col-width "11rem")
 
@@ -18,13 +18,20 @@
                    :display            "grid"
                    :grid-template-rows "auto 1fr"}}
      ;Toolbar
-     (s-detailview/toolbar {:type "inventory"
-                            :item item})
+     (s-detailview/toolbar {:items-left (s-detailview/breadcrumb {:type "inventory"
+                                                                  :item item})
+                            :items-right [(s-general/button {:color color/white
+                                                             :icon  "fas fa-share-square"})
+                                          (s-general/button {:color color/grey-normal
+                                                             :text  "Transfer Device"
+                                                             :icon  "fas fa-share-square"})
+                                          (s-general/button {:color color/grey-normal
+                                                             :text  "Transfer Device"})]})
 
      ;Main Details Container
      [:div {:style {:overflow-x      "hidden"
                     :overflow-y      "scroll"
-                    :backgroundColor c/white}}
+                    :backgroundColor color/white}}
 
       ;Page Header
       (s-detailview/detail-header

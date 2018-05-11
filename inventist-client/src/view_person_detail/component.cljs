@@ -3,7 +3,7 @@
             [symbols.detailview :as s-detailview]
             [symbols.general :as s-general]
             [remodular.core :refer [modular-component]]
-            [symbols.color :as c]))
+            [symbols.color :as color]))
 
 (def col-width "11rem")
 
@@ -18,13 +18,20 @@
                    :display            "grid"
                    :grid-template-rows "auto 1fr"}}
      ;Toolbar
-     (s-detailview/toolbar {:type "people"
-                            :item person})
+     (s-detailview/toolbar {:items-left  (s-detailview/breadcrumb {:type "people"
+                                                                   :item person})
+                            :items-right [(s-general/button {:color color/white
+                                                             :icon  "fas fa-plus-square"})
+                                          (s-general/button {:color color/grey-normal
+                                                             :text  "Assign New Device"
+                                                             :icon  "fas fa-plus-square"})
+                                          (s-general/button {:color color/grey-normal
+                                                             :text  "Assign New Device"})]})
 
      ;Main Details Container
      [:div {:style {:overflow-x      "hidden"
                     :overflow-y      "scroll"
-                    :backgroundColor c/white}}
+                    :backgroundColor color/white}}
 
       ;Page Header
       (s-detailview/detail-header

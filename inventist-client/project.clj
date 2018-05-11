@@ -15,7 +15,8 @@
                  [antizer "0.2.2"]
                  [rum "0.11.2"]
                  [remodular "0.1.0-SNAPSHOT"]
-                 [ysera "1.2.0"]]
+                 [ysera "1.2.0"]
+                 [sablono "0.8.4"]]
 
   :plugins [[lein-figwheel "0.5.15"]
             [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]

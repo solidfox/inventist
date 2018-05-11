@@ -1,7 +1,8 @@
 (ns symbols.detailview
   (:require [rum.core :refer [defc]]
             [symbols.general :as s-general]
-            [symbols.color :as c]))
+            [symbols.color :as color]
+            [symbols.style :as style]))
 
 (def field-col-width "11rem")
 
@@ -33,35 +34,21 @@
                                        (str " - " (:fname (first (:history item))) " " (:lname (first (:history item))))])]])])
 
 ;Toolbar contains breadcrumb and action-buttons
-(defc toolbar [{type :type
-                item :item}]
+(defc toolbar [{items-left  :items-left
+                items-right :items-right}]
   [:div {:style {:height          "3rem"
-                 :backgroundColor c/grey-dark
+                 :backgroundColor color/grey-dark
                  :display         "flex"
                  :justify-content "space-between"
-                 :color           c/white}}
+                 :align-items     "center"
+                 :color           color/white}}
    [:div {:style {:display "flex"}}
     ;(s-general/button-light {:icon "fas fa-arrow-circle-left"}) ;back button for mobile view
-    (breadcrumb {:type type
-                 :item item})]                              ;breadcrumb for desktop view
-
+    items-left]                             ;breadcrumb for desktop view
    [:div {:style {:display        "flex"
                   :flex-direction "row"
                   :margin         "0 1rem"}}
-    (cond (= type "inventory") [(s-general/button {:color c/white
-                                                   :icon "fas fa-share-square"})
-                                (s-general/button {:color c/grey-normal
-                                                   :text "Transfer Device"
-                                                   :icon "fas fa-share-square"})
-                                (s-general/button {:color c/grey-normal
-                                                   :text "Transfer Device"})]
-          (= type "people") [(s-general/button {:color c/white
-                                                :icon "fas fa-plus-square"})
-                             (s-general/button {:color c/grey-normal
-                                                :text "Assign New Device"
-                                                :icon "fas fa-plus-square"})
-                             (s-general/button {:color c/grey-normal
-                                                :text "Assign New Device"})])]])
+    items-right]])
 
 
 ;Page Header - Image and Heading
@@ -73,16 +60,16 @@
          :id    "header"}
    [:div [:img {:src   image
                 :style {:width      "6rem" :height "6rem"
-                        :object-fit "cover" :backgroundColor c/grey-light}}]]
+                        :object-fit "cover" :backgroundColor color/grey-light}}]]
    [:div {:style {:margin "0 0 0 1rem"}}
     [:span {:style {:font-size      "2rem"
-                    :color          c/black
+                    :color          color/black
                     :font-weight    "300"
                     :text-transform "capitalize"}}
      heading] [:br]
 
     [:span {:style {:font-weight    "400"
-                    :color          c/grey-blue
+                    :color          color/grey-blue
                     :text-transform "capitalize"}}
      sub-heading-1 [:br] sub-heading-2]]])
 
@@ -90,7 +77,7 @@
 ;Title for sections
 (defc section-title [{title :title}]
   [:div {:id    "header"
-         :style {:font-size "1.5rem" :color c/grey-blue}} title])
+         :style {:font-size "1.5rem" :color color/grey-blue}} title])
 
 ;Empty div on left of section
 (defc section-left []
@@ -102,7 +89,7 @@
 (defc section-divider []
   [:div {:id    "divider"
          :style {:margin          "1rem 0"
-                 :backgroundColor c/silver
+                 :backgroundColor color/silver
                  :width           "100%"
                  :height          "1px"}}])
 
@@ -122,11 +109,11 @@
     [:div {:style {:display        "flex"
                    :flex-direction "row"}}
      [:div {:style {:width      field-col-width
-                    :color      c/grey-blue
+                    :color      color/grey-blue
                     :text-align "left"}}
       (for [field fields]
         [:div {:key field :style {:margin "0.5rem 0"}} field])]
-     [:div {:style {:color      c/grey-dark
+     [:div {:style {:color      color/grey-dark
                     :margin     "0 0 0 1rem"
                     :text-align "left"}}
       (for [value values]
@@ -155,8 +142,8 @@
             (for [item history]
               [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"}
                      :key   (:inventory-id item)}
-               [:div {:style {:color c/grey-blue :width field-col-width}} (:date item)]
-               [:div {:style {:color c/grey-dark :margin "0 0 0 1rem"}}
+               [:div {:style {:color color/grey-blue :width field-col-width}} (:date item)]
+               [:div {:style {:color color/grey-dark :margin "0 0 0 1rem"}}
                 [:span (:brand item) " " (:model-name item)
                  " (" (s-general/device-icon-set {:item item}) ")"]
                 [:br]
@@ -172,61 +159,54 @@
                     type    :type
                     group   :group} history]
                [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"} :key id}
-                [:div {:style {:color c/grey-blue :width field-col-width}} date]
-                [:div {:style {:color c/grey-dark :margin "0 0 0 1rem"}}
+                [:div {:style {:color color/grey-blue :width field-col-width}} date]
+                [:div {:style {:color color/grey-dark :margin "0 0 0 1rem"}}
                  [:span "Allotted to "]
                  [:span {:style {:font-weight "500"}} fname " " lname]
                  [:span " (" type " - " group ")"]
                  [:br]
                  [:span {:class "italic"} comment]]])
              [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"}}
-              [:div {:style {:color c/grey-blue :width field-col-width}} (:delivery-date purchase)]
-              [:div {:style {:color c/grey-dark :margin "0 0 0 1rem"}}
+              [:div {:style {:color color/grey-blue :width field-col-width}} (:delivery-date purchase)]
+              [:div {:style {:color color/grey-dark :margin "0 0 0 1rem"}}
                [:span "Purchased from "]
                [:span {:style {:font-weight "500"}} (:supplier purchase)]
-               [:span {:style {:color c/link-active :cursor "pointer"}} " (PDF)"]]]])]]
+               [:span {:style {:color color/link-active :cursor "pointer"}} " (PDF)"]]]])]]
 
     (section-divider)]])
 
+(defc card
+  [{style     :style
+    key       :key
+    image-url :image-url
+    content   :content}]
+  [:div {:key   key
+         :style (merge symbols.style/card
+                       style)}
+   [:div [:img {:src   image-url
+                :style style/card-image}]]
+   [:div {:class "card-content"}
+    content]])
+
 ;Card to show devices assigned
 (defc device-card [{item :item}]
-  [:div {:key   (:id item)
-         :style {:backgroundColor       c/grey-light
-                 :minHeight             "4rem"
-                 :width                 "20rem"
-                 :padding               "1rem"
-                 :borderRadius          "0.5rem"
-                 :margin                "0.5rem 1rem 0.5rem 0"
-                 :display               "grid"
-                 :grid-template-columns "auto 1fr"
-                 :cursor                "pointer"}}
-   [:div {:style {:width "3rem"}}
-    [:img {:src   (:photo item)
-           :style {:width "3rem" :height "3rem" :object-fit "cover" :borderRadius "0.25rem" :backgroundColor c/white}}]]
-   [:div {:style {:margin "0 0 0 1rem"}}
-    [:span {:style {:font-size "1rem" :color c/grey-dark :line-height "1rem" :text-transform "capitalize"}}
-     (str (:brand item) " " (:model-name item))] [:br]
-    [:span {:style {:font-size "0.8rem" :color c/grey-blue :line-height "1rem" :text-transform "capitalize"}}
-     (str (:color item) " - " (:serial-number item)) [:br] (str "Assigned on " (:date item))]]])
+  (card {:key       (:id item)
+         :image-url (:photo item)
+         :content   [:div
+                     [:span {:style style/card-title}
+                      (str (:brand item) " " (:model-name item))] [:br]
+                     [:span {:style style/card-subtitle}
+                      (str (:color item) " - " (:serial-number item)) [:br]
+                      (str "Assigned on " (:date item))]]}))
+
 
 ;Card to show Person
 (defc person-card [{person :person}]
-  [:div {:key   (:id person)
-         :style {:backgroundColor       c/grey-light
-                 :minHeight             "4rem"
-                 :width                 "20rem"
-                 :padding               "1rem"
-                 :borderRadius          "0.5rem"
-                 :margin                "0.5rem 1rem 0.5rem 0"
-                 :display               "grid"
-                 :grid-template-columns "auto 1fr"
-                 :cursor                "pointer"}}
-   [:div {:style {:width "3rem"}}
-    [:img {:src   (:image person)
-           :style {:width "3rem" :height "3rem" :object-fit "cover" :borderRadius "0.25rem" :backgroundColor c/white}}]]
-   [:div {:style {:margin "0 0 0 1rem"}}
-    [:span {:style {:font-size "1rem" :color c/grey-dark :line-height "1rem" :text-transform "capitalize"}}
-     (str (:fname person) " " (:lname person))] [:br]
-    [:span {:style {:font-size "0.9rem" :color c/grey-blue :line-height "1rem" :text-transform "capitalize"}}
-     (str (:type person) " - " (:group person)) [:br] (str "Assigned on " (:date person))]]])
-
+  (card {:key       (:id person)
+         :image-url (:image person)
+         :content   [:div
+                     [:span {:style style/card-title}
+                      (str (:fname person) " " (:lname person))] [:br]
+                     [:span {:style style/card-subtitle}
+                      (str (:type person) " - " (:group person)) [:br]
+                      (str "Assigned on " (:date person))]]}))
