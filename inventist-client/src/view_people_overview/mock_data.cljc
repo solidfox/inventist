@@ -5,6 +5,7 @@
    :type      "teacher"
    :group     "Lågstadiet"
    :image     "http://www.theswiftlift.com/wp-content/uploads/2017/06/person-placeholder.png"
+   :sex       "f"
    :fname     "Hanna"
    :lname     "Alenius"
    :inventory [{:id               01

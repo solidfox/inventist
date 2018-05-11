@@ -206,7 +206,9 @@
 ;Card to show devices assigned
 (defc device-card [{item :item}]
   (card {:key       (:id item)
-         :image-url (:photo item)
+         :image-url (cond (and (:photo item) (not= (:photo item) "")) (:photo item)
+                          :else  "image/no-image.png")
+
          :content   [:div
                      [:span {:style style/card-title}
                       (str (:brand item) " " (:model-name item))] [:br]
@@ -218,7 +220,9 @@
 ;Card to show Person
 (defc person-card [{person :person}]
   (card {:key       (:id person)
-         :image-url (:image person)
+         :image-url (cond (and (:image person) (not= (:image person) "")) (:image person)
+                          :else (cond (= (:sex person) "f") "image/person-f-placeholder.png"
+                                      (= (:sex person) "m") "image/person-m-placeholder.png"))
          :content   [:div
                      [:span {:style style/card-title}
                       (str (:fname person) " " (:lname person))] [:br]

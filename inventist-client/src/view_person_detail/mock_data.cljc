@@ -33,7 +33,7 @@
                 :model-identifier "Phone"
                 :serial-number    "C02SVXXXXF1R"
                 :class            "phone"
-                :photo            "https://i.gadgets360cdn.com/products/large/1519585124_635_samsung_galaxy_s9_blue.jpg"}]
+                :photo            ""}]
    :history   [{:inventory-id     01
                 :date             "2018-04-14T10:37:46Z"
                 :brand            "Apple"

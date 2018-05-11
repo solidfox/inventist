@@ -15,7 +15,8 @@
    [:div {:style {:width "3rem"}}
     [:img {:style style/card-image
            :src   (cond (and (:image person) (not= (:image person) "")) (:image person)
-                        :else "image/person-placeholder.png")}]]
+                        :else (cond (= (:sex person) "f") "image/person-f-placeholder.png"
+                                    (= (:sex person) "m") "image/person-m-placeholder.png"))}]]
    [:div {:style {:margin "0 0 0 1rem"}}
     [:span {:style style/card-title}
      (str (:fname person) " " (:lname person))] [:br]
