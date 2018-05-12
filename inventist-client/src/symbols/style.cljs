@@ -36,11 +36,11 @@
                    :object-fit      "cover"
                    :backgroundColor color/white}))
 
-(def card-listing {:width                 "100%"
-                   :backgroundColor       list-bg-color
-                   :minHeight             "2rem"
-                   :padding               "0.75rem 1rem"
-                   :margin                "2px 0"
-                   :display               "grid"
-                   :grid-template-columns "auto 1fr"
-                   :cursor                "pointer"})
+(def list-item {:width                      "100%"
+                :backgroundColor       list-bg-color
+                :minHeight             "2rem"
+                :padding               "0.75rem 1rem"
+                :margin                "2px 0"
+                :display               "grid"
+                :grid-template-columns "auto 1fr"
+                :cursor                "pointer"})
