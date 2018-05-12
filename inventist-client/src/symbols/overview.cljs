@@ -11,7 +11,7 @@
 (defc person-list-card [{person   :person
                          on-click :on-click}]
   [:div {:key   (:id person)
-         :style style/card-listing}
+         :style style/list-item}
    [:div {:style {:width "3rem"}}
     [:img {:style style/card-image
            :src   (cond (and (:image person) (not= (:image person) "")) (:image person)
@@ -30,7 +30,7 @@
 (defc contractor-list-card [{contractor :contractor
                              on-click   :on-click}]
   [:div {:key   (:id contractor)
-         :style style/card-listing}
+         :style style/list-item}
    [:div {:style {:width "3rem"}}
     [:img {:style style/card-image
            :src   (cond (and (:image contractor) (not= (:image contractor) "")) (:image contractor)
@@ -46,7 +46,7 @@
 (defc inventory-list-card [{item     :item
                             on-click :on-click}]
   [:div {:key   (:id item)
-         :style style/card-listing}
+         :style style/list-item}
    (cond (and (:photo item) (not= (:photo item) ""))
          [:div {:style {:width "3rem"}}
           [:img {:style style/card-image
