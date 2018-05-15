@@ -2,8 +2,10 @@
   (:require [rum.core :refer [defc]]
             [symbols.detailview :as s-detailview]
             [symbols.general :as s-general]
+            [symbols.overview :as s-overview]
             [remodular.core :refer [modular-component]]
-            [symbols.color :as color]))
+            [symbols.color :as color]
+            [symbols.style :as style]))
 
 (def col-width "11rem")
 
@@ -21,52 +23,104 @@
      (s-detailview/toolbar {:items-left  (s-detailview/breadcrumb {:type "dashboard"
                                                                    :item person})
                             :items-right [(s-general/button {:color color/grey-normal
-                                                             :text  "Assign New Device"
-                                                             :icon  "fas fa-plus-square"})]})
+                                                             :text  "New Comment"
+                                                             :icon  "fas fa-comment-dots"})
+                                          (s-general/button {:color color/grey-normal
+                                                             :text  "Register Device"
+                                                             :icon  "fas fa-pen-square"})]})
+     [:div {:id    (str ::component-id)
+            :style {:display               "grid"
+                    :overflow              "scroll"
+                    :grid-template-columns "22rem 1fr"}}
 
 
-     ;Main Details Container
-     [:div {:style {:overflow-x      "hidden"
-                    :overflow-y      "scroll"
-                    :backgroundColor color/white}}
+      ;Dashboard Stats
+      [:div {:style {:overflow-x      "hidden"
+                     :overflow-y      "scroll"
+                     :backgroundColor color/grey-light}}
 
-      ;Page Header
-      (s-detailview/detail-header
-        {:image         (:image person)
-         :heading       (str (:fname person) " " (:lname person))
-         :sub-heading-1 (:type person)
-         :sub-heading-2 (:group person)})
+       ;Division Heading
+       (s-general/division-title
+         {:title "Inventist Stats"})
 
-      ;Information
-      (s-detailview/section-information
-        {:fields ["Email"
-                  "Phone"
-                  "Gender"
-                  "Address"
-                  "Assigned Devices"]
-         :values [(:email person)
-                  (:phone person)
-                  (cond (= (:sex person) "f") "Female"
-                        (= (:sex person) "m") "Male")
-                  (:address person)
-                  (s-general/length (:inventory person))]})
+       [:div {:style {:margin    "2.5rem"
+                      :display   "flex"
+                      :flex-wrap "wrap"}}
 
-      ;Assigned Devices
-      [:div {:style {:margin         "1rem 2.5rem 1rem"
-                     :display        "flex"
-                     :flex-direction "row"}
-             :id    "devices"}
-       (s-detailview/section-left)
-       [:div {:style {:margin "0 0 0 1rem" :display "flex" :flex-direction "column"
-                      :width  "100%"}}
-        (s-detailview/section-title {:title "Assigned Devices"})
-        [:div {:style {:display        "flex"
-                       :flex-direction "row"
-                       :flex-wrap      "wrap"}}
-         (for [item (:inventory person)]
-           (s-detailview/device-card {:item item}))]
-        (s-detailview/section-divider)]]
+        (s-general/stat-card {:value 999
+                              :text  "Total Inventory in School"})
 
-      ;Timeline
-      (s-detailview/section-timeline {:type    "people"
-                                      :history (:history person)})]]))
+        (s-general/stat-card {:value   999
+                              :text    "Inventory per Type"
+                              :subtext [:select
+                                        [:option {:value "All"}]
+                                        [:option {:value "All"}]]})
+
+        (s-general/stat-card {:value 9999
+                              :text  "Total Computers on repair"})
+
+        (s-general/stat-card {:value   999
+                              :text    "Computer on repair per Model"
+                              :subtext [:select
+                                        [:option {:value "All"}]
+                                        [:option {:value "All"}]]})
+
+        (s-general/stat-card {:value 999
+                              :text  "Total Reserve computers"})
+
+        (s-general/stat-card {:value 0
+                              :text  "Unhandled issue reports"})]]
+
+
+
+
+      ;User Details
+      [:div {:style {:overflow-x      "hidden"
+                     :overflow-y      "scroll"
+                     :backgroundColor color/white}}
+
+       ;Division Heading
+       (s-general/division-title
+         {:title "Your Details"})
+
+       ;Page Header
+       (s-detailview/detail-header
+         {:image         (:image person)
+          :heading       (str (:fname person) " " (:lname person))
+          :sub-heading-1 (:type person)
+          :sub-heading-2 (:group person)})
+
+       ;Information
+       (s-detailview/section-information
+         {:fields ["Email"
+                   "Phone"
+                   "Gender"
+                   "Address"
+                   "Assigned Devices"]
+          :values [(:email person)
+                   (:phone person)
+                   (cond (= (:sex person) "f") "Female"
+                         (= (:sex person) "m") "Male")
+                   (:address person)
+                   (s-general/length (:inventory person))]})
+
+       ;Assigned Devices
+       [:div {:style {:margin         "1rem 2.5rem 1rem"
+                      :display        "flex"
+                      :flex-direction "row"}
+              :id    "devices"}
+        (s-detailview/section-left)
+        [:div {:style {:margin "0 0 0 1rem" :display "flex" :flex-direction "column"
+                       :width  "100%"}}
+         (s-detailview/section-title {:title "Assigned Devices"})
+         [:div {:style {:display        "flex"
+                        :flex-direction "row"
+                        :flex-wrap      "wrap"}}
+          (for [item (:inventory person)]
+            (s-detailview/device-card {:item item}))]
+         (s-detailview/section-divider)]]
+
+       ;Timeline
+       (s-detailview/section-timeline {:type    "people"
+                                       :history (:history person)})]]]))
+

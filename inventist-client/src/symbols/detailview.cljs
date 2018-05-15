@@ -11,7 +11,7 @@
                    item :item}]
   [:div {:style {:margin "0.75rem 2.5rem" :cursor "pointer"}}
    (cond (= type "dashboard")
-         [:span {:style {:margin "0 0.5rem 0 0"}} "Welcome to Inventist Dashboard"]
+         [:span {:style {:margin "0 0.5rem 0 0"}} "Hi " (:fname item) " " (:lname item) ", welcome to Inventist."]
          :else
          [:span {:style {:margin "0 0.5rem 0 0"}}
           ;1-Dashboard
@@ -52,7 +52,6 @@
                   :margin         "0 1rem"}}
     items-right]])
 
-
 ;Page Header - Image and Heading
 (defc detail-header [{image         :image
                       heading       :heading
@@ -65,10 +64,7 @@
                 :style {:width      "6rem" :height "6rem"
                         :object-fit "cover" :backgroundColor color/grey-light}}]]
    [:div {:style {:margin "0 0 0 1rem"}}
-    [:span {:style {:font-size      "2rem"
-                    :color          color/black
-                    :font-weight    "300"
-                    :text-transform "capitalize"}}
+    [:span {:style style/header-title}
      heading] [:br]
 
     [:span {:style {:font-weight    "400"

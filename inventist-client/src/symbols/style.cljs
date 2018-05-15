@@ -17,6 +17,11 @@
                     :line-height    "1rem"
                     :text-transform "capitalize"})
 
+(def header-title {:font-size      "2rem"
+                   :color          color/black
+                   :font-weight    "300"
+                   :text-transform "capitalize"})
+
 (def card (merge
             outer-border-radius
             {:backgroundColor       color/grey-light
@@ -44,3 +49,16 @@
                 :display               "grid"
                 :grid-template-columns "auto 1fr"
                 :cursor                "pointer"})
+
+
+(def item-stats {:width                 "100%"
+                 :backgroundColor       color/white
+                 :borderRadius          "5px"
+                 :border                (str "1px solid " color/silver)
+                 ;:box-shadow            "0 0 2px 0 rgba(0,0,0,0.5)"
+                 :minHeight             "2rem"
+                 :padding               "0.75rem 1rem"
+                 :margin-bottom         "1rem"
+                 :display               "grid"
+                 :grid-template-columns "1fr auto"
+                 :cursor                "pointer"})
