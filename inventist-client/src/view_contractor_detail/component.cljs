@@ -3,9 +3,8 @@
             [symbols.detailview :as s-detailview]
             [symbols.general :as s-general]
             [remodular.core :refer [modular-component]]
+            [util.inventory.component :as inventory]
             [symbols.color :as color]))
-
-(def col-width "11rem")
 
 (defc contractor-detail < (modular-component identity)
   [{{state :state} :input
@@ -23,6 +22,7 @@
                             :items-right [(s-general/button {:color color/grey-normal
                                                              :text  "Add Order"
                                                              :icon  "fas fa-plus-square"})
+
                                           (s-general/button {:color color/grey-normal
                                                              :text "New Contractor"
                                                              :icon  "fas fa-cart-plus"})]})
@@ -69,3 +69,7 @@
       ;Timeline
       (s-detailview/section-timeline {:type    "contractors"
                                       :history (:history contractor)})]]))
+
+
+
+

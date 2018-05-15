@@ -10,30 +10,35 @@
 (defc breadcrumb [{type :type
                    item :item}]
   [:div {:style {:margin "0.75rem 2.5rem" :cursor "pointer"}}
-   (cond (= type "dashboard")
-         [:span {:style {:margin "0 0.5rem 0 0"}} "Hi " (:fname item) " " (:lname item) ", welcome to Inventist."]
-         :else
-         [:span {:style {:margin "0 0.5rem 0 0"}}
-          ;1-Dashboard
-          [:span {:style {:opacity "0.75"
-                          :margin  "0 0.5rem 0 0"}} "Dashboard"]
-          [:span {:style {:opacity "0.75"
-                          :margin  "0 0.5rem 0 0"}} "/"]
-          ;2-Main Navigation
-          [:span {:style {:opacity "0.75"
-                          :margin  "0 0.5rem 0 0"}}
-           (cond (= type "people") "People"
-                 (= type "inventory") "Inventory"
-                 (= type "contractors") "Contractors")]
-          [:span {:style {:opacity "0.75"
-                          :margin  "0 0.5rem 0 0"}} "/"]
-          ;3-Current Item
-          [:span
-           (cond (= type "people") [:span (str (:fname item) " " (:lname item))]
-                 (= type "inventory") [:span
-                                       (s-general/device-icon-set {:item item})
-                                       (str " - " (:fname (first (:history item))) " " (:lname (first (:history item))))]
-                 (= type "contractors") [:span (str (:name item))])]])])
+   (cond
+     (= type "back")
+     [:span (s-general/button {:color color/white
+                               :icon "fas fa-arrow-circle-left"
+                               :title "Go Back"})]
+     (= type "dashboard")
+     [:span "Hi " (:fname item) " " (:lname item) ", welcome to Inventist."]
+     :else
+     [:span
+      ;1-Dashboard
+      [:span {:style {:opacity "0.75"
+                      :margin  "0 0.5rem 0 0"}} "Dashboard"]
+      [:span {:style {:opacity "0.75"
+                      :margin  "0 0.5rem 0 0"}} "/"]
+      ;2-Main Navigation
+      [:span {:style {:opacity "0.75"
+                      :margin  "0 0.5rem 0 0"}}
+       (cond (= type "people") "People"
+             (= type "inventory") "Inventory"
+             (= type "contractors") "Contractors")]
+      [:span {:style {:opacity "0.75"
+                      :margin  "0 0.5rem 0 0"}} "/"]
+      ;3-Current Item
+      [:span
+       (cond (= type "people") [:span (str (:fname item) " " (:lname item))]
+             (= type "inventory") [:span
+                                   (s-general/device-icon-set {:item item})
+                                   (str " - " (:fname (first (:history item))) " " (:lname (first (:history item))))]
+             (= type "contractors") [:span (str (:name item))])]])])
 
 ;Toolbar contains breadcrumb and action-buttons
 (defc toolbar [{items-left  :items-left

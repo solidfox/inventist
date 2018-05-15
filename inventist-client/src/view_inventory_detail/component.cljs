@@ -5,8 +5,6 @@
             [remodular.core :refer [modular-component]]
             [symbols.color :as color]))
 
-(def col-width "11rem")
-
 (defc inventory-detail < (modular-component identity)
   [{{state :state} :input
     trigger-event  :trigger-event}]
@@ -30,7 +28,6 @@
                                                              :text  "Add Comment"
                                                              :icon  "fas fa-comment-dots"})]})
 
-
      ;Main Details Container
      [:div {:style {:overflow-x      "hidden"
                     :overflow-y      "scroll"
@@ -46,11 +43,13 @@
         {:fields ["Serial Number"
                   "Color"
                   "Identifier"
+                  "Supplier"
                   "Insaurance expiry"
                   "Warranty expiry"]
          :values [(:serial-number item)
                   (:color item)
                   (:model-identifier item)
+                  (:supplier (:purchase-details item))
                   (:insurance-expires (:purchase-details item))
                   (:warranty-expires (:purchase-details item))]})
 

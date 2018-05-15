@@ -11,7 +11,9 @@
   [:div {:id (str ::component-id)
          :style {:height "100%"
                  :display "grid"
-                 :grid-template-columns "22rem 1fr"
+                 :grid-template-columns "22rem 1fr 40rem"
                  :grid-template-rows "100%"}}
    (contractors-list (core/create-contractors-overview-args state))
-   (contractor-detail (core/create-contractor-detail-args state "mock-contractor-id"))])
+   (contractor-detail (core/create-contractor-detail-args state "mock-contractor-id"))
+   (util.inventory.component/inventory-add)])
+

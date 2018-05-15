@@ -1,11 +1,11 @@
 (ns symbols.overview
   (:require [rum.core :refer [defc]]
             [symbols.general :as s-general]
-            [symbols.color :as c]
+            [symbols.color :as color]
             [symbols.style :as style]))
 
 ;To change listing bg color on hover.
-(def list-bg-color c/highlight)
+(def list-bg-color color/highlight)
 
 ;Person-list card
 (defc person-list-card [{person   :person
@@ -67,12 +67,12 @@
   [:div
    [:div {:style {:width                 "100%"
                   :height                "3rem"
-                  :backgroundColor       c/white
+                  :backgroundColor       color/white
                   :display               "grid"
                   :grid-template-columns "auto 1fr auto"
                   :align-items           "center"
                   :box-shadow            "0px 0px 5px rgba(0,0,0,0.25) inset"}}
-    [:div {:style {:margin "0.75rem" :color c/grey-normal}}
+    [:div {:style {:margin "0.75rem" :color color/grey-normal}}
      [:i {:class "fas fa-search"}]]
     [:input {:type        "input"
              :id          "search"
@@ -83,24 +83,24 @@
                            :margin          "0"
                            :font-size       "1rem"
                            :height          "100%"
-                           :backgroundColor c/tp
+                           :backgroundColor color/tp
                            :border          0}}]]
    [:div {:style {:height          "auto" :padding "0.25rem 1rem"
                   :font-size       "0.9rem"
-                  :backgroundColor c/silver
+                  :backgroundColor color/silver
                   :display         "flex" :justify-content "space-between"}}
     [:div (str "Total " (s-general/length list-items) " results")]
-    [:div {:style {:color c/link-active :cursor "pointer"}} (str "View Table")]]])
+    [:div {:style {:color color/link-active :cursor "pointer"}} (str "View Table")]]])
 
 ;Sidebar-Footer
 (defc overview-footer []
   [:div {:style {:width                 "100%"
                  :height                "3rem"
-                 :backgroundColor       c/silver
+                 :backgroundColor       color/silver
                  :display               "grid"
                  :grid-template-columns "1fr auto"
                  :box-shadow            "0 0 5px rgba(0,0,0,0.25)"}}
-   (s-general/button {:icon "fas fa-list-alt" :color c/tp :text "Powered by Inventist"})
+   (s-general/button {:icon "fas fa-list-alt" :color color/tp :text "Powered by Inventist"})
    [:div {:style {:margin "0.75rem" :font-size "1.2rem" :opacity "0.75" :cursor "pointer"}}
     [:i {:class "fas fa-caret-left"}]]])
 
@@ -118,7 +118,7 @@
    ;listing
    [:div {:style {:overflow-x      "hidden"
                   :overflow-y      "scroll"
-                  :backgroundColor c/grey-light}}
+                  :backgroundColor color/grey-light}}
     (for [list-item list-items]
       (cond (= type "people") (person-list-card {:person list-item})
             (= type "inventory") (inventory-list-card {:item list-item})

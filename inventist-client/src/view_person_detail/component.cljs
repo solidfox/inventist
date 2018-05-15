@@ -5,8 +5,6 @@
             [remodular.core :refer [modular-component]]
             [symbols.color :as color]))
 
-(def col-width "11rem")
-
 (defc person-detail < (modular-component identity)
   [{{state :state} :input
     trigger-event  :trigger-event}]

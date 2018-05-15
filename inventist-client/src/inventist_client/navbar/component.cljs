@@ -31,12 +31,12 @@
   [{:title          "Dashboard"
     :image          "fas fa-tachometer-alt"
     :target-page-id :dashboard}
-   {:title          "People"
-    :image          "fas fa-users"
-    :target-page-id :people}
    {:title          "Inventory"
     :image          "fas fa-sitemap"
     :target-page-id :inventory}
+   {:title          "People"
+    :image          "fas fa-users"
+    :target-page-id :people}
    {:title          "Contractors"
     :image          "fas fa-shopping-cart"
     :target-page-id :contractors}])

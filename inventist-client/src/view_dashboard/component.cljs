@@ -7,8 +7,6 @@
             [symbols.color :as color]
             [symbols.style :as style]))
 
-(def col-width "11rem")
-
 (defc dashboard-detail < (modular-component identity)
   [{{state :state} :input
     trigger-event  :trigger-event}]
