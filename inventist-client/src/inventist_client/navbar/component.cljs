@@ -38,11 +38,11 @@
     :image          "fas fa-sitemap"
     :target-page-id :inventory}
    {:title          "Contractors"
-    :image          "fas fa-ribbon"
-    :target-page-id :contractors}
-   {:title          "Settings"
-    :image          "fas fa-cog"
-    :target-page-id :settings}])
+    :image          "fas fa-shopping-cart"
+    :target-page-id :contractors}])
+   ;{:title          "Settings"
+   ; :image          "fas fa-cog"
+   ; :target-page-id :settings}])
 
 
 (defc navigation-bar [{trigger-event    :trigger-event

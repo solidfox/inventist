@@ -36,7 +36,7 @@
                    :object-fit      "cover"
                    :backgroundColor color/white}))
 
-(def list-item {:width                      "100%"
+(def list-item {:width                 "100%"
                 :backgroundColor       list-bg-color
                 :minHeight             "2rem"
                 :padding               "0.75rem 1rem"

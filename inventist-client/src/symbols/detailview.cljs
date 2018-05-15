@@ -11,7 +11,7 @@
                    item :item}]
   [:div {:style {:margin "0.75rem 2.5rem" :cursor "pointer"}}
    (cond (= type "dashboard")
-         [:span {:style {:margin "0 0.5rem 0 0"}} "Welcome to Inventist's Dashboard"]
+         [:span {:style {:margin "0 0.5rem 0 0"}} "Welcome to Inventist Dashboard"]
          :else
          [:span {:style {:margin "0 0.5rem 0 0"}}
           ;1-Dashboard
@@ -120,7 +120,7 @@
                     :margin     "0 0 0 1rem"
                     :text-align "left"}}
       (for [value values]
-        [:div {:key value :style {:margin "0.5rem 0"}} value])]]
+        [:div {:key value :style {:margin "0.5rem 0"}} value [:br]])]]
     (section-divider)]])
 
 ;Timeline Section

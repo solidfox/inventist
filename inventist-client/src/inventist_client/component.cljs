@@ -4,6 +4,7 @@
             [inventist-client.navbar.component :as navbar]
             [inventist-client.page.inventory.component :as inventory-page]
             [inventist-client.page.people.component :as people-page]
+            [inventist-client.page.dashboard.component :as dashboard-page]
             [inventist-client.page.contractors.component :as contractors-page]
             [rum.core :refer [defc with-key]]
             [remodular.core :refer [modular-component]]
@@ -25,6 +26,8 @@
         :current-path     (:path state)
         :trigger-event    trigger-event})
      (condp = (first (:path state))
+       :dashboard
+       (dashboard-page/component (core/create-dashboard-page-args state))
        :people
        (people-page/component (core/create-people-page-args state))
        :contractors

@@ -19,13 +19,14 @@
 (defc button [{text     :text
                icon     :icon
                color    :color
+               title    :title
                on-click :on-click}]
   (cond (not text)
         [:div {:style {:margin    "0.5rem"
                        :color     (or color c/grey-dark)
                        :font-size "1.5rem"
                        :cursor    "pointer"}}
-         [:i {:class icon}]]
+         [:i {:class icon :title title}]]
         :else
         [:div {:style {:margin          "0.5rem"
                        :padding         "0.25rem 0.5rem"

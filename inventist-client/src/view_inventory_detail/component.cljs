@@ -21,8 +21,14 @@
      (s-detailview/toolbar {:items-left  (s-detailview/breadcrumb {:type "inventory"
                                                                    :item item})
                             :items-right [(s-general/button {:color color/grey-normal
-                                                             :text  "Transfer Device"
-                                                             :icon  "fas fa-share-square"})]})
+                                                             :text  "Reassign"
+                                                             :icon  "fas fa-share-square"})
+                                          (s-general/button {:color color/grey-normal
+                                                             :text  "Report Issue"
+                                                             :icon  "fas fa-exclamation-triangle"})
+                                          (s-general/button {:color color/grey-normal
+                                                             :text  "Add Comment"
+                                                             :icon  "fas fa-comment-dots"})]})
 
 
      ;Main Details Container
