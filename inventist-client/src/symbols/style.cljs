@@ -62,3 +62,11 @@
                  :display               "grid"
                  :grid-template-columns "1fr auto"
                  :cursor                "pointer"})
+
+(def form-box {:width           "auto"
+               :height          "auto"
+               :margin          "auto"
+               :padding         "2.5rem 1rem"
+               :backgroundColor color/tp
+               :border          (str "1px solid " color/grey-light)
+               :borderRadius    "0rem"})

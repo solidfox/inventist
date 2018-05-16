@@ -12,33 +12,22 @@
          :style {:height             "100%"
                  :display            "grid"
                  :backgroundColor    color/silver
-                 :grid-template-rows "auto auto"}}
+                 :grid-template-rows "auto 1fr"}}
 
 
    ;Toolbar
    (s-detailview/toolbar {:items-left  (s-detailview/breadcrumb {:type "back"})
-                          :items-right [(s-general/button {:color color/theme
-                                                           :text  "Add Device"
-                                                           :icon  "fas fa-check-circle"})
-                                        (s-general/button {:color color/grey-normal
-                                                           :text  "Cancel"
-                                                           :icon  "fas fa-times-circle"})]})
-   ;Form
-   [:div
-    [:div {:style {:overflow-x      "hidden"
-                   :overflow-y      "scroll"
-                   :width           "30rem"
-                   :height          "auto"
-                   :margin          "2.5rem"
-                   :padding         "2.5rem"
-                   :backgroundColor color/white
-                   :border          (str "1px solid " color/grey-light)
-                   :borderRadius    "1rem"}}
-
+                          :items-right [(s-general/button {:color color/grey-normal
+                                                           :text  "Help"
+                                                           :icon  "fas fa-help"})]})
+   ;Form Page
+   [:div {:style {:overflow-x      "hidden"
+                  :overflow-y      "scroll"}}
+    [:div {:style style/form-box}
      [:div {:style (merge {:display         "flex"
                            :justify-content "center"}
                           style/header-title)}
-      "Add New Device"]
+      "New Contractor"]
      (s-detailview/section-divider)
 
      [:div {:id    "form"
@@ -59,7 +48,6 @@
       (s-general/input-filed {:width "45%"
                               :field "Model Identifier/Class"
                               :text  "Eg. laptop, smartphone"})
-      (s-general/input-filed {})
       (s-general/input-filed {:width "100%"
                               :field "Supplier"
                               :text  "From where the device is purchased"
@@ -70,12 +58,10 @@
      [:div {:style {:display         "flex"
                     :justify-content "center"}}
       (s-general/button {:color color/theme
-                         :text  "Add Device"
+                         :text  "Add Contractor"
                          :icon  "fas fa-check-circle"})
       (s-general/button {:color color/grey-normal
                          :text  "Cancel"
                          :icon  "fas fa-times-circle"})]]]])
-
-
 
 

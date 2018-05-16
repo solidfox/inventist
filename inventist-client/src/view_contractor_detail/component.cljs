@@ -4,7 +4,8 @@
             [symbols.general :as s-general]
             [remodular.core :refer [modular-component]]
             [util.inventory.component :as inventory]
-            [symbols.color :as color]))
+            [symbols.color :as color]
+            [symbols.style :as style]))
 
 (defc contractor-detail < (modular-component identity)
   [{{state :state} :input
@@ -24,7 +25,7 @@
                                                              :icon  "fas fa-plus-square"})
 
                                           (s-general/button {:color color/grey-normal
-                                                             :text "New Contractor"
+                                                             :text  "New Contractor"
                                                              :icon  "fas fa-cart-plus"})]})
 
 
@@ -70,6 +71,63 @@
       (s-detailview/section-timeline {:type    "contractors"
                                       :history (:history contractor)})]]))
 
+;NEW CONTRACTOR
+(defc contractor-add []
+  [:div {:id    "detail-container"
+         :style {:height             "100%"
+                 :width              "100%"
+                 ;:position           "absolute"
+                 ;:top                "3.5rem"
+                 ;:left               0
+                 :display            "grid"
+                 :backgroundColor    color/silver
+                 :grid-template-rows "auto 1fr"}}
+
+
+   ;Toolbar
+   (s-detailview/toolbar {
+                          ;:items-left  (s-detailview/breadcrumb {:type ""})
+                          :items-right [(s-general/button {:color color/grey-normal
+                                                           :text  "Help"
+                                                           :icon  "fas fa-help"})]})
+   ;;Form Page
+   [:div {:style {:overflow-x "hidden"
+                  :overflow-y "scroll"}}
+    [:div {:style style/form-box}
+     [:div {:style (merge {:display         "flex"
+                           :justify-content "center"}
+                          style/header-title)}
+      "New Contractor"]
+     (s-detailview/section-divider)
+
+     [:div {:id    "form"
+            :style {:display         "flex"
+                    :flex-wrap       "wrap"
+                    :justify-content "space-between"}}
+
+      (s-general/input-filed {:field "Contractor Name"
+                              :text  "Name of supplier, repairer, etc."
+                              :value ""})
+      (s-general/input-filed {:field "Device Name"
+                              :text  "Enter full Device Name"
+                              :value "MacBook Pro"})
+      (s-general/input-filed {:field "Serial Nr"})
+      (s-general/input-filed {:field "Model Identifier/Class"
+                              :text  "Eg. laptop, smartphone"})
+      (s-general/input-filed {:field "Supplier"
+                              :text  "From where the device is purchased"
+                              :value "MediaMarkt"})]
+
+
+     (s-detailview/section-divider)
+     [:div {:style {:display         "flex"
+                    :justify-content "center"}}
+      (s-general/button {:color color/theme
+                         :text  "Add Contractor"
+                         :icon  "fas fa-check-circle"})
+      (s-general/button {:color color/grey-normal
+                         :text  "Cancel"
+                         :icon  "fas fa-times-circle"})]]]])
 
 
 

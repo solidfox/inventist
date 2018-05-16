@@ -80,26 +80,53 @@
                     placeholder :placeholder
                     value       :value
                     width       :width
+                    type        :type
+                    disabled    :disabled
+                    required    :required
                     on-change   :on-change}]
   [:div {:style {:width  (or width "100%")
-                 :margin "0 0 0.5rem 0"}}
+                 :margin "0 0.5rem 0.5rem 0"}}
    [:div {:style {:line-height "1.5rem"
-                  :color  color/theme
-                  :margin "0 1rem"}}
+                  :color       color/theme
+                  :margin      "0"}}
     (or field "Field")]
 
-   [:input {:style       {:font-size       "1rem"
-                          :width           "100%"
-                          :height          "2rem"
-                          :backgroundColor color/white
-                          :box-shadow      "0px 0px 2px rgba(0,0,0,0.5) inset"
-                          :borderRadius    "5px"
-                          :border          0
-                          :padding-left    "1rem"}
-            :placeholder (or placeholder "Enter here...")
-            :value       value
-            :on-change   (fn [e] (.. e -target -value))}]
+   (cond (= type "textarea") [:textarea {:style       {:font-size       "1rem"
+                                                       :width           "100%"
+                                                       :minHeight       "2rem"
+                                                       :backgroundColor (cond (= disabled true) color/highlight
+                                                                              :esle color/white)
+                                                       :box-shadow      "0px 0px 2px rgba(0,0,0,0.5) inset"
+                                                       :borderRadius    "5px"
+                                                       :border          0
+                                                       :padding-left    "0.5rem"
+                                                       :paddingTop      "0.5rem"}
+                                         :type        (or type "text")
+                                         :disabled    (or disabled false)
+                                         :required    (or required true)
+                                         :placeholder (or placeholder "Enter here...")
+                                         :value       value
+                                         :on-change   (fn [e] (.. e -target -value))}]
+
+         :else [:input {:style       {:font-size       "1rem"
+                                      :width           "100%"
+                                      :height       "2rem"
+                                      :backgroundColor (cond (= disabled true) color/highlight
+                                                             :esle color/white)
+                                      :box-shadow      "0px 0px 2px rgba(0,0,0,0.5) inset"
+                                      :borderRadius    "5px"
+                                      :border          0
+                                      :padding-left    "0.5rem"}
+                        :type        (or type "text")
+                        :disabled    (or disabled false)
+                        :required    (or required true)
+                        :placeholder (or placeholder "Enter here...")
+                        :value       value
+                        :on-change   (fn [e] (.. e -target -value))}])
+
    [:div {:style {:color      color/grey-blue
                   :font-size  "0.9rem"
-                  :margin "0 1rem"
-                  :font-style "italic"}} text]])
+                  :margin     "0"
+                  :font-style "italic"}}
+
+    (cond (= required false) "(Optional) ") text]])
