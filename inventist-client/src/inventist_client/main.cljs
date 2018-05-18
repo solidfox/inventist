@@ -4,14 +4,15 @@
             [authentication.core :as auth]
             [remodular.runtime :as a]
             [inventist-client.core :as core]
-            [oops.core :refer [oget ocall]]))
+            [oops.core :refer [oget ocall]]
+            [inventist-client.services :as services]))
 
 (enable-console-print!)
 
 (defonce app-state-atom (atom (core/create-state)))
 
 (a/run-modular-app! {:get-view       c/app
-                     :get-services   nil
+                     :get-services   services/get-services
                      :app-state-atom app-state-atom
                      :logging        {:state-updates true
                                       :services      true
