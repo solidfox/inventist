@@ -10,7 +10,7 @@
 ;Person-list card
 (defc person-list-card [{person   :person
                          on-click :on-click}]
-  [:div {:key   (:id person)
+  [:div {:key (:id person)
          :class (style/list-item)}
    [:div {:style {:width "3rem"}}
     [:img {:style style/card-image
@@ -21,7 +21,7 @@
     [:span {:style style/card-title}
      (str (:fname person) " " (:lname person))] [:br]
     [:span {:style style/card-subtitle}
-     (str (:type person) " - " (:group person))] [:br]
+     (str (:type person) " - " (for [group (:groups person)] group))] [:br]
     [:span {:style style/card-title}
      (for [item (:inventory person)]
        [:span {:style {:margin "0 1rem 0 0"}}
@@ -30,7 +30,7 @@
 ;Contractor-list card
 (defc contractor-list-card [{contractor :contractor
                              on-click   :on-click}]
-  [:div {:key   (:id contractor)
+  [:div {:key (:id contractor)
          :class (style/list-item)}
    [:div {:style {:width "3rem"}}
     [:img {:style style/card-image
@@ -46,7 +46,7 @@
 ;Inventory-list card
 (defc inventory-list-card [{item     :item
                             on-click :on-click}]
-  [:div {:key   (:id item)
+  [:div {:key (:id item)
          :class (style/list-item)}
    (cond (and (:photo item) (not= (:photo item) ""))
          [:div {:style {:width "3rem"}}

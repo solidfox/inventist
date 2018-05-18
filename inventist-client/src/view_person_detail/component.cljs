@@ -60,7 +60,7 @@
        (s-detailview/section-left)
        [:div {:style {:margin "0 0 0 1rem" :display "flex" :flex-direction "column"
                       :width  "100%"}}
-        (s-detailview/section-title {:title "Assigned Devices"
+        (s-detailview/section-title {:title   "Assigned Devices"
                                      :buttons [(s-detailview/section-title-button {:icon     "fas fa-plus-circle"
                                                                                    :text     "Assign new devices"
                                                                                    :on-click ""})]})
@@ -72,7 +72,8 @@
                              :content [:form {:style {:display         "flex"
                                                       :flex-wrap       "wrap"
                                                       :justify-content "space-between"}}
-                                       (s-general/input-field {:placeholder "Search Device's name..."})
+                                       (s-general/input-field {:placeholder "Search Device's name..."
+                                                               :value ""})
                                        (s-general/text-area {:required    false
                                                              :maxWidth    "100%"
                                                              :placeholder "Enter comment (optional)."})
