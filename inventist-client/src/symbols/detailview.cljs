@@ -4,7 +4,7 @@
             [symbols.color :as color]
             [symbols.style :as style]))
 
-(def field-col-width "11rem")
+(def field-col-width "10rem")
 
 ;Breadcrumb
 (defc breadcrumb [{type :type
@@ -13,7 +13,7 @@
    (cond
      (= type "back")
      [:span (s-general/button {:color color/white
-                               :icon "fas fa-arrow-circle-left"
+                               :icon  "fas fa-arrow-circle-left"
                                :title "Go Back"})]
      (= type "dashboard")
      [:span "Hi " (:fname item) " " (:lname item) ", welcome to Inventist."]
@@ -58,7 +58,9 @@
     items-right]])
 
 ;Page Header - Image and Heading
-(defc detail-header [{image         :image
+(defc detail-header [{edit-mode     :edit-mode
+                      on-change     :on-change
+                      image         :image
                       heading       :heading
                       sub-heading-1 :sub-heading-1
                       sub-heading-2 :sub-heading-2}]
@@ -70,18 +72,45 @@
                         :object-fit "cover" :backgroundColor color/grey-light}}]]
    [:div {:style {:margin "0 0 0 1rem"}}
     [:span {:style style/header-title}
-     heading] [:br]
-
+     (cond (= edit-mode true)
+           (s-general/input-field {:value       heading
+                                   :placeholder "Name"
+                                   :on-change   ""
+                                   :style       {:height         "3rem"
+                                                 :font-size      "2rem"
+                                                 :color          color/black
+                                                 :font-weight    "300"
+                                                 :minWidth       "40rem"
+                                                 :text-transform "capitalize"}})
+           :else heading)]
+    [:br]
     [:span {:style {:font-weight    "400"
                     :color          color/grey-blue
                     :text-transform "capitalize"}}
-     sub-heading-1 [:br] sub-heading-2]]])
+     (cond (= edit-mode true)
+           (s-general/input-field {:value       sub-heading-1
+                                   :placeholder "Type"
+                                   :on-change   ""})
+           :else
+           sub-heading-1 [:br] sub-heading-2)]]])
 
+
+;Edit/Comment button
+(defc section-title-button [{icon     :icon
+                             text     :text
+                             on-click :on-click}]
+  [:span {:style {:color     color/link-active
+                  :margin    "0 1rem"
+                  :font-size "1rem"}}
+   [:i {:class icon}] " " text])
 
 ;Title for sections
-(defc section-title [{title :title}]
+(defc section-title [{title   :title
+                      buttons :buttons}]
   [:div {:id    "header"
-         :style {:font-size "1.5rem" :color color/grey-blue}} title])
+         :style {:font-size "1.5rem" :color color/grey-blue}}
+   title
+   buttons])
 
 ;Empty div on left of section
 (defc section-left []
@@ -98,8 +127,9 @@
                  :height          "1px"}}])
 
 ;Information Section
-(defc section-information [{fields :fields
-                            values :values}]
+(defc section-information [{fields      :fields
+                            edit-mode   :edit-mode
+                            enable-edit :enable-edit}]
   [:div {:style {:margin         "1rem 2.5rem 1rem"
                  :display        "flex"
                  :flex-direction "row"}
@@ -109,25 +139,38 @@
                   :display        "flex"
                   :flex-direction "column"
                   :width          "100%"}}
-    (section-title {:title "Information"})
-    [:div {:style {:display        "flex"
-                   :flex-direction "row"}}
-     [:div {:style {:width      field-col-width
-                    :color      color/grey-blue
-                    :text-align "left"}}
-      (for [field fields]
-        [:div {:key field :style {:margin "0.5rem 0"}} field])]
-     [:div {:style {:color      color/grey-dark
-                    :margin     "0 0 0 1rem"
-                    :text-align "left"}}
-      (for [value values]
-        [:div {:key value :style {:margin "0.5rem 0"}} value [:br]])]]
+    (section-title {:title   "Information"
+                    :buttons [(cond (= enable-edit true)
+                                    (section-title-button {:icon     "far fa-edit"
+                                                           :text     "Edit"
+                                                           :on-click ""}))]})
+
+    [:div {:style {:display               "grid"
+                   :grid-template-columns (str field-col-width " 1fr")
+                   :text-align            "left"}}
+     (map (fn [field]
+            [
+             [:div {:style {:margin     "0.25rem 0"
+                            :color      color/grey-blue
+                            :align-self "center"}} (:label field)]
+             [:div {:style {:margin     "0.25rem 0"
+                            :color      color/grey-dark
+                            :align-self "center"}}
+              (cond (and (= edit-mode true) (= (:editable field) true))
+                    (s-general/text-area {:value    (:value field)
+                                          :maxWidth "30rem"
+                                          :minWidth "20rem"})
+                    :else
+                    [:span (:value field) " " (:side-value field)])]])
+          fields)]
+
     (section-divider)]])
 
 ;Timeline Section
-(defc section-timeline [{type     :type
-                         history  :history
-                         purchase :purchase}]
+(defc section-timeline [{type           :type
+                         enable-comment :enable-comment
+                         history        :history
+                         purchase       :purchase}]
   [:div {:style {:margin         "1rem 2.5rem 1rem"
                  :display        "flex"
                  :flex-direction "row"}
@@ -137,70 +180,73 @@
                   :display        "flex"
                   :flex-direction "column"
                   :width          "100%"}}
-    (section-title {:title "Timeline"})
+    (section-title {:title   "Timeline"
+                    :buttons [(cond (= enable-comment true)
+                                    (section-title-button {:icon     "far fa-comment"
+                                                           :text     "Add Comment"
+                                                           :on-click ""}))]})
+
 
     [:div {:style {:display        "flex"
                    :flex-direction "row"}}
      [:div {:style {:text-transform "capitalize"}}
-      (cond (= type "people")
-            (for [item history]
-              [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"}
-                     :key   (:inventory-id item)}
-               [:div {:style {:color color/grey-blue :width field-col-width}} (:date item)]
-               [:div {:style {:color color/grey-dark :margin "0 0 0 1rem"}}
-                [:span (:brand item) " " (:model-name item)
-                 " (" (s-general/device-icon-set {:item item}) ")"]
-                [:br]
-                [:span {:style {:font-weight "500"}} "Assigned "]
-                [:span {:class "italic"} (:comment item)]]])
+      (cond
+        (= type "inventory")
+        [[:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"}}
+          [:div {:style {:color color/grey-blue :width field-col-width}} (s-general/time-format-string {:time (:delivery-date purchase)})]
+          [:div {:style {:color color/grey-dark :margin "0 0 0 0"}}
+           (s-general/input-field {:placeholder "Enter comment here..."})]]
 
-            (= type "contractors")
-            (for [item history]
-              [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"}
-                     :key   (:inventory-id item)}
-               [:div {:style {:color color/grey-blue :width field-col-width}} (:date item)]
-               [:div {:style {:color color/grey-dark :margin "0 0 0 1rem"}}
-                [:span (:brand item) " " (:model-name item)
-                 " (" (s-general/device-icon-set {:item item}) ")"]
-                [:br]
-                [:span {:style {:font-weight "500"}} "Purchased "]
-                [:span {:class "italic"} (:comment item)]]])
+         (for [{id      :person-id
+                date    :date
+                comment :comment
+                fname   :fname
+                lname   :lname
+                type    :type
+                group   :group} history]
+           [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"} :key id}
+            [:div {:style {:color color/grey-blue :width field-col-width}} (s-general/time-format-string {:time date})]
+            [:div {:style {:color color/grey-dark :margin "0 0 0 0"}}
+             [:span "Allotted to "]
+             [:span {:style {:font-weight "500"}} fname " " lname]
+             [:span " (" type " - " group ")"]
+             [:br]
+             [:span {:class "italic"} comment]]])
+         [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"}}
+          [:div {:style {:color color/grey-blue :width field-col-width}} (s-general/time-format-string {:time (:delivery-date purchase)})]
+          [:div {:style {:color color/grey-dark :margin "0 0 0 0rem"}}
+           [:span "Purchased from "]
+           [:span {:style {:font-weight "500"}} (:supplier purchase)]
+           [:span {:style {:color color/link-active :cursor "pointer"}} " (PDF)"]]]]
 
-            (= type "inventory")
-            [(for [{id      :person-id
-                    date    :date
-                    comment :comment
-                    fname   :fname
-                    lname   :lname
-                    type    :type
-                    group   :group} history]
-               [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"} :key id}
-                [:div {:style {:color color/grey-blue :width field-col-width}} date]
-                [:div {:style {:color color/grey-dark :margin "0 0 0 1rem"}}
-                 [:span "Allotted to "]
-                 [:span {:style {:font-weight "500"}} fname " " lname]
-                 [:span " (" type " - " group ")"]
-                 [:br]
-                 [:span {:class "italic"} comment]]])
-             [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"}}
-              [:div {:style {:color color/grey-blue :width field-col-width}} (:delivery-date purchase)]
-              [:div {:style {:color color/grey-dark :margin "0 0 0 1rem"}}
-               [:span "Purchased from "]
-               [:span {:style {:font-weight "500"}} (:supplier purchase)]
-               [:span {:style {:color color/link-active :cursor "pointer"}} " (PDF)"]]]])]]
+        :else
+        (for [item history]
+          [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"}
+                 :key   (:inventory-id item)}
+           [:div {:style {:color color/grey-blue :width field-col-width}} (s-general/time-format-string {:time (:date item)})]
+           [:div {:style {:color color/grey-dark :margin "0 0 0 0rem"}}
+            [:span (:comment item)]
+            [:br]
+            [:span (:brand item) " " (:model-name item)
+             " (" (s-general/device-icon-set {:item item}) ")"]]]))]]
+
+
 
     (section-divider)]])
 
 (defc card
-  [{style     :style
+  [{id        :id
+    style     :style
     key       :key
     image-url :image-url
     content   :content}]
   [:div {:key   key
+         :id    id
          :style (merge style/card
                        style)}
-   [:div [:img {:src   image-url
-                :style style/card-image}]]
+
+   (cond (not= image-url nil) [:div [:img {:src   image-url
+                                           :style style/card-image}]])
    [:div {:class "card-content"}
     content]])
 
@@ -208,7 +254,7 @@
 (defc device-card [{item :item}]
   (card {:key       (:id item)
          :image-url (cond (and (:photo item) (not= (:photo item) "")) (:photo item)
-                          :else  "image/no-image.png")
+                          :else "image/no-image.png")
 
          :content   [:div
                      [:span {:style style/card-title}

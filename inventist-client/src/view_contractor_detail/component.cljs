@@ -7,6 +7,8 @@
             [symbols.color :as color]
             [symbols.style :as style]))
 
+(def edit-mode false)
+
 (defc contractor-detail < (modular-component identity)
   [{{state :state} :input
     trigger-event  :trigger-event}]
@@ -22,12 +24,7 @@
                                                                    :item contractor})
                             :items-right [(s-general/button {:color color/grey-normal
                                                              :text  "Add Order"
-                                                             :icon  "fas fa-plus-square"})
-
-                                          (s-general/button {:color color/grey-normal
-                                                             :text  "New Contractor"
-                                                             :icon  "fas fa-cart-plus"})]})
-
+                                                             :icon  "fas fa-plus-square"})]})
 
      ;Main Details Container
      [:div {:style {:overflow-x      "hidden"
@@ -36,20 +33,32 @@
 
       ;Page Header
       (s-detailview/detail-header
-        {:image         (:image contractor)
+        {:edit-mode     edit-mode
+         :on-change     ""
+         :image         (:image contractor)
          :heading       (:name contractor)
          :sub-heading-1 (:type contractor)})
 
       ;Information
       (s-detailview/section-information
-        {:fields ["Email"
-                  "Phone"
-                  "Address"
-                  "Linked Devices"]
-         :values [(:email contractor)
-                  (:phone contractor)
-                  (:address contractor)
-                  (s-general/length (:inventory contractor))]})
+        {:fields      [{:label     "Email"
+                        :value     (:email contractor)
+                        :on-change ""
+                        :editable  true}
+                       {:label     "Phone"
+                        :value     (:phone contractor)
+                        :on-change ""
+                        :editable  true}
+                       {:label     "Address"
+                        :value     (:address contractor)
+                        :on-change ""
+                        :editable  true}
+                       {:label     "Linked Devices"
+                        :value     (count (:inventory contractor))
+                        :on-change ""
+                        :editable  false}]
+         :edit-mode   edit-mode
+         :enable-edit true})
 
       ;Assigned Devices
       [:div {:style {:margin         "1rem 2.5rem 1rem"
@@ -62,72 +71,63 @@
         (s-detailview/section-title {:title "Linked Devices"})
         [:div {:style {:display        "flex"
                        :flex-direction "row"
-                       :flex-wrap      "wrap"}}
+                       :flex-wrap      "wrap"
+                       :align-items    "flex-start"}}
          (for [item (:inventory contractor)]
            (s-detailview/device-card {:item item}))]
         (s-detailview/section-divider)]]
 
       ;Timeline
-      (s-detailview/section-timeline {:type    "contractors"
-                                      :history (:history contractor)})]]))
+      (s-detailview/section-timeline {:type           "contractors"
+                                      :history        (:history contractor)
+                                      :enable-comment false})]]))
 
 ;NEW CONTRACTOR
 (defc contractor-add []
   [:div {:id    "detail-container"
-         :style {:height             "100%"
-                 :width              "100%"
-                 ;:position           "absolute"
-                 ;:top                "3.5rem"
-                 ;:left               0
+         :style {:height             "auto"
+                 :maxHeight          "50rem"
+                 :width              "22rem"
+                 :position           "absolute"
+                 :top                "7rem"
+                 :right              "0.5rem"
                  :display            "grid"
                  :backgroundColor    color/silver
-                 :grid-template-rows "auto 1fr"}}
-
+                 :grid-template-rows "auto 1fr"
+                 :box-shadow         "0 0 0.25rem 0 rgba(0,0,0,0.5)"}}
 
    ;Toolbar
-   (s-detailview/toolbar {
-                          ;:items-left  (s-detailview/breadcrumb {:type ""})
-                          :items-right [(s-general/button {:color color/grey-normal
-                                                           :text  "Help"
-                                                           :icon  "fas fa-help"})]})
+   (s-detailview/toolbar {:items-left  [:span {:style {:margin-left "1rem"}}
+                                        [:i {:class "fas fa-plus-square"}] " Add Order"]
+                          :items-right [(s-general/button {:color color/white
+                                                           :icon  "far fa-times-circle"})]})
    ;;Form Page
    [:div {:style {:overflow-x "hidden"
                   :overflow-y "scroll"}}
     [:div {:style style/form-box}
-     [:div {:style (merge {:display         "flex"
-                           :justify-content "center"}
-                          style/header-title)}
-      "New Contractor"]
-     (s-detailview/section-divider)
-
      [:div {:id    "form"
             :style {:display         "flex"
                     :flex-wrap       "wrap"
                     :justify-content "space-between"}}
 
-      (s-general/input-filed {:field "Contractor Name"
-                              :text  "Name of supplier, repairer, etc."
-                              :value ""})
-      (s-general/input-filed {:field "Device Name"
-                              :text  "Enter full Device Name"
-                              :value "MacBook Pro"})
-      (s-general/input-filed {:field "Serial Nr"})
-      (s-general/input-filed {:field "Model Identifier/Class"
-                              :text  "Eg. laptop, smartphone"})
-      (s-general/input-filed {:field "Supplier"
-                              :text  "From where the device is purchased"
-                              :value "MediaMarkt"})]
+      (s-general/input-section {:field "Order Description"
+                                :type  "textarea"
+                                :text  "Quantity, type, etc."})
+      (s-general/input-section {:field "Select File to Upload"
+                                :type  "button"
+                                :color color/link-active
+                                :icon  "fas fa-cloud-upload-alt"
+                                :text  "Upload a \".tsv\" file to import the data."
+                                :value "Click here"
+                                :style {:margin 0}})]]]
 
+   [:div {:style {:display         "flex"
+                  :justify-content "space-between"}}
+    (s-general/button {:color color/theme
+                       :text  "Add Contractor"
+                       :icon  "fas fa-check-circle"
+                       :style {:margin "0.5rem 1rem"}})]])
 
-     (s-detailview/section-divider)
-     [:div {:style {:display         "flex"
-                    :justify-content "center"}}
-      (s-general/button {:color color/theme
-                         :text  "Add Contractor"
-                         :icon  "fas fa-check-circle"})
-      (s-general/button {:color color/grey-normal
-                         :text  "Cancel"
-                         :icon  "fas fa-times-circle"})]]]])
 
 
 

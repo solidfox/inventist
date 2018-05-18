@@ -9,10 +9,12 @@
   :min-lein-version "2.7.1"
 
   :dependencies [[org.clojure/clojure "1.9.0"]
-                 [org.clojure/clojurescript "1.9.946"]
+                 [org.clojure/clojurescript "1.10.238"]
                  ;[org.clojure/core.async  "0.4.474"]
                  [binaryage/oops "0.6.1"]
                  [antizer "0.2.2"]
+                 [com.andrewmcveigh/cljs-time "0.5.2"]
+                 [cljs-react-material-ui "0.2.48"]
                  [rum "0.11.2"]
                  [remodular "0.1.0-SNAPSHOT"]
                  [ysera "1.2.0"]

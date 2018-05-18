@@ -1,4 +1,4 @@
-(ns view-dashboard-detail.component
+(ns view-dashboard.component
   (:require [rum.core :refer [defc]]
             [symbols.detailview :as s-detailview]
             [symbols.general :as s-general]
@@ -21,9 +21,6 @@
      (s-detailview/toolbar {:items-left  (s-detailview/breadcrumb {:type "dashboard"
                                                                    :item person})
                             :items-right [(s-general/button {:color color/grey-normal
-                                                             :text  "New Comment"
-                                                             :icon  "fas fa-comment-dots"})
-                                          (s-general/button {:color color/grey-normal
                                                              :text  "Register Device"
                                                              :icon  "fas fa-pen-square"})]})
      [:div {:id    (str ::component-id)
@@ -90,17 +87,24 @@
 
        ;Information
        (s-detailview/section-information
-         {:fields ["Email"
-                   "Phone"
-                   "Gender"
-                   "Address"
-                   "Assigned Devices"]
-          :values [(:email person)
-                   (:phone person)
-                   (cond (= (:sex person) "f") "Female"
-                         (= (:sex person) "m") "Male")
-                   (:address person)
-                   (s-general/length (:inventory person))]})
+         {:fields      [{:label    "Email"
+                         :value    (str (:email person))
+                         :editable false}
+                        {:label    "Phone"
+                         :value    (:phone person)
+                         :editable false}
+                        {:label    "Gender"
+                         :value    (cond (= (:sex person) "f") "Female"
+                                         (= (:sex person) "m") "Male")
+                         :editable false}
+                        {:label    "Address"
+                         :value    (:address person)
+                         :editable false}
+                        {:label    "Assigned Devices"
+                         :value    (count (:inventory person))
+                         :editable false}]
+          :edit-mode   false
+          :enable-edit false})
 
        ;Assigned Devices
        [:div {:style {:margin         "1rem 2.5rem 1rem"
@@ -110,15 +114,21 @@
         (s-detailview/section-left)
         [:div {:style {:margin "0 0 0 1rem" :display "flex" :flex-direction "column"
                        :width  "100%"}}
-         (s-detailview/section-title {:title "Assigned Devices"})
+         (s-detailview/section-title {:title "Assigned Devices"
+                                      :buttons [(s-detailview/section-title-button {:icon     "fas fa-plus-circle"
+                                                                                    :text     "Assign new devices"
+                                                                                    :on-click ""})]})
+
          [:div {:style {:display        "flex"
                         :flex-direction "row"
-                        :flex-wrap      "wrap"}}
+                        :flex-wrap      "wrap"
+                        :align-items    "flex-start"}}
           (for [item (:inventory person)]
             (s-detailview/device-card {:item item}))]
          (s-detailview/section-divider)]]
 
        ;Timeline
-       (s-detailview/section-timeline {:type    "people"
-                                       :history (:history person)})]]]))
+       (s-detailview/section-timeline {:type           "people"
+                                       :enable-comment false
+                                       :history        (:history person)})]]]))
 

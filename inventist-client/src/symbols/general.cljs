@@ -1,5 +1,7 @@
 (ns symbols.general
   (:require [rum.core :refer [defc]]
+            [cljs-time.format :as time-format]
+            [cljs-time.core :as time-core]
             [symbols.color :as color]
             [symbols.style :as style]
             [util.inventory.core :as inventory]))
@@ -10,35 +12,50 @@
    [:i {:class (:brand (inventory/inventory-icon item))}] " "
    [:i {:class (:model (inventory/inventory-icon item))}]])
 
-;to calculate length of an array
-(defn length
-  [list]
-  (if (empty? list) 0
-                    (+ 1 (length (rest list)))))
+(defn time-format-object [time]
+  (time-format/parse (time-format/formatters :date-time-no-ms) time))
+
+(defn days-to-expiry [time]
+  (cond
+    (> (time-format-object time) (time-core/now))
+    (time-core/in-days (time-core/interval (time-core/now) (time-format-object time)))
+    ;To get inverse value
+    ;(> (time-format-object time) (time-core/now))
+    ;(time-core/in-days (time-core/interval (time-format-object time) (time-core/now)))
+    :else "0"))
+
+(defn time-format-string [{time   :time
+                           format :format}]
+  (time-format/unparse (time-format/formatter (or format "yyyy-MM-dd hh:mm")) (time-format-object time)))
+
 
 ;button general
 (defc button [{text     :text
                icon     :icon
                color    :color
                title    :title
+               style    :style
                on-click :on-click}]
   (cond (not text)
-        [:div {:style {:margin    "0.5rem"
-                       :color     (or color color/grey-dark)
-                       :font-size "1.5rem"
-                       :cursor    "pointer"}}
+        [:div {:style (merge {:margin    "0.5rem"
+                              :color     (or color color/grey-dark)
+                              :font-size "1.5rem"
+                              :cursor    "pointer"}
+                             style)}
+
          [:i {:class icon :title title}]]
         :else
-        [:div {:style {:margin          "0.5rem"
-                       :padding         "0.25rem 0.5rem"
-                       :backgroundColor (or color color/grey-dark)
-                       :color           (cond (= color color/white) color/grey-dark
-                                              (= color "white") color/grey-dark
-                                              (= color "#ffffff") color/grey-dark
-                                              (= color color/tp) color/grey-dark
-                                              :else color/white)
-                       :cursor          "pointer"
-                       :borderRadius    "0.25rem"}}
+        [:div {:style (merge {:margin          "0.5rem"
+                              :padding         "0.25rem 0.5rem"
+                              :backgroundColor (or color color/grey-dark)
+                              :color           (cond (= color color/white) color/grey-dark
+                                                     (= color "white") color/grey-dark
+                                                     (= color "#ffffff") color/grey-dark
+                                                     (= color color/tp) color/grey-dark
+                                                     :else color/white)
+                              :cursor          "pointer"
+                              :borderRadius    "0.25rem"}
+                             style)}
          ;:box-shadow      "0 0 0.25rem #fff"}}
          (cond (not= icon nil)
                [:span {:style {:margin "0 0.5rem 0 0"}} [:i {:class icon}]])
@@ -74,59 +91,114 @@
                          :margin-left   "1rem"})}
     value]])
 
-;INPUT FIELD
-(defc input-filed [{field       :field
-                    text        :text
-                    placeholder :placeholder
+;Input Field
+(defc input-field [{placeholder :placeholder
                     value       :value
                     width       :width
+                    minWidth    :minWidth
+                    maxWidth    :maxWidth
                     type        :type
                     disabled    :disabled
                     required    :required
+                    style       :style
                     on-change   :on-change}]
+  [:input {:style       (merge {:font-size       "1rem"
+                                :minWidth        minWidth
+                                :maxWidth        maxWidth
+                                :width           (or width "100%")
+                                :height          "2rem"
+                                :backgroundColor (cond (= disabled true) color/highlight
+                                                       :esle color/white)
+                                :box-shadow      "0px 0px 2px rgba(0,0,0,0.5) inset"
+                                :borderRadius    "5px"
+                                :border          0
+                                :padding-left    "0.5rem"}
+                               style)
+           :type        (or type "text")
+           :disabled    (or disabled false)
+           :required    (or required true)
+           :placeholder (or placeholder "Enter here...")
+           :value       value
+           :on-change   (fn [e] (.. e -target -value))}])
+
+(defc text-area [{placeholder :placeholder
+                  value       :value
+                  width       :width
+                  maxWidth    :maxWidth
+                  type        :type
+                  disabled    :disabled
+                  required    :required
+                  on-change   :on-change}]
+  [:textarea {:style       {:font-size       "1rem"
+                            :width           (or width "100%")
+                            :maxWidth        maxWidth
+                            :height          "1.5rem"
+                            :backgroundColor (cond (= disabled true) color/highlight
+                                                   :esle color/white)
+                            :box-shadow      "0px 0px 2px rgba(0,0,0,0.5) inset"
+                            :borderRadius    "5px"
+                            :border          0
+                            :padding-left    "0.5rem"
+                            :paddingTop      "0.5rem"}
+              :type        (or type "text")
+              :disabled    (or disabled false)
+              :required    (or required true)
+              :placeholder (or placeholder "Enter here...")
+              :value       value
+              :on-change   (fn [e] (.. e -target -value))}])
+
+;INPUT Section
+(defc input-section [{field       :field
+                      text        :text
+                      placeholder :placeholder
+                      value       :value
+                      width       :width
+                      type        :type
+                      color       :color
+                      icon        :icon
+                      style       :style
+                      disabled    :disabled
+                      required    :required
+                      on-change   :on-change}]
   [:div {:style {:width  (or width "100%")
                  :margin "0 0.5rem 0.5rem 0"}}
    [:div {:style {:line-height "1.5rem"
                   :color       color/theme
                   :margin      "0"}}
-    (or field "Field")]
+    (or field "Field")
+    (cond (= required false) [:span {:style {:color      color/grey-blue
+                                             :font-size  "0.9rem"
+                                             :margin     "0"
+                                             :font-style "italic"}}
+                              " (Optional)"])]
 
-   (cond (= type "textarea") [:textarea {:style       {:font-size       "1rem"
-                                                       :width           "100%"
-                                                       :minHeight       "2rem"
-                                                       :backgroundColor (cond (= disabled true) color/highlight
-                                                                              :esle color/white)
-                                                       :box-shadow      "0px 0px 2px rgba(0,0,0,0.5) inset"
-                                                       :borderRadius    "5px"
-                                                       :border          0
-                                                       :padding-left    "0.5rem"
-                                                       :paddingTop      "0.5rem"}
-                                         :type        (or type "text")
-                                         :disabled    (or disabled false)
-                                         :required    (or required true)
-                                         :placeholder (or placeholder "Enter here...")
-                                         :value       value
-                                         :on-change   (fn [e] (.. e -target -value))}]
+   (cond (= type "textarea")
+         (text-area {:width       width
+                     :value       value
+                     :placeholder placeholder
+                     :type        type
+                     :disabled    disabled
+                     :required    required
+                     :on-change   on-change})
 
-         :else [:input {:style       {:font-size       "1rem"
-                                      :width           "100%"
-                                      :height       "2rem"
-                                      :backgroundColor (cond (= disabled true) color/highlight
-                                                             :esle color/white)
-                                      :box-shadow      "0px 0px 2px rgba(0,0,0,0.5) inset"
-                                      :borderRadius    "5px"
-                                      :border          0
-                                      :padding-left    "0.5rem"}
-                        :type        (or type "text")
-                        :disabled    (or disabled false)
-                        :required    (or required true)
-                        :placeholder (or placeholder "Enter here...")
-                        :value       value
-                        :on-change   (fn [e] (.. e -target -value))}])
+         (= type "button")
+         (button {:text  value
+                  :color color
+                  :icon  icon
+                  :style style})
 
-   [:div {:style {:color      color/grey-blue
-                  :font-size  "0.9rem"
-                  :margin     "0"
-                  :font-style "italic"}}
+         :else (input-field {:width       width
+                             :value       value
+                             :placeholder placeholder
+                             :type        type
+                             :disabled    disabled
+                             :required    required
+                             :on-change   on-change}))
 
-    (cond (= required false) "(Optional) ") text]])
+
+   (cond (not= text nil) [:div {:style {:color      color/grey-blue
+                                        :font-size  "0.9rem"
+                                        :margin     "0"
+                                        :font-style "italic"}}
+                          text])])
+

@@ -40,7 +40,7 @@
     [:span {:style style/card-title}
      (str (:name contractor))] [:br]
     [:span {:style style/card-subtitle}
-     (str (:type contractor) " - " (s-general/length (:inventory contractor)) " Products")]]])
+     (str (:type contractor) " - " (count (:inventory contractor)) " Products")]]])
 
 
 ;Inventory-list card
@@ -89,7 +89,7 @@
                   :font-size       "0.9rem"
                   :backgroundColor color/silver
                   :display         "flex" :justify-content "space-between"}}
-    [:div (str "Total " (s-general/length list-items) " results")]
+    [:div (str "Total " (count list-items) " results")]
     [:div {:style {:color color/link-active :cursor "pointer"}} (str "View Table")]]])
 
 ;Sidebar-Footer

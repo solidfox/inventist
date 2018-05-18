@@ -66,7 +66,7 @@
 (def form-box {:width           "auto"
                :height          "auto"
                :margin          "auto"
-               :padding         "2.5rem 1rem"
-               :backgroundColor color/tp
+               :padding         "1rem 1rem"
+               :backgroundColor color/white
                :border          (str "1px solid " color/grey-light)
                :borderRadius    "0rem"})
