@@ -1,10 +1,14 @@
 (ns symbols.general
-  (:require [rum.core :refer [defc]]
-            [cljs-time.format :as time-format]
-            [cljs-time.core :as time-core]
-            [symbols.color :as color]
-            [symbols.style :as style]
-            [util.inventory.core :as inventory]))
+  (:require
+    [rum.core :refer [defc]]
+    [cljs-time.format :as time-format]
+    [cljs-time.core :as time-core]
+    [symbols.color :as color]
+    [symbols.style :as style]
+    [util.inventory.core :as inventory]
+    [cljss.core :as cljss])
+  (:require-macros
+    [cljss.core :refer [defstyles]]))
 
 ;Returns brand and model icon together
 (defc device-icon-set [{item :item}]
@@ -45,18 +49,13 @@
 
          [:i {:class icon :title title}]]
         :else
-        [:div {:style (merge {:margin          "0.5rem"
-                              :padding         "0.25rem 0.5rem"
-                              :backgroundColor (or color color/grey-dark)
-                              :color           (cond (= color color/white) color/grey-dark
-                                                     (= color "white") color/grey-dark
-                                                     (= color "#ffffff") color/grey-dark
-                                                     (= color color/tp) color/grey-dark
-                                                     :else color/white)
-                              :cursor          "pointer"
-                              :borderRadius    "0.25rem"}
-                             style)}
-         ;:box-shadow      "0 0 0.25rem #fff"}}
+        [:div {:style style
+               :class (style/button {:bg-color   (or color color/grey-dark)
+                                     :text-color (cond (= color color/white) color/grey-dark
+                                                       (= color "white") color/grey-dark
+                                                       (= color "#ffffff") color/grey-dark
+                                                       (= color color/tp) color/grey-dark
+                                                       :else color/white)})}
          (cond (not= icon nil)
                [:span {:style {:margin "0 0.5rem 0 0"}} [:i {:class icon}]])
          [:span text]]))

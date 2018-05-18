@@ -3,7 +3,7 @@
 (defn create-person-summary [{id :id}]
   {:id        (or id "00")
    :type      "teacher"
-   :group     "Lågstadiet"
+   :groups     ["Lågstadiet"]
    :image     "http://www.theswiftlift.com/wp-content/uploads/2017/06/person-placeholder.png"
    :sex       "f"
    :fname     "Hanna"

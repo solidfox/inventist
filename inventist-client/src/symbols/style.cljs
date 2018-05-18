@@ -1,6 +1,8 @@
 (ns symbols.style
   (:require
     [symbols.color :as color]
+    [cljss.core :as cljss])
+  (:require-macros
     [cljss.core :refer [defstyles]]))
 
 ;To change listing bg color on hover.
@@ -53,6 +55,17 @@
             :cursor                "pointer"
             :&:hover               {:background-color color/white}
             :&:active              {:background-color color/white}})
+
+(defstyles button [{bg-color   :bg-color
+                    text-color :text-color}]
+           {:margin           "0.5rem"
+            :padding          "0.25rem 0.5rem"
+            :cursor           "pointer"
+            :border-radius    "0.25rem"
+            :color            text-color
+            :background-color bg-color
+            :&:hover          {:box-shadow "0 0 0.25rem 0 #000000"}})
+
 
 (def item-stats {:width                 "100%"
                  :backgroundColor       color/white
