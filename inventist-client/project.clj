@@ -10,6 +10,7 @@
 
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.10.238"]
+                 [re-graph "0.1.5"]
                  ;[org.clojure/core.async  "0.4.474"]
                  [binaryage/oops "0.6.1"]
                  [antizer "0.2.2"]
