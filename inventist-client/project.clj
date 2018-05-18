@@ -13,7 +13,6 @@
                  [re-graph "0.1.5"]
                  ;[org.clojure/core.async  "0.4.474"]
                  [binaryage/oops "0.6.1"]
-                 [antizer "0.2.2"]
                  [com.andrewmcveigh/cljs-time "0.5.2"]
                  [cljs-react-material-ui "0.2.48"]
                  [rum "0.11.2"]
