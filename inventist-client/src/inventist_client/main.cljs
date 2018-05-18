@@ -26,13 +26,13 @@
                                   :state-path  (or (:state-path service) [])})
                                services)}))
 
-(a/run-modular-app! {:get-view       c/app
-                     :get-services   services/get-services
-                     :perform-services
-                     :app-state-atom app-state-atom
-                     :logging        {:state-updates true
-                                      :services      true
-                                      :events        true}})
+(a/run-modular-app! {:get-view         c/app
+                     :get-services     services/get-services
+                     :perform-services perform-services
+                     :app-state-atom   app-state-atom
+                     :logging          {:state-updates true
+                                        :services      true
+                                        :events        true}})
 
 (def firebase-auth (oget js/firebase :auth))
 
