@@ -1,7 +1,7 @@
 (ns inventist-client.page.dashboard.component
   (:require [remodular.core :refer [modular-component]]
             [inventist-client.page.dashboard.core :as core]
-            [view-dashboard-detail.component :refer [dashboard-detail]]
+            [view-dashboard.component :refer [dashboard-detail]]
             [rum.core :refer [defc]]))
 
 (defc component < (modular-component identity)

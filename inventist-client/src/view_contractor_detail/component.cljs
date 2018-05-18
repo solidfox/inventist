@@ -3,7 +3,6 @@
             [symbols.detailview :as s-detailview]
             [symbols.general :as s-general]
             [remodular.core :refer [modular-component]]
-            [util.inventory.component :as inventory]
             [symbols.color :as color]
             [symbols.style :as style]))
 

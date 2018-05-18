@@ -18,6 +18,7 @@
                  [rum "0.11.2"]
                  [remodular "0.1.0-SNAPSHOT"]
                  [ysera "1.2.0"]
+                 [org.roman01la/cljss "1.6.2"]
                  [sablono "0.8.4"]]
 
   :plugins [[lein-figwheel "0.5.15"]

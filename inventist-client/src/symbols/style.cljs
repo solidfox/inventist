@@ -1,6 +1,7 @@
 (ns symbols.style
   (:require
-    [symbols.color :as color]))
+    [symbols.color :as color]
+    [cljss.core :refer [defstyles]]))
 
 ;To change listing bg color on hover.
 (def list-bg-color color/highlight)
@@ -41,15 +42,17 @@
                    :object-fit      "cover"
                    :backgroundColor color/white}))
 
-(def list-item {:width                 "100%"
-                :backgroundColor       list-bg-color
-                :minHeight             "2rem"
-                :padding               "0.75rem 1rem"
-                :margin                "2px 0"
-                :display               "grid"
-                :grid-template-columns "auto 1fr"
-                :cursor                "pointer"})
-
+(defstyles list-item []
+           {:width                 "100%"
+            :background-color      color/highlight
+            :min-height            "2rem"
+            :padding               "0.75rem 1rem"
+            :margin                "2px 0"
+            :display               "grid"
+            :grid-template-columns "auto 1fr"
+            :cursor                "pointer"
+            :&:hover               {:background-color color/white}
+            :&:active              {:background-color color/white}})
 
 (def item-stats {:width                 "100%"
                  :backgroundColor       color/white
