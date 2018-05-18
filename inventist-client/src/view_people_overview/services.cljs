@@ -7,11 +7,7 @@
   {:name   :get-people-list
    :before [core/started-get-people-list-service-call]
    :data   {:url     "serviceEndpoints.getAccountTransactions"
-            :request {:groups            groups
-                      :searchCriterion   {:fromDate   "",
-                                          :toDate     "",
-                                          :fromAmount "",
-                                          :toAmount   ""}}}
+            :request {}}
    :after  [core/receive-get-people-list-service-response]})
 
 
