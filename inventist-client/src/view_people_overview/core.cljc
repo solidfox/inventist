@@ -16,4 +16,6 @@
        (not (get-in state [:get-people-list-response :data]))))
 
 (defn receive-get-people-list-service-response [state response request]
-  (assoc state :get-people-list-response response))
+  (-> state
+      (assoc :get-people-list-response response)
+      (assoc :fetching-people-list false)))
