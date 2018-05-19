@@ -1,4 +1,4 @@
-(ns view-dashboard-detail.mock-data)
+(ns view-dashboard.mock-data)
 
 (defn create-person-detail
   [{id :id}]

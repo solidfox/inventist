@@ -1,5 +1,5 @@
 (ns inventist-client.page.dashboard.core
-  (:require [view-dashboard-detail.core :as view-dashboard-detail]
+  (:require [view-dashboard.core :as view-dashboard-detail]
             [clojure.string :refer [lower-case]]))
 
 (defn dashboard-detail-state-path [dashboard-id] [:view-modules :view-dashboard-detail dashboard-id])
