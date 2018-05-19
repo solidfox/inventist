@@ -5,6 +5,6 @@
 (defc people-list < (remodular.core/modular-component identity)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [people (get-in state [:get-people-list-response :response :items])]
+  (let [people (get-in state [:get-people-list-response :data :people])]
     (s-overview/overview-list {:type "people"
                                :list-items people})))

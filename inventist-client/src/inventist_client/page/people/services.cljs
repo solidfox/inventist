@@ -7,4 +7,4 @@
   (concat
     (a/prepend-state-path-to-services
       (people-overview/get-services (core/create-people-overview-args state))
-      core/people-overview-state-path)))
+      (core/people-overview-state-path))))

@@ -2,7 +2,8 @@
   (:require [rum.core :refer [defc]]
             [symbols.general :as s-general]
             [symbols.color :as color]
-            [symbols.style :as style]))
+            [symbols.style :as style]
+            [clojure.string :as str]))
 
 ;To change listing bg color on hover.
 (def list-bg-color color/highlight)
@@ -15,13 +16,12 @@
    [:div {:style {:width "3rem"}}
     [:img {:style style/card-image
            :src   (cond (and (:image person) (not= (:image person) "")) (:image person)
-                        :else (cond (= (:sex person) "f") "image/person-f-placeholder.png"
-                                    (= (:sex person) "m") "image/person-m-placeholder.png"))}]]
+                        :else "image/person-m-placeholder.png")}]]
    [:div {:style {:margin "0 0 0 1rem"}}
     [:span {:style style/card-title}
      (str (:fname person) " " (:lname person))] [:br]
     [:span {:style style/card-subtitle}
-     (str (:type person) " - " (for [group (:groups person)] group))] [:br]
+     (str (:type person) " - " (str/join ", " (for [group (:groups person)] (:name group))))] [:br]
     [:span {:style style/card-title}
      (for [item (:inventory person)]
        [:span {:style {:margin "0 1rem 0 0"}}
