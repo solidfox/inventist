@@ -24,7 +24,8 @@
      (str (:type person) " - " (str/join ", " (for [group (:groups person)] (:name group))))] [:br]
     [:span {:style style/card-title}
      (for [item (:inventory person)]
-       [:span {:style {:margin "0 1rem 0 0"}}
+       [:span {:key (:id item)
+               :style {:margin "0 1rem 0 0"}}
         (s-general/device-icon-set {:item item})])]]])
 
 ;Contractor-list card
@@ -63,7 +64,7 @@
      (str (:assignee item))]]])
 
 ;Search component
-(defc overview-search [{list-items :list-items}]
+(defc search [{list-items :list-items}]
   [:div
    [:div {:style {:width                 "100%"
                   :height                "3rem"
@@ -93,7 +94,7 @@
     [:div {:style {:color color/link-active :cursor "pointer"}} (str "View Table")]]])
 
 ;Sidebar-Footer
-(defc overview-footer []
+(defc footer []
   [:div {:style {:width                 "100%"
                  :height                "3rem"
                  :backgroundColor       color/silver
@@ -104,28 +105,40 @@
    [:div {:style {:margin "0.75rem" :font-size "1.2rem" :opacity "0.75" :cursor "pointer"}}
     [:i {:class "fas fa-caret-left"}]]])
 
+(defc scrollable
+  [{floating-header :floating-header
+    floating-footer :floating-footer
+    content         :content}]
+  [:div {:style {:height             "100%"
+                 :display            "grid"
+                 :grid-template-rows "auto 1fr auto"}}
+   floating-header
+   [:div {:style {:overflow-x                 "hidden"
+                  :overflow-y                 "scroll"
+                  :-webkit-overflow-scrolling "touch"}}
+    content]
+   floating-footer])
+
+
+;Footer
+
+
 
 ;overview with search and listing
 (defc overview-list
   [{type       :type
     list-items :list-items}]
-  [:div {:style {:height             "100%"
-                 :display            "grid"
-                 :grid-template-rows "auto 1fr auto"}}
-   ;Normal Search
-   (overview-search {:list-items list-items})
+  (scrollable
+    {:floating-header (search {:list-items list-items})
+     :floating-footer (footer)
+     :content
+     [:div {:style {:background-color color/grey-light}}
+      (for [list-item list-items]
+        (cond (= type "people") (person-list-card {:person list-item})
+              (= type "inventory") (inventory-list-card {:item list-item})
+              (= type "contractors") (contractor-list-card {:contractor list-item})))]}))
 
-   ;listing
-   [:div {:style {:overflow-x                 "hidden"
-                  :overflow-y                 "scroll"
-                  :-webkit-overflow-scrolling "touch"
-                  :backgroundColor            color/grey-light}}
-    (for [list-item list-items]
-      (cond (= type "people") (person-list-card {:person list-item})
-            (= type "inventory") (inventory-list-card {:item list-item})
-            (= type "contractors") (contractor-list-card {:contractor list-item})))]
 
-   ;Footer
-   (overview-footer)])
+
 
 
