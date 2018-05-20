@@ -4,7 +4,11 @@
             [symbols.general :as s-general]
             [remodular.core :refer [modular-component]]
             [symbols.color :as color]
+            [cljs-react-material-ui.core :refer [get-mui-theme color]]
+            [cljs-react-material-ui.rum :as ui]
             [clojure.string :as str]))
+
+(def edit-mode false)
 
 (defc person-detail < (modular-component)
   [{{state :state} :input
@@ -48,7 +52,7 @@
                        {:label    "Assigned Devices"
                         :value    (count (:inventory person))
                         :editable false}]
-         :edit-mode   false
+         :edit-mode   edit-mode
          :enable-edit false})
 
       ;Assigned Devices
@@ -60,36 +64,51 @@
        [:div {:style {:margin "0 0 0 1rem" :display "flex" :flex-direction "column"
                       :width  "100%"}}
         (s-detailview/section-title {:title   "Assigned Devices"
-                                     :buttons [(s-detailview/section-title-button {:icon     "fas fa-plus-circle"
-                                                                                   :text     "Assign new devices"
-                                                                                   :on-click ""})]})
+                                     :buttons [(cond (not edit-mode)
+                                                     (s-detailview/section-title-button {:icon "fas fa-plus-circle"
+                                                                                         :text "Assign new device"}))]})
+
+
+
         [:div {:style {:display        "flex"
                        :flex-direction "row"
                        :flex-wrap      "wrap"
                        :align-items    "flex-start"}}
-         (s-detailview/card {:id      "add-device"
-                             :content [:form {:style {:display         "flex"
-                                                      :flex-wrap       "wrap"
-                                                      :justify-content "space-between"}}
-                                       (s-general/input-field {:placeholder "Search Device's name..."
-                                                               :value       ""})
-                                       (s-general/text-area {:required    false
-                                                             :maxWidth    "100%"
-                                                             :placeholder "Enter comment (optional)."})
-                                       (s-general/button {:color color/theme
-                                                          :icon  "fas fa-check-circle"
-                                                          :text  "Add Device"
-                                                          :style {:margin "0.5rem 0 0 0"}})
-                                       (s-general/button {:color color/grey-normal
-                                                          :icon  "fas fa-times-circle"
-                                                          :text  "Cancel"
-                                                          :style {:margin "0.5rem 0 0 0"}})]})
+
+         (cond edit-mode
+               (s-detailview/card {:id      "add-device"
+                                   :content [:form {:style {:display         "flex"
+                                                            :flex-wrap       "wrap"
+                                                            :justify-content "space-between"}}
+                                             (s-general/input-field {:placeholder "Search Device's name..."
+                                                                     :value       ""})
+                                             (s-general/text-area {:required    false
+                                                                   :maxWidth    "100%"
+                                                                   :placeholder "Enter comment (optional)."})
+                                             (s-general/button {:color color/theme
+                                                                :icon  "fas fa-check-circle"
+                                                                :text  "Add Device"
+                                                                :style {:margin "0.5rem 0 0 0"}})
+                                             (s-general/button {:color color/grey-normal
+                                                                :icon  "fas fa-times-circle"
+                                                                :text  "Cancel"
+                                                                :style {:margin "0.5rem 0 0 0"}})]}))
+
+         (cond (= (count (:inventory person)) 0)
+             [:div {:style {:color      color/grey-normal
+                            :font-style "italic"}}
+              "No Devices Assigned."])
+
          (for [item (:inventory person)]
            (s-detailview/device-card {:item item}))]
+
 
         (s-detailview/section-divider)]]
 
       ;Timeline
-      (s-detailview/section-timeline {:type           "people"
-                                      :enable-comment false
-                                      :history        (:history person)})]]))
+      (cond (:history person)
+            (s-detailview/section-timeline {:type           "people"
+                                            :enable-comment false
+                                            :history        (:history person)}))]]))
+
+

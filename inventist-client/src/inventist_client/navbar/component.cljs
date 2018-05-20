@@ -36,10 +36,10 @@
     :target-page-id :inventory}
    {:title          "People"
     :image          "fas fa-users"
-    :target-page-id :people}
-   {:title          "Contractors"
-    :image          "fas fa-shopping-cart"
-    :target-page-id :contractors}])
+    :target-page-id :people}])
+   ;{:title          "Contractors"
+   ; :image          "fas fa-shopping-cart"
+   ; :target-page-id :contractors}])
    ;{:title          "Settings"
    ; :image          "fas fa-cog"
    ; :target-page-id :settings}])
