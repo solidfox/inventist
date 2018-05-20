@@ -4,6 +4,7 @@
             [symbols.general :as s-general]
             [remodular.core :refer [modular-component]]
             [symbols.color :as color]
+            [symbols.style :as style]
             [clojure.string :as str]))
 
 (defc person-detail < (modular-component)
@@ -37,7 +38,11 @@
       ;Information
       (s-detailview/section-information
         {:fields      [{:label    "Email"
-                        :value    (str/join "\n" (remove empty? (:email person)))
+                        :value    (->> (:email person)
+                                       (remove empty?)
+                                       (map (fn [email]
+                                              [:a {:key email
+                                                   :href (str "mailto:" email) } [:div  email]])))
                         :editable false}
                        (when (not-empty phone) {:label    "Phone"
                                                 :value    phone

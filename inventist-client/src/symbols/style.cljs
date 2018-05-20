@@ -66,6 +66,9 @@
             :background-color bg-color
             :&:hover          {:box-shadow "0 0 0.25rem 0 #000000"}})
 
+(defstyles email-li []
+           {:display "block"})
+
 
 (def item-stats {:width                 "100%"
                  :backgroundColor       color/white
