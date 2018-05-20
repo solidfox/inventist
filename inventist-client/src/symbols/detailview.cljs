@@ -150,21 +150,22 @@
     [:div {:style {:display               "grid"
                    :grid-template-columns (str field-col-width " 1fr")
                    :text-align            "left"}}
-     (map (fn [field]
-            [
-             [:div {:style {:margin     "0.25rem 0"
-                            :color      color/grey-blue
-                            :align-self "center"}} (:label field)]
-             [:div {:style {:margin     "0.25rem 0"
-                            :color      color/grey-dark
-                            :align-self "center"}}
-              (cond (and (= edit-mode true) (= (:editable field) true))
-                    (s-general/text-area {:value    (:value field)
-                                          :maxWidth "30rem"
-                                          :minWidth "20rem"})
-                    :else
-                    [:span (:value field) " " (:side-value field)])]])
-          fields)]
+     (->> fields
+          (remove nil?)
+          (map (fn [field]
+                 [
+                  [:div {:style {:margin     "0.25rem 0"
+                                 :color      color/grey-blue
+                                 :align-self "center"}} (:label field)]
+                  [:div {:style {:margin     "0.25rem 0"
+                                 :color      color/grey-dark
+                                 :align-self "center"}}
+                   (cond (and (= edit-mode true) (= (:editable field) true))
+                         (s-general/text-area {:value    (:value field)
+                                               :maxWidth "30rem"
+                                               :minWidth "20rem"})
+                         :else
+                         [:span (:value field) " " (:side-value field)])]])))]
 
     (section-divider)]])
 

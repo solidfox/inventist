@@ -54,6 +54,9 @@
                 (str/lower-case)
                 (str/split #"\s")))))
 
+(defn get-free-text-search [state]
+  (get-in state [:search-terms :free-text-search]))
+
 (defn filtered-people
   {:test (fn []
            (let [kalle   {:fname  "Kalle"

@@ -66,9 +66,10 @@
      (str (:assignee item))]]])
 
 ;Search component
-(defc search-toolbar [{shown-results :shown-results
-                       total-results :total-results
-                       on-change     :on-change}]
+(defc search-toolbar [{search-field-value :search-field-value
+                       shown-results      :shown-results
+                       total-results      :total-results
+                       on-change          :on-change}]
   [:div
    [:div {:style {:width                 "100%"
                   :height                "3rem"
@@ -80,7 +81,7 @@
     [:div {:style {:margin "0.75rem" :color color/grey-normal}}
      [:i {:class "fas fa-search"}]]
     [:input {:type        "input"
-             :value       ""
+             :value       (or search-field-value "")
              :id          "search"
              :name        "search"
              :autoFocus   true
