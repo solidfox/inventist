@@ -1,6 +1,5 @@
 (ns view-person-detail.core
-  (:require [view-person-detail.mock-data :as mock-data]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]))
 
 (defn create-state
   [{person-id :person-id}]

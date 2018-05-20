@@ -6,12 +6,13 @@
             [symbols.color :as color]
             [symbols.style :as style]
             [cljs-react-material-ui.core :refer [get-mui-theme color]]
-            [cljs-react-material-ui.rum :as ui]))
+            [cljs-react-material-ui.rum :as ui]
+            [clojure.string :as str]))
 
 (defc inventory-detail < (modular-component)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [item (get-in state [:get-inventory-details-response :response])]
+  (let [item (get-in state [:get-inventory-details-response :data :response])]
 
     ;INVENTORY DETAILS
     [:div {:id    "detail-container"
@@ -23,9 +24,7 @@
                                                                    :item item})
                             :items-right [(s-general/button {:color color/grey-normal
                                                              :text  "Report Issue"
-                                                             :icon  "fas fa-exclamation-triangle"})
-                                          (s-general/button {:color color/grey-normal})]})
-
+                                                             :icon  "fas fa-exclamation-triangle"})]})
 
      ;Main Details Container
      [:div {:style {:overflow-x      "hidden"
@@ -35,28 +34,28 @@
       ;Page Header
       (s-detailview/detail-header
         {:image   (:photo item)
-         :heading (str (:brand item) " " (:model-name item))})
+         :heading (str (:brand item) " " (:model_name item))})
 
 
 
       ;Information
       (s-detailview/section-information
         {:fields      [{:label    "Serial Number"
-                        :value    (:serial-number item)
+                        :value    (:serial_number item)
                         :editable false}
                        {:label    "Phone"
-                        :value    (:model-identifier item)
+                        :value    (:model_identifier item)
                         :editable false}
                        {:label    "Supplier"
-                        :value    (:supplier (:purchase-details item))
+                        :value    (:name (:supplier (:purchase_details item)))
                         :editable false}
                        {:label      "Insurance expiry"
-                        :value      (s-general/time-format-string {:time (:insurance-expires (:purchase-details item))})
-                        :side-value (str " (" (s-general/days-to-expiry (:insurance-expires (:purchase-details item))) " days left)")
+                        :value      (s-general/time-format-string {:time (:insurance_expires (:purchase_details item))})
+                        :side-value (str " (" (s-general/days-to-expiry (:insurance_expires (:purchase_details item))) " days left)")
                         :editable   false}
                        {:label      "Warranty expiry"
-                        :value      (s-general/time-format-string {:time (:warranty-expires (:purchase-details item))})
-                        :side-value (str " (" (s-general/days-to-expiry (:warranty-expires (:purchase-details item))) " days left)")
+                        :value      (s-general/time-format-string {:time (:warranty_expires (:purchase_details item))})
+                        :side-value (str " (" (s-general/days-to-expiry (:warranty_expires (:purchase_details item))) " days left)")
                         :editable   false}]
          :edit-mode   false
          :enable-edit false})

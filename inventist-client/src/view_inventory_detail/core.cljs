@@ -1,10 +1,23 @@
 (ns view-inventory-detail.core
-  (:require [view-inventory-detail.mock-data :as mock-data]))
+  (:require  [clojure.string :as str]))
 
 (defn create-state
   [{inventory-id :inventory-id}]
-  {:inventory-id                   inventory-id
-   :fetching-inventory-details     false
-   :get-inventory-details-response {:status 200
-                                    :response (mock-data/create-inventory-detail)}})
+  {:inventory-id                        inventory-id
+   :fetching-inventory-details          false
+   :should-refetch-get-inventory-detail false
+   :get-inventory-details-response      nil})
 
+(defn started-get-inventory-detail-service-call [state]
+  (assoc state :fetching-inventory-details true))
+
+(defn should-get-inventory-detail? [state]
+  (and (not (:fetching-inventory-details state))
+       (or (:should-refetch-get-inventory-detail state)
+           (not (get-in state [:get-inventory-details-response :data])))))
+
+(defn receive-get-inventory-detail-service-response [state response request]
+  (-> state
+      (assoc :should-refetch-get-inventory-detail false)
+      (assoc :fetching-inventory-details false)
+      (assoc :get-inventory-details-response response)))

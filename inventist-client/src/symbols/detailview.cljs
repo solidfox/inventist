@@ -68,8 +68,10 @@
          :id    "header"}
    [:div [:img {:src   (cond (and image (not= image "")) image
                              :else "image/no-image.png")
-                :style {:width      "6rem" :height "6rem"
-                        :object-fit "cover" :backgroundColor color/grey-light}}]]
+                :style {:width        "6rem"
+                        :height       "6rem"
+                        :borderRadius "1rem"
+                        :object-fit   "cover" :backgroundColor color/grey-light}}]]
    [:div {:style {:margin "0 0 0 1rem"}}
     [:span {:style style/header-title}
      (cond (= edit-mode true)

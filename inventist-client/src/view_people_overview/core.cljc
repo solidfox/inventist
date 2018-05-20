@@ -1,6 +1,5 @@
 (ns view-people-overview.core
-  (:require [view-people-overview.mock-data :as mock-data]
-            [clojure.string :as str]
+  (:require [clojure.string :as str]
             [ysera.test :as test]))
 
 (defn create-state
