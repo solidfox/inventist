@@ -17,6 +17,7 @@
                                "    model_name"
                                "    class"
                                "    color"
+                               "    serial_number"
                                "    photo: image_url"
                                "  }"
                                "}"])}}

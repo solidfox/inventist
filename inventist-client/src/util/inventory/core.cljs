@@ -5,18 +5,18 @@
 
 (defn inventory-icon [{id            :id
                        brand?        :brand
-                       model         :model-name
+                       model         :model_name
                        color         :color
-                       identifier?   :model-identifier
+                       identifier?   :model_identifier
                        class?        :class
-                       serial-number :serial-number
+                       serial-number :serial_number
                        :as           item-data}]
-  (let [brand      (or brand? "")
+  (let [brand (or brand? "")
         identifier (or identifier? "")
-        class      (or class? "")]
+        class (or class? "")]
     (cond (= (lower-case brand) (lower-case "Apple"))
           (let [brand-map {:brand "fab fa-apple"}]
-            (cond (re-find #"laptop" (lower-case class))
+            (cond (or (re-find #"laptop" (lower-case class)) (re-find #"macbook" (lower-case model)))
                   (assoc brand-map :model "fas fa-laptop")
                   (re-find #"smartphone" (lower-case class))
                   (assoc brand-map :model "fas fa-mobile-alt")

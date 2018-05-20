@@ -59,11 +59,12 @@
          [:div {:style {:width "3rem" :font-size "1.25rem"}}
           (s-general/device-icon-set {:item item})])
 
-   [:div {:style {:margin "0 0 0 1rem"}}
+   [:div {:style {:margin "0 0 0 1rem"
+                  :width  "16rem"}}
     [:span {:style style/card-title}
-     (str (:model-name item) " - " (:color item))] [:br]
+     (str (:brand item) " " (:model_name item))] [:br]
     [:span {:style style/card-subtitle}
-     (str (:assignee item))]]])
+     (str (:serial_number item) " - " (:color item))]]])
 
 ;Search component
 (defc search-toolbar [{search-field-value :search-field-value
@@ -125,6 +126,7 @@
     floating-footer :floating-footer
     content         :content}]
   [:div {:style {:height             "100%"
+                 :width              "22rem"
                  :display            "grid"
                  :grid-template-rows "auto 1fr auto"}}
    floating-header

@@ -25,7 +25,7 @@
        :content
        [:div {:style {:background-color color/grey-light}}
         (for [inventory limited-inventory]
-          (inventory-list-card {:inventory inventory
+          (inventory-list-card {:item      inventory
                                 :on-select (fn [] (trigger-event
                                                     (rem/create-event
                                                       {:name :inventory-selected
