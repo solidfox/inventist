@@ -1,10 +1,12 @@
 (ns view-people-overview.core
-  (:require [view-people-overview.mock-data :as mock-data]))
+  (:require [view-people-overview.mock-data :as mock-data]
+            [clojure.string :as str]
+            [ysera.test :as test]))
 
 (defn create-state
   []
   {:selected-person-id       nil
-   :filter                   nil
+   :search-terms             nil
    :fetching-people-list     false
    :get-people-list-response nil})
 
@@ -19,3 +21,58 @@
   (-> state
       (assoc :get-people-list-response response)
       (assoc :fetching-people-list false)))
+
+(defn person-matches
+  {:test (fn [] (let [kalle-anka {:fname  "Kalle"
+                                  :lname  "Anka"
+                                  :groups {:name "Quack-squad"}
+                                  :type   "unemployed"}]
+                  (test/is (person-matches kalle-anka
+                                           {:free-text-search "kalle Anka"}))
+                  (test/is (person-matches kalle-anka
+                                           {:free-text-search "Quack kalle"}))
+                  (test/is-not (person-matches kalle-anka
+                                               {:free-text-search "anka mimmi"}))))}
+  [person {search-string :free-text-search}]
+  (let [person-string (-> (str/join " " [(:fname person)
+                                         (:lname person)
+                                         (get-in person [:groups :name])
+                                         (:type person)])
+                          (str/lower-case))]
+    (every? (fn [search-string-word]
+              (str/includes? person-string search-string-word))
+            (-> search-string
+                (str/lower-case)
+                (str/split #"\s")))))
+
+(defn filtered-people
+  {:test (fn []
+           (let [kalle   {:fname  "Kalle"
+                          :lname  "Anka"
+                          :groups {:name "Quack-squad"}}
+                 scrooge {:fname "Uncle"
+                          :lname "Scrooge"
+                          :type  "capitalist"}
+                 people  [kalle
+                          scrooge]
+                 state   (-> (create-state)
+                             (receive-get-people-list-service-response
+                               {:data {:people people}}
+                               nil))]
+             (test/is= (filtered-people state
+                                        {:free-text-search "le capitalist"})
+                       [scrooge])
+             (test/is= (filtered-people state
+                                        {:free-text-search "le s"})
+                       [kalle
+                        scrooge])
+             (test/is= (filtered-people state)
+                       [kalle
+                        scrooge])))}
+  [state & [search-terms]]
+  (when-let [people       (get-in state [:get-people-list-response :data :people])]
+    (if-let [search-terms (or search-terms
+                              (:search-terms state))]
+      (->> people
+           (filter (fn [person] (person-matches person search-terms))))
+      people)))

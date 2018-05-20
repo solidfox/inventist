@@ -11,7 +11,7 @@
 ;Person-list card
 (defc person-list-card [{person   :person
                          on-click :on-click}]
-  [:div {:key (:id person)
+  [:div {:key   (:id person)
          :class (style/list-item)}
    [:div {:style {:width "3rem"}}
     [:img {:style style/card-image
@@ -30,7 +30,7 @@
 ;Contractor-list card
 (defc contractor-list-card [{contractor :contractor
                              on-click   :on-click}]
-  [:div {:key (:id contractor)
+  [:div {:key   (:id contractor)
          :class (style/list-item)}
    [:div {:style {:width "3rem"}}
     [:img {:style style/card-image
@@ -46,7 +46,7 @@
 ;Inventory-list card
 (defc inventory-list-card [{item     :item
                             on-click :on-click}]
-  [:div {:key (:id item)
+  [:div {:key   (:id item)
          :class (style/list-item)}
    (cond (and (:photo item) (not= (:photo item) ""))
          [:div {:style {:width "3rem"}}
@@ -116,9 +116,10 @@
    (overview-search {:list-items list-items})
 
    ;listing
-   [:div {:style {:overflow-x      "hidden"
-                  :overflow-y      "scroll"
-                  :backgroundColor color/grey-light}}
+   [:div {:style {:overflow-x                 "hidden"
+                  :overflow-y                 "scroll"
+                  :-webkit-overflow-scrolling "touch"
+                  :backgroundColor            color/grey-light}}
     (for [list-item list-items]
       (cond (= type "people") (person-list-card {:person list-item})
             (= type "inventory") (inventory-list-card {:item list-item})
