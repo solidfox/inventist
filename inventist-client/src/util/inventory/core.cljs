@@ -16,7 +16,7 @@
         class      (or class? "")]
     (cond (= (lower-case brand) (lower-case "Apple"))
           (let [brand-map {:brand "fab fa-apple"}]
-            (cond (re-find #"macbook" (lower-case identifier))
+            (cond (re-find #"laptop" (lower-case class))
                   (assoc brand-map :model "fas fa-laptop")
                   (re-find #"smartphone" (lower-case class))
                   (assoc brand-map :model "fas fa-mobile-alt")

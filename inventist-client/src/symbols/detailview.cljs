@@ -101,7 +101,9 @@
                              on-click :on-click}]
   [:span {:style {:color     color/link-active
                   :margin    "0 1rem"
-                  :font-size "1rem"}}
+                  :font-size "1rem"
+                  :cursor    "pointer"
+                  :on-click  on-click}}
    [:i {:class icon}] " " text])
 
 ;Title for sections
@@ -254,13 +256,12 @@
   (card {:key       (:id item)
          :image-url (cond (and (:photo item) (not= (:photo item) "")) (:photo item)
                           :else "image/no-image.png")
-
          :content   [:div
                      [:span {:style style/card-title}
-                      (str (:brand item) " " (:model-name item))] [:br]
+                      (str (:brand item) " " (:model_name item))] [:br]
                      [:span {:style style/card-subtitle}
-                      (str (:serial-number item) " - " (:color item)) [:br]
-                      (str "Date: " (:date item))]]}))
+                      (str (:serial_number item) " - " (:color item)) [:br]]]}))
+;(str "Date: " (:date item))]]}))
 
 
 ;Card to show Person
