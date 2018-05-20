@@ -11,7 +11,7 @@
             :params {:query (str/join
                               "\n"
                               ["query {"
-                               "  computer {"
+                               "  computers {"
                                "    id"
                                "    brand"
                                "    model_name"

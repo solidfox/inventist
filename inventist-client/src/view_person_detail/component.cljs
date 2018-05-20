@@ -1,5 +1,5 @@
 (ns view-person-detail.component
-  (:require [rum.core :refer [defc]]
+  (:require [rum.core :refer [defc with-key]]
             [symbols.detailview :as s-detailview]
             [symbols.general :as s-general]
             [remodular.core :refer [modular-component]]
@@ -69,9 +69,10 @@
        [:div {:style {:margin "0 0 0 1rem" :display "flex" :flex-direction "column"
                       :width  "100%"}}
         (s-detailview/section-title {:title   "Assigned Devices"
-                                     :buttons [(cond (not edit-mode)
-                                                     (s-detailview/section-title-button {:icon "fas fa-plus-circle"
-                                                                                         :text "Assign new device"}))]})
+                                     :buttons [(when (not edit-mode)
+                                                     (with-key (s-detailview/section-title-button {:icon "fas fa-plus-circle"
+                                                                                                   :text "Assign new device"}) 42))]})
+
 
 
 

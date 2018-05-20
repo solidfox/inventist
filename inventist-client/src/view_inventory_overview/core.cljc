@@ -76,7 +76,7 @@
                        [kalle
                         scrooge])))}
   [state & [search-terms]]
-  (when-let [inventory (get-in state [:get-inventory-list-response :data :inventory])]
+  (when-let [inventory (get-in state [:get-inventory-list-response :data :computers])]
     (if-let [search-terms (or search-terms
                               (:search-terms state))]
       (->> inventory

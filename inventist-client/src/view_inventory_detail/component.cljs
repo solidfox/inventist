@@ -12,7 +12,7 @@
 (defc inventory-detail < (modular-component)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [item (get-in state [:get-inventory-details-response :data :response])]
+  (let [item (get-in state [:get-inventory-details-response :data :computers])]
 
     ;INVENTORY DETAILS
     [:div {:id    "detail-container"

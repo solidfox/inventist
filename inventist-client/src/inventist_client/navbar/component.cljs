@@ -1,5 +1,5 @@
 (ns inventist-client.navbar.component
-  (:require [rum.core :refer [defc]]
+  (:require [rum.core :refer [defc with-key]]
             [remodular.core :as rem]
             [authentication.core :as core]
             [inventist-client.event :as event]
@@ -20,7 +20,6 @@
          :on-click on-click}
    [:div {:style {:height "1.75rem" :text-align "center"}}
     [:i {:class image :style {:font-size "1.5rem"}}]]
-
    [:div {:style {:font-size "0.7rem"
                   :margin    "0rem"}}
     title]])
@@ -65,10 +64,11 @@
     (for [{title          :title
            image          :image
            target-page-id :target-page-id} navbar-main-sections]
-      (navigation-icon (merge {:title    title
-                               :image    image
-                               :on-click (fn [] (trigger-event (event/clicked-navigation-icon {:target-page-id target-page-id})))}
-                              (when (= (first current-path) target-page-id)
-                                {:selected true
-                                 :color    c/theme}))))]
+      (-> (navigation-icon (merge {:title    title
+                                   :image    image
+                                   :on-click (fn [] (trigger-event (event/clicked-navigation-icon {:target-page-id target-page-id})))}
+                                  (when (= (first current-path) target-page-id)
+                                    {:selected true
+                                     :color    c/theme})))
+          (with-key title)))]
    auth-status-item])

@@ -9,6 +9,7 @@
     (a/prepend-state-path-to-services
       (people-overview/get-services (core/create-people-overview-args state))
       (core/people-overview-state-path))
-    (a/prepend-state-path-to-services
-      (person-detail/get-services (core/create-person-detail-args state (:selected-person-id state)))
-      (core/person-detail-state-path (:selected-person-id state)))))
+    (when (:selected-person-id state)
+      (a/prepend-state-path-to-services
+        (person-detail/get-services (core/create-person-detail-args state (:selected-person-id state)))
+        (core/person-detail-state-path (:selected-person-id state))))))
