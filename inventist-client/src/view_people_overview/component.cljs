@@ -10,21 +10,22 @@
 (defc people-list < (remodular.core/modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [people (core/filtered-people state)
+  (let [people         (core/filtered-people state)
         limited-people (take 75 people)]
     (scrollable
       {:floating-header
        (search-toolbar
-         {:shown-results (count limited-people)
+         {:search-field-value (core/get-free-text-search state)
+          :shown-results (count limited-people)
           :total-results (count people)
-          :on-change  (fn [e]
-                        (trigger-event
-                          (rem/create-event {:name :search-string-changed
-                                             :data {:new-value (o/oget e [:target :value])}})))})
+          :on-change     (fn [e]
+                           (trigger-event
+                             (rem/create-event {:name :search-string-changed
+                                                :data {:new-value (o/oget e [:target :value])}})))})
        :content
        [:div {:style {:background-color color/grey-light}}
         (for [person limited-people]
-          (person-list-card {:person person
+          (person-list-card {:person    person
                              :on-select (fn [] (trigger-event
                                                  (rem/create-event
                                                    {:name :person-selected
