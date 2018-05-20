@@ -2,7 +2,7 @@
   (:require [rum.core :refer [defc]]
             [symbols.overview :as s-overview]))
 
-(defc inventory-list < (remodular.core/modular-component identity)
+(defc inventory-list < (remodular.core/modular-component)
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (let [items (get-in state [:get-inventory-list-response :response :items])]

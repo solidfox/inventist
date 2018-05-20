@@ -2,7 +2,7 @@
   (:require [rum.core :refer [defc]]
             [symbols.overview :as s-overview]))
 
-(defc contractors-list < (remodular.core/modular-component identity)
+(defc contractors-list < (remodular.core/modular-component)
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (let [contractors (get-in state [:get-contractors-list-response :response :items])]

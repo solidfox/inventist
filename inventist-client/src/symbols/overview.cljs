@@ -3,7 +3,8 @@
             [symbols.general :as s-general]
             [symbols.color :as color]
             [symbols.style :as style]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [oops.core :as o]))
 
 ;To change listing bg color on hover.
 (def list-bg-color color/highlight)
@@ -24,7 +25,7 @@
      (str (:type person) " - " (str/join ", " (for [group (:groups person)] (:name group))))] [:br]
     [:span {:style style/card-title}
      (for [item (:inventory person)]
-       [:span {:key (:id item)
+       [:span {:key   (:id item)
                :style {:margin "0 1rem 0 0"}}
         (s-general/device-icon-set {:item item})])]]])
 
@@ -64,7 +65,9 @@
      (str (:assignee item))]]])
 
 ;Search component
-(defc search [{list-items :list-items}]
+(defc search-toolbar [{shown-results :shown-results
+                       total-results :total-results
+                       on-change     :on-change}]
   [:div
    [:div {:style {:width                 "100%"
                   :height                "3rem"
@@ -76,10 +79,12 @@
     [:div {:style {:margin "0.75rem" :color color/grey-normal}}
      [:i {:class "fas fa-search"}]]
     [:input {:type        "input"
+             :value       ""
              :id          "search"
              :name        "search"
              :autoFocus   true
              :placeholder "Search"
+             :on-change   on-change
              :style       {:width           "100%"
                            :margin          "0"
                            :font-size       "1rem"
@@ -90,7 +95,15 @@
                   :font-size       "0.9rem"
                   :backgroundColor color/silver
                   :display         "flex" :justify-content "space-between"}}
-    [:div (str "Total " (count list-items) " results")]
+    [:div (str/join " "
+                    (concat (when (and total-results (not= total-results
+                                                           shown-results))
+                              ["Showing"])
+                            [shown-results]
+                            (when (and total-results (not= total-results
+                                                           shown-results))
+                              ["of" total-results])
+                            [" results"]))]
     [:div {:style {:color color/link-active :cursor "pointer"}} (str "View Table")]]])
 
 ;Sidebar-Footer
@@ -129,14 +142,13 @@
   [{type       :type
     list-items :list-items}]
   (scrollable
-    {:floating-header (search {:list-items list-items})
+    {:floating-header (search-toolbar {:list-items list-items})
      :floating-footer (footer)
      :content
-     [:div {:style {:background-color color/grey-light}}
-      (for [list-item list-items]
-        (cond (= type "people") (person-list-card {:person list-item})
-              (= type "inventory") (inventory-list-card {:item list-item})
-              (= type "contractors") (contractor-list-card {:contractor list-item})))]}))
+                      [:div {:style {:background-color color/grey-light}}
+                       (for [list-item list-items]
+                         (cond (= type "inventory") (inventory-list-card {:item list-item})
+                               (= type "contractors") (contractor-list-card {:contractor list-item})))]}))
 
 
 

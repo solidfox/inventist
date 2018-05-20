@@ -5,7 +5,7 @@
             [view-people-overview.component :refer [people-list]]
             [rum.core :refer [defc]]))
 
-(defc component < (modular-component identity)
+(defc component < (modular-component)
   [{{state :state} :input
     trigger-event  :trigger-event}]
   [:div {:id (str ::component-id)
@@ -13,5 +13,7 @@
                  :display "grid"
                  :grid-template-columns "22rem 1fr"
                  :grid-template-rows "100%"}}
-   (people-list (core/create-people-overview-args state))
-   (person-detail (core/create-person-detail-args state "mock-person-id"))])
+   (people-list (assoc (core/create-people-overview-args state)
+                  :trigger-parent-event trigger-event))
+   (person-detail (assoc (core/create-person-detail-args state "mock-person-id")
+                    :trigger-parent-event trigger-event))])

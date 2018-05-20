@@ -7,7 +7,7 @@
             [symbols.color :as color]
             [symbols.style :as style]))
 
-(defc dashboard-detail < (modular-component identity)
+(defc dashboard-detail < (modular-component)
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (let [person (get-in state [:get-dashboard-details-response :response])]

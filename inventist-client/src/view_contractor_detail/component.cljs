@@ -8,7 +8,7 @@
 
 (def edit-mode false)
 
-(defc contractor-detail < (modular-component identity)
+(defc contractor-detail < (modular-component)
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (let [contractor (get-in state [:get-contractor-details-response :response])]

@@ -8,7 +8,7 @@
             [cljs-react-material-ui.core :refer [get-mui-theme color]]
             [cljs-react-material-ui.rum :as ui]))
 
-(defc inventory-detail < (modular-component identity)
+(defc inventory-detail < (modular-component)
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (let [item (get-in state [:get-inventory-details-response :response])]

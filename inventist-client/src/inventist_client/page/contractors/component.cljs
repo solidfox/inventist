@@ -5,7 +5,7 @@
             [view-contractors-overview.component :refer [contractors-list]]
             [rum.core :refer [defc]]))
 
-(defc component < (modular-component identity)
+(defc component < (modular-component)
   [{{state :state} :input
     trigger-event  :trigger-event}]
   [:div {:id    (str ::component-id)

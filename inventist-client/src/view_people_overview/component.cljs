@@ -1,16 +1,29 @@
 (ns view-people-overview.component
   (:require [rum.core :refer [defc]]
-            [symbols.overview :refer [scrollable search footer person-list-card]]
+            [symbols.overview :refer [scrollable search-toolbar footer person-list-card]]
             [view-people-overview.core :as core]
-            [symbols.color :as color]))
+            [symbols.color :as color]
+            [remodular.core :as rem]
+            [oops.core :as o]
+            [view-people-overview.event :as event]))
 
-(defc people-list < (remodular.core/modular-component identity)
+(defc people-list < (remodular.core/modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [people (core/filtered-people state)]
+  (let [people (core/filtered-people state)
+        limited-people (take 75 people)]
     (scrollable
-      {:floating-header (search [{:list-items people}])
-       :content         [:div {:style {:background-color color/grey-light}}
-                         (for [person people]
-                           (person-list-card {:person person}))]
-       :floating-footer (footer)})))
+      {:floating-header
+       (search-toolbar
+         {:shown-results (count limited-people)
+          :total-results (count people)
+          :on-change  (fn [e]
+                        (trigger-event
+                          (rem/create-event {:name :search-string-changed
+                                             :data {:new-value (o/oget e [:target :value])}})))})
+       :content
+       [:div {:style {:background-color color/grey-light}}
+        (for [person limited-people]
+          (person-list-card {:person person}))]
+       :floating-footer
+       (footer)})))

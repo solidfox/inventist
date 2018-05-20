@@ -5,7 +5,7 @@
             [remodular.core :refer [modular-component]]
             [symbols.color :as color]))
 
-(defc person-detail < (modular-component identity)
+(defc person-detail < (modular-component)
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (let [person (get-in state [:get-person-details-response :response])]

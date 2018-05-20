@@ -22,10 +22,14 @@
       (assoc :get-people-list-response response)
       (assoc :fetching-people-list false)))
 
+(defn set-free-text-search
+  [state free-text-search]
+  (assoc-in state [:search-terms :free-text-search] free-text-search))
+
 (defn person-matches
   {:test (fn [] (let [kalle-anka {:fname  "Kalle"
                                   :lname  "Anka"
-                                  :groups {:name "Quack-squad"}
+                                  :groups [{:name "Quack-squad"}]
                                   :type   "unemployed"}]
                   (test/is (person-matches kalle-anka
                                            {:free-text-search "kalle Anka"}))
@@ -34,10 +38,11 @@
                   (test/is-not (person-matches kalle-anka
                                                {:free-text-search "anka mimmi"}))))}
   [person {search-string :free-text-search}]
-  (let [person-string (-> (str/join " " [(:fname person)
-                                         (:lname person)
-                                         (get-in person [:groups :name])
-                                         (:type person)])
+  (let [person-string (-> (str/join " " (concat [(:fname person)
+                                                 (:lname person)
+                                                 (:type person)]
+                                                (for [group (:groups person)]
+                                                  (:name group))))
                           (str/lower-case))]
     (every? (fn [search-string-word]
               (str/includes? person-string search-string-word))
@@ -49,7 +54,7 @@
   {:test (fn []
            (let [kalle   {:fname  "Kalle"
                           :lname  "Anka"
-                          :groups {:name "Quack-squad"}}
+                          :groups [{:name "Quack-squad"}]}
                  scrooge {:fname "Uncle"
                           :lname "Scrooge"
                           :type  "capitalist"}

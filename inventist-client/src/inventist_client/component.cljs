@@ -27,10 +27,14 @@
         :trigger-event    trigger-event})
      (condp = (first (:path state))
        :dashboard
-       (dashboard-page/component (core/create-dashboard-page-args state))
+       (dashboard-page/component (assoc (core/create-dashboard-page-args state)
+                                   :trigger-parent-event trigger-event))
        :people
-       (people-page/component (core/create-people-page-args state))
+       (people-page/component (assoc (core/create-people-page-args state)
+                                :trigger-parent-event trigger-event))
        :contractors
-       (contractors-page/component (core/create-contractors-page-args state))
+       (contractors-page/component (assoc (core/create-contractors-page-args state)
+                                     :trigger-parent-event trigger-event))
        :inventory
-       (inventory-page/component (core/create-inventory-page-args state)))]))
+       (inventory-page/component (assoc (core/create-inventory-page-args state)
+                                   :trigger-parent-event trigger-event)))]))

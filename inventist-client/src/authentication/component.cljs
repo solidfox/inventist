@@ -18,7 +18,7 @@
 (defn log-out []
   (ocall (firebase-auth) :signOut))
 
-(defc login < (rem/modular-component identity)
+(defc login < (rem/modular-component)
   [{{state :state} :input}]
   [:div {:style {:padding        "3rem"
                  :display        "flex"
@@ -42,7 +42,7 @@
                               :color    "secondary"
                               :on-click log-in-with-redirect})))])
 
-(defc bar-item-login-status < (rem/modular-component identity)
+(defc bar-item-login-status < (rem/modular-component)
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (if-let [logged-in-user (core/get-authenticated-user state)]
