@@ -5,6 +5,7 @@
             [remodular.core :refer [modular-component]]
             [symbols.color :as color]
             [cljs-react-material-ui.core :refer [get-mui-theme color]]
+            [symbols.style :as style]
             [cljs-react-material-ui.rum :as ui]
             [clojure.string :as str]))
 
@@ -41,7 +42,11 @@
       ;Information
       (s-detailview/section-information
         {:fields      [{:label    "Email"
-                        :value    (str/join "\n" (remove empty? (:email person)))
+                        :value    (->> (:email person)
+                                       (remove empty?)
+                                       (map (fn [email]
+                                              [:a {:key email
+                                                   :href (str "mailto:" email) } [:div  email]])))
                         :editable false}
                        (when (not-empty phone) {:label    "Phone"
                                                 :value    phone
