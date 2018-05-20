@@ -24,6 +24,10 @@
        :content
        [:div {:style {:background-color color/grey-light}}
         (for [person limited-people]
-          (person-list-card {:person person}))]
+          (person-list-card {:person person
+                             :on-select (fn [] (trigger-event
+                                                 (rem/create-event
+                                                   {:name :person-selected
+                                                    :data {:person person}})))}))]
        :floating-footer
        (footer)})))

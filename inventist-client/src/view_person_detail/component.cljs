@@ -8,7 +8,7 @@
 (defc person-detail < (modular-component)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [person (get-in state [:get-person-details-response :response])]
+  (let [person (get-in state [:get-person-details-response :data :person])]
 
     ;PEOPLE DETAILS
     [:div {:id    "detail-container"

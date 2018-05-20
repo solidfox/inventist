@@ -10,10 +10,11 @@
 (def list-bg-color color/highlight)
 
 ;Person-list card
-(defc person-list-card [{person   :person
-                         on-click :on-click}]
-  [:div {:key   (:id person)
-         :class (style/list-item)}
+(defc person-list-card [{person    :person
+                         on-select :on-select}]
+  [:div {:key      (:id person)
+         :class    (style/list-item)
+         :on-click on-select}
    [:div {:style {:width "3rem"}}
     [:img {:style style/card-image
            :src   (cond (and (:image person) (not= (:image person) "")) (:image person)

@@ -1,33 +1,25 @@
 (ns view-person-detail.core
-  (:require [view-person-detail.mock-data :as mock-data]))
+  (:require [view-person-detail.mock-data :as mock-data]
+            [clojure.string :as str]))
 
 (defn create-state
   [{person-id :person-id}]
-  {:person-id                   person-id
-   :fetching-person-details     false
-   :get-person-details-response {:status 200
-                                 :response (mock-data/create-person-detail {:id "mock-person-id"})}})
+  {:person-id                        person-id
+   :fetching-person-details          false
+   :should-refetch-get-person-detail false
+   :get-person-details-response      nil})
 
-(defn started-get-person-details-service-call [state]
+(defn started-get-person-detail-service-call [state]
   (assoc state :fetching-person-details true))
 
-(defn should-get-person-details? [state]
-  (and (not (:fetching-people-list state))
-       (not (get-in state [:get-people-list-response :data]))))
+(defn should-get-person-detail? [state]
+  (and (not (:fetching-person-details state))
+       (or (:should-refetch-get-person-detail state)
+           (not (get-in state [:get-person-details-response :data])))))
 
-(defn receive-get-people-list-service-response [state response request]
-  (let [photo-base-url (str/replace (:url request)
-                                    #"/[^/]+/?$" "")]
-    (as-> response $
-          (update-in $ [:data :people]
-                     (fn [people]
-                       (for [person people]
-                         (update person :image
-                                 (fn [image-name]
-                                   (when (not-empty image-name)
-                                     (str/join "/"
-                                               [photo-base-url
-                                                "photos"
-                                                (str/replace image-name
-                                                             #"^/" "")])))))))
-          (assoc state :get-people-list-response $))))
+(defn receive-get-person-detail-service-response [state response request]
+  (-> state
+      (assoc :should-refetch-get-person-detail false)
+      (assoc :fetching-person-details false)
+      (assoc :get-person-details-response response)))
+

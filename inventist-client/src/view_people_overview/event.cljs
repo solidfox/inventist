@@ -11,7 +11,17 @@
         event
         (rem/create-action {:name :search-string-changed
                             :fn-and-args
-                                  [core/set-free-text-search (get-in event [:data :new-value])]})))
+                                  [core/set-free-text-search (get-in event [:data :new-value])]}))
+      :person-selected
+      (let [person (get-in event [:data :person])]
+        (-> event
+            (rem/append-action
+              (rem/create-action {:name :set-selected-person-id
+                                  :fn-and-args [core/set-selected-person-id (:id person)]}))
+            (rem/create-event {:new-name :person-selected
+                               :new-data {:person-id (:id person)}})))
+      (rem/create-anonymous-event event))
+
     event))
 
 

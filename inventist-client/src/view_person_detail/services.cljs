@@ -3,42 +3,48 @@
             [ysera.test :refer [is=]]
             [clojure.string :as str]))
 
-;(defn get-person
-;  []
-;  {:name   :get-people-list
-;   :before [core/started-get-people-list-service-call]
-;   :data   {:url   "http://backend.inventory.gripsholmsskolan.se:8888/graphql"
-;            :params {:query (str/join
-;                              "\n"
-;                              ["query {"
-;                               "  people {"
-;                               "    id"
-;                               "    type: occupation"
-;                               "    fname: first_name"
-;                               "    lname: last_name"
-;                               "    groups {"
-;                               "      name"
-;                               "    }"
-;                               "    image: photo_url"
-;                               "    inventory {"
-;                               "      id"
-;                               "      brand"
-;                               "      model_name"
-;                               "      color"
-;                               "      class"
-;                               "      model_identifier"
-;                               "    }"
-;                               "  }"
-;                               "}"])}}
-;
-;
-;
-;   :after  [core/receive-get-people-list-service-response]})
-;
-;
-;(defn get-services
-;  [{{state :state} :input}]
-;  (when (core/should-get-people-list? state)
-;    [(get-people-list)]))
-;
-;
+(defn get-person-details
+  [person-id]
+  {:name   :get-person-details
+   :before [core/started-get-person-detail-service-call]
+   :data   {:url    "http://backend.inventory.gripsholmsskolan.se:8888/graphql"
+            :params {:query (str/join
+                              "\n"
+                              ["query {"
+                               (str "  person(id:" person-id ") {")
+                               "    id"
+                               "    type: occupation"
+                               "    fname: first_name"
+                               "    lname: last_name"
+                               "    groups {"
+                               "      name"
+                               "      id"
+                               "    }"
+                               "    image: photo_url"
+                               "    email"
+                               "    phone"
+                               "    address"
+                               "    inventory {"
+                               "      id"
+                               "      brand"
+                               "      model_name"
+                               "      color"
+                               "      model_identifier"
+                               "      serial_number"
+                               "      class"
+                               "      photo: image_url"
+                               "    }"
+                               "  }"
+                               "}"])}}
+
+
+
+   :after  [core/receive-get-person-detail-service-response]})
+
+
+(defn get-services
+  [{{state :state} :input}]
+  (when (core/should-get-person-detail? state)
+    [(get-person-details (:person-id state))]))
+
+

@@ -26,6 +26,10 @@
   [state free-text-search]
   (assoc-in state [:search-terms :free-text-search] free-text-search))
 
+(defn set-selected-person-id
+  [state new-id]
+  (assoc state :selected-person-id new-id))
+
 (defn person-matches
   {:test (fn [] (let [kalle-anka {:fname  "Kalle"
                                   :lname  "Anka"
