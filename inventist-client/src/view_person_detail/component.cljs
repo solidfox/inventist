@@ -3,12 +3,15 @@
             [symbols.detailview :as s-detailview]
             [symbols.general :as s-general]
             [remodular.core :refer [modular-component]]
-            [symbols.color :as color]))
+            [symbols.color :as color]
+            [clojure.string :as str]))
 
 (defc person-detail < (modular-component)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [person (get-in state [:get-person-details-response :data :person])]
+  (let [person (get-in state [:get-person-details-response :data :person])
+        {phone   :phone
+         address :address} person]
 
     ;PEOPLE DETAILS
     [:div {:id    "detail-container"
@@ -34,18 +37,14 @@
       ;Information
       (s-detailview/section-information
         {:fields      [{:label    "Email"
-                        :value    (str (:email person))
+                        :value    (str/join "\n" (remove empty? (:email person)))
                         :editable false}
-                       {:label    "Phone"
-                        :value    (:phone person)
-                        :editable false}
-                       {:label    "Gender"
-                        :value    (cond (= (:sex person) "f") "Female"
-                                        (= (:sex person) "m") "Male")
-                        :editable false}
-                       {:label    "Address"
-                        :value    (:address person)
-                        :editable false}
+                       (when (not-empty phone) {:label    "Phone"
+                                                :value    phone
+                                                :editable false})
+                       (when (not-empty address) {:label    "Address"
+                                                  :value    address
+                                                  :editable false})
                        {:label    "Assigned Devices"
                         :value    (count (:inventory person))
                         :editable false}]
@@ -73,7 +72,7 @@
                                                       :flex-wrap       "wrap"
                                                       :justify-content "space-between"}}
                                        (s-general/input-field {:placeholder "Search Device's name..."
-                                                               :value ""})
+                                                               :value       ""})
                                        (s-general/text-area {:required    false
                                                              :maxWidth    "100%"
                                                              :placeholder "Enter comment (optional)."})
