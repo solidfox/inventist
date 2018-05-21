@@ -204,7 +204,7 @@
 (defc timeline-item [{icon    :icon
                       title   :title
                       content :content}]
-  [:div {:style {:border-left   (str "0.1rem solid " color/grey-blue)
+  [:div {:style {:border-left   (str "0.1rem solid " color/grey-light)
                  :padding-top   "1rem"
                  :padding-left  "1.5rem"
                  :width         "100%"
