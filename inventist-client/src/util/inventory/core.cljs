@@ -5,7 +5,7 @@
 
 (defn inventory-icon [{id            :id
                        brand?        :brand
-                       model         :model_name
+                       model?         :model_name
                        color         :color
                        identifier?   :model_identifier
                        class?        :class
@@ -13,7 +13,8 @@
                        :as           item-data}]
   (let [brand (or brand? "")
         identifier (or identifier? "")
-        class (or class? "")]
+        class (or class? "")
+        model (or model? "")]
     (cond (= (lower-case brand) (lower-case "Apple"))
           (let [brand-map {:brand "fab fa-apple"}]
             (cond (or (re-find #"laptop" (lower-case class)) (re-find #"macbook" (lower-case model)))

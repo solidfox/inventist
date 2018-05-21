@@ -10,11 +10,11 @@
 (defc component < (modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  [:div {:id (str ::component-id)
-         :style {:height "100%"
-                 :display "grid"
+  [:div {:id    (str ::component-id)
+         :style {:height                "100%"
+                 :display               "grid"
                  :grid-template-columns "22rem 1fr"
-                 :grid-template-rows "100%"}}
+                 :grid-template-rows    "100%"}}
    (inventory-list (assoc (core/create-inventory-overview-args state)
                      :trigger-parent-event trigger-event))
    [:div {:style (merge style/z-index-details-section

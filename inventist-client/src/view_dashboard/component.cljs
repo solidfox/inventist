@@ -48,8 +48,8 @@
         (s-general/stat-card {:value   999
                               :text    "Inventory per Type"
                               :subtext [:select
-                                        [:option {:value "All"}]
-                                        [:option {:value "All"}]]})
+                                        [:option "All"]
+                                        [:option "All"]]})
 
         (s-general/stat-card {:value 9999
                               :text  "Total Computers on repair"})
@@ -57,8 +57,8 @@
         (s-general/stat-card {:value   999
                               :text    "Computer on repair per Model"
                               :subtext [:select
-                                        [:option {:value "All"}]
-                                        [:option {:value "All"}]]})
+                                        [:option "All"]
+                                        [:option "All"]]})
 
         (s-general/stat-card {:value 999
                               :text  "Total Reserve computers"})
