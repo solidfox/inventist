@@ -77,8 +77,7 @@
                   :backgroundColor       color/white
                   :display               "grid"
                   :grid-template-columns "auto 1fr auto"
-                  :align-items           "center"
-                  :box-shadow            "0px 0px 5px rgba(0,0,0,0.25) inset"}}
+                  :align-items           "center"}}
     [:div {:style {:margin "0.75rem" :color color/grey-normal}}
      [:i {:class "fas fa-search"}]]
     [:input {:type        "input"
@@ -92,10 +91,11 @@
                            :margin          "0"
                            :font-size       "1rem"
                            :height          "100%"
-                           :backgroundColor color/tp
+                           :backgroundColor color/transparent
                            :border          0}}]]
    [:div {:style {:height          "auto" :padding "0.25rem 1rem"
                   :font-size       "0.9rem"
+                  :color           color/de-emphasize
                   :backgroundColor color/silver
                   :display         "flex" :justify-content "space-between"}}
     [:div (str/join " "
@@ -106,20 +106,21 @@
                             (when (and total-results (not= total-results
                                                            shown-results))
                               ["of" total-results])
-                            [" results"]))]
-    [:div {:style {:color color/link-active :cursor "pointer"}} (str "View Table")]]])
+                            [" results"]))]]])
+;[:div {:style {:color color/link-active :cursor "pointer"}} (str "View Table")]]])
 
 ;Sidebar-Footer
 (defc footer []
-  [:div {:style {:width                 "100%"
-                 :height                "3rem"
+  [:div {:style {:width                 "calc(100% - 2rem)"
+                 :padding               "1rem"
                  :backgroundColor       color/silver
                  :display               "grid"
-                 :grid-template-columns "1fr auto"
-                 :box-shadow            "0 0 5px rgba(0,0,0,0.25)"}}
-   (s-general/button {:icon "fas fa-list-alt" :color color/tp :text "Powered by Inventist"})
-   [:div {:style {:margin "0.75rem" :font-size "1.2rem" :opacity "0.75" :cursor "pointer"}}
-    [:i {:class "fas fa-caret-left"}]]])
+                 :grid-template-columns "1fr auto"}}
+   ;:box-shadow            "0 0 5px rgba(0,0,0,0.25)"}}
+   [:div {:style {:color color/de-emphasize}} "Powered by inventist"]])
+;(s-general/button {:icon "fas fa-list-alt" :color color/tp :text "Powered by Inventist"})
+;[:div {:style {:margin "0.75rem" :font-size "1.2rem" :opacity "0.75" :cursor "pointer"}}
+; [:i {:class "fas fa-caret-left"}]]])
 
 (defc scrollable
   [{floating-header :floating-header

@@ -54,7 +54,7 @@
                                      :text-color (cond (= color color/white) color/grey-dark
                                                        (= color "white") color/grey-dark
                                                        (= color "#ffffff") color/grey-dark
-                                                       (= color color/tp) color/grey-dark
+                                                       (= color color/transparent) color/grey-dark
                                                        :else color/white)})}
          (cond (not= icon nil)
                [:span {:style {:margin "0 0.5rem 0 0"}} [:i {:class icon}]])

@@ -4,7 +4,8 @@
             [view-person-detail.component :refer [person-detail]]
             [view-people-overview.component :refer [people-list]]
             [rum.core :refer [defc]]
-            [inventist-client.page.people.event :as event]))
+            [inventist-client.page.people.event :as event]
+            [symbols.style :as style]))
 
 (defc component < (modular-component event/handle-event)
   [{{state :state} :input
@@ -16,7 +17,8 @@
                  :grid-template-rows "100%"}}
    (people-list (assoc (core/create-people-overview-args state)
                   :trigger-parent-event trigger-event))
-   (if-let [selected-person-id (:selected-person-id state)]
-     (person-detail (assoc (core/create-person-detail-args state selected-person-id)
-                      :trigger-parent-event trigger-event))
-     [:div])])
+   [:div {:style (merge style/z-index-details-section
+                        style/box-shadow)}
+    (when-let [selected-person-id (:selected-person-id state)]
+      (person-detail (assoc (core/create-person-detail-args state selected-person-id)
+                       :trigger-parent-event trigger-event)))]])

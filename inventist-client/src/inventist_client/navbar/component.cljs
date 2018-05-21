@@ -3,7 +3,9 @@
             [remodular.core :as rem]
             [authentication.core :as core]
             [inventist-client.event :as event]
-            [symbols.color :as c]))
+            [symbols.color :as c]
+            [symbols.color :as color]
+            [symbols.style :as style]))
 
 
 
@@ -48,13 +50,15 @@
                        current-path     :current-path
                        auth-status-item :auth-status-item}]
   [:div {:style
-         {:padding         "0.5rem"
-          :height          "2.5rem"
-          :display         "flex"
-          :flex-direction  "row"
-          :align-items     "center"
-          :backgroundColor c/silver
-          :justify-content "space-between"}}
+         (merge {:padding         "0.5rem"
+                 :height          "2.5rem"
+                 :display         "flex"
+                 :flex-direction  "row"
+                 :align-items     "center"
+                 :backgroundColor c/silver
+                 :justify-content "space-between"}
+                style/z-index-top-toolbar
+                style/box-shadow)}
    [:div {:style {:height "100%" :text-align "left"}}
     [:span [:img {:src   "image/GHS-logotype-horizontal.svg"
                   :style {:height       "100%"

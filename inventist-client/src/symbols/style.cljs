@@ -11,6 +11,11 @@
 (def outer-border-radius {:borderRadius "0.5rem"})
 (def inner-border-radius {:borderRadius "0.25rem"})
 
+(def z-index-top-toolbar {:z-index 10})
+(def z-index-details-section {:z-index 5})
+
+(def box-shadow {:box-shadow (str "0 0 0.12rem " color/shadow)})
+
 (def card-title {:color          color/grey-dark
                  :line-height    "1rem"
                  :text-transform "capitalize"})
