@@ -113,7 +113,7 @@
         (s-detailview/section-divider)]]
 
       ;Timeline
-      (s-detailview/section-timeline
+      (s-general/timeline
         {:enable-comment false
          :timeline-items
          (for [history-item (:history person)]

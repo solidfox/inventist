@@ -222,3 +222,23 @@
     [:h3 {:style {:margin "0 0 0 .5rem"}} title]]
    content])
 
+(defc timeline [{timeline-items :timeline-items
+                 enable-comment :enable-comment}]
+  [:div {:style {:margin         "1rem 2.5rem 1rem"
+                 :display        "flex"
+                 :flex-direction "row"}
+         :id    "timeline"}
+   (section-left)
+   [:div {:style {:margin         "0 0 0 1rem"
+                  :display        "flex"
+                  :flex-direction "column"
+                  :width          "100%"}}
+    (section-title {:title   "Timeline"
+                    :buttons [(cond (= enable-comment true)
+                                    (section-title-button {:icon     "far fa-comment"
+                                                           :text     "Add Comment"
+                                                           :on-click ""}))]})
+    [:div {:style {:margin-left    "-1.5rem"
+                   :padding-top    "1rem"
+                   :text-transform "capitalize"}}
+     timeline-items]]])
