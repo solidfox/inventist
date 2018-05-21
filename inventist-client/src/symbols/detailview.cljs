@@ -141,11 +141,13 @@
     style     :style
     key       :key
     image-url :image-url
-    content   :content}]
-  [:div {:key   key
-         :id    id
-         :style (merge style/card
-                       style)}
+    content   :content
+    on-click  :on-click}]
+  [:div {:key      key
+         :id       id
+         :on-click on-click
+         :style    (merge style/card
+                          style)}
 
    (cond (not= image-url nil) [:div [:img {:src   image-url
                                            :style style/card-image}]])
@@ -153,8 +155,10 @@
     content]])
 
 ;Card to show devices assigned
-(defc device-card [{item :item}]
+(defc device-card [{item     :item
+                    on-click :on-click}]
   (card {:key       (:id item)
+         :on-click  on-click
          :image-url (cond (and (:photo item) (not= (:photo item) "")) (:photo item)
                           :else "image/no-image.png")
          :content   [:div
