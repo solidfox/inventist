@@ -34,6 +34,18 @@
                                "      class"
                                "      photo: image_url"
                                "    }"
+                               "    history {"
+                               "      ... on Reallocation {"
+                               "        inventory_item {"
+                               "          id"
+                               "          brand"
+                               "          model_name"
+                               "          model_identifier"
+                               "          serial_number"
+                               "        }"
+                               "        instant"
+                               "      }"
+                               "    }"
                                "  }"
                                "}"])}}
 

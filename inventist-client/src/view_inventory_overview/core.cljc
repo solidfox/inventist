@@ -30,17 +30,9 @@
   (assoc state :selected-inventory-id new-id))
 
 (defn inventory-matches
-  {:test (fn [] (let [kalle-anka {:brand      "Kalle"
-                                  :model_name "Anka"
-                                  :color      "silver"}]
-                  (test/is (inventory-matches kalle-anka
-                                              {:free-text-search "kalle Anka"}))
-                  (test/is (inventory-matches kalle-anka
-                                              {:free-text-search "silver kalle"}))
-                  (test/is-not (inventory-matches kalle-anka
-                                                  {:free-text-search "anka silver"}))))}
   [inventory {search-string :free-text-search}]
   (let [inventory-string (-> (str/join " " (concat [(:brand inventory)
+                                                    (:serial_number inventory)
                                                     (:model_name inventory)
                                                     (:color inventory)]))
                              (str/lower-case))]
@@ -54,27 +46,6 @@
   (get-in state [:search-terms :free-text-search]))
 
 (defn filtered-inventory
-  {:test (fn []
-           (let [kalle {:brand      "Kalle"
-                        :model_name "Anka"}
-                 scrooge {:brand      "Uncle"
-                          :model_name "Scrooge"}
-                 inventory [kalle
-                            scrooge]
-                 state (-> (create-state)
-                           (receive-get-inventory-list-service-response
-                             {:data {:inventory inventory}}
-                             nil))]
-             (test/is= (filtered-inventory state
-                                           {:free-text-search "le Uncle"})
-                       [scrooge])
-             (test/is= (filtered-inventory state
-                                           {:free-text-search "le n"})
-                       [kalle
-                        scrooge])
-             (test/is= (filtered-inventory state)
-                       [kalle
-                        scrooge])))}
   [state & [search-terms]]
   (when-let [inventory (get-in state [:get-inventory-list-response :data :computers])]
     (if-let [search-terms (or search-terms

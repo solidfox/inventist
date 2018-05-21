@@ -171,6 +171,8 @@
     (section-divider)]])
 
 ;Timeline Section
+
+
 (defc section-timeline [{type           :type
                          enable-comment :enable-comment
                          history        :history
@@ -189,8 +191,6 @@
                                     (section-title-button {:icon     "far fa-comment"
                                                            :text     "Add Comment"
                                                            :on-click ""}))]})
-
-
     [:div {:style {:display        "flex"
                    :flex-direction "row"}}
      [:div {:style {:text-transform "capitalize"}}
@@ -233,9 +233,6 @@
             [:br]
             [:span (:brand item) " " (:model-name item)
              " (" (s-general/device-icon-set {:item item}) ")"]]]))]]
-
-
-
     (section-divider)]])
 
 (defc card

@@ -116,9 +116,8 @@
         (s-detailview/section-divider)]]
 
       ;Timeline
-      (cond (:history person)
-            (s-detailview/section-timeline {:type           "people"
-                                            :enable-comment false
-                                            :history        (:history person)}))]]))
+      (s-detailview/section-timeline {:type           "people"
+                                      :enable-comment false
+                                      :history        (:history person)})]]))
 
 
