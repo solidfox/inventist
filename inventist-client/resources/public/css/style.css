@@ -1,24 +1,8 @@
-/* some style */
-p {
-    /*line-height: normal;*/
-}
-
-.bold {
-    font-weight: bold;
-}
-
-.italic {
-    font-style: italic;
-}
-
-.icon {
-    height: 1rem;
-    margin: 0.2rem;
-}
-
-.capitalize {
-    text-transform: capitalize;
-}
+/*
+Only global styling is kept in this file.
+Most of the styling is local to components and
+common styling is kept in symbols directory in src.
+*/
 
 body {
     font-family: 'Roboto', sans-serif;
@@ -28,54 +12,7 @@ body {
     margin: 0;
 }
 
-dt {
-    color: #95A5A6;
+a:link, a:visited, a:hover, a:active {
+    color: #4A90E2;
+    text-decoration: none;
 }
-
-
-/*
-.detail-container {
-    height: 100%;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-}
-
-.detail-header {
-    height: 50px;
-    background-color: #ccc;
-    position: fixed;
-    top: 0px;
-    width: 100%;
-}
-
-.detail-main {
-    flex: auto;
-    padding: 20px;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    display: flex;
-    flex-direction: column;
-}
-
-.detail-identity {
-    flex: auto;
-}
-
-.detail-image {
-    flex: auto;
-}
-
-.detail-footer {
-    height: 50px;
-    background-color: #ccc;
-    position: fixed;
-    bottom: 0px;
-    width: 100%;
-}
-
-
-.line-ht-none {
-    line-height: 0px;
-}
- */
