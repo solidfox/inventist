@@ -66,16 +66,16 @@
                      :display        "flex"
                      :flex-direction "row"}
              :id    "devices"}
-       (s-detailview/section-left)
+       (s-general/section-left)
        [:div {:style {:margin "0 0 0 1rem" :display "flex" :flex-direction "column"
                       :width  "100%"}}
-        (s-detailview/section-title {:title   "Assigned Devices"
-                                     :buttons [(when (not edit-mode)
-                                                 (with-key (s-detailview/section-title-button
-                                                             {:icon     "fas fa-plus-circle"
-                                                              :text     "Assign new device"
-                                                              :on-click (fn [] (trigger-event (rem/create-event
-                                                                                                {:name :assign-new-device-clicked})))}) 42))]})
+        (s-general/section-title {:title   "Assigned Devices"
+                                  :buttons [(when (not edit-mode)
+                                              (with-key (s-general/section-title-button
+                                                          {:icon     "fas fa-plus-circle"
+                                                           :text     "Assign new device"
+                                                           :on-click (fn [] (trigger-event (rem/create-event
+                                                                                             {:name :assign-new-device-clicked})))}) 42))]})
 
         [:div {:style {:display        "flex"
                        :flex-direction "row"
@@ -110,16 +110,15 @@
            (s-detailview/device-card {:item item}))]
 
 
-        (s-detailview/section-divider)]]
+        (s-general/section-divider)]]
 
       ;Timeline
       (s-general/timeline
         {:enable-comment false
          :timeline-items
-         (for [history-item (:history person)]
-           (s-general/timeline-item {:icon    [:img {:src   "http://icons.iconarchive.com/icons/graphicloads/100-flat/256/home-icon.png"
-                                                     :style {:height "2rem"}}]
-                                     :title   (str "Registered " (get-in history-item [:inventory_item :model_name]))
-                                     :content [:div (:instant history-item)]}))})]]))
+                         (for [history-item (reverse (sort-by (fn [history-item] (:instant history-item)) (:history person)))]
+                           (s-general/timeline-item {:icon    (s-general/circle-icon {:icon "fas fa-clock" :color color/link-active})
+                                                     :title   (str "Registered " (get-in history-item [:inventory_item :model_name]))
+                                                     :content [:div (:instant history-item)]}))})]]))
 
 

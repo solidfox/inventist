@@ -64,17 +64,17 @@
                      :display        "flex"
                      :flex-direction "row"}
              :id    "devices"}
-       (s-detailview/section-left)
+       (s-general/section-left)
        [:div {:style {:margin "0 0 0 1rem" :display "flex" :flex-direction "column"
                       :width  "100%"}}
-        (s-detailview/section-title {:title "Linked Devices"})
+        (s-general/section-title {:title "Linked Devices"})
         [:div {:style {:display        "flex"
                        :flex-direction "row"
                        :flex-wrap      "wrap"
                        :align-items    "flex-start"}}
          (for [item (:inventory contractor)]
            (s-detailview/device-card {:item item}))]
-        (s-detailview/section-divider)]]]]))
+        (s-general/section-divider)]]]]))
 
 ;Timeline
 ;TODO

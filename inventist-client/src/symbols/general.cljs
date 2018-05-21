@@ -60,6 +60,42 @@
                [:span {:style {:margin "0 0.5rem 0 0"}} [:i {:class icon}]])
          [:span text]]))
 
+
+;Edit/Comment button
+(defc section-title-button [{icon     :icon
+                             text     :text
+                             on-click :on-click}]
+  [:span {:on-click on-click
+          :style    {:color     color/link-active
+                     :margin    "0 1rem"
+                     :font-size "1rem"
+                     :cursor    "pointer"}}
+
+   [:i {:class icon}] " " text])
+
+;Title for sections
+(defc section-title [{title   :title
+                      buttons :buttons}]
+  [:div {:id    "header"
+         :style {:font-size "1.5rem" :color color/grey-blue}}
+   title
+   buttons])
+
+;Empty div on left of section
+(defc section-left []
+  [:div {:style {:minWidth   "6rem"
+                 :text-align "right"
+                 :margin     "3rem 0 0"}}])
+
+;Divider after sections
+(defc section-divider []
+  [:div {:id    "divider"
+         :style {:margin          "1rem 0"
+                 :backgroundColor color/silver
+                 :width           "100%"
+                 :height          "1px"}}])
+
+
 ;Division Title - Title
 (defc division-title [{title :title}]
 
@@ -219,8 +255,12 @@
                   :flex-direction "row"
                   :align-items    "center"}}
     icon
-    [:h3 {:style {:margin "0 0 0 .5rem"}} title]]
-   content])
+    [:div {:style {:margin      "0 0 0 .5rem"
+                   :font-size   "1rem"
+                   :font-weight "normal"
+                   :color       color/grey-dark}} title]]
+   [:span {:style {:color color/grey-blue}} content]])
+
 
 (defc timeline [{timeline-items :timeline-items
                  enable-comment :enable-comment}]
@@ -242,3 +282,17 @@
                    :padding-top    "1rem"
                    :text-transform "capitalize"}}
      timeline-items]]])
+
+(defc circle-icon [{icon  :icon
+                    color :color}]
+  [:div {:style {:maxWidth         "2rem" :maxHeight "2rem"
+                 :minWidth         "2rem" :minHeight "2rem"
+                 :background-color color
+                 :borderRadius     "1rem"
+                 :display          "flex"
+                 :justify-content  "center"
+                 :text-align       "center"}}
+   [:i {:class icon
+        :style {:font-size  "1rem"
+                :align-self "center"
+                :color      color/white}}]])

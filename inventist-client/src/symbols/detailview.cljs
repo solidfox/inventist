@@ -97,40 +97,6 @@
            sub-heading-1 [:br] sub-heading-2)]]])
 
 
-;Edit/Comment button
-(defc section-title-button [{icon     :icon
-                             text     :text
-                             on-click :on-click}]
-  [:span {:on-click on-click
-          :style    {:color     color/link-active
-                     :margin    "0 1rem"
-                     :font-size "1rem"
-                     :cursor    "pointer"}}
-
-   [:i {:class icon}] " " text])
-
-;Title for sections
-(defc section-title [{title   :title
-                      buttons :buttons}]
-  [:div {:id    "header"
-         :style {:font-size "1.5rem" :color color/grey-blue}}
-   title
-   buttons])
-
-;Empty div on left of section
-(defc section-left []
-  [:div {:style {:minWidth   "6rem"
-                 :text-align "right"
-                 :margin     "3rem 0 0"}}])
-
-;Divider after sections
-(defc section-divider []
-  [:div {:id    "divider"
-         :style {:margin          "1rem 0"
-                 :backgroundColor color/silver
-                 :width           "100%"
-                 :height          "1px"}}])
-
 ;Information Section
 (defc section-information [{fields      :fields
                             edit-mode   :edit-mode
@@ -139,16 +105,16 @@
                  :display        "flex"
                  :flex-direction "row"}
          :id    "information"}
-   (section-left)
+   (s-general/section-left)
    [:div {:style {:margin         "0 0 0 1rem"
                   :display        "flex"
                   :flex-direction "column"
                   :width          "100%"}}
-    (section-title {:title   "Information"
-                    :buttons [(cond (= enable-edit true)
-                                    (section-title-button {:icon     "far fa-edit"
-                                                           :text     "Edit"
-                                                           :on-click ""}))]})
+    (s-general/section-title {:title   "Information"
+                              :buttons [(cond (= enable-edit true)
+                                              (s-general/section-title-button {:icon     "far fa-edit"
+                                                                               :text     "Edit"
+                                                                               :on-click ""}))]})
 
     [:div {:style {:display               "grid"
                    :grid-template-columns (str field-col-width " 1fr")
@@ -168,7 +134,7 @@
                                            :minWidth "20rem"})
                      [:span (:value field) " " (:side-value field)])]])))]
 
-    (section-divider)]])
+    (s-general/section-divider)]])
 
 (defc card
   [{id        :id
