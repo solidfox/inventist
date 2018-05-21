@@ -14,7 +14,7 @@
 (defc person-detail < (modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [person    (get-in state [:get-person-details-response :data :person])
+  (let [person (get-in state [:get-person-details-response :data :person])
         {phone   :phone
          address :address} person
         edit-mode (:edit-mode state)]
@@ -27,6 +27,9 @@
      ;Toolbar
      (s-detailview/toolbar {:items-left (s-detailview/breadcrumb {:type "people"
                                                                   :item person})})
+
+
+
 
      ;Main Details Container
      [:div {:style {:overflow-x      "hidden"
@@ -86,23 +89,23 @@
                        :align-items    "flex-start"}}
 
          (when edit-mode
-               (s-detailview/card {:id      "add-device"
-                                   :content [:form {:style {:display         "flex"
-                                                            :flex-wrap       "wrap"
-                                                            :justify-content "space-between"}}
-                                             (s-general/input-field {:placeholder "Search Device's name..."
-                                                                     :value       ""})
-                                             (s-general/text-area {:required    false
-                                                                   :maxWidth    "100%"
-                                                                   :placeholder "Enter comment (optional)."})
-                                             (s-general/button {:color color/theme
-                                                                :icon  "fas fa-check-circle"
-                                                                :text  "Add Device"
-                                                                :style {:margin "0.5rem 0 0 0"}})
-                                             (s-general/button {:color color/grey-normal
-                                                                :icon  "fas fa-times-circle"
-                                                                :text  "Cancel"
-                                                                :style {:margin "0.5rem 0 0 0"}})]}))
+           (s-detailview/card {:id      "add-device"
+                               :content [:form {:style {:display         "flex"
+                                                        :flex-wrap       "wrap"
+                                                        :justify-content "space-between"}}
+                                         (s-general/input-field {:placeholder "Search Device's name..."
+                                                                 :value       ""})
+                                         (s-general/text-area {:required    false
+                                                               :maxWidth    "100%"
+                                                               :placeholder "Enter comment (optional)."})
+                                         (s-general/button {:color color/theme
+                                                            :icon  "fas fa-check-circle"
+                                                            :text  "Add Device"
+                                                            :style {:margin "0.5rem 0 0 0"}})
+                                         (s-general/button {:color color/grey-normal
+                                                            :icon  "fas fa-times-circle"
+                                                            :text  "Cancel"
+                                                            :style {:margin "0.5rem 0 0 0"}})]}))
 
          (cond (= (count (:inventory person)) 0)
                [:div {:style {:color      color/grey-normal

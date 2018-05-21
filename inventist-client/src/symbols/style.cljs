@@ -33,7 +33,7 @@
 (def card (merge
             outer-border-radius
             {:backgroundColor       color/grey-light
-             :minHeight             "4rem"
+             :minHeight             "3rem"
              :width                 "20rem"
              :padding               "1rem"
              :margin                "0.5rem 1rem 0.5rem 0"

@@ -11,7 +11,7 @@
             :params {:query (str/join
                               "\n"
                               ["query {"
-                               (str "  inventory(id:" inventory-id ") {")
+                               (str "  computer(id:" inventory-id ") {")
                                "    id"
                                "    date: release_date"
                                "    brand"
@@ -20,7 +20,17 @@
                                "    photo: image_url"
                                "    model_identifier"
                                "    serial_number"
-                               "    name"
+                               "    user {"
+                               "      id"
+                               "      first_name"
+                               "      last_name"
+                               "      image: photo_url"
+                               "      occupation"
+                               "      groups {"
+                               "        id"
+                               "        name"
+                               "      }"
+                               "    }"
                                "    purchase_details {"
                                "      id: purchase_id"
                                "      delivery_date"
@@ -45,5 +55,3 @@
   [{{state :state} :input}]
   (when (core/should-get-inventory-detail? state)
     [(get-inventory-details (:inventory-id state))]))
-
-

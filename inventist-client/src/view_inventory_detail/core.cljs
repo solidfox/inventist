@@ -1,9 +1,10 @@
 (ns view-inventory-detail.core
-  (:require  [clojure.string :as str]))
+  (:require [clojure.string :as str]))
 
 (defn create-state
   [{inventory-id :inventory-id}]
   {:inventory-id                        inventory-id
+   :edit-mode                           false
    :fetching-inventory-details          false
    :should-refetch-get-inventory-detail false
    :get-inventory-details-response      nil})
@@ -21,3 +22,7 @@
       (assoc :should-refetch-get-inventory-detail false)
       (assoc :fetching-inventory-details false)
       (assoc :get-inventory-details-response response)))
+
+(defn set-edit-mode
+  [state new-edit-mode]
+  (assoc state :edit-mode new-edit-mode))

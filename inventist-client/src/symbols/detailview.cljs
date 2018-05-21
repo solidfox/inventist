@@ -37,7 +37,7 @@
        (cond (= type "people") [:span (str (:fname item) " " (:lname item))]
              (= type "inventory") [:span
                                    (s-general/device-icon-set {:item item})
-                                   (str " - " (:fname (first (:history item))) " " (:lname (first (:history item))))]
+                                   (str " - " (:brand item) " " (:model_name item))]
              (= type "contractors") [:span (str (:name item))])]])])
 
 ;Toolbar contains breadcrumb and action-buttons
@@ -265,14 +265,19 @@
 
 
 ;Card to show Person
-(defc person-card [{person :person}]
-  (card {:key       (:id person)
-         :image-url (cond (and (:image person) (not= (:image person) "")) (:image person)
-                          :else (cond (= (:sex person) "f") "image/person-f-placeholder.png"
-                                      (= (:sex person) "m") "image/person-m-placeholder.png"))
+(defc person-card [{user :user}]
+  (card {:key       (:id user)
+         :image-url (cond (:image user) (:image user)
+                          :else
+                          (when (:sex user) (cond (= (:sex user) "f") "image/person-f-placeholder.png"
+                                                  :else "image/person-m-placeholder.png")))
          :content   [:div
                      [:span {:style style/card-title}
-                      (str (:fname person) " " (:lname person))] [:br]
+                      (str (:first_name user) " " (:last_name user))] [:br]
                      [:span {:style style/card-subtitle}
-                      (str (:type person) " - " (:group person)) [:br]
-                      (str "Date: " (:date person))]]}))
+                      (str (:occupation user) " - ")
+                      (for [group (:groups user)]
+                        [:span {:key (:id group)}
+                         (str (:name group) " ")])]]}))
+;[:br]
+;(str "Date: " (:date person))]]}))
