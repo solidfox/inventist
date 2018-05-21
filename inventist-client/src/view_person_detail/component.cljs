@@ -28,9 +28,6 @@
      (s-detailview/toolbar {:items-left (s-detailview/breadcrumb {:type "people"
                                                                   :item person})})
 
-
-
-
      ;Main Details Container
      [:div {:style {:overflow-x      "hidden"
                     :overflow-y      "scroll"
@@ -79,9 +76,6 @@
                                                               :text     "Assign new device"
                                                               :on-click (fn [] (trigger-event (rem/create-event
                                                                                                 {:name :assign-new-device-clicked})))}) 42))]})
-
-
-
 
         [:div {:style {:display        "flex"
                        :flex-direction "row"

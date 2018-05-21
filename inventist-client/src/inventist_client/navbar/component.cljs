@@ -3,7 +3,6 @@
             [remodular.core :as rem]
             [authentication.core :as core]
             [inventist-client.event :as event]
-            [symbols.color :as c]
             [symbols.color :as color]
             [symbols.style :as style]))
 
@@ -15,7 +14,7 @@
     color    :color
     on-click :on-click}]
   [:div {:style    {:text-align "center"
-                    :color      (or color c/grey-normal)
+                    :color      (or color color/grey-normal)
                     :width      "4rem"
                     :margin     "0"
                     :cursor     "pointer"}
@@ -55,7 +54,7 @@
                  :display         "flex"
                  :flex-direction  "row"
                  :align-items     "center"
-                 :backgroundColor c/silver
+                 :backgroundColor color/silver
                  :justify-content "space-between"}
                 style/z-index-top-toolbar
                 style/box-shadow)}
@@ -73,6 +72,6 @@
                                    :on-click (fn [] (trigger-event (event/clicked-navigation-icon {:target-page-id target-page-id})))}
                                   (when (= (first current-path) target-page-id)
                                     {:selected true
-                                     :color    c/theme})))
+                                     :color    color/theme})))
           (with-key title)))]
    auth-status-item])
