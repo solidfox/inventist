@@ -119,8 +119,13 @@
         (s-detailview/section-divider)]]
 
       ;Timeline
-      (s-detailview/section-timeline {:type           "people"
-                                      :enable-comment false
-                                      :history        (:history person)})]]))
+      (s-detailview/section-timeline
+        {:enable-comment false
+         :timeline-items
+         (for [history-item (:history person)]
+           (s-general/timeline-item {:icon    [:img {:src   "http://icons.iconarchive.com/icons/graphicloads/100-flat/256/home-icon.png"
+                                                     :style {:height "2rem"}}]
+                                     :title   (str "Registered " (get-in history-item [:inventory_item :model_name]))
+                                     :content [:div (:instant history-item)]}))})]]))
 
 

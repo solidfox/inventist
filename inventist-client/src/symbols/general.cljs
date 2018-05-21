@@ -201,3 +201,24 @@
                                         :font-style "italic"}}
                           text])])
 
+(defc timeline-item [{icon    :icon
+                      title   :title
+                      content :content}]
+  [:div {:style {:border-left   (str "0.1rem solid " color/grey-blue)
+                 :padding-top   "1rem"
+                 :padding-left  "1.5rem"
+                 :width         "100%"
+                 :min-height    "3rem"
+                 :margin-bottom "1rem"
+                 :position      "relative"}}
+   [:div {:style {:position       "absolute"
+                  :width          "100%"
+                  :top            "-1rem"
+                  :left           "-1rem"
+                  :display        "flex"
+                  :flex-direction "row"
+                  :align-items    "center"}}
+    icon
+    [:h3 {:style {:margin "0 0 0 .5rem"}} title]]
+   content])
+

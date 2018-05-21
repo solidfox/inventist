@@ -174,6 +174,7 @@
 
 
 (defc section-timeline [{type           :type
+                         timeline-items :timeline-items
                          enable-comment :enable-comment
                          history        :history
                          purchase       :purchase}]
@@ -191,48 +192,49 @@
                                     (section-title-button {:icon     "far fa-comment"
                                                            :text     "Add Comment"
                                                            :on-click ""}))]})
-    [:div {:style {:display        "flex"
-                   :flex-direction "row"}}
-     [:div {:style {:text-transform "capitalize"}}
-      (cond
-        (= type "inventory")
-        [[:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"}}
-          [:div {:style {:color color/grey-blue :width field-col-width}} (s-general/time-format-string {:time (:delivery-date purchase)})]
-          [:div {:style {:color color/grey-dark :margin "0 0 0 0"}}
-           (s-general/input-field {:placeholder "Enter comment here..."})]]
-
-         (for [{id      :person-id
-                date    :date
-                comment :comment
-                fname   :fname
-                lname   :lname
-                type    :type
-                group   :group} history]
-           [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"} :key id}
-            [:div {:style {:color color/grey-blue :width field-col-width}} (s-general/time-format-string {:time date})]
-            [:div {:style {:color color/grey-dark :margin "0 0 0 0"}}
-             [:span "Allotted to "]
-             [:span {:style {:font-weight "500"}} fname " " lname]
-             [:span " (" type " - " group ")"]
-             [:br]
-             [:span {:class "italic"} comment]]])
-         [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"}}
-          [:div {:style {:color color/grey-blue :width field-col-width}} (s-general/time-format-string {:time (:delivery-date purchase)})]
-          [:div {:style {:color color/grey-dark :margin "0 0 0 0rem"}}
-           [:span "Purchased from "]
-           [:span {:style {:font-weight "500"}} (:supplier purchase)]
-           [:span {:style {:color color/link-active :cursor "pointer"}} " (PDF)"]]]]
-
-        :else
-        (for [item history]
-          [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"}
-                 :key   (:inventory-id item)}
-           [:div {:style {:color color/grey-blue :width field-col-width}} (s-general/time-format-string {:time (:date item)})]
-           [:div {:style {:color color/grey-dark :margin "0 0 0 0rem"}}
-            [:span (:comment item)]
-            [:br]
-            [:span (:brand item) " " (:model-name item)
-             " (" (s-general/device-icon-set {:item item}) ")"]]]))]]
+    [:div {:style {:margin-left    "-1.5rem"
+                   :padding-top    "1rem"
+                   :text-transform "capitalize"}}
+     timeline-items]
+    ;(cond
+    ;  (= type "inventory")
+    ;  [[:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"}}
+    ;    [:div {:style {:color color/grey-blue :width field-col-width}} (s-general/time-format-string {:time (:delivery-date purchase)})]
+    ;    [:div {:style {:color color/grey-dark :margin "0 0 0 0"}}
+    ;     (s-general/input-field {:placeholder "Enter comment here..."})]]
+    ;
+    ;   (for [{id      :person-id
+    ;          date    :date
+    ;          comment :comment
+    ;          fname   :fname
+    ;          lname   :lname
+    ;          type    :type
+    ;          group   :group} history]
+    ;     [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"} :key id}
+    ;      [:div {:style {:color color/grey-blue :width field-col-width}} (s-general/time-format-string {:time date})]
+    ;      [:div {:style {:color color/grey-dark :margin "0 0 0 0"}}
+    ;       [:span "Allotted to "]
+    ;       [:span {:style {:font-weight "500"}} fname " " lname]
+    ;       [:span " (" type " - " group ")"]
+    ;       [:br]
+    ;       [:span {:class "italic"} comment]]])
+    ;   [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"}}
+    ;    [:div {:style {:color color/grey-blue :width field-col-width}} (s-general/time-format-string {:time (:delivery-date purchase)})]
+    ;    [:div {:style {:color color/grey-dark :margin "0 0 0 0rem"}}
+    ;     [:span "Purchased from "]
+    ;     [:span {:style {:font-weight "500"}} (:supplier purchase)]
+    ;     [:span {:style {:color color/link-active :cursor "pointer"}} " (PDF)"]]]]
+    ;
+    ;  :else
+    ;  (for [item history]
+    ;    [:div {:style {:margin "0.5rem 0" :display "flex" :flex-direction "row"}
+    ;           :key   (:inventory-id item)}
+    ;     [:div {:style {:color color/grey-blue :width field-col-width}} (s-general/time-format-string {:time (:date item)})]
+    ;     [:div {:style {:color color/grey-dark :margin "0 0 0 0rem"}}
+    ;      [:span (:comment item)]
+    ;      [:br]
+    ;      [:span (:brand item) " " (:model-name item)
+    ;       " (" (s-general/device-icon-set {:item item}) ")"]]]))]]
     (section-divider)]])
 
 (defc card
