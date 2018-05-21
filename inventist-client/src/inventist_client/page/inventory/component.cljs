@@ -4,7 +4,8 @@
             [view-inventory-overview.component :refer [inventory-list]]
             [inventist-client.page.inventory.core :as core]
             [rum.core :refer [defc]]
-            [inventist-client.page.inventory.event :as event]))
+            [inventist-client.page.inventory.event :as event]
+            [symbols.style :as style]))
 
 (defc component < (modular-component event/handle-event)
   [{{state :state} :input
@@ -16,7 +17,8 @@
                  :grid-template-rows "100%"}}
    (inventory-list (assoc (core/create-inventory-overview-args state)
                      :trigger-parent-event trigger-event))
-   (if-let [selected-inventory-id (:selected-inventory-id state)]
-     (inventory-detail (assoc (core/create-inventory-detail-args state selected-inventory-id)
-                         :trigger-parent-event trigger-event))
-     [:div])])
+   [:div {:style (merge style/z-index-details-section
+                        style/box-shadow)}
+    (when-let [selected-inventory-id (:selected-inventory-id state)]
+      (inventory-detail (assoc (core/create-inventory-detail-args state selected-inventory-id)
+                          :trigger-parent-event trigger-event)))]])
