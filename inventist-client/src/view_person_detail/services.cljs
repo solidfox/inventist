@@ -46,5 +46,3 @@
   [{{state :state} :input}]
   (when (core/should-get-person-detail? state)
     [(get-person-details (:person-id state))]))
-
-

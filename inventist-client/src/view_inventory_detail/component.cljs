@@ -7,12 +7,17 @@
             [symbols.style :as style]
             [cljs-react-material-ui.core :refer [get-mui-theme color]]
             [cljs-react-material-ui.rum :as ui]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [remodular.core :as rem]
+            [view-inventory-detail.event :as event]))
 
-(defc inventory-detail < (modular-component)
+(defc inventory-detail < (modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [item (get-in state [:get-inventory-details-response :data :computers])]
+  (let [computer (get-in state [:get-inventory-details-response :data :computer])
+        {purchase_details :purchase-details
+         user             :user} computer
+        edit-mode (:edit-mode state)]
 
     ;INVENTORY DETAILS
     [:div {:id    "detail-container"
@@ -21,7 +26,7 @@
                    :grid-template-rows "auto 1fr"}}
      ;Toolbar
      (s-detailview/toolbar {:items-left  (s-detailview/breadcrumb {:type "inventory"
-                                                                   :item item})
+                                                                   :item computer})
                             :items-right [(s-general/button {:color color/grey-normal
                                                              :text  "Report Issue"
                                                              :icon  "fas fa-exclamation-triangle"})]})
@@ -33,31 +38,29 @@
 
       ;Page Header
       (s-detailview/detail-header
-        {:image   (:photo item)
-         :heading (str (:brand item) " " (:model_name item))})
-
-
+        {:image   (:photo computer)
+         :heading (str (:brand computer) " " (:model_name computer))})
 
       ;Information
       (s-detailview/section-information
         {:fields      [{:label    "Serial Number"
-                        :value    (:serial_number item)
+                        :value    (:serial_number computer)
                         :editable false}
-                       {:label    "Phone"
-                        :value    (:model_identifier item)
+                       {:label    "Model Identifier"
+                        :value    (:model_identifier computer)
                         :editable false}
-                       {:label    "Supplier"
-                        :value    (:name (:supplier (:purchase_details item)))
-                        :editable false}
-                       {:label      "Insurance expiry"
-                        :value      (s-general/time-format-string {:time (:insurance_expires (:purchase_details item))})
-                        :side-value (str " (" (s-general/days-to-expiry (:insurance_expires (:purchase_details item))) " days left)")
-                        :editable   false}
-                       {:label      "Warranty expiry"
-                        :value      (s-general/time-format-string {:time (:warranty_expires (:purchase_details item))})
-                        :side-value (str " (" (s-general/days-to-expiry (:warranty_expires (:purchase_details item))) " days left)")
-                        :editable   false}]
-         :edit-mode   false
+                       (when (not-empty purchase_details) {:label    "Supplier"
+                                                           :value    (:name (:supplier (:purchase_details computer)))
+                                                           :editable false}
+                                                          {:label      "Insurance expiry"
+                                                           :value      (s-general/time-format-string {:time (:insurance_expires (:purchase_details computer))})
+                                                           :side-value (str " (" (s-general/days-to-expiry (:insurance_expires (:purchase_details computer))) " days left)")
+                                                           :editable   false}
+                                                          {:label      "Warranty expiry"
+                                                           :value      (s-general/time-format-string {:time (:warranty_expires (:purchase_details computer))})
+                                                           :side-value (str " (" (s-general/days-to-expiry (:warranty_expires (:purchase_details computer))) " days left)")
+                                                           :editable   false})]
+         :edit-mode   edit-mode
          :enable-edit false})
 
       ;Assignee
@@ -71,106 +74,43 @@
         (s-detailview/section-title {:title   "Current Assignee"
                                      :buttons [(s-detailview/section-title-button {:icon     "fas fa-exchange-alt"
                                                                                    :text     "Reassign Device"
-                                                                                   :on-click ""})]})
+                                                                                   :on-click (fn [] (trigger-event (rem/create-event
+                                                                                                                     {:name :reassign-device-clicked})))})]})
 
         [:div {:style {:display        "flex"
                        :flex-direction "row"
                        :flex-wrap      "wrap"
                        :align-items    "flex-start"}}
-         (s-detailview/card {:id      "reassign-device"
-                             :style   {:display "block !important"
-                                       :padding "1rem"}
-                             :content [:form {:style {:display         "flex"
-                                                      :flex-wrap       "wrap"
-                                                      :justify-content "space-between"}}
-                                       (s-general/input-field {:placeholder "Search new Assignee's name..."})
-                                       (s-general/text-area {:required    false
-                                                             :maxWidth    "100%"
-                                                             :placeholder "Enter comment (optional)."})
-                                       (s-general/button {:color color/theme
-                                                          :icon  "fas fa-check-circle"
-                                                          :text  "Assign Device"
-                                                          :style {:margin "0.5rem 0 0 0"}})
-                                       (s-general/button {:color color/grey-normal
-                                                          :icon  "fas fa-times-circle"
-                                                          :text  "Cancel"
-                                                          :style {:margin "0.5rem 0 0 0"}})]})
-
-         (s-detailview/person-card {:person (first (:history item))})]
+         (when edit-mode (s-detailview/card {:id      "reassign-device"
+                                             :style   {:display "block !important"
+                                                       :padding "1rem"}
+                                             :content [:form {:style {:display         "flex"
+                                                                      :flex-wrap       "wrap"
+                                                                      :justify-content "space-between"}}
+                                                       (s-general/input-field {:placeholder "Search new Assignee's name..."})
+                                                       (s-general/text-area {:required    false
+                                                                             :maxWidth    "100%"
+                                                                             :placeholder "Enter comment (optional)."})
+                                                       (s-general/button {:color color/theme
+                                                                          :icon  "fas fa-check-circle"
+                                                                          :text  "Assign Device"
+                                                                          :style {:margin "0.5rem 0 0 0"}})
+                                                       (s-general/button {:color color/grey-normal
+                                                                          :icon  "fas fa-times-circle"
+                                                                          :text  "Cancel"
+                                                                          :style {:margin "0.5rem 0 0 0"}})]}))
 
 
+         (s-detailview/person-card {:user user})]
 
-
-
-        (s-detailview/section-divider)]]
-
-      ;Timeline
-      (s-detailview/section-timeline {:type           "inventory"
-                                      :enable-comment true
-                                      :history        (:history item)
-                                      :purchase       (:purchase-details item)})]]))
-
-
-
+        (s-detailview/section-divider)]]]]))
 ;
-;;Report Issue
-;(defc report-issue []
-;  [:div {:id    "report-issue-form"
-;         :style {:height             "100%"
-;                 :width              "100%"
-;                 ;:position           "absolute"
-;                 ;:top                "3.5rem"
-;                 ;:left               0
-;                 :display            "grid"
-;                 :backgroundColor    color/silver
-;                 :grid-template-rows "auto 1fr"}}
-;
-;
-;   ;Toolbar
-;   (s-detailview/toolbar {
-;                          ;:items-left  (s-detailview/breadcrumb {:type ""})
-;                          :items-right [(s-general/button {:color color/grey-normal
-;                                                           :text  "Help"
-;                                                           :icon  "fas fa-help"})]})
-;   ;;Form Page
-;   [:div {:style {:overflow-x "hidden"
-;                  :overflow-y "scroll"}}
-;    [:div {:style style/form-box}
-;     [:div {:style (merge {:display         "flex"
-;                           :justify-content "center"}
-;                          style/header-title)}
-;      "Reassign Device"]
-;     (s-detailview/section-divider)
-;
-;     [:form {:id    "form"
-;             :style {:display         "flex"
-;                     :flex-wrap       "wrap"
-;                     :justify-content "space-between"}}
-;      (s-general/input-section {:field    "Selected Device"
-;                                :value    "Apple MacBook Pro (13-Inch, 2016, Four Thunderbolt 3 Ports)"
-;                                :disabled true})
-;      (s-general/input-section {:field    "Selected Device Serial Number"
-;                                :value    "C02SVXXXXF1R"
-;                                :disabled true})
-;      (s-general/input-section {:type  "text"
-;                                :field "Select Assignee"
-;                                :text  "Enter the name of the person to whom the selected device is to be assigned."})
-;      (s-general/input-section {:type     "textarea"
-;                                :required false
-;                                :field    "Comment"
-;                                :text     "Any associated comment"})]
-;
-;
-;
-;     (s-detailview/section-divider)
-;     [:div {:style {:display         "flex"
-;                    :justify-content "center"}}
-;      (s-general/button {:color color/theme
-;                         :text  "Reassign Device"
-;                         :icon  "fas fa-check-circle"})
-;      (s-general/button {:color color/grey-normal
-;                         :text  "Cancel"
-;                         :icon  "fas fa-times-circle"})]]]])
+;;Timeline
+;(if (:history computer)
+;  (s-detailview/section-timeline {:type           "inventory"
+;                                  :enable-comment true
+;                                  :history        (:history computer)
+;                                  :purchase       (:purchase-details computer)}))]]))
 
 
 

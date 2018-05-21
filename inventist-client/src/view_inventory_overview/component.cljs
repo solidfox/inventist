@@ -24,20 +24,11 @@
                                                      :data {:new-value (o/oget e [:target :value])}})))})
        :content
        [:div {:style {:background-color color/grey-light}}
-        (for [inventory limited-inventory]
-          (inventory-list-card {:item      inventory
+        (for [item limited-inventory]
+          (inventory-list-card {:item      item
                                 :on-select (fn [] (trigger-event
                                                     (rem/create-event
                                                       {:name :inventory-selected
-                                                       :data {:inventory inventory}})))}))]
+                                                       :data {:inventory item}})))}))]
        :floating-footer
        (footer)})))
-
-;
-;(defc inventory-list < (remodular.core/modular-component)
-;  [{{state :state} :input
-;    trigger-event  :trigger-event}]
-;  (let [items (get-in state [:get-inventory-list-response :response :items])]
-;    (s-overview/overview-list {:type       "inventory"
-;                               :list-items items})))
-

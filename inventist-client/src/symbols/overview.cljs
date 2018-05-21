@@ -47,10 +47,11 @@
 
 
 ;Inventory-list card
-(defc inventory-list-card [{item     :item
-                            on-click :on-click}]
-  [:div {:key   (:id item)
-         :class (style/list-item)}
+(defc inventory-list-card [{item      :item
+                            on-select :on-select}]
+  [:div {:key      (:id item)
+         :class    (style/list-item)
+         :on-click on-select}
    (cond (and (:photo item) (not= (:photo item) ""))
          [:div {:style {:width "3rem"}}
           [:img {:style style/card-image
