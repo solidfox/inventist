@@ -1,5 +1,6 @@
 (ns view-dashboard.component
   (:require [rum.core :refer [defc]]
+            [authentication.component :as auth]
             [symbols.detailview :as s-detailview]
             [symbols.general :as s-general]
             [symbols.overview :as s-overview]
@@ -26,6 +27,7 @@
                   :left       "2rem"}}
     "This is the Inventist Dashboard." [:br]
     "Students & Staff with a \"gripsholmsskolan.se\" email address will be able to see their infromation and registered devices." [:br] [:br]
+    "You are logged-in with a external mail-id." [:br]
     "For non-gripsholmsskolan.se visitors, click on other sections like \"People\" and \"Inventory\" to view other's details."]
 
    ;background image
@@ -56,26 +58,17 @@
                   :display   "flex"
                   :flex-wrap "wrap"}}
 
-    (s-general/stat-card {:value 999
+    (s-general/stat-card {:value 467
                           :text  "Total Inventory in School"})
 
-    (s-general/stat-card {:value   999
-                          :text    "Inventory per Type"
-                          :subtext [:select
-                                    [:option "All"]
-                                    [:option "All"]]})
+    ;(s-general/stat-card {:value   467
+    ;                      :text    "Inventory per Type"
+    ;                      :subtext [:select
+    ;                                [:option "All"]]})
+    (s-general/stat-card {:value 508
+                          :text  "Total People in School"})]])
 
-    (s-general/stat-card {:value 9999
-                          :text  "Total Computers on repair"})
 
-    (s-general/stat-card {:value   999
-                          :text    "Computer on repair per Model"
-                          :subtext [:select
-                                    [:option "All"]
-                                    [:option "All"]]})
 
-    (s-general/stat-card {:value 999
-                          :text  "Total Reserve computers"})
 
-    (s-general/stat-card {:value 0
-                          :text  "Unhandled issue reports"})]])
+
