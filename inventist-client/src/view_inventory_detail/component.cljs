@@ -101,7 +101,10 @@
                                                                           :style {:margin "0.5rem 0 0 0"}})]}))
 
 
-         (s-detailview/person-card {:user user})]
+         (if user (s-detailview/person-card {:user user})
+                  [:div {:style {:color      color/grey-normal
+                                 :font-style "italic"}}
+                   "This device is unassigned."])]
 
         (s-detailview/section-divider)]]]]))
 ;
