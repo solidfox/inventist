@@ -14,7 +14,7 @@
 
 (defn create-state
   []
-  (-> {:path [:people]}
+  (-> {:path [:inventory]}
       (assoc-in authentication-state-path (auth/create-state))
       (assoc-in inventory-page-state-path (inventory-page/create-state))
       (assoc-in contractors-page-state-path (contractors-page/create-state))
