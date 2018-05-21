@@ -107,7 +107,8 @@
                 "No Devices Assigned."])
 
          (for [item (:inventory person)]
-           (s-detailview/device-card {:item item}))]
+           (s-detailview/device-card {:item item
+                                      :on-click (fn [] (trigger-event (event/clicked-device (:id item))))}))]
 
 
         (s-general/section-divider)]]

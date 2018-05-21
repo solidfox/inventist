@@ -51,3 +51,7 @@
 (defn set-active-page
   [state page-id]
   (assoc state :path [page-id]))
+
+(defn set-path
+  [state path]
+  (assoc state :path path))

@@ -1,5 +1,6 @@
 (ns util.inventory.core
-  (:require [clojure.string :refer [lower-case]]))
+  (:require [clojure.string :refer [lower-case]]
+            [clojure.pprint :refer [pprint]]))
 
 (def android-brands #{"samsung" "google" "android"})
 
@@ -34,3 +35,6 @@
                   (assoc brand-map :model "fas fa-tablet-alt")
                   :else brand-map)))))
 
+(defn spy [x]
+  (pprint x)
+  x)
