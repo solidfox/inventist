@@ -74,12 +74,10 @@
                        :align-items    "flex-start"}}
          (for [item (:inventory contractor)]
            (s-detailview/device-card {:item item}))]
-        (s-detailview/section-divider)]]
+        (s-detailview/section-divider)]]]]))
 
-      ;Timeline
-      (s-detailview/section-timeline {:type           "contractors"
-                                      :history        (:history contractor)
-                                      :enable-comment false})]]))
+;Timeline
+;TODO
 
 ;NEW CONTRACTOR
 (defc contractor-add []
