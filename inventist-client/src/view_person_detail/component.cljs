@@ -7,16 +7,17 @@
             [cljs-react-material-ui.core :refer [get-mui-theme color]]
             [symbols.style :as style]
             [cljs-react-material-ui.rum :as ui]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [remodular.core :as rem]
+            [view-person-detail.event :as event]))
 
-(def edit-mode false)
-
-(defc person-detail < (modular-component)
+(defc person-detail < (modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [person (get-in state [:get-person-details-response :data :person])
+  (let [person    (get-in state [:get-person-details-response :data :person])
         {phone   :phone
-         address :address} person]
+         address :address} person
+        edit-mode (:edit-mode state)]
 
     ;PEOPLE DETAILS
     [:div {:id    "detail-container"
@@ -45,8 +46,8 @@
                         :value    (->> (:email person)
                                        (remove empty?)
                                        (map (fn [email]
-                                              [:a {:key email
-                                                   :href (str "mailto:" email) } [:div  email]])))
+                                              [:a {:key  email
+                                                   :href (str "mailto:" email)} [:div email]])))
                         :editable false}
                        (when (not-empty phone) {:label    "Phone"
                                                 :value    phone
@@ -70,8 +71,11 @@
                       :width  "100%"}}
         (s-detailview/section-title {:title   "Assigned Devices"
                                      :buttons [(when (not edit-mode)
-                                                     (with-key (s-detailview/section-title-button {:icon "fas fa-plus-circle"
-                                                                                                   :text "Assign new device"}) 42))]})
+                                                 (with-key (s-detailview/section-title-button
+                                                             {:icon     "fas fa-plus-circle"
+                                                              :text     "Assign new device"
+                                                              :on-click (fn [] (trigger-event (rem/create-event
+                                                                                                {:name :assign-new-device-clicked})))}) 42))]})
 
 
 
@@ -81,7 +85,7 @@
                        :flex-wrap      "wrap"
                        :align-items    "flex-start"}}
 
-         (cond edit-mode
+         (when edit-mode
                (s-detailview/card {:id      "add-device"
                                    :content [:form {:style {:display         "flex"
                                                             :flex-wrap       "wrap"
@@ -101,9 +105,9 @@
                                                                 :style {:margin "0.5rem 0 0 0"}})]}))
 
          (cond (= (count (:inventory person)) 0)
-             [:div {:style {:color      color/grey-normal
-                            :font-style "italic"}}
-              "No Devices Assigned."])
+               [:div {:style {:color      color/grey-normal
+                              :font-style "italic"}}
+                "No Devices Assigned."])
 
          (for [item (:inventory person)]
            (s-detailview/device-card {:item item}))]

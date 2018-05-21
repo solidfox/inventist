@@ -101,11 +101,12 @@
 (defc section-title-button [{icon     :icon
                              text     :text
                              on-click :on-click}]
-  [:span {:style {:color     color/link-active
-                  :margin    "0 1rem"
-                  :font-size "1rem"
-                  :cursor    "pointer"
-                  :on-click  on-click}}
+  [:span {:on-click on-click
+          :style    {:color     color/link-active
+                     :margin    "0 1rem"
+                     :font-size "1rem"
+                     :cursor    "pointer"}}
+
    [:i {:class icon}] " " text])
 
 ;Title for sections
@@ -157,15 +158,15 @@
           (remove nil?)
           (map (fn [field]
                  [
-                  [:div {:style {:margin     "0.25rem 0"
-                                 :color      color/grey-blue}} (:label field)]
-                  [:div {:style {:margin     "0.25rem 0"
-                                 :color      color/grey-dark}}
+                  [:div {:style {:margin "0.25rem 0"
+                                 :color  color/grey-blue}} (:label field)]
+                  [:div {:style {:margin "0.25rem 0"
+                                 :color  color/grey-dark}}
                    (if (and (= edit-mode true) (= (:editable field) true))
-                       (s-general/text-area {:value    (:value field)
-                                             :maxWidth "30rem"
-                                             :minWidth "20rem"})
-                       [:span (:value field) " " (:side-value field)])]])))]
+                     (s-general/text-area {:value    (:value field)
+                                           :maxWidth "30rem"
+                                           :minWidth "20rem"})
+                     [:span (:value field) " " (:side-value field)])]])))]
 
     (section-divider)]])
 

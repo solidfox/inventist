@@ -19,6 +19,7 @@
                   :trigger-parent-event trigger-event))
    [:div {:style (merge style/z-index-details-section
                         style/box-shadow)}
-    (when-let [selected-person-id (:selected-person-id state)]
+    (if-let [selected-person-id (:selected-person-id state)]
       (person-detail (assoc (core/create-person-detail-args state selected-person-id)
-                       :trigger-parent-event trigger-event)))]])
+                       :trigger-parent-event trigger-event))
+      [:div "No person selected."])]])

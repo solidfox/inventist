@@ -4,6 +4,7 @@
 (defn create-state
   [{person-id :person-id}]
   {:person-id                        person-id
+   :edit-mode                        false
    :fetching-person-details          false
    :should-refetch-get-person-detail false
    :get-person-details-response      nil})
@@ -22,3 +23,6 @@
       (assoc :fetching-person-details false)
       (assoc :get-person-details-response response)))
 
+(defn set-edit-mode
+  [state new-edit-mode]
+  (assoc state :edit-mode new-edit-mode))
