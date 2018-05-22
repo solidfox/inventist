@@ -39,15 +39,15 @@
       ;Page Header
       (s-detailview/detail-header
         {:image   (:photo computer)
-         :heading (str (:brand computer) " " (:model_name computer))})
+         :heading (str (:brand computer) " " (:model-name computer))})
 
       ;Information
       (s-detailview/section-information
         {:fields      [{:label    "Serial Number"
-                        :value    (:serial_number computer)
+                        :value    (:serial-number computer)
                         :editable false}
                        {:label    "Model Identifier"
-                        :value    (:model_identifier computer)
+                        :value    (:model-identifier computer)
                         :editable false}
                        (when (not-empty purchase_details) {:label    "Supplier"
                                                            :value    (:name (:supplier (:purchase_details computer)))

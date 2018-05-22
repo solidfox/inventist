@@ -1,6 +1,7 @@
 (ns view-inventory-overview.core
   (:require [clojure.string :as str]
-            [ysera.test :as test]))
+            [ysera.test :as test]
+            [util.inventory.core :as util]))
 
 (defn create-state
   []
@@ -18,7 +19,7 @@
 
 (defn receive-get-inventory-list-service-response [state response request]
   (-> state
-      (assoc :get-inventory-list-response response)
+      (assoc :get-inventory-list-response (util/->clojure-keys response))
       (assoc :fetching-inventory-list false)))
 
 (defn set-free-text-search
@@ -32,8 +33,8 @@
 (defn inventory-matches
   [inventory {search-string :free-text-search}]
   (let [inventory-string (-> (str/join " " (concat [(:brand inventory)
-                                                    (:serial_number inventory)
-                                                    (:model_name inventory)
+                                                    (:serial-number inventory)
+                                                    (:model-name inventory)
                                                     (:color inventory)]))
                              (str/lower-case))]
     (every? (fn [search-string-word]

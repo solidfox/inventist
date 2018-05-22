@@ -5,12 +5,13 @@
             [symbols.color :as color]
             [remodular.core :as rem]
             [oops.core :as o]
-            [view-people-overview.event :as event]))
+            [view-people-overview.event :as event]
+            [cljs-react-material-ui.core :as ui]))
 
 (defc people-list < (remodular.core/modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [people (core/filtered-people state)
+  (let [people         (core/filtered-people state)
         limited-people (take 75 people)]
     (scrollable
       {:floating-header
@@ -32,3 +33,9 @@
                                                     :data {:person person}})))}))]
        :floating-footer
        (footer)})))
+;
+;(defc person-selection-field < (remodular.core/modular-component event/handle-event)
+;  [{{state :state} :input
+;    trigger-event  :trigger-event}]
+;  (let [people         (core/get-people state)]))
+

@@ -1,5 +1,7 @@
 (ns view-person-detail.core
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [util.inventory.core :as util]))
+
 
 (defn create-state
   [{person-id :person-id}]
@@ -21,7 +23,7 @@
   (-> state
       (assoc :should-refetch-get-person-detail false)
       (assoc :fetching-person-details false)
-      (assoc :get-person-details-response response)))
+      (assoc :get-person-details-response (util/->clojure-keys response))))
 
 (defn set-edit-mode
   [state new-edit-mode]

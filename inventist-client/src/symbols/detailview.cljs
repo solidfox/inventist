@@ -16,7 +16,7 @@
                                :icon  "fas fa-arrow-circle-left"
                                :title "Go Back"})]
      (= type "dashboard")
-     [:span "Hi " (:fname item) " " (:lname item) ", welcome to Inventist."]
+     [:span "Hi " (:first-name item) " " (:last-name item) ", welcome to Inventist."]
      :else
      [:span
       ;1-Dashboard
@@ -34,10 +34,10 @@
                       :margin  "0 0.5rem 0 0"}} "/"]
       ;3-Current Item
       [:span
-       (cond (= type "people") [:span (str (:fname item) " " (:lname item))]
+       (cond (= type "people") [:span (str (:first-name item) " " (:last-name item))]
              (= type "inventory") [:span
                                    (s-general/device-icon-set {:item item})
-                                   (str " - " (:brand item) " " (:model_name item))]
+                                   (str " - " (:brand item) " " (:model-name item))]
              (= type "contractors") [:span (str (:name item))])]])])
 
 ;Toolbar contains breadcrumb and action-buttons
@@ -163,9 +163,9 @@
                           :else "image/no-image.png")
          :content   [:div
                      [:span {:style style/card-title}
-                      (str (:brand item) " " (:model_name item))] [:br]
+                      (str (:brand item) " " (:model-name item))] [:br]
                      [:span {:style style/card-subtitle}
-                      (str (:serial_number item) " - " (:color item)) [:br]]]}))
+                      (str (:serial-number item) " - " (:color item)) [:br]]]}))
 ;(str "Date: " (:date item))]]}))
 
 
@@ -174,11 +174,11 @@
   (card {:key       (:id user)
          :image-url (cond (:image user) (:image user)
                           :else
-                          (when (:sex user) (cond (= (:sex user) "f") "image/person-f-placeholder.png"
-                                                  :else "image/person-m-placeholder.png")))
+                          (when (:gender user) (cond (= (:gender user) "f") "image/person-f-placeholder.png"
+                                                     :else "image/person-m-placeholder.png")))
          :content   [:div
                      [:span {:style style/card-title}
-                      (str (:first_name user) " " (:last_name user))] [:br]
+                      (str (:first-name user) " " (:last-name user))] [:br]
                      [:span {:style style/card-subtitle}
                       (str (:occupation user) " - ")
                       (for [group (:groups user)]

@@ -10,7 +10,7 @@
 
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.10.238"]
-                 [vincit/venia "0.2.5"]
+                 [district0x/graphql-query "1.0.5"]
                  [cljs-ajax "0.7.3"]
                  ;[org.clojure/core.async  "0.4.474"]
                  [binaryage/oops "0.6.1"]
@@ -20,7 +20,8 @@
                  [remodular "0.1.3-SNAPSHOT"]
                  [ysera "1.2.0"]
                  [org.roman01la/cljss "1.6.2"]
-                 [sablono "0.8.4"]]
+                 [sablono "0.8.4"]
+                 [camel-snake-kebab "0.4.0"]]
 
   :plugins [[lein-figwheel "0.5.15"]
             [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]

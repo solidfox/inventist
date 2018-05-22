@@ -21,9 +21,9 @@
                         :else "image/person-m-placeholder.png")}]]
    [:div {:style {:margin "0 0 0 1rem"}}
     [:span {:style style/card-title}
-     (str (:fname person) " " (:lname person))] [:br]
+     (str (:first-name person) " " (:last-name person))] [:br]
     [:span {:style style/card-subtitle}
-     (str (:type person) " - " (str/join ", " (for [group (:groups person)] (:name group))))] [:br]
+     (str (:occupation person) " - " (str/join ", " (for [group (:groups person)] (:name group))))] [:br]
     [:span {:style style/card-title}
      (for [item (:inventory person)]
        [:span {:key   (:id item)
@@ -63,9 +63,9 @@
    [:div {:style {:margin "0 0 0 1rem"
                   :width  "16rem"}}
     [:span {:style style/card-title}
-     (str (:brand item) " " (:model_name item))] [:br]
+     (str (:brand item) " " (:model-name item))] [:br]
     [:span {:style style/card-subtitle}
-     (str (:serial_number item) " - " (:color item))]]])
+     (str (:serial-number item) " - " (:color item))]]])
 
 ;Search component
 (defc search-toolbar [{search-field-value :search-field-value

@@ -36,8 +36,8 @@
       ;Page Header
       (s-detailview/detail-header
         {:image         (:image person)
-         :heading       (str (:fname person) " " (:lname person))
-         :sub-heading-1 (:type person)
+         :heading       (str (:first-name person) " " (:last-name person))
+         :sub-heading-1 (:occupation person)
          :sub-heading-2 (:group person)})
 
       ;Information
@@ -119,7 +119,7 @@
          :timeline-items
                          (for [history-item (reverse (sort-by (fn [history-item] (:instant history-item)) (:history person)))]
                            (s-general/timeline-item {:icon    (s-general/circle-icon {:icon "fas fa-clock" :color color/link-active})
-                                                     :title   (str "Registered " (get-in history-item [:inventory_item :model_name]))
+                                                     :title   (str "Registered " (get-in history-item [:inventory_item :model-name]))
                                                      :content [:div (:instant history-item)]}))})]]))
 
 
