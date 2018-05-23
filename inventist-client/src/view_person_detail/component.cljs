@@ -85,9 +85,9 @@
                        :align-items    "flex-start"}}
 
          (when edit-mode (s-detailview/card {:id      "add-device"
-                                             :content [:form {:style {:display         "flex"
-                                                                      :flex-wrap       "wrap"
-                                                                      :justify-content "space-between"}}
+                                             :content [:div {:style {:display         "flex"
+                                                                     :flex-wrap       "wrap"
+                                                                     :justify-content "space-between"}}
                                                        (s-general/input-field {:placeholder "New device's serial number"
                                                                                :value       (core/get-new-device-serial-number state)
                                                                                :on-change   (fn [e] (trigger-event (event/new-device-serial-number-changed (oops/oget e [:target :value]))))})
