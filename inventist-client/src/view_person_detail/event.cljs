@@ -9,15 +9,15 @@
 
 (defn handle-event
   [_state event]
-  (util/spy event)
   (if (not (rem/triggered-by-me? event))
     (rem/create-anonymous-event event)
     (case (:name event)
       :assign-new-device-clicked
-      (rem/append-action
-        event
-        (rem/create-action {:name :assign-new-device-clicked
-                            :fn-and-args [core/set-edit-mode true]}))
+      (-> event
+          (rem/append-action
+            (rem/create-action {:name :assign-new-device-clicked
+                                :fn-and-args [core/set-edit-mode true]}))
+          (rem/create-anonymous-event))
       :clicked-device
       (util/spy (rem/create-event event
                                   {:new-name :show-inventory-item

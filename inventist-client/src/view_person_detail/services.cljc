@@ -1,7 +1,6 @@
 (ns view-person-detail.services
   (:require [view-person-detail.core :as core]
             [ysera.test :refer [is=]]
-            [clojure.string :as str]
             [util.inventory.core :as util]))
 
 (def reallocation-fragment
@@ -14,7 +13,7 @@
                                         :model-identifier
                                         :serial-number]]]}])
 
-(def person-details-graph-ql
+(def person-details-graphql
   [:id
    :occupation
    :first-name
@@ -38,63 +37,26 @@
    [:history [:fragment/person-history-reallocation]]])
 
 
-
 (defn get-person-details
   [person-id]
   {:name   :get-person-details
    :before [core/started-get-person-detail-service-call]
    :data   {:url    "http://backend.inventory.gripsholmsskolan.se:8888/graphql"
             :params {:query (util/graphql-string {:fragments reallocation-fragment
-                                                  :queries   [[:person {:id person-id} person-details-graph-ql]]})}}
+                                                  :queries   [[:person {:id person-id} person-details-graphql]]})}}
    :after  [core/receive-get-person-detail-service-response]})
 
-;(defn reassignInventoryItem
-;  [{inventory-item-serial-number :inventory-item-serial-number
-;    new-user-id                  :new-user-id}]
-;  {:name   :reassign-inventory-item
-;   :before [core/started-reassign-inventory-item-service-call]
-;   :data   {:url    "http://backend.inventory.gripsholmsskolan.se:8888/graphql"
-;            :params {:query (str/join
-;                              "\n"
-;                              ["mutation {"
-;                               (str "  person(id:" person-id ") {")
-;                               "    id"
-;                               "    type: occupation"
-;                               "    fname: first_name"
-;                               "    lname: last_name"
-;                               "    groups {"
-;                               "      name"
-;                               "      id"
-;                               "    }"
-;                               "    image: photo_url"
-;                               "    email"
-;                               "    phone"
-;                               "    address"
-;                               "    inventory {"
-;                               "      id"
-;                               "      brand"
-;                               "      model_name"
-;                               "      color"
-;                               "      model_identifier"
-;                               "      serial_number"
-;                               "      class"
-;                               "      photo: image_url"
-;                               "    }"
-;                               "    history {"
-;                               "      ... on Reallocation {"
-;                               "        inventory_item {"
-;                               "          id"
-;                               "          brand"
-;                               "          model_name"
-;                               "          model_identifier"
-;                               "          serial_number"
-;                               "        }"
-;                               "        instant"
-;                               "      }"
-;                               "    }"
-;                               "  }"
-;                               "}"])}}
-;   :after  [core/receive-get-person-detail-service-response]})
+(defn reassign-inventory-item
+  [{inventory-item-serial-number :inventory-item-serial-number
+    new-user-id                  :new-user-id}]
+  {:name   :reassign-inventory-item
+   :before [core/started-reassign-inventory-item-service-call]
+   :data   {:url    "http://backend.inventory.gripsholmsskolan.se:8888/graphql"
+            :params {:query (util/graphql-string {:fragments reallocation-fragment
+                                                  :queries   [[:setUserOfInventoryItem {:inventory_item_serial_number inventory-item-serial-number
+                                                                                        :new_user_id                  new-user-id}
+                                                               [:new-user-id person-details-graphql]]]})}}
+   :after  [core/receive-reassign-inventory-item-service-response]})
 
 
 (defn get-services
