@@ -41,7 +41,8 @@
                style    :style
                on-click :on-click}]
   (cond (not text)
-        [:div {:style (merge {:margin    "0.5rem"
+        [:div {:on-click on-click
+               :style (merge {:margin    "0.5rem"
                               :color     (or color color/grey-dark)
                               :font-size "1.5rem"
                               :cursor    "pointer"}
@@ -50,6 +51,7 @@
          [:i {:class icon :title title}]]
         :else
         [:div {:style style
+               :on-click on-click
                :class (style/button {:bg-color   (or color color/grey-dark)
                                      :text-color (cond (= color color/white) color/grey-dark
                                                        (= color "white") color/grey-dark
@@ -154,7 +156,7 @@
            :required    (or required true)
            :placeholder (or placeholder "Enter here...")
            :value       value
-           :on-change   (fn [e] (.. e -target -value))}])
+           :on-change   on-change}])
 
 (defc text-area [{placeholder :placeholder
                   value       :value

@@ -9,12 +9,14 @@
             [cljs-react-material-ui.rum :as ui]
             [clojure.string :as str]
             [remodular.core :as rem]
-            [view-person-detail.event :as event]))
+            [view-person-detail.event :as event]
+            [oops.core :as oops]
+            [view-person-detail.core :as core]))
 
 (defc person-detail < (modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [person (get-in state [:get-person-details-response :data :person])
+  (let [person    (core/get-person state)
         {phone   :phone
          address :address} person
         edit-mode (:edit-mode state)]
@@ -82,32 +84,36 @@
                        :flex-wrap      "wrap"
                        :align-items    "flex-start"}}
 
-         (when edit-mode
-           (s-detailview/card {:id      "add-device"
-                               :content [:form {:style {:display         "flex"
-                                                        :flex-wrap       "wrap"
-                                                        :justify-content "space-between"}}
-                                         (s-general/input-field {:placeholder "Search Device's name..."
-                                                                 :value       ""})
-                                         (s-general/text-area {:required    false
-                                                               :maxWidth    "100%"
-                                                               :placeholder "Enter comment (optional)."})
-                                         (s-general/button {:color color/theme
-                                                            :icon  "fas fa-check-circle"
-                                                            :text  "Add Device"
-                                                            :style {:margin "0.5rem 0 0 0"}})
-                                         (s-general/button {:color color/grey-normal
-                                                            :icon  "fas fa-times-circle"
-                                                            :text  "Cancel"
-                                                            :style {:margin "0.5rem 0 0 0"}})]}))
+         (when edit-mode (s-detailview/card {:id      "add-device"
+                                             :content [:form {:style {:display         "flex"
+                                                                      :flex-wrap       "wrap"
+                                                                      :justify-content "space-between"}}
+                                                       (s-general/input-field {:placeholder "New device's serial number"
+                                                                               :value       (core/get-new-device-serial-number state)
+                                                                               :on-change   (fn [e] (trigger-event (event/new-device-serial-number-changed (oops/oget e [:target :value]))))})
+                                                       ;(s-general/text-area {:required    false
+                                                       ;                      :maxWidth    "100%"
+                                                       ;                      :placeholder "Enter comment (optional)."})
+                                                       (s-general/button {:color color/theme
+                                                                          :icon  "fas fa-check-circle"
+                                                                          :text  "Add Device"
+                                                                          :style {:margin "0.5rem 0 0 0"}
+                                                                          :on-click (fn [] (trigger-event event/commit-new-device))})
+                                                       (s-general/button {:color    color/grey-normal
+                                                                          :icon     "fas fa-times-circle"
+                                                                          :text     "Cancel"
+                                                                          :on-click (fn [] (trigger-event event/cancel-new-device-assignment))
+                                                                          :style    {:margin "0.5rem 0 0 0"}})]}))
 
          (cond (= (count (:inventory person)) 0)
                [:div {:style {:color      color/grey-normal
                               :font-style "italic"}}
                 "No Devices Assigned."])
 
-         (for [item (:inventory person)]
-           (s-detailview/device-card {:item item
+         (for [item (remove nil?
+                      (concat [(:ongoing-inventory-item-assignment state)]
+                              (:inventory person)))]
+           (s-detailview/device-card {:item     item
                                       :on-click (fn [] (trigger-event (event/clicked-device (:id item))))}))]
 
 
