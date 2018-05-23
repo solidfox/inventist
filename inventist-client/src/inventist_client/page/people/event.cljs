@@ -3,9 +3,9 @@
             [inventist-client.page.people.core :as core]
             [util.inventory.core :as util]))
 
+
 (defn handle-event
   [_state event] ;TODO State not working here?
-  (util/spy event)
   (cond
     (rem/triggered-by-child? (core/people-overview-state-path) event)
     (case (:name event)
@@ -18,11 +18,12 @@
             (rem/create-anonymous-event)))
       (rem/create-anonymous-event event))
 
-    (rem/triggered-by-descendant-of-child? (drop-last (core/person-detail-state-path [nil])) event)
+    (rem/triggered-by-descendant-of-child? core/any-person-detail-state-path event)
     (case (:name event)
       :show-inventory-item
       (rem/create-event event {:new-name (:name event) ;TODO Tomas: is this really the best naming?
-                               :new-data (:data event)}))
+                               :new-data (:data event)})
+      (rem/create-anonymous-event event))
 
     :else
     (rem/create-anonymous-event event)))

@@ -25,7 +25,7 @@
           (rem/append-action
             (assoc (rem/create-action {:name        :inventory-item-selected
                                        :fn-and-args [inventory-core/set-selected-inventory-id inventory-item-id]})
-              :state-path core/inventory-page-state-path))))
+              :state-path core/inventory-page-state-path)))) ; TODO Tomas: är detta ok?
 
     (rem/triggered-by-me? event)
     (condp = (:name event)

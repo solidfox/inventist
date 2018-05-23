@@ -1,6 +1,7 @@
 (ns view-people-overview.core
   (:require [clojure.string :as str]
-            [ysera.test :as test]))
+            [ysera.test :as test]
+            [util.inventory.core :as util]))
 
 (defn create-state
   []
@@ -18,7 +19,7 @@
 
 (defn receive-get-people-list-service-response [state response request]
   (-> state
-      (assoc :get-people-list-response response)
+      (assoc :get-people-list-response (util/->clojure-keys response))
       (assoc :fetching-people-list false)))
 
 (defn set-free-text-search
@@ -30,10 +31,10 @@
   (assoc state :selected-person-id new-id))
 
 (defn person-matches
-  {:test (fn [] (let [kalle-anka {:fname  "Kalle"
-                                  :lname  "Anka"
-                                  :groups [{:name "Quack-squad"}]
-                                  :type   "unemployed"}]
+  {:test (fn [] (let [kalle-anka {:first-name "Kalle"
+                                  :last-name  "Anka"
+                                  :groups     [{:name "Quack-squad"}]
+                                  :occupation "unemployed"}]
                   (test/is (person-matches kalle-anka
                                            {:free-text-search "kalle Anka"}))
                   (test/is (person-matches kalle-anka
@@ -41,29 +42,35 @@
                   (test/is-not (person-matches kalle-anka
                                                {:free-text-search "anka mimmi"}))))}
   [person {search-string :free-text-search}]
-  (let [person-string (-> (str/join " " (concat [(:fname person)
-                                                 (:lname person)
-                                                 (:type person)]
-                                                (for [group (:groups person)]
-                                                  (:name group))))
-                          (str/lower-case))]
-    (every? (fn [search-string-word]
-              (str/includes? person-string search-string-word))
-            (-> search-string
-                (str/lower-case)
-                (str/split #"\s")))))
+  (if (empty? search-string)
+    true
+    (let [person-string (-> (str/join " " (concat [(:first-name person)
+                                                   (:last-name person)
+                                                   (:occupation person)]
+                                                  (for [group (:groups person)]
+                                                    (:name group))))
+                            (str/lower-case))]
+      (every? (fn [search-string-word]
+                (str/includes? person-string search-string-word))
+              (-> search-string
+                  (str/lower-case)
+                  (str/split #"\s"))))))
 
 (defn get-free-text-search [state]
   (get-in state [:search-terms :free-text-search]))
 
+(defn get-people
+  [state]
+  (get-in state [:get-people-list-response :data :people]))
+
 (defn filtered-people
   {:test (fn []
-           (let [kalle   {:fname  "Kalle"
-                          :lname  "Anka"
-                          :groups [{:name "Quack-squad"}]}
-                 scrooge {:fname "Uncle"
-                          :lname "Scrooge"
-                          :type  "capitalist"}
+           (let [kalle   {:first-name "Kalle"
+                          :last-name  "Anka"
+                          :groups     [{:name "Quack-squad"}]}
+                 scrooge {:first-name "Uncle"
+                          :last-name  "Scrooge"
+                          :occupation "capitalist"}
                  people  [kalle
                           scrooge]
                  state   (-> (create-state)
