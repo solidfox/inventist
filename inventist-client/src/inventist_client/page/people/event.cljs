@@ -6,7 +6,6 @@
 
 (defn handle-event
   [_state event] ;TODO State not working here?
-  (util/spy event)
   (cond
     (rem/triggered-by-child? (core/people-overview-state-path) event)
     (case (:name event)

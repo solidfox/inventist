@@ -125,7 +125,10 @@
          :timeline-items
                          (for [history-item (reverse (sort-by (fn [history-item] (:instant history-item)) (:history person)))]
                            (s-general/timeline-item {:icon    (s-general/circle-icon {:icon "fas fa-clock" :color color/link-active})
-                                                     :title   (str "Registered " (get-in history-item [:inventory_item :model-name]))
-                                                     :content [:div (:instant history-item)]}))})]]))
+                                                     :title   (str "Registered " (get-in history-item [:inventory-item :model-name]))
+                                                     :content [:div (str (s-general/time-format-string {:time   (:instant history-item)
+                                                                                                        :format "yyyy-MM-dd"})
+                                                                         " — "
+                                                                         (get-in history-item [:inventory-item :serial-number]))]}))})]]))
 
 

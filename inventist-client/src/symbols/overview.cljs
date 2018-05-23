@@ -11,10 +11,12 @@
 
 ;Person-list card
 (defc person-list-card [{person    :person
+                         hidden    :hidden
                          on-select :on-select}]
-  [:div {:key      (:id person)
-         :class    (style/list-item)
-         :on-click on-select}
+  [:div (merge (when hidden {:style {:display "none"}})
+               {:key      (:id person)
+                :class    (style/list-item)
+                :on-click on-select})
    [:div {:style {:width "3rem"}}
     [:img {:style style/card-image
            :src   (cond (and (:image person) (not= (:image person) "")) (:image person)

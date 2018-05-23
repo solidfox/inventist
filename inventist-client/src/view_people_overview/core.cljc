@@ -42,17 +42,19 @@
                   (test/is-not (person-matches kalle-anka
                                                {:free-text-search "anka mimmi"}))))}
   [person {search-string :free-text-search}]
-  (let [person-string (-> (str/join " " (concat [(:first-name person)
-                                                 (:last-name person)
-                                                 (:occupation person)]
-                                                (for [group (:groups person)]
-                                                  (:name group))))
-                          (str/lower-case))]
-    (every? (fn [search-string-word]
-              (str/includes? person-string search-string-word))
-            (-> search-string
-                (str/lower-case)
-                (str/split #"\s")))))
+  (if (empty? search-string)
+    true
+    (let [person-string (-> (str/join " " (concat [(:first-name person)
+                                                   (:last-name person)
+                                                   (:occupation person)]
+                                                  (for [group (:groups person)]
+                                                    (:name group))))
+                            (str/lower-case))]
+      (every? (fn [search-string-word]
+                (str/includes? person-string search-string-word))
+              (-> search-string
+                  (str/lower-case)
+                  (str/split #"\s"))))))
 
 (defn get-free-text-search [state]
   (get-in state [:search-terms :free-text-search]))

@@ -47,8 +47,8 @@
                                 :fn-and-args [core/set-edit-mode true]}))
           (rem/create-anonymous-event))
       :clicked-device
-      (util/spy (rem/create-event event
-                                  {:new-name :show-inventory-item
-                                   :new-data {:inventory-item-id (get-in event [:data :device-id])}})))))
+      (rem/create-event event
+                        {:new-name :show-inventory-item
+                         :new-data {:inventory-item-id (get-in event [:data :device-id])}}))))
 
 
