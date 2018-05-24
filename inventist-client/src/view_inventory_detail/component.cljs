@@ -84,9 +84,9 @@
          (when edit-mode (s-detailview/card {:id      "reassign-device"
                                              :style   {:display "block !important"
                                                        :padding "1rem"}
-                                             :content [:form {:style {:display         "flex"
-                                                                      :flex-wrap       "wrap"
-                                                                      :justify-content "space-between"}}
+                                             :content [:div {:style {:display         "flex"
+                                                                     :flex-wrap       "wrap"
+                                                                     :justify-content "space-between"}}
                                                        (s-general/input-field {:placeholder "Search new Assignee's name..."})
                                                        (s-general/text-area {:required    false
                                                                              :maxWidth    "100%"
