@@ -8,8 +8,8 @@
 ;To change listing bg color on hover.
 (def list-bg-color color/highlight)
 
-(def outer-border-radius {:borderRadius "0.5rem"})
-(def inner-border-radius {:borderRadius "0.25rem"})
+(def outer-border-radius "0.5rem")
+(def inner-border-radius "0.25rem")
 
 (def z-index-top-toolbar {:z-index 10})
 (def z-index-details-section {:z-index 5})
@@ -30,24 +30,23 @@
                    :font-weight    "300"
                    :text-transform "capitalize"})
 
-(def card (merge
-            outer-border-radius
-            {:backgroundColor       color/grey-light
-             :minHeight             "3rem"
-             :width                 "20rem"
-             :padding               "1rem"
-             :margin                "0.5rem 1rem 0.5rem 0"
-             :display               "grid"
-             :grid-template-columns "auto 1fr"
-             :cursor                "pointer"}))
+(def card {:border-radius         outer-border-radius
+           :backgroundColor       color/grey-light
+           :minHeight             "3rem"
+           :width                 "20rem"
+           :padding               "1rem"
+           :margin                "0.5rem 1rem 0.5rem 0"
+           :display               "grid"
+           :grid-template-columns "auto 1fr"
+           :cursor                "pointer"})
 
-(def card-image (merge
-                  inner-border-radius
-                  {:width           "3rem"
-                   :margin-right    "1rem"
-                   :height          "3rem"
-                   :object-fit      "cover"
-                   :backgroundColor color/white}))
+(defstyles card-image []
+           {:border-radius   inner-border-radius
+            :width           "3rem"
+            :margin-right    "1rem"
+            :height          "3rem"
+            :object-fit      "cover"
+            :backgroundColor color/white})
 
 (defstyles list-item []
            {:width                 "100%"
@@ -57,9 +56,13 @@
             :margin                "2px 0"
             :display               "grid"
             :grid-template-columns "auto 1fr"
+            :grid-gap              "1rem"
             :cursor                "pointer"
             :&:hover               {:background-color color/white}
             :&:active              {:background-color color/white}})
+
+(defstyles list-item-left-column []
+           {:width "3rem"})
 
 (defstyles button [{bg-color   :bg-color
                     text-color :text-color}]

@@ -17,11 +17,11 @@
                {:key      (:id person)
                 :class    (style/list-item)
                 :on-click on-select})
-   [:div {:style {:width "3rem"}}
-    [:img {:style style/card-image
+   [:div {:class (style/list-item-left-column)}
+    [:img {:class (style/card-image)
            :src   (cond (and (:image person) (not= (:image person) "")) (:image person)
                         :else "image/person-m-placeholder.png")}]]
-   [:div {:style {:margin "0 0 0 1rem"}}
+   [:div
     [:span {:style style/card-title}
      (str (:first-name person) " " (:last-name person))] [:br]
     [:span {:style style/card-subtitle}
@@ -37,11 +37,11 @@
                              on-click   :on-click}]
   [:div {:key   (:id contractor)
          :class (style/list-item)}
-   [:div {:style {:width "3rem"}}
-    [:img {:style style/card-image
+   [:div {:class (style/list-item-left-column)}
+    [:img {:class (style/card-image)
            :src   (cond (and (:image contractor) (not= (:image contractor) "")) (:image contractor)
                         :else "image/contractor-placeholder.png")}]]
-   [:div {:style {:margin "0 0 0 1rem"}}
+   [:div
     [:span {:style style/card-title}
      (str (:name contractor))] [:br]
     [:span {:style style/card-subtitle}
@@ -56,7 +56,7 @@
          :on-click on-select}
    (cond (and (:photo item) (not= (:photo item) ""))
          [:div {:style {:width "3rem"}}
-          [:img {:style style/card-image
+          [:img {:class (style/card-image)
                  :src   (:photo item)}]]
          :else
          [:div {:style {:width "3rem" :font-size "1.25rem"}}

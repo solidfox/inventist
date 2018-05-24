@@ -150,7 +150,7 @@
                           style)}
 
    (cond (not= image-url nil) [:div [:img {:src   image-url
-                                           :style style/card-image}]])
+                                           :class (style/card-image)}]])
    [:div {:class "card-content"}
     content]])
 
