@@ -23,12 +23,24 @@
                                   (rem/create-event {:name :search-string-changed
                                                      :data {:new-value (o/oget e [:target :value])}})))})
        :content
-       [:div {:style {:background-color color/grey-light}}
-        (for [item limited-inventory]
-          (inventory-list-card {:item      item
-                                :on-select (fn [] (trigger-event
-                                                    (rem/create-event
-                                                      {:name :inventory-selected
-                                                       :data {:inventory item}})))}))]
+       (cond (not= limited-inventory [])
+             [:div {:style {:background-color color/grey-light}}
+              (for [item limited-inventory]
+                (inventory-list-card {:item      item
+                                      :on-select (fn [] (trigger-event
+                                                          (rem/create-event
+                                                            {:name :inventory-selected
+                                                             :data {:inventory item}})))}))]
+             :else                                          ;Error text
+             [:div {:style {:width            "100%"
+                            :height           "100%"
+                            :color            color/grey-blue
+                            :background-color color/transparent
+                            :text-align       "left"
+                            :margin           "2rem"}}
+              "No matches found!" [:br][:br]
+              "Try with some other keyword" [:br]
+              "or check internet connection"])
+
        :floating-footer
        (footer)})))

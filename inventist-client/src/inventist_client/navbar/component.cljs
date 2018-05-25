@@ -6,8 +6,6 @@
             [symbols.color :as color]
             [symbols.style :as style]))
 
-
-
 (defc navigation-icon
   [{title    :title
     image    :image
@@ -74,4 +72,6 @@
                                     {:selected true
                                      :color    color/theme})))
           (with-key title)))]
+
    auth-status-item])
+

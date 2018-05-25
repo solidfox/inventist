@@ -11,7 +11,7 @@
 (defc people-list < (remodular.core/modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [people         (core/filtered-people state)
+  (let [people (core/filtered-people state)
         limited-people (take 75 people)]
     (scrollable
       {:floating-header
@@ -24,18 +24,26 @@
                                   (rem/create-event {:name :search-string-changed
                                                      :data {:new-value (o/oget e [:target :value])}})))})
        :content
-       [:div {:style {:background-color color/grey-light}}
-        (for [person limited-people]
-          (person-list-card {:person    person
-                             :on-select (fn [] (trigger-event
-                                                 (rem/create-event
-                                                   {:name :person-selected
-                                                    :data {:person person}})))}))]
+       (cond (not= limited-people [])
+             [:div {:style {:background-color color/grey-light}}
+              (for [person limited-people]
+                (person-list-card {:person    person
+                                   :on-select (fn [] (trigger-event
+                                                       (rem/create-event
+                                                         {:name :person-selected
+                                                          :data {:person person}})))}))]
+             :else                                          ;Error text
+             [:div {:style {:width            "100%"
+                            :height           "100%"
+                            :color            color/grey-blue
+                            :background-color color/transparent
+                            :text-align       "left"
+                            :margin           "2rem"}}
+              "No matches found!" [:br][:br]
+              "Try with some other keyword" [:br]
+              "or check internet connection"])
+
        :floating-footer
        (footer)})))
-;
-;(defc person-selection-field < (remodular.core/modular-component event/handle-event)
-;  [{{state :state} :input
-;    trigger-event  :trigger-event}]
-;  (let [people         (core/get-people state)]))
+
 
