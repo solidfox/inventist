@@ -42,22 +42,22 @@
                on-click :on-click}]
   (cond (not text)
         [:div {:on-click on-click
-               :style (merge {:margin    "0.5rem"
-                              :color     (or color color/grey-dark)
-                              :font-size "1.5rem"
-                              :cursor    "pointer"}
-                             style)}
+               :style    (merge {:margin    "0.5rem"
+                                 :color     (or color color/grey-dark)
+                                 :font-size "1.5rem"
+                                 :cursor    "pointer"}
+                                style)}
 
          [:i {:class icon :title title}]]
         :else
-        [:div {:style style
+        [:div {:style    style
                :on-click on-click
-               :class (style/button {:bg-color   (or color color/grey-dark)
-                                     :text-color (cond (= color color/white) color/grey-dark
-                                                       (= color "white") color/grey-dark
-                                                       (= color "#ffffff") color/grey-dark
-                                                       (= color color/transparent) color/grey-dark
-                                                       :else color/white)})}
+               :class    (style/button {:bg-color   (or color color/grey-dark)
+                                        :text-color (cond (= color color/white) color/grey-dark
+                                                          (= color "white") color/grey-dark
+                                                          (= color "#ffffff") color/grey-dark
+                                                          (= color color/transparent) color/grey-dark
+                                                          :else color/white)})}
          (cond (not= icon nil)
                [:span {:style {:margin "0 0.5rem 0 0"}} [:i {:class icon}]])
          [:span text]]))
@@ -239,16 +239,19 @@
                                         :font-style "italic"}}
                           text])])
 
-(defc timeline-item [{icon    :icon
-                      title   :title
-                      content :content}]
-  [:div {:style {:border-left   (str "0.1rem solid " color/grey-light)
-                 :padding-top   "1rem"
-                 :padding-left  "1.5rem"
-                 :width         "100%"
-                 :min-height    "3rem"
-                 :margin-bottom "1rem"
-                 :position      "relative"}}
+(defc timeline-item [{icon     :icon
+                      title    :title
+                      content  :content
+                      on-click :on-click}]
+  [:div {:style    {:border-left   (str "0.1rem solid " color/grey-light)
+                    :padding-top   "1rem"
+                    :padding-left  "1.5rem"
+                    :width         "100%"
+                    :min-height    "3rem"
+                    :margin-bottom "1rem"
+                    :position      "relative"
+                    :cursor        "pointer"}
+         :on-click on-click}
    [:div {:style {:position       "absolute"
                   :width          "100%"
                   :top            "-1rem"
