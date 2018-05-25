@@ -15,13 +15,13 @@
       :reassign-device-clicked
       (-> event
           (rem/append-action
-            (rem/create-action {:name :reassign-device-clicked
+            (rem/create-action {:name        :reassign-device-clicked
                                 :fn-and-args [core/set-edit-mode true]})))
 
       :clicked-user
-      (rem/create-event event
-                        {:new-name :show-person
-                         :new-data {:person-id (get-in event [:data :user-id])}}))))
+      (-> event
+          (rem/create-event {:new-name :show-person
+                             :new-data {:person-id (get-in event [:data :user-id])}})))))
 
 
 
