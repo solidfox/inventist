@@ -1,18 +1,23 @@
 (ns symbols.overview
-  (:require [rum.core :refer [defc]]
+  (:require [rum.core :refer [defc] :as rum]
             [symbols.general :as s-general]
             [symbols.color :as color]
             [symbols.style :as style]
             [clojure.string :as str]
-            [oops.core :as o]))
+            [oops.core :as o]
+            [util.inventory.core :as util]))
 
 ;To change listing bg color on hover.
 (def list-bg-color color/highlight)
 
 ;Person-list card
-(defc person-list-card [{person    :person
-                         hidden    :hidden
-                         on-select :on-select}]
+(defc person-list-card < {:should-update
+                          (fn [old-state new-state]
+                            (not= (dissoc (first (:rum/args old-state)) :on-select)
+                                  (dissoc (first (:rum/args new-state)) :on-select)))}
+  [{person    :person
+    hidden    :hidden
+    on-select :on-select}]
   [:div (merge (when hidden {:style {:display "none"}})
                {:key      (:id person)
                 :class    (style/list-item)
@@ -102,13 +107,13 @@
                   :backgroundColor color/silver
                   :display         "flex" :justify-content "space-between"}}
     [:div (str/join " "
-                    (concat (when (and total-results (not= total-results
+                    (concat (when (and shown-results (not= total-results
                                                            shown-results))
-                              ["Showing"])
-                            [shown-results]
-                            (when (and total-results (not= total-results
-                                                           shown-results))
-                              ["of" total-results])
+                              ["Showing " shown-results])
+                            (when (and shown-results total-results (not= total-results
+                                                                         shown-results))
+                              ["of"])
+                            [total-results]
                             [" results"]))]]])
 ;[:div {:style {:color color/link-active :cursor "pointer"}} (str "View Table")]]])
 

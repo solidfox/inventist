@@ -21,7 +21,8 @@
                  [ysera "1.2.0"]
                  [org.roman01la/cljss "1.6.2"]
                  [sablono "0.8.4"]
-                 [camel-snake-kebab "0.4.0"]]
+                 [camel-snake-kebab "0.4.0"]
+                 [finja "0.1.0-SNAPSHOT"]]
 
   :plugins [[lein-figwheel "0.5.15"]
             [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]

@@ -5,7 +5,9 @@
             [remodular.runtime :as a]
             [inventist-client.core :as core]
             [oops.core :refer [oget ocall]]
-            [inventist-client.services :as services]))
+            [inventist-client.services :as services]
+            [finja.core :as finja]
+            [clojure.string :as str]))
 
 (enable-console-print!)
 
@@ -21,12 +23,23 @@
 
 (def firebase-auth (oget js/firebase :auth))
 
-(ocall
-  (firebase-auth)
-  :onAuthStateChanged
-  (fn [user]
-    (swap! app-state-atom
-           update-in
-           core/authentication-state-path
-           auth/recieve-new-auth-state
-           user)))
+(defonce _
+         (do
+           (ocall
+             (firebase-auth)
+             :onAuthStateChanged
+             (fn [user]
+               (swap! app-state-atom
+                      update-in
+                      core/authentication-state-path
+                      auth/recieve-new-auth-state
+                      user)))))
+
+;(as-> (finja/get-current-path) $
+;      (str/split $ "/")
+;      (remove empty? $)
+;      (map keyword $)
+;      (swap! app-state-atom
+;             core/set-path
+;             $))
+
