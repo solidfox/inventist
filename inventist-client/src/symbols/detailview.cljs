@@ -170,8 +170,10 @@
 
 
 ;Card to show Person
-(defc person-card [{user :user}]
+(defc person-card [{user :user
+                    on-click :on-click}]
   (card {:key       (:id user)
+         :on-click  on-click
          :image-url (cond (:image user) (:image user)
                           :else
                           (when (:gender user) (cond (= (:gender user) "f") "image/person-f-placeholder.png"

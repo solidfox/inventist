@@ -3,8 +3,7 @@
             [view-people-overview.core :as view-people-overview]
             [clojure.string :refer [lower-case]]))
 
-(def any-person-detail-state-path
-  [:view-modules :view-person-detail])
+(def any-person-detail-state-path [:view-modules :view-person-detail])
 (defn person-detail-state-path [person-id] (concat any-person-detail-state-path [person-id]))
 (defn people-overview-state-path [] [:view-modules :view-people-overview])
 

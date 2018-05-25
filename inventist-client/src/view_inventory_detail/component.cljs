@@ -1,5 +1,5 @@
 (ns view-inventory-detail.component
-  (:require [rum.core :refer [defc]]
+  (:require [rum.core :refer [defc with-key]]
             [symbols.general :as s-general]
             [symbols.detailview :as s-detailview]
             [remodular.core :refer [modular-component]]
@@ -9,7 +9,8 @@
             [cljs-react-material-ui.rum :as ui]
             [clojure.string :as str]
             [remodular.core :as rem]
-            [view-inventory-detail.event :as event]))
+            [view-inventory-detail.event :as event]
+            [view-inventory-detail.core :as core]))
 
 (defc inventory-detail < (modular-component event/handle-event)
   [{{state :state} :input
@@ -101,10 +102,12 @@
                                                                           :style {:margin "0.5rem 0 0 0"}})]}))
 
 
-         (if user (s-detailview/person-card {:user user})
-                  [:div {:style {:color      color/grey-normal
-                                 :font-style "italic"}}
-                   "This device is unassigned."])]
+         (if user
+           (s-detailview/person-card {:user     user
+                                      :on-click (fn [] (trigger-event (event/clicked-user (:id user))))})
+           [:div {:style {:color      color/grey-normal
+                          :font-style "italic"}}
+            "This device is unassigned."])]
 
         (s-general/section-divider)]]]]))
 ;
