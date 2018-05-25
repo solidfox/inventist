@@ -1,7 +1,8 @@
 (ns inventist-client.event
   (:require [remodular.core :as rem]
             [inventist-client.core :as core]
-            [inventist-client.page.inventory.core :as inventory-core]))
+            [inventist-client.page.inventory.core :as inventory-core]
+            [inventist-client.page.people.core :as people-core]))
 
 (defn clicked-navigation-icon
   [{target-page-id :target-page-id}]
@@ -26,6 +27,17 @@
             (assoc (rem/create-action {:name        :inventory-item-selected
                                        :fn-and-args [inventory-core/set-selected-inventory-id inventory-item-id]})
               :state-path core/inventory-page-state-path)))) ; TODO Tomas: är detta ok?
+
+    (= (:name event) :show-person)
+    (let [person-id (get-in event [:data :person-id])]
+      (-> event
+          (rem/append-action
+            (rem/create-action {:name        :show-person
+                                :fn-and-args [core/set-path [:people person-id]]}))
+          (rem/append-action
+            (assoc (rem/create-action {:name        :person-selected
+                                       :fn-and-args [people-core/set-selected-person-id person-id]})
+              :state-path core/people-page-state-path)))) ; TODO Tomas: är detta ok?
 
     (rem/triggered-by-me? event)
     (condp = (:name event)

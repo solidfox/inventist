@@ -13,6 +13,19 @@
                                         :model-identifier
                                         :serial-number]]]}])
 
+(def inventroy-details-graph-ql
+  [:id
+   :brand
+   :model-name
+   :color
+   :model-identifier
+   :serial-number
+   :class
+   {:field/alias :photo
+    :field/data  [:image-url]}])
+
+
+
 (def person-details-graphql
   [:id
    :occupation
@@ -25,15 +38,7 @@
    :email
    :phone
    :address
-   [:inventory [:id
-                :brand
-                :model-name
-                :color
-                :model-identifier
-                :serial-number
-                :class
-                {:field/alias :photo
-                 :field/data  [:image-url]}]]
+   [:inventory inventroy-details-graph-ql]
    [:history [:fragment/person-history-reallocation]]])
 
 

@@ -3,7 +3,6 @@
             [inventist-client.page.people.core :as core]
             [util.inventory.core :as util]))
 
-
 (defn handle-event
   [_state event] ;TODO State not working here?
   (cond

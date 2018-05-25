@@ -3,7 +3,8 @@
             [view-inventory-overview.core :as view-inventory-overview]
             [clojure.string :refer [lower-case]]))
 
-(defn inventory-detail-state-path [inventory-id] [:view-modules :view-inventory-detail inventory-id])
+(def any-inventory-detail-state-path [:view-modules :view-inventory-detail])
+(defn inventory-detail-state-path [inventory-id] (concat any-inventory-detail-state-path [inventory-id]))
 (defn inventory-overview-state-path [] [:view-modules :view-inventory-overview])
 
 (defn create-state

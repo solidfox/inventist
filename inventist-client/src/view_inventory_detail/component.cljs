@@ -1,5 +1,5 @@
 (ns view-inventory-detail.component
-  (:require [rum.core :refer [defc]]
+  (:require [rum.core :refer [defc with-key]]
             [symbols.general :as s-general]
             [symbols.detailview :as s-detailview]
             [remodular.core :refer [modular-component]]
@@ -9,7 +9,8 @@
             [cljs-react-material-ui.rum :as ui]
             [clojure.string :as str]
             [remodular.core :as rem]
-            [view-inventory-detail.event :as event]))
+            [view-inventory-detail.event :as event]
+            [view-inventory-detail.core :as core]))
 
 (defc inventory-detail < (modular-component event/handle-event)
   [{{state :state} :input
@@ -101,19 +102,43 @@
                                                                           :style {:margin "0.5rem 0 0 0"}})]}))
 
 
-         (if user (s-detailview/person-card {:user user})
-                  [:div {:style {:color      color/grey-normal
-                                 :font-style "italic"}}
-                   "This device is unassigned."])]
+         (if user
+           (s-detailview/person-card {:user     user
+                                      :on-click (fn [] (trigger-event (event/clicked-user (:id user))))})
+           [:div {:style {:color      color/grey-normal
+                          :font-style "italic"}}
+            "This device is unassigned."])]
 
-        (s-general/section-divider)]]]]))
-;
-;;Timeline
-;(if (:history computer)
-;  (s-detailview/section-timeline {:type           "inventory"
-;                                  :enable-comment true
-;                                  :history        (:history computer)
-;                                  :purchase       (:purchase-details computer)}))]]))
+        (s-general/section-divider)]]
+
+      ;Timeline
+      (cond (not= (:history computer) [])
+            (s-general/timeline
+              {:enable-comment false
+               :timeline-items (for [history-item (reverse (sort-by (fn [history-item] (:instant history-item)) (:history computer)))]
+                                 (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-user" :color color/link-active})
+                                                           :title    (str "Registered to " (get-in history-item [:new-user :first-name])
+                                                                          " " (get-in history-item [:new-user :last-name]))
+                                                           :on-click (fn [] (trigger-event (event/clicked-user (get-in history-item [:new-user :id]))))
+                                                           :content  [:div (str (s-general/time-format-string {:time   (:instant history-item)
+                                                                                                               :format "yyyy-MM-dd"}) " — "
+                                                                                (get-in history-item [:new-user :occupation]) " "
+                                                                                (for [group (get-in history-item [:new-user :groups])]
+                                                                                  (:name group)))]}))})
+            :else
+            (s-general/timeline
+              {:enable-comment false
+               :timeline-items [:div {:style {:color      color/grey-normal
+                                              :font-style "italic"
+                                              :margin "-1rem 0 0 1.5rem"}}
+                                "No history available"]}))]]))
+
+
+
+
+
+
+
 
 
 

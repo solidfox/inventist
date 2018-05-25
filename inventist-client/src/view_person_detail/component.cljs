@@ -16,7 +16,7 @@
 (defc person-detail < (modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [person    (core/get-person state)
+  (let [person (core/get-person state)
         {phone   :phone
          address :address} person
         edit-mode (:edit-mode state)]
@@ -91,13 +91,10 @@
                                                        (s-general/input-field {:placeholder "New device's serial number"
                                                                                :value       (core/get-new-device-serial-number state)
                                                                                :on-change   (fn [e] (trigger-event (event/new-device-serial-number-changed (oops/oget e [:target :value]))))})
-                                                       ;(s-general/text-area {:required    false
-                                                       ;                      :maxWidth    "100%"
-                                                       ;                      :placeholder "Enter comment (optional)."})
-                                                       (s-general/button {:color color/theme
-                                                                          :icon  "fas fa-check-circle"
-                                                                          :text  "Add Device"
-                                                                          :style {:margin "0.5rem 0 0 0"}
+                                                       (s-general/button {:color    color/theme
+                                                                          :icon     "fas fa-check-circle"
+                                                                          :text     "Add Device"
+                                                                          :style    {:margin "0.5rem 0 0 0"}
                                                                           :on-click (fn [] (trigger-event event/commit-new-device))})
                                                        (s-general/button {:color    color/grey-normal
                                                                           :icon     "fas fa-times-circle"
@@ -111,8 +108,8 @@
                 "No Devices Assigned."])
 
          (for [item (remove nil?
-                      (concat [(:ongoing-inventory-item-assignment state)]
-                              (:inventory person)))]
+                            (concat [(:ongoing-inventory-item-assignment state)]
+                                    (:inventory person)))]
            (s-detailview/device-card {:item     item
                                       :on-click (fn [] (trigger-event (event/clicked-device (:id item))))}))]
 
@@ -120,15 +117,26 @@
         (s-general/section-divider)]]
 
       ;Timeline
-      (s-general/timeline
-        {:enable-comment false
-         :timeline-items
-                         (for [history-item (reverse (sort-by (fn [history-item] (:instant history-item)) (:history person)))]
-                           (s-general/timeline-item {:icon    (s-general/circle-icon {:icon "fas fa-clock" :color color/link-active})
-                                                     :title   (str "Registered " (get-in history-item [:inventory-item :model-name]))
-                                                     :content [:div (str (s-general/time-format-string {:time   (:instant history-item)
-                                                                                                        :format "yyyy-MM-dd"})
-                                                                         " — "
-                                                                         (get-in history-item [:inventory-item :serial-number]))]}))})]]))
+      (cond (not= (:history person) [])
+            (s-general/timeline
+              {:enable-comment false
+               :timeline-items (for [history-item (reverse (sort-by (fn [history-item] (:instant history-item)) (:history person)))]
+                                 (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-laptop" :color color/link-active})
+                                                           :title    (str "Registered " (get-in history-item [:inventory-item :model-name]))
+                                                           :on-click (fn [] (trigger-event (event/clicked-device (get-in history-item [:inventory-item :id]))))
+                                                           :content  [:div (str (s-general/time-format-string {:time   (:instant history-item)
+                                                                                                               :format "yyyy-MM-dd"}) " — "
+                                                                                (get-in history-item [:inventory-item :serial-number]))]}))})
+            :else
+            (s-general/timeline
+              {:enable-comment false
+               :timeline-items [:div {:style {:color      color/grey-normal
+                                              :font-style "italic"
+                                              :margin "-1rem 0 0 1.5rem"}}
+                                "No history available"]}))]]))
+
+
+
+
 
 
