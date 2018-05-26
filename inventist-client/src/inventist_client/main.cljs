@@ -7,7 +7,8 @@
             [oops.core :refer [oget ocall]]
             [inventist-client.services :as services]
             [finja.core :as finja]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [clojure.browser.event :as event]))
 
 (enable-console-print!)
 
@@ -33,10 +34,15 @@
                       update-in
                       core/authentication-state-path
                       auth/recieve-new-auth-state
-                      user)))))
+                      user)))
+           (ocall js/window :addEventListener "offline" (fn []
+                                                          (swap! app-state-atom assoc :internet-reachable false)))
+           (ocall js/window :addEventListener "online" (fn []
+                                                         (swap! app-state-atom assoc :internet-reachable true)))))
 
-;(as-> (finja/get-current-path) $
-;      (str/split $ "/")
+
+             ;(as-> (finja/get-current-path) $
+             ;      (str/split $ "/"))
 ;      (remove empty? $)
 ;      (map keyword $)
 ;      (swap! app-state-atom

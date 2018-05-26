@@ -5,8 +5,7 @@
             [inventist-client.page.dashboard.core :as core]
             [view-dashboard.component :refer [dashboard-detail dashboard-stats]]
             [symbols.color :as color]
-            [rum.core :refer [defc]]
-            [inventist-client.no_connection.component :as connection]))
+            [rum.core :refer [defc]]))
 
 (defc component < (modular-component)
   [{{state :state} :input
@@ -28,8 +27,7 @@
                            :items-right [(s-general/button {:color color/grey-normal
                                                             :text  "Register Device"
                                                             :icon  "fas fa-pen-square"})]})
-    (dashboard-detail (core/create-dashboard-detail-args state "mock-dashboard-id"))
-    (connection/connection-bar)]])
+    (dashboard-detail (core/create-dashboard-detail-args state "mock-dashboard-id"))]])
 
 
 

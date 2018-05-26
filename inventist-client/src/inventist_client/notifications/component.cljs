@@ -1,4 +1,4 @@
-(ns inventist-client.no_connection.component
+(ns inventist-client.notifications.component
   (:require [rum.core :refer [defc with-key]]
             [remodular.core :as rem]
             [symbols.color :as color]

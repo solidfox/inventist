@@ -14,7 +14,8 @@
     :inventory
     (a/prepend-state-path-to-services
       (inventory-page/get-services (core/create-inventory-page-args state))
-      core/inventory-page-state-path)))
+      core/inventory-page-state-path)
+    []))
 
 (defn perform-services
   [services handle-event]

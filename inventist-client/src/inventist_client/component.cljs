@@ -9,7 +9,8 @@
             [rum.core :refer [defc with-key]]
             [remodular.core :refer [modular-component]]
             [inventist-client.event :refer [handle-event]]
-            [symbols.color :as c]))
+            [symbols.color :as c]
+            [inventist-client.notifications.component :as notifications]))
 
 
 (defc app < (modular-component handle-event)
@@ -17,10 +18,12 @@
     trigger-event  :trigger-event}]
   (if (not (core/logged-in? state))
     (auth/login (core/authentication-args state))
+    ; Else Logged in!
     [:div {:style {:height             "100vh"
                    :display            "grid"
                    :backgroundColor    c/white
                    :grid-template-rows "3.5rem calc(100% - 3.5rem)"}}
+     (when (not (:internet-reachable state)) (notifications/connection-bar))
      (navbar/navigation-bar
        {:auth-status-item (auth/bar-item-login-status (core/authentication-args state))
         :current-path     (:path state)
