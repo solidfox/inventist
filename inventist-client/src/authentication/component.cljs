@@ -3,7 +3,6 @@
             [remodular.core :as rem]
             [authentication.core :as core]
             [symbols.color :as c]
-            [cljs-react-material-ui.core :refer [get-mui-theme color]]
             [cljs-react-material-ui.rum :as ui]
             [oops.core :refer [oget ocall]]))
 
@@ -27,20 +26,20 @@
                  :align-items    "center"}}
    [:h1 "Inventist"]
    [:h2 "Reinvented inventory."]
-   (ui/mui-theme-provider
-     {:mui-theme (get-mui-theme)}
-     (cond (= :loading (core/status state))
-           [:div {:style {:text-align "center"}}
-            (ui/raised-button {:label    "Sign in with Google"
-                               :color    "secondary"
-                               :disabled true
-                               :on-click log-in-with-redirect})
-            [:br] [:br]
-            (ui/circular-progress {:size 50})]
-           :else
-           (ui/raised-button {:label    "Sign in with Google"
-                              :color    "secondary"
-                              :on-click log-in-with-redirect})))])
+   (cond (= :loading (core/status state))
+         [:div {:style {:text-align "center"}}
+          (ui/raised-button {:label    "Sign in with Google"
+                             :color    "secondary"
+                             :disabled true
+                             :on-click log-in-with-redirect})
+          [:br] [:br]
+          (ui/circular-progress {:size 50})]
+         :else
+         (ui/raised-button {:label    "Sign in with Google"
+                            :color    "secondary"
+                            :on-click log-in-with-redirect}))])
+
+
 
 (defc bar-item-login-status < (rem/modular-component)
   [{{state :state} :input
