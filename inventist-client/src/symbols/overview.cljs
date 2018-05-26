@@ -11,17 +11,12 @@
 (def list-bg-color color/highlight)
 
 ;Person-list card
-(defc person-list-card < {:should-update
-                          (fn [old-state new-state]
-                            (not= (dissoc (first (:rum/args old-state)) :on-select)
-                                  (dissoc (first (:rum/args new-state)) :on-select)))}
-  [{person    :person
-    hidden    :hidden
-    on-select :on-select}]
-  [:div (merge (when hidden {:style {:display "none"}})
-               {:key      (:id person)
-                :class    (style/list-item)
-                :on-click on-select})
+(defc person-list-card < rum/static
+  [{person :person
+    hidden :hidden}]
+  [:div {:style {:display (if hidden "none" "auto")}
+         :key   (:id person)
+         :class (style/list-item)}
    [:div {:class (style/list-item-left-column)}
     [:img {:class (style/card-image)
            :src   (cond (and (:image person) (not= (:image person) "")) (:image person)

@@ -11,9 +11,10 @@
 (defc people-list < (remodular.core/modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [people       (core/get-people state)
-        n-results    (count (core/filtered-people state))
-        search-terms (:search-terms state)]
+  (let [people          (core/get-people state)
+        filtered-people (core/filtered-people state)
+        n-results       (count filtered-people)
+        search-terms    (:search-terms state)]
     (scrollable
       {:floating-header
        (search-toolbar
@@ -24,25 +25,37 @@
                                   (rem/create-event {:name :search-string-changed
                                                      :data {:new-value (o/oget e [:target :value])}})))})
        :content
-       (if (not= n-results 0)
-         [:div {:style {:background-color color/grey-light}}
-          (for [person people]
-            (with-key (person-list-card {:person    person
-                                         :hidden    (not (core/person-matches person search-terms))
-                                         :on-select (fn [] (trigger-event
-                                                             (rem/create-event
-                                                               {:name :person-selected
-                                                                :data {:person person}})))})
-                      (:id person)))]
-         [:div {:style {:width            "100%"
-                        :height           "100%"
-                        :color            color/grey-blue
-                        :background-color color/transparent
-                        :text-align       "left"
-                        :margin           "2rem"}}
-          "No matches found!" [:br] [:br]
-          "Try with some other keyword" [:br]
-          "or check internet connection"])
+       [:div {:style {:height       "100%"
+                      :background-color color/grey-light}}
+        (let [person-selected-event (fn [person] (trigger-event (rem/create-event {:name :person-selected
+                                                                                   :data {:person person}})))]
+          (->> people
+               (map
+                 (fn [person]
+                   [:div {:key      (:id person)
+                          :on-click (fn [] (person-selected-event person))}
+                    (person-list-card {:person person
+                                       :hidden (not (core/person-matches person search-terms))})]))))
+        (cond (not= n-results 0)
+              nil
+              (:fetching-people-list state)
+              [:div {:style {:height      "100%"
+                             :display         "flex"
+                             :flex-direction  "column"
+                             :align-items     "center"
+                             :justify-content "center"}}
+               (ui/circular-progress {:size 50})
+               [:div "Loading people..."]]
+              :else
+              [:div {:style {:width            "100%"
+                             :height           "100%"
+                             :color            color/grey-blue
+                             :background-color color/transparent
+                             :text-align       "left"
+                             :margin           "2rem"}}
+               "No matches found!" [:br] [:br]
+               "Try with some other keyword" [:br]
+               "or check internet connection"])]
 
        :floating-footer
        (footer)})))

@@ -12,9 +12,10 @@
 
 ;Returns brand and model icon together
 (defc device-icon-set [{item :item}]
-  [:span
-   [:i {:class (:brand (inventory/inventory-icon item))}] " "
-   [:i {:class (:model (inventory/inventory-icon item))}]])
+  (let [icon-map (inventory/inventory-icon item)]
+    [:span
+     (:brand icon-map) " "
+     (:model icon-map)]))
 
 (defn time-format-object [time]
   (time-format/parse (time-format/formatters :date-time-no-ms) time))
