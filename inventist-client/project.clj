@@ -4,8 +4,8 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  
-  
+
+
   :min-lein-version "2.7.1"
 
   :dependencies [[org.clojure/clojure "1.9.0"]
@@ -68,8 +68,10 @@
              ;; :server-port 3449 ;; default
              ;; :server-ip "127.0.0.1"
 
-             :css-dirs ["resources/public/css"]} ;; watch and update CSS
+             :css-dirs ["resources/public/css"] ;; watch and update CSS
 
+             :ring-handler server.router/handle-request
+             :server-logfile "/tmp/figwheel-log.txt"}
              ;; Start an nREPL server into the running figwheel process
              ;; :nrepl-port 7888
 
