@@ -24,9 +24,9 @@
 
     ;Toolbar
     (s-detailview/toolbar {:items-left  (s-detailview/breadcrumb {:type "dashboard"})
-                           :items-right [(s-general/button {:color color/grey-normal
-                                                            :text  "Register Device"
-                                                            :icon  "fas fa-pen-square"})]})
+                           :items-right (s-general/button {:color color/grey-normal
+                                                           :text  "Register Device"
+                                                           :icon  "fas fa-pen-square"})})
     (dashboard-detail (core/create-dashboard-detail-args state "mock-dashboard-id"))]])
 
 
