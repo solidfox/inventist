@@ -98,9 +98,9 @@
 
 
 ;Information Section
-(defc section-information [{fields      :fields
-                            edit-mode   :edit-mode
-                            enable-edit :enable-edit}]
+(defc section-information [{title       :title
+                            fields      :fields
+                            edit-mode   :edit-mode}]
   [:div {:style {:margin         "1rem 2.5rem 1rem"
                  :display        "flex"
                  :flex-direction "row"}
@@ -110,11 +110,7 @@
                   :display        "flex"
                   :flex-direction "column"
                   :width          "100%"}}
-    (s-general/section-title {:title   "Information"
-                              :buttons [(cond (= enable-edit true)
-                                              (s-general/section-title-button {:icon     "far fa-edit"
-                                                                               :text     "Edit"
-                                                                               :on-click ""}))]})
+    title ;Section Title
 
     [:div {:style {:display               "grid"
                    :grid-template-columns (str field-col-width " 1fr")
@@ -170,7 +166,7 @@
 
 
 ;Card to show Person
-(defc person-card [{user :user
+(defc person-card [{user     :user
                     on-click :on-click}]
   (card {:key       (:id user)
          :on-click  on-click
