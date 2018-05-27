@@ -66,7 +66,7 @@
                                      :text  "Type your issue here."})
            (s-general/input-section {:field    "Upload an Image"
                                      :type     "button"
-                                     :color    color/link-active
+                                     :color    color/white
                                      :icon     "fas fa-cloud-upload-alt"
                                      :required false
                                      :text     "Upload image to show the problem."
