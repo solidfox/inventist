@@ -8,8 +8,8 @@
 (defn people-overview-state-path [] [:view-modules :view-people-overview])
 
 (defn create-state
-  []
-  (-> {:selected-person-id nil}
+  [{selected-person-id :selected-person-id}]
+  (-> {:selected-person-id selected-person-id}
       (assoc-in (people-overview-state-path) (view-people-overview/create-state))))
 
 (defn create-person-detail-args

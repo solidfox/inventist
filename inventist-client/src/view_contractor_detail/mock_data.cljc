@@ -40,17 +40,17 @@
                  :serial-number    "C02SVXXXXF1R"
                  :class            "phone"
                  :photo            "https://i.gadgets360cdn.com/products/large/1519585124_635_samsung_galaxy_s9_blue.jpg"}]
-   :history    [{:inventory-id     01
-                 :date             "2018-04-14T10:37:46Z"
-                 :brand            "Apple"
-                 :model-name       "MacBook Pro (13-inch, 2016, Four Thunderbolt 3 Ports)"
-                 :model-identifier "MacBookPro13,2"
-                 :serial-number    "C02SVXXXXF1R"
-                 :comment          "New MacBook"}
-                {:inventory-id     02
-                 :date             "2018-04-14T10:37:46Z"
-                 :brand            "Apple"
-                 :model-name       "MacBook Pro (13-inch, 2016, Four Thunderbolt 3 Ports)"
-                 :model-identifier "MacBookPro13,2"
-                 :serial-number    "C02SVXXXXF1R"
-                 :comment          "New MacBook"}]})
+   :history    [{:inventory-item-id 01
+                 :date              "2018-04-14T10:37:46Z"
+                 :brand             "Apple"
+                 :model-name        "MacBook Pro (13-inch, 2016, Four Thunderbolt 3 Ports)"
+                 :model-identifier  "MacBookPro13,2"
+                 :serial-number     "C02SVXXXXF1R"
+                 :comment           "New MacBook"}
+                {:inventory-item-id 02
+                 :date              "2018-04-14T10:37:46Z"
+                 :brand             "Apple"
+                 :model-name        "MacBook Pro (13-inch, 2016, Four Thunderbolt 3 Ports)"
+                 :model-identifier  "MacBookPro13,2"
+                 :serial-number     "C02SVXXXXF1R"
+                 :comment           "New MacBook"}]})

@@ -22,11 +22,7 @@
       (-> event
           (rem/append-action
             (rem/create-action {:name        :show-inventory-item
-                                :fn-and-args [core/set-path [:inventory inventory-item-id]]}))
-          (rem/append-action
-            (assoc (rem/create-action {:name        :inventory-item-selected
-                                       :fn-and-args [inventory-core/set-selected-inventory-id inventory-item-id]})
-              :state-path core/inventory-page-state-path)))) ; TODO Tomas: är detta ok?
+                                :fn-and-args [core/show-inventory-item inventory-item-id]}))))
 
     (= (:name event) :show-person)
     (let [person-id (get-in event [:data :person-id])]

@@ -3,8 +3,8 @@
             [util.inventory.core :as util]))
 
 (defn create-state
-  [{inventory-id :inventory-id}]
-  {:inventory-id                        inventory-id
+  [{inventory-id :inventory-item-id}]
+  {:inventory-item-id                   inventory-id
    :edit-mode                           false
    :fetching-inventory-details          false
    :should-refetch-get-inventory-detail false

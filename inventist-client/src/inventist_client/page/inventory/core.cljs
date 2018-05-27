@@ -7,10 +7,21 @@
 (defn inventory-detail-state-path [inventory-id] (concat any-inventory-detail-state-path [inventory-id]))
 (defn inventory-overview-state-path [] [:view-modules :view-inventory-overview])
 
+(defn set-selected-inventory-id
+  [state inventory-id]
+  (-> state
+      (assoc :selected-inventory-id inventory-id)
+      (update-in (inventory-detail-state-path inventory-id)
+                 (fn [inventory-detail-state]
+                   (if (nil? inventory-detail-state)
+                     (view-inventory-detail/create-state {:inventory-item-id inventory-id})
+                     inventory-detail-state)))))
+
 (defn create-state
-  []
-  (-> {:selected-inventory-id nil}
-      (assoc-in (inventory-overview-state-path) (view-inventory-overview/create-state))))
+  [{selected-inventory-id :selected-inventory-id}]
+  (-> {}
+      (assoc-in (inventory-overview-state-path) (view-inventory-overview/create-state))
+      (set-selected-inventory-id selected-inventory-id)))
 
 (defn create-inventory-detail-args
   [state inventory-id]
@@ -23,13 +34,3 @@
   (let [state-path (inventory-overview-state-path)]
     {:input      {:state (get-in state state-path)}
      :state-path state-path}))
-
-(defn set-selected-inventory-id
-  [state inventory-id]
-  (-> state
-      (assoc :selected-inventory-id inventory-id)
-      (update-in (inventory-detail-state-path inventory-id)
-                 (fn [inventory-detail-state]
-                   (if (nil? inventory-detail-state)
-                     (view-inventory-detail/create-state {:inventory-id inventory-id})
-                     inventory-detail-state)))))

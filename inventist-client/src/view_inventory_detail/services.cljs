@@ -53,4 +53,4 @@
 (defn get-services
   [{{state :state} :input}]
   (when (core/should-get-inventory-detail? state)
-    [(get-inventory-details (:inventory-id state))]))
+    [(get-inventory-details (:inventory-item-id state))]))

@@ -12,14 +12,14 @@
         (rem/create-action {:name :search-string-changed
                             :fn-and-args
                                   [core/set-free-text-search (get-in event [:data :new-value])]}))
-      :inventory-selected
+      :inventory-item-selected
       (let [inventory (get-in event [:data :inventory])]
         (-> event
             (rem/append-action
               (rem/create-action {:name :set-selected-inventory-id
                                   :fn-and-args [core/set-selected-inventory-id (:id inventory)]}))
-            (rem/create-event {:new-name :inventory-selected
-                               :new-data {:inventory-id (:id inventory)}})))
+            (rem/create-event {:new-name :inventory-item-selected
+                               :new-data {:inventory-item-id (:id inventory)}})))
       (rem/create-anonymous-event event))
 
     event))

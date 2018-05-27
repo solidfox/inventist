@@ -13,20 +13,17 @@
 
 (enable-console-print!)
 
-(defonce app-state-atom (atom (core/create-state)))
-
-(a/run-modular-app! {:get-view         c/app
-                     :get-services     services/get-services
-                     :perform-services services/perform-services
-                     :app-state-atom   app-state-atom
-                     :logging          {:state-updates true
-                                        :services      true
-                                        :events        true}})
-
 (def firebase-auth (oget js/firebase :auth))
 
 (defonce _
-         (do
+         (let [path (as-> (oget js/window :location) $
+                          (oget $ :pathname)
+                          (str/split $ "/")
+                          (remove empty? $)
+                          (let [[head & tail] $]
+                            (conj tail (keyword head))))]
+           (def app-state-atom (atom (core/create-state
+                                       {:path path})))
            (ocall
              (firebase-auth)
              :onAuthStateChanged
@@ -39,15 +36,16 @@
            (ocall js/window :addEventListener "offline" (fn []
                                                           (swap! app-state-atom assoc :internet-reachable false)))
            (ocall js/window :addEventListener "online" (fn []
-                                                         (swap! app-state-atom assoc :internet-reachable true)))
-           (as-> (util/spy (oget js/window :location)) $
-                 (oget $ :pathname)
-                 (util/spy (str/split $ "/"))
-                 (remove empty? $)
-                 (map keyword $)
-                 (swap! app-state-atom
-                        core/set-path
-                        $))))
+                                                         (swap! app-state-atom assoc :internet-reachable true)))))
+
+
+(a/run-modular-app! {:get-view         c/app
+                     :get-services     services/get-services
+                     :perform-services services/perform-services
+                     :app-state-atom   app-state-atom
+                     :logging          {:state-updates true
+                                        :services      true
+                                        :events        true}})
 
 
 
