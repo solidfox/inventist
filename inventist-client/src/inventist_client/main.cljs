@@ -6,7 +6,6 @@
             [inventist-client.core :as core]
             [oops.core :refer [oget ocall]]
             [inventist-client.services :as services]
-            [finja.core :as finja]
             [clojure.string :as str]
             [clojure.browser.event :as event]
             [util.inventory.core :as util]))
@@ -15,9 +14,10 @@
 
 (def firebase-auth (oget js/firebase :auth))
 
-(defonce _
+(defonce initialized
          (let [path (as-> (oget js/window :location) $
                           (oget $ :pathname))]
+           (println "reload")
            (def app-state-atom (atom (core/create-state
                                        {:path path})))
            (ocall js/window :addEventListener "popstate" (fn [event]
@@ -37,7 +37,8 @@
            (ocall js/window :addEventListener "offline" (fn []
                                                           (swap! app-state-atom assoc :internet-reachable false)))
            (ocall js/window :addEventListener "online" (fn []
-                                                         (swap! app-state-atom assoc :internet-reachable true)))))
+                                                         (swap! app-state-atom assoc :internet-reachable true)))
+           true))
 
 
 (a/run-modular-app! {:get-view         c/app
