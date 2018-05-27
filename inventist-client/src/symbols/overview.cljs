@@ -20,7 +20,7 @@
    [:div {:class (style/list-item-left-column)}
     [:img {:class (style/card-image)
            :src   (cond (and (:image person) (not= (:image person) "")) (:image person)
-                        :else "image/person-m-placeholder.png")}]]
+                        :else "/image/person-m-placeholder.png")}]]
    [:div
     [:span {:style style/card-title}
      (str (:first-name person) " " (:last-name person))] [:br]
@@ -40,7 +40,7 @@
    [:div {:class (style/list-item-left-column)}
     [:img {:class (style/card-image)
            :src   (cond (and (:image contractor) (not= (:image contractor) "")) (:image contractor)
-                        :else "image/contractor-placeholder.png")}]]
+                        :else "/image/contractor-placeholder.png")}]]
    [:div
     [:span {:style style/card-title}
      (str (:name contractor))] [:br]

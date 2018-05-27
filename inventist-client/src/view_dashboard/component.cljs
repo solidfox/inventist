@@ -34,7 +34,7 @@
    [:div {:style {:width               "100%"
                   :height              "100%"
                   :position            "absolute"
-                  :background-image    "url(\"image/GHS-logotype-horizontal.svg\")"
+                  :background-image    "url(\"/image/GHS-logotype-horizontal.svg\")"
                   :background-position "35%"
                   :background-size     "25%"
                   :background-repeat   "no-repeat"

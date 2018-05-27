@@ -67,7 +67,7 @@
   [:div {:style {:margin "2.5rem 2.5rem 0" :display "flex" :flex-direction "row"}
          :id    "header"}
    [:div [:img {:src   (cond (and image (not= image "")) image
-                             :else "image/no-image.png")
+                             :else "/image/no-image.png")
                 :style {:width        "6rem"
                         :height       "6rem"
                         :borderRadius "1rem"
@@ -160,7 +160,7 @@
   (card {:key       (:id item)
          :on-click  on-click
          :image-url (cond (and (:photo item) (not= (:photo item) "")) (:photo item)
-                          :else "image/no-image.png")
+                          :else "/image/no-image.png")
          :content   [:div
                      [:span {:style style/card-title}
                       (str (:brand item) " " (:model-name item))] [:br]
@@ -176,8 +176,8 @@
          :on-click  on-click
          :image-url (cond (:image user) (:image user)
                           :else
-                          (when (:gender user) (cond (= (:gender user) "f") "image/person-f-placeholder.png"
-                                                     :else "image/person-m-placeholder.png")))
+                          (when (:gender user) (cond (= (:gender user) "f") "/image/person-f-placeholder.png"
+                                                     :else "/image/person-m-placeholder.png")))
          :content   [:div
                      [:span {:style style/card-title}
                       (str (:first-name user) " " (:last-name user))] [:br]

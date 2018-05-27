@@ -8,7 +8,8 @@
             [inventist-client.services :as services]
             [finja.core :as finja]
             [clojure.string :as str]
-            [clojure.browser.event :as event]))
+            [clojure.browser.event :as event]
+            [util.inventory.core :as util]))
 
 (enable-console-print!)
 
@@ -38,14 +39,16 @@
            (ocall js/window :addEventListener "offline" (fn []
                                                           (swap! app-state-atom assoc :internet-reachable false)))
            (ocall js/window :addEventListener "online" (fn []
-                                                         (swap! app-state-atom assoc :internet-reachable true)))))
+                                                         (swap! app-state-atom assoc :internet-reachable true)))
+           (as-> (util/spy (oget js/window :location)) $
+                 (oget $ :pathname)
+                 (util/spy (str/split $ "/"))
+                 (remove empty? $)
+                 (map keyword $)
+                 (swap! app-state-atom
+                        core/set-path
+                        $))))
 
 
-             ;(as-> (finja/get-current-path) $
-             ;      (str/split $ "/"))
-;      (remove empty? $)
-;      (map keyword $)
-;      (swap! app-state-atom
-;             core/set-path
-;             $))
+
 

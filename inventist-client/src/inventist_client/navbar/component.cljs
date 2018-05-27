@@ -57,7 +57,7 @@
                 style/z-index-top-toolbar
                 style/box-shadow)}
    [:div {:style {:height "100%" :text-align "left"}}
-    [:span [:img {:src   "image/GHS-logotype-horizontal.svg"
+    [:span [:img {:src   "/image/GHS-logotype-horizontal.svg"
                   :style {:height       "100%"
                           :borderRadius "0rem"}}]]]
 

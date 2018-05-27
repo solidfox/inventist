@@ -44,7 +44,7 @@
                            ;; :open-urls ["http://localhost:3449/index.html"]}
 
                 :compiler {:main inventist-client.main
-                           :asset-path "js/compiled/out"
+                           :asset-path "/js/compiled/out"
                            :output-to "resources/public/js/compiled/inventist_client.js"
                            :output-dir "resources/public/js/compiled/out"
                            :source-map-timestamp true
