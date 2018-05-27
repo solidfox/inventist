@@ -32,27 +32,17 @@
                                                             :text     "Report Issue with Device"
                                                             :icon     "fas fa-exclamation-triangle"
                                                             :on-click (fn [] (trigger-event (event/report-issue-clicked (:id computer))))})})
-
+     ;Report Issue Box
      (when report-issue-mode
        [:div {:id    "detail-container"
-              :style {:height             "auto"
-                      :maxHeight          "50rem"
-                      :width              "22rem"
-                      :position           "absolute"
-                      :top                "3.5rem"
-                      :right              "0.5rem"
-                      :display            "grid"
-                      :backgroundColor    color/silver
-                      :grid-template-rows "auto 1fr"
-                      :box-shadow         "0rem 0.25rem 0.25rem 0 rgba(0,0,0,0.5)"}}
-
+              :style style/float-box}
         ;Toolbar
         (s-detailview/toolbar {:items-left  [:span {:style {:margin-left "1rem"}}
                                              [:i {:class "fas fa-exclamation-triangle"}] " Report Issue with Device"]
                                :items-right (s-general/button {:color    color/white
                                                                :icon     "far fa-times-circle"
                                                                :on-click (fn [] (trigger-event (rem/create-event {:name :close-report-issue})))})})
-        ;;Form Page
+        ;;Form
         [:div {:style {:overflow-x "hidden"
                        :overflow-y "scroll"}}
          [:div {:style style/form-box}
@@ -79,7 +69,7 @@
                             :text  "Report this Issue"
                             :icon  "fas fa-paper-plane"
                             :style {:margin "0.5rem 1rem"}})]])
-
+     ;------------
 
      ;Main Details Container
      [:div {:style {:overflow-x      "hidden"

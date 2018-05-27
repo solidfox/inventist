@@ -97,3 +97,14 @@
                :backgroundColor color/white
                :border          (str "1px solid " color/grey-light)
                :borderRadius    "0rem"})
+
+(def float-box {:height             "auto"
+                :maxHeight          "50rem"
+                :width              "22rem"
+                :position           "absolute"
+                :top                "3.5rem"
+                :right              "0.5rem"
+                :display            "grid"
+                :backgroundColor    color/silver
+                :grid-template-rows "auto 1fr"
+                :box-shadow         "0rem 0.25rem 0.25rem 0 rgba(0,0,0,0.5)"})
