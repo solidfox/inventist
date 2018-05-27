@@ -19,11 +19,6 @@
      [:span "Hi " (:first-name item) " " (:last-name item) ", welcome to Inventist."]
      :else
      [:span
-      ;1-Dashboard
-      [:span {:style {:opacity "0.75"
-                      :margin  "0 0.5rem 0 0"}} "Dashboard"]
-      [:span {:style {:opacity "0.75"
-                      :margin  "0 0.5rem 0 0"}} "/"]
       ;2-Main Navigation
       [:span {:style {:opacity "0.75"
                       :margin  "0 0.5rem 0 0"}}
@@ -36,8 +31,7 @@
       (when item [:span
                   (cond (= type "people") [:span (str (:first-name item) " " (:last-name item))]
                         (= type "inventory") [:span
-                                              (s-general/device-icon-set {:item item})
-                                              (str " - " (:brand item) " " (:model-name item))]
+                                              (str (:brand item) " " (:model-name item))]
                         (= type "contractors") [:span (str (:name item))])])])])
 
 ;Toolbar contains breadcrumb and action-buttons
