@@ -17,13 +17,14 @@
 
 (defonce _
          (let [path (as-> (oget js/window :location) $
-                          (oget $ :pathname)
-                          (str/split $ "/")
-                          (remove empty? $)
-                          (let [[head & tail] $]
-                            (conj tail (keyword head))))]
+                          (oget $ :pathname))]
            (def app-state-atom (atom (core/create-state
                                        {:path path})))
+           (ocall js/window :addEventListener "popstate" (fn [event]
+                                                           (let [path (oget event [:target :location :pathname])]
+                                                             (swap! app-state-atom
+                                                                    core/set-path
+                                                                    path))))
            (ocall
              (firebase-auth)
              :onAuthStateChanged
@@ -31,7 +32,7 @@
                (swap! app-state-atom
                       update-in
                       core/authentication-state-path
-                      auth/recieve-new-auth-state
+                      auth/receive-new-auth-state
                       user)))
            (ocall js/window :addEventListener "offline" (fn []
                                                           (swap! app-state-atom assoc :internet-reachable false)))

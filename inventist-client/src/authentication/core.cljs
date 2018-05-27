@@ -24,7 +24,7 @@
      :email        (.-email js-user)
      :photo-url    (.-photoURL js-user)}))
 
-(defn recieve-new-auth-state
+(defn receive-new-auth-state
   [state user]
   (-> state
       (assoc :fetching-login-status false)

@@ -12,12 +12,15 @@
             [symbols.color :as c]
             [inventist-client.notifications.component :as notifications]
             [cljs-react-material-ui.rum :as ui]
-            [cljs-react-material-ui.core :refer [get-mui-theme color]]))
+            [cljs-react-material-ui.core :refer [get-mui-theme color]]
+            [oops.core :as oops]))
 
 
 (defc app < (modular-component handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
+  (when (not= (oops/oget js/window [:location :pathname]) (core/get-current-location-bar-path state))
+    (oops/ocall js/window [:history :pushState] nil "" (core/get-current-location-bar-path state)))
   (ui/mui-theme-provider
     {:mui-theme (get-mui-theme)}
     (if (not (core/logged-in? state))

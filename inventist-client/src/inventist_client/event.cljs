@@ -29,7 +29,7 @@
       (-> event
           (rem/append-action
             (rem/create-action {:name        :show-person
-                                :fn-and-args [core/set-path [:people person-id]]}))
+                                :fn-and-args [core/parse-path [:people person-id]]}))
           (rem/append-action
             (assoc (rem/create-action {:name        :person-selected
                                        :fn-and-args [people-core/set-selected-person-id person-id]})

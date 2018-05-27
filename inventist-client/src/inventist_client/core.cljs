@@ -6,7 +6,9 @@
             [inventist-client.page.contractors.core :as contractors-page]
             [cljs.pprint]
             [inventist-client.page.inventory.core :as inventory-core]
-            [remodular.core :as rem]))
+            [remodular.core :as rem]
+            [clojure.string :as str]
+            [util.inventory.core :as util]))
 
 (def authentication-state-path [:view-modules :authentication])
 (def inventory-page-state-path [:pages :inventory])
@@ -14,14 +16,23 @@
 (def dashboard-page-state-path [:pages :dashboard])
 (def contractors-page-state-path [:pages :contractors])
 
+(defn parse-path
+  [path]
+  (let [[head & tail] (remove empty? (str/split path #"/"))
+        page (keyword head)]
+    (merge {:path [page]}
+           (when (= page :inventory) {:selected-inventory-id (first tail)})
+           (when (= page :people) {:selected-person-id (first tail)}))))
+
 (defn create-state
   [{path :path}]
-  (let [selected-inventory-id (when (= (first path) :inventory) (second path))
-        selected-person-id    (when (= (first path) :people) (second path))]
-    (-> {:path                  [(or (first path) :dashboard)]
-         :selected-inventory-id selected-inventory-id
-         :selected-person-id    selected-person-id
-         :internet-reachable    true}
+  (let [{selected-inventory-id :selected-inventory-id
+         selected-person-id    :selected-person-id
+         path                  :path
+         :as                   initial-state} (parse-path path)]
+    (-> initial-state
+        (assoc :internet-reachable true
+               :path [(or (first path) :dashboard)])
         (assoc-in authentication-state-path (auth/create-state))
         (assoc-in inventory-page-state-path (inventory-page/create-state {:selected-inventory-id selected-inventory-id}))
         (assoc-in contractors-page-state-path (contractors-page/create-state))
@@ -29,6 +40,18 @@
         (assoc-in people-page-state-path (people-page/create-state {:selected-person-id selected-person-id})))))
 
 (defn get-selected-inventory-id [state] (:selected-inventory-id state))
+
+(defn get-current-location-bar-path [state]
+  (case (first (:path state))
+    :inventory
+    (str/join "/" [""
+                   (subs (str :inventory) 1)
+                   (:selected-inventory-id state)])
+    :people
+    (str/join "/" [""
+                   (subs (str :people) 1)
+                   (:selected-person-id state)])
+    "/"))
 
 (defn show-inventory-item [state inventory-item-id]
   (-> state
@@ -70,6 +93,11 @@
   [state page-id]
   (assoc state :path [page-id]))
 
-(defn set-path
-  [state path]
-  (assoc state :path path))
+(defn set-path [state path & [push-state?]]
+  (let [{selected-inventory-id :selected-inventory-id
+         selected-person-id    :selected-person-id
+         [page]                :path} (parse-path path)]
+    (case page
+      :inventory
+      (show-inventory-item state selected-inventory-id)
+      (set-active-page state page))))
