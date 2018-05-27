@@ -170,15 +170,16 @@
             (s-general/timeline
               {:enable-comment false
                :timeline-items (for [history-item (reverse (sort-by (fn [history-item] (:instant history-item)) (:history computer)))]
-                                 (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-user" :color color/link-active})
-                                                           :title    (str "Registered to " (get-in history-item [:new-user :first-name])
-                                                                          " " (get-in history-item [:new-user :last-name]))
-                                                           :on-click (fn [] (trigger-event (event/clicked-user (get-in history-item [:new-user :id]))))
-                                                           :content  [:div (str (s-general/time-format-string {:time   (:instant history-item)
-                                                                                                               :format "yyyy-MM-dd"}) " — "
-                                                                                (get-in history-item [:new-user :occupation]) " "
-                                                                                (for [group (get-in history-item [:new-user :groups])]
-                                                                                  (:name group)))]}))})
+                                 [:span {:key (:instant history-item)}
+                                  (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-user" :color color/link-active})
+                                                            :title    (str "Registered to " (get-in history-item [:new-user :first-name])
+                                                                           " " (get-in history-item [:new-user :last-name]))
+                                                            :on-click (fn [] (trigger-event (event/clicked-user (get-in history-item [:new-user :id]))))
+                                                            :content  [:div (str (s-general/time-format-string {:time   (:instant history-item)
+                                                                                                                :format "yyyy-MM-dd"}) " — "
+                                                                                 (get-in history-item [:new-user :occupation]) " "
+                                                                                 (for [group (get-in history-item [:new-user :groups])]
+                                                                                   (:name group)))]})])})
             :else
             (s-general/timeline
               {:enable-comment false

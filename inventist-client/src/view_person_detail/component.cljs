@@ -122,18 +122,19 @@
             (s-general/timeline
               {:enable-comment false
                :timeline-items (for [history-item (reverse (sort-by (fn [history-item] (:instant history-item)) (:history person)))]
-                                 (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-laptop" :color color/link-active})
-                                                           :title    (str "Registered " (get-in history-item [:inventory-item :model-name]))
-                                                           :on-click (fn [] (trigger-event (event/clicked-device (get-in history-item [:inventory-item :id]))))
-                                                           :content  [:div (str (s-general/time-format-string {:time   (:instant history-item)
-                                                                                                               :format "yyyy-MM-dd"}) " — "
-                                                                                (get-in history-item [:inventory-item :serial-number]))]}))})
+                                 [:span {:key (:instant history-item)}
+                                  (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-laptop" :color color/link-active})
+                                                            :title    (str "Registered " (get-in history-item [:inventory-item :model-name]))
+                                                            :on-click (fn [] (trigger-event (event/clicked-device (get-in history-item [:inventory-item :id]))))
+                                                            :content  [:div (str (s-general/time-format-string {:time   (:instant history-item)
+                                                                                                                :format "yyyy-MM-dd"}) " — "
+                                                                                 (get-in history-item [:inventory-item :serial-number]))]})])})
             :else
             (s-general/timeline
               {:enable-comment false
                :timeline-items [:div {:style {:color      color/grey-normal
                                               :font-style "italic"
-                                              :margin "-1rem 0 0 1.5rem"}}
+                                              :margin     "-1rem 0 0 1.5rem"}}
                                 "No history available"]}))]]))
 
 
