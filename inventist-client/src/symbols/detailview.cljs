@@ -33,12 +33,12 @@
       [:span {:style {:opacity "0.75"
                       :margin  "0 0.5rem 0 0"}} "/"]
       ;3-Current Item
-      [:span
-       (cond (= type "people") [:span (str (:first-name item) " " (:last-name item))]
-             (= type "inventory") [:span
-                                   (s-general/device-icon-set {:item item})
-                                   (str " - " (:brand item) " " (:model-name item))]
-             (= type "contractors") [:span (str (:name item))])]])])
+      (when item [:span
+                  (cond (= type "people") [:span (str (:first-name item) " " (:last-name item))]
+                        (= type "inventory") [:span
+                                              (s-general/device-icon-set {:item item})
+                                              (str " - " (:brand item) " " (:model-name item))]
+                        (= type "contractors") [:span (str (:name item))])])])])
 
 ;Toolbar contains breadcrumb and action-buttons
 (defc toolbar [{items-left  :items-left
