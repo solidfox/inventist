@@ -61,6 +61,14 @@
                  inventory-core/set-selected-inventory-id
                  inventory-item-id)))
 
+(defn show-person [state person-id]
+  (-> state
+      (assoc :selected-person-id person-id)
+      (assoc :path [:people])
+      (update-in people-page-state-path
+                 people-page/set-selected-person-id
+                 person-id)))
+
 (defn authentication-args [state]
   {:input      {:state (get-in state authentication-state-path)}
    :state-path authentication-state-path})

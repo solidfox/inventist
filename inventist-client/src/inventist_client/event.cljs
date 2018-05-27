@@ -29,11 +29,7 @@
       (-> event
           (rem/append-action
             (rem/create-action {:name        :show-person
-                                :fn-and-args [core/parse-path [:people person-id]]}))
-          (rem/append-action
-            (assoc (rem/create-action {:name        :person-selected
-                                       :fn-and-args [people-core/set-selected-person-id person-id]})
-              :state-path core/people-page-state-path)))) ; TODO Tomas: är detta ok?
+                                :fn-and-args [core/show-person person-id]}))))
 
     (rem/triggered-by-me? event)
     (condp = (:name event)

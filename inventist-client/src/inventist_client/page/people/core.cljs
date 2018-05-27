@@ -7,10 +7,21 @@
 (defn person-detail-state-path [person-id] (concat any-person-detail-state-path [person-id]))
 (defn people-overview-state-path [] [:view-modules :view-people-overview])
 
+(defn set-selected-person-id
+  [state person-id]
+  (-> state
+      (assoc :selected-person-id person-id)
+      (update-in (person-detail-state-path person-id)
+                 (fn [person-detail-state]
+                   (if (nil? person-detail-state)
+                     (view-person-detail/create-state {:person-id person-id})
+                     person-detail-state)))))
+
 (defn create-state
   [{selected-person-id :selected-person-id}]
-  (-> {:selected-person-id selected-person-id}
-      (assoc-in (people-overview-state-path) (view-people-overview/create-state))))
+  (-> {}
+      (assoc-in (people-overview-state-path) (view-people-overview/create-state))
+      (set-selected-person-id selected-person-id)))
 
 (defn create-person-detail-args
   [state person-id]
@@ -23,13 +34,3 @@
   (let [state-path (people-overview-state-path)]
     {:input      {:state (get-in state state-path)}
      :state-path state-path}))
-
-(defn set-selected-person-id
-  [state person-id]
-  (-> state
-      (assoc :selected-person-id person-id)
-      (update-in (person-detail-state-path person-id)
-                 (fn [person-detail-state]
-                   (if (nil? person-detail-state)
-                     (view-person-detail/create-state {:person-id person-id})
-                     person-detail-state)))))

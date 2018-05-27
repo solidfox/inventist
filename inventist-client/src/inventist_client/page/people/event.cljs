@@ -14,7 +14,8 @@
             (rem/append-action
               (rem/create-action {:name        :set-selected-person-id
                                   :fn-and-args [core/set-selected-person-id person-id]}))
-            (rem/create-anonymous-event)))
+            (rem/create-event {:new-name :show-person
+                               :new-data {:person-id person-id}})))
       (rem/create-anonymous-event event))
 
     (rem/triggered-by-descendant-of-child? core/any-person-detail-state-path event)

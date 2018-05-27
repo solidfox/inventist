@@ -110,8 +110,9 @@
          (for [item (remove nil?
                             (concat [(:ongoing-inventory-item-assignment state)]
                                     (:inventory person)))]
-           (s-detailview/device-card {:item     item
-                                      :on-click (fn [] (trigger-event (event/clicked-device (:id item))))}))]
+           (-> (s-detailview/device-card {:item     item
+                                          :on-click (fn [] (trigger-event (event/clicked-device (:id item))))})
+               (with-key (:id item))))]
 
 
         (s-general/section-divider)]]
