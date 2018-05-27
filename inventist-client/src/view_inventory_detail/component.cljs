@@ -89,16 +89,18 @@
                                                                      :flex-wrap       "wrap"
                                                                      :justify-content "space-between"}}
                                                        (s-general/input-field {:placeholder "Search new Assignee's name..."})
-                                                       (s-general/text-area {:required    false
-                                                                             :maxWidth    "100%"
-                                                                             :placeholder "Enter comment (optional)."})
+                                                       ;(s-general/text-area {:required    false
+                                                       ;                      :maxWidth    "100%"
+                                                       ;                      :placeholder "Enter comment (optional)."})
                                                        (s-general/button {:color color/theme
                                                                           :icon  "fas fa-check-circle"
                                                                           :text  "Assign Device"
+                                                                          :on-click (fn [] (trigger-event event/cancel-device-reassignment))
                                                                           :style {:margin "0.5rem 0 0 0"}})
                                                        (s-general/button {:color color/grey-normal
                                                                           :icon  "fas fa-times-circle"
                                                                           :text  "Cancel"
+                                                                          :on-click (fn [] (trigger-event event/cancel-device-reassignment))
                                                                           :style {:margin "0.5rem 0 0 0"}})]}))
 
 
