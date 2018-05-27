@@ -6,8 +6,9 @@
   (rem/create-event {:name :clicked-user
                      :data {:user-id user-id}}))
 
-(def cancel-device-reassignment
-  (rem/create-event {:name :cancel-device-reassignment}))
+(defn report-issue-clicked [device-id]
+  (rem/create-event {:name :report-issue-clicked
+                     :data {:device-id device-id}}))
 
 (defn handle-event
   [_state event]
@@ -26,6 +27,20 @@
           (rem/append-action
             (rem/create-action {:name        :cancel-device-reassignment
                                 :fn-and-args [core/set-edit-mode false]}))
+          (rem/create-anonymous-event))
+
+      :report-issue-clicked
+      (-> event
+          (rem/append-action
+            (rem/create-action {:name :report-issue-clicked
+                                :fn-and-args [core/set-report-issue-mode true]}))
+          (rem/create-anonymous-event))
+
+      :close-report-issue
+      (-> event
+          (rem/append-action
+            (rem/create-action {:name :close-report-issue
+                                :fn-and-args [core/set-report-issue-mode false]}))
           (rem/create-anonymous-event))
 
       :clicked-user

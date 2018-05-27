@@ -1,7 +1,7 @@
 (ns inventist-client.page.contractors.component
   (:require [remodular.core :refer [modular-component]]
             [inventist-client.page.contractors.core :as core]
-            [view-contractor-detail.component :refer [contractor-detail contractor-add]]
+            [view-contractor-detail.component :refer [contractor-detail]]
             [view-contractors-overview.component :refer [contractors-list]]
             [rum.core :refer [defc]]))
 
@@ -14,5 +14,4 @@
                  :grid-template-columns "22rem 1fr"
                  :grid-template-rows    "100%"}}
    (contractors-list (core/create-contractors-overview-args state))
-   (contractor-detail (core/create-contractor-detail-args state "mock-contractor-id"))
-   (contractor-add)])
+   (contractor-detail (core/create-contractor-detail-args state "mock-contractor-id"))])

@@ -6,6 +6,7 @@
   [{inventory-id :inventory-item-id}]
   {:inventory-item-id                   inventory-id
    :edit-mode                           false
+   :report-issue-mode                   false
    :fetching-inventory-details          false
    :should-refetch-get-inventory-detail false
    :get-inventory-details-response      nil})
@@ -23,6 +24,10 @@
       (assoc :should-refetch-get-inventory-detail false)
       (assoc :fetching-inventory-details false)
       (assoc :get-inventory-details-response (util/->clojure-keys response))))
+
+(defn set-report-issue-mode
+  [state new-report-issue-mode]
+  (assoc state :report-issue-mode new-report-issue-mode))
 
 (defn set-edit-mode
   [state new-edit-mode]
