@@ -25,25 +25,25 @@
       :new-device-serial-number-changed
       (-> event
           (rem/append-action
-            (rem/create-action {:name :new-device-serial-number-changed
+            (rem/create-action {:name        :new-device-serial-number-changed
                                 :fn-and-args [core/set-new-device-serial-number (get-in event [:data :new-value])]}))
           (rem/create-anonymous-event))
       :commit-new-device
       (-> event
           (rem/append-action
-            (rem/create-action {:name :commit-new-device
+            (rem/create-action {:name        :commit-new-device
                                 :fn-and-args [core/commit-new-pending-inventory-item-assignment]}))
           (rem/create-anonymous-event))
       :cancel-new-device-assignment
       (-> event
           (rem/append-action
-            (rem/create-action {:name :cancel-new-device-assignment
+            (rem/create-action {:name        :cancel-new-device-assignment
                                 :fn-and-args [core/set-edit-mode false]}))
           (rem/create-anonymous-event))
       :assign-new-device-clicked
       (-> event
           (rem/append-action
-            (rem/create-action {:name :assign-new-device-clicked
+            (rem/create-action {:name        :assign-new-device-clicked
                                 :fn-and-args [core/set-edit-mode true]}))
           (rem/create-anonymous-event))
       :clicked-device

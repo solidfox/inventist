@@ -29,8 +29,8 @@
                      :display            "grid"
                      :grid-template-rows "auto 1fr"}}
        (s-detailview/toolbar {:items-left
-                              [:span {:style {:margin-left "1rem"}}
-                               "Select an person from the list."]})
+                              (s-detailview/breadcrumb {:type "people"})})
+
        ;Error text
        [:div {:style {:width      "100%"
                       :height     "100%"
