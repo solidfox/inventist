@@ -28,10 +28,10 @@
      ;Toolbar
      (s-detailview/toolbar {:items-left  (s-detailview/breadcrumb {:type "inventory"
                                                                    :item computer})
-                            :items-right [(s-general/button {:color    color/grey-blue
-                                                             :text     "Report Issue with Device"
-                                                             :icon     "fas fa-exclamation-triangle"
-                                                             :on-click (fn [] (trigger-event (event/report-issue-clicked (:id computer))))})]})
+                            :items-right (s-general/button {:color    color/grey-blue
+                                                            :text     "Report Issue with Device"
+                                                            :icon     "fas fa-exclamation-triangle"
+                                                            :on-click (fn [] (trigger-event (event/report-issue-clicked (:id computer))))})})
 
      (when report-issue-mode
        [:div {:id    "detail-container"
@@ -49,9 +49,9 @@
         ;Toolbar
         (s-detailview/toolbar {:items-left  [:span {:style {:margin-left "1rem"}}
                                              [:i {:class "fas fa-exclamation-triangle"}] " Report Issue with Device"]
-                               :items-right [(s-general/button {:color    color/white
-                                                                :icon     "far fa-times-circle"
-                                                                :on-click (fn [] (trigger-event (rem/create-event {:name :close-report-issue})))})]})
+                               :items-right (s-general/button {:color    color/white
+                                                               :icon     "far fa-times-circle"
+                                                               :on-click (fn [] (trigger-event (rem/create-event {:name :close-report-issue})))})})
         ;;Form Page
         [:div {:style {:overflow-x "hidden"
                        :overflow-y "scroll"}}
@@ -125,10 +125,10 @@
 
        [:div {:style {:margin "0 0 0 1rem" :width "100%"}}
         (s-general/section-title {:title   "Current Assignee"
-                                  :buttons [(s-general/section-title-button {:icon     "fas fa-exchange-alt"
-                                                                             :text     "Reassign Device"
-                                                                             :on-click (fn [] (trigger-event (rem/create-event
-                                                                                                               {:name :reassign-device-clicked})))})]})
+                                  :buttons (s-general/section-title-button {:icon     "fas fa-exchange-alt"
+                                                                            :text     "Reassign Device"
+                                                                            :on-click (fn [] (trigger-event (rem/create-event
+                                                                                                              {:name :reassign-device-clicked})))})})
 
         [:div {:style {:display        "flex"
                        :flex-direction "row"
