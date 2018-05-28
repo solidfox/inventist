@@ -14,16 +14,9 @@
 ;  (rem/create-event {:name new-report-issue-file
 ;                     :data {:file file}}))
 
-(defn new-report-issue-file [{name   :name
-                              type   :type
-                              size   :size
-                              date   :date
-                              object :object}]
+(defn new-report-issue-file [file]
   (rem/create-event {:name :new-report-issue-file
-                     :data {:file {:name name
-                                   :type type
-                                   :size size
-                                   :date date}}}))
+                     :data {:file file}}))
 
 (defn handle-event
   [_state event]
@@ -35,11 +28,6 @@
           (rem/append-action
             (rem/create-action {:name        :new-report-issue-file
                                 :fn-and-args [core/set-report-issue-file (get-in event [:data :file])]}))
-          (js/console.log "FILE:"
-                          (get-in event [:data :file :type])
-                          (get-in event [:data :file :size])
-                          (get-in event [:data :file :date])
-                          (get-in event [:data :file :name]))
           (rem/create-anonymous-event))
 
       :reassign-device-clicked

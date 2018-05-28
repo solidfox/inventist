@@ -69,7 +69,8 @@
                                                       {:name (oops/oget e [:target :files :0 :name])
                                                        :type (oops/oget e [:target :files :0 :type])
                                                        :size (oops/oget e [:target :files :0 :size])
-                                                       :date (oops/oget e [:target :files :0 :lastModified])})))
+                                                       :date (oops/oget e [:target :files :0 :lastModified])
+                                                       :object (oops/oget e [:target :files :0])})))
                                      :value     "Click here"
                                      :style     {:margin 0}})]]]
 
