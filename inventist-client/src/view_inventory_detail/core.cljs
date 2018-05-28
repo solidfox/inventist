@@ -3,13 +3,21 @@
             [util.inventory.core :as util]))
 
 (defn create-state
-  [{inventory-id :inventory-item-id}]
+  [{inventory-id      :inventory-item-id}]
   {:inventory-item-id                   inventory-id
    :edit-mode                           false
+   :report-issue-file                   {}
    :report-issue-mode                   false
    :fetching-inventory-details          false
    :should-refetch-get-inventory-detail false
    :get-inventory-details-response      nil})
+
+(defn set-report-issue-file
+  [state file]
+  (assoc-in state [:report-issue-file :name] (:name file))
+  (assoc-in state [:report-issue-file :size] (:size file))
+  (assoc-in state [:report-issue-file :type] (:type file))
+  (assoc-in state [:report-issue-file :date] (:date file)))
 
 (defn started-get-inventory-detail-service-call [state]
   (assoc state :fetching-inventory-details true))

@@ -9,7 +9,8 @@
             [clojure.string :as str]
             [remodular.core :as rem]
             [view-inventory-detail.event :as event]
-            [view-inventory-detail.core :as core]))
+            [view-inventory-detail.core :as core]
+            [oops.core :as oops]))
 
 (defc inventory-detail < (modular-component event/handle-event)
   [{{state :state} :input
@@ -32,27 +33,17 @@
                                                             :text     "Report Issue with Device"
                                                             :icon     "fas fa-exclamation-triangle"
                                                             :on-click (fn [] (trigger-event (event/report-issue-clicked (:id computer))))})})
-
+     ;Report Issue Box
      (when report-issue-mode
        [:div {:id    "detail-container"
-              :style {:height             "auto"
-                      :maxHeight          "50rem"
-                      :width              "22rem"
-                      :position           "absolute"
-                      :top                "3.5rem"
-                      :right              "0.5rem"
-                      :display            "grid"
-                      :backgroundColor    color/silver
-                      :grid-template-rows "auto 1fr"
-                      :box-shadow         "0rem 0.25rem 0.25rem 0 rgba(0,0,0,0.5)"}}
-
+              :style style/float-box}
         ;Toolbar
         (s-detailview/toolbar {:items-left  [:span {:style {:margin-left "1rem"}}
                                              [:i {:class "fas fa-exclamation-triangle"}] " Report Issue with Device"]
                                :items-right (s-general/button {:color    color/white
                                                                :icon     "far fa-times-circle"
                                                                :on-click (fn [] (trigger-event (rem/create-event {:name :close-report-issue})))})})
-        ;;Form Page
+        ;;Form
         [:div {:style {:overflow-x "hidden"
                        :overflow-y "scroll"}}
          [:div {:style style/form-box}
@@ -64,22 +55,32 @@
            (s-general/input-section {:field "Issue:"
                                      :type  "textarea"
                                      :text  "Type your issue here."})
-           (s-general/input-section {:field    "Upload an Image"
-                                     :type     "button"
-                                     :color    color/white
-                                     :icon     "fas fa-cloud-upload-alt"
-                                     :required false
-                                     :text     "Upload image to show the problem."
-                                     :value    "Click here"
-                                     :style    {:margin 0}})]]]
+           (s-general/input-section {:field     "Upload an Image"
+                                     :type      "upload"
+                                     :id        "report-image"
+                                     :color     color/transparent
+                                     :required  false
+                                     :text      "Upload image to show the problem (only 1 image allowed)."
+                                     ;:on-change (fn [e] (trigger-event
+                                     ;                     (event/new-report-issue-file (oops/oget e [:target :files :0]))))
+                                     :on-change (fn [e]
+                                                  (trigger-event
+                                                    (event/new-report-issue-file
+                                                      {:name (oops/oget e [:target :files :0 :name])
+                                                       :type (oops/oget e [:target :files :0 :type])
+                                                       :size (oops/oget e [:target :files :0 :size])
+                                                       :date (oops/oget e [:target :files :0 :lastModified])})))
+                                     :value     "Click here"
+                                     :style     {:margin 0}})]]]
 
         [:div {:style {:display         "flex"
                        :justify-content "space-between"}}
-         (s-general/button {:color color/danger
+         (s-general/button {:color color/link-active
                             :text  "Report this Issue"
                             :icon  "fas fa-paper-plane"
                             :style {:margin "0.5rem 1rem"}})]])
 
+     ;------------
 
      ;Main Details Container
      [:div {:style {:overflow-x      "hidden"
@@ -170,15 +171,16 @@
             (s-general/timeline
               {:enable-comment false
                :timeline-items (for [history-item (reverse (sort-by (fn [history-item] (:instant history-item)) (:history computer)))]
-                                 (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-user" :color color/link-active})
-                                                           :title    (str "Registered to " (get-in history-item [:new-user :first-name])
-                                                                          " " (get-in history-item [:new-user :last-name]))
-                                                           :on-click (fn [] (trigger-event (event/clicked-user (get-in history-item [:new-user :id]))))
-                                                           :content  [:div (str (s-general/time-format-string {:time   (:instant history-item)
-                                                                                                               :format "yyyy-MM-dd"}) " — "
-                                                                                (get-in history-item [:new-user :occupation]) " "
-                                                                                (for [group (get-in history-item [:new-user :groups])]
-                                                                                  (:name group)))]}))})
+                                 [:span {:key (:instant history-item)}
+                                  (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-user" :color color/link-active})
+                                                            :title    (str "Registered to " (get-in history-item [:new-user :first-name])
+                                                                           " " (get-in history-item [:new-user :last-name]))
+                                                            :on-click (fn [] (trigger-event (event/clicked-user (get-in history-item [:new-user :id]))))
+                                                            :content  [:div (str (s-general/time-format-string {:time   (:instant history-item)
+                                                                                                                :format "yyyy-MM-dd"}) " — "
+                                                                                 (get-in history-item [:new-user :occupation]) " "
+                                                                                 (for [group (get-in history-item [:new-user :groups])]
+                                                                                   (:name group)))]})])})
             :else
             (s-general/timeline
               {:enable-comment false
