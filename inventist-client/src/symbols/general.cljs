@@ -6,7 +6,8 @@
     [symbols.color :as color]
     [symbols.style :as style]
     [util.inventory.core :as inventory]
-    [cljss.core :as cljss])
+    [cljss.core :as cljss]
+    [oops.core :as oops])
   (:require-macros
     [cljss.core :refer [defstyles]]))
 
@@ -139,7 +140,8 @@
                     disabled    :disabled
                     required    :required
                     style       :style
-                    on-change   :on-change}]
+                    on-change   :on-change
+                    on-enter    :on-enter}]
   [:input {:style       (merge {:font-size       "1rem"
                                 :minWidth        minWidth
                                 :maxWidth        maxWidth
@@ -157,7 +159,10 @@
            :required    (or required true)
            :placeholder (or placeholder "Enter here...")
            :value       value
-           :on-change   on-change}])
+           :on-change   on-change
+           :on-key-press (fn [e]
+                           (when (= (oops/oget e [:key]) "Enter")
+                             (on-enter e)))}])
 
 (defc text-area [{placeholder :placeholder
                   value       :value
