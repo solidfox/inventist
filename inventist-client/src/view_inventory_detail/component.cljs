@@ -9,7 +9,8 @@
             [clojure.string :as str]
             [remodular.core :as rem]
             [view-inventory-detail.event :as event]
-            [view-inventory-detail.core :as core]))
+            [view-inventory-detail.core :as core]
+            [oops.core :as oops]))
 
 (defc inventory-detail < (modular-component event/handle-event)
   [{{state :state} :input
@@ -54,21 +55,31 @@
            (s-general/input-section {:field "Issue:"
                                      :type  "textarea"
                                      :text  "Type your issue here."})
-           (s-general/input-section {:field    "Upload an Image"
-                                     :type     "button"
-                                     :color    color/white
-                                     :icon     "fas fa-cloud-upload-alt"
-                                     :required false
-                                     :text     "Upload image to show the problem."
-                                     :value    "Click here"
-                                     :style    {:margin 0}})]]]
+           (s-general/input-section {:field     "Upload an Image"
+                                     :type      "upload"
+                                     :id        "report-image"
+                                     :color     color/transparent
+                                     :required  false
+                                     :text      "Upload image to show the problem (only 1 image allowed)."
+                                     ;:on-change (fn [e] (trigger-event
+                                     ;                     (event/new-report-issue-file (oops/oget e [:target :files :0]))))
+                                     :on-change (fn [e]
+                                                  (trigger-event
+                                                    (event/new-report-issue-file
+                                                      {:name (oops/oget e [:target :files :0 :name])
+                                                       :type (oops/oget e [:target :files :0 :type])
+                                                       :size (oops/oget e [:target :files :0 :size])
+                                                       :date (oops/oget e [:target :files :0 :lastModified])})))
+                                     :value     "Click here"
+                                     :style     {:margin 0}})]]]
 
         [:div {:style {:display         "flex"
                        :justify-content "space-between"}}
-         (s-general/button {:color color/danger
+         (s-general/button {:color color/link-active
                             :text  "Report this Issue"
                             :icon  "fas fa-paper-plane"
                             :style {:margin "0.5rem 1rem"}})]])
+
      ;------------
 
      ;Main Details Container

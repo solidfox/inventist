@@ -130,7 +130,8 @@
     value]])
 
 ;Input Field
-(defc input-field [{placeholder :placeholder
+(defc input-field [{id          :id
+                    placeholder :placeholder
                     value       :value
                     width       :width
                     minWidth    :minWidth
@@ -140,7 +141,8 @@
                     required    :required
                     style       :style
                     on-change   :on-change}]
-  [:input {:style       (merge {:font-size       "1rem"
+  [:input {:id          id
+           :style       (merge {:font-size       "1rem"
                                 :minWidth        minWidth
                                 :maxWidth        maxWidth
                                 :width           (or width "100%")
@@ -159,7 +161,8 @@
            :value       value
            :on-change   on-change}])
 
-(defc text-area [{placeholder :placeholder
+(defc text-area [{id          :id
+                  placeholder :placeholder
                   value       :value
                   width       :width
                   maxWidth    :maxWidth
@@ -167,7 +170,8 @@
                   disabled    :disabled
                   required    :required
                   on-change   :on-change}]
-  [:textarea {:style       {:font-size       "1rem"
+  [:textarea {:id          id
+              :style       {:font-size       "1rem"
                             :width           (or width "100%")
                             :maxWidth        maxWidth
                             :height          "1.5rem"
@@ -185,8 +189,31 @@
               :value       value
               :on-change   (fn [e] (.. e -target -value))}])
 
+;UPLOAD BUTTON
+(defc upload-button [{id       :id
+                      width    :width
+                      minWidth :minWidth
+                      maxWidth :maxWidth
+                      disabled :disabled
+                      required :required
+                      style    :style
+                      on-change :on-change}]
+  [:input {:id        id
+           :style     (merge {:font-size "1rem"
+                              :minWidth  minWidth
+                              :maxWidth  maxWidth
+                              :width     (or width "100%")
+                              :height    "auto"}
+                             style)
+           :type      "file"
+           :disabled  (or disabled false)
+           :required  (or required true)
+           :on-change on-change}])
+
+
 ;INPUT Section
-(defc input-section [{field       :field
+(defc input-section [{id          :id
+                      field       :field
                       text        :text
                       placeholder :placeholder
                       value       :value
@@ -197,7 +224,8 @@
                       style       :style
                       disabled    :disabled
                       required    :required
-                      on-change   :on-change}]
+                      on-change   :on-change
+                      on-click    :on-click}]
   [:div {:style {:width  (or width "100%")
                  :margin "0 0.5rem 0.5rem 0"}}
    [:div {:style {:line-height "1.5rem"
@@ -212,7 +240,7 @@
 
    (cond (= type "textarea")
          (text-area {:width       width
-                     :value       value
+                     :value       (or value "")
                      :placeholder placeholder
                      :type        type
                      :disabled    disabled
@@ -220,10 +248,15 @@
                      :on-change   on-change})
 
          (= type "button")
-         (button {:text  value
+         (button {:id    id
+                  :text  value
                   :color color
                   :icon  icon
                   :style style})
+
+         (= type "upload")
+         (upload-button {:id       id
+                         :on-change on-change})
 
          :else (input-field {:width       width
                              :value       value
