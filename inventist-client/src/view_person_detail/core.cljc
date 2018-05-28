@@ -39,25 +39,52 @@
 
 ; Service call support logic
 
-(defn remove-pending-inventory-item-assignment
-  [state {serial-number :serial-number}]
-  (update state :pending-inventory-item-assignments
-          (fn [pending-assignments]
-            (remove pending-assignments
-                    (fn [assignment]
-                      (= (:serial-number assignment) serial-number))))))
-
 (defn commit-new-pending-inventory-item-assignment
   {:test (fn [] (test/is= (commit-new-pending-inventory-item-assignment
-                            {:new-inventory-item-input {:serial-number "test"}})
+                            {:new-inventory-item-input {:serial-number "test"}
+                             :edit-mode                true})
                           {:new-inventory-item-input           {}
-                           :pending-inventory-item-assignments [{:serial-number "test"}]}))}
+                           :pending-inventory-item-assignments [{:serial-number "test"}]
+                           :edit-mode                          false}))}
   [state]
   (-> state
       (update :pending-inventory-item-assignments conj {:serial-number
                                                         (get-new-device-serial-number state)})
       (reset-new-inventory-item-input)
       (set-edit-mode false)))
+
+(defn get-next-pending-inventory-item-assignment-to-perform
+  {:test (fn [] (test/is= (get-next-pending-inventory-item-assignment-to-perform
+                            {:pending-inventory-item-assignments [{}]
+                             :ongoing-inventory-item-assignment  {}})
+                          nil)
+           (test/is= (get-next-pending-inventory-item-assignment-to-perform
+                       {:pending-inventory-item-assignments [{:serial-number 1} {:serial-number 2}]
+                        :ongoing-inventory-item-assignment  nil})
+                     {:serial-number 1}))}
+
+  [state]
+  (util/spy state)
+  (when (not (:ongoing-inventory-item-assignment state))
+    (first (:pending-inventory-item-assignments state))))
+
+(defn remove-pending-inventory-item-assignment
+  {:test (fn [] (test/is= (-> (create-state {:person-id "test"})
+                              (set-new-device-serial-number "test-sn")
+                              (commit-new-pending-inventory-item-assignment)
+                              (set-new-device-serial-number "test-sn 2")
+                              (commit-new-pending-inventory-item-assignment)
+                              (remove-pending-inventory-item-assignment {:serial-number "test-sn"})
+                              (get-next-pending-inventory-item-assignment-to-perform)
+                              (:serial-number))
+                          "test-sn 2"))}
+
+  [state {serial-number :serial-number}]
+  (update state :pending-inventory-item-assignments
+          (fn [pending-assignments]
+            (remove (fn [assignment]
+                      (= (:serial-number assignment) serial-number))
+                    pending-assignments))))
 
 (defn should-get-person-detail? [state]
   (and (not (:fetching-person-details state))
@@ -71,20 +98,6 @@
   (-> state
       (assoc :fetching-person-details false)
       (assoc :get-person-details-response (util/->clojure-keys response))))
-
-(defn get-next-pending-inventory-item-assignment-to-perform
-  {:test (fn [] (test/is= (get-next-pending-inventory-item-assignment-to-perform
-                            {:pending-inventory-item-assignments [{}]
-                             :ongoing-inventory-item-assignment  {}})
-                          nil)
-           (test/is= (get-next-pending-inventory-item-assignment-to-perform
-                       {:pending-inventory-item-assignments [{:serial-number 1} {:serial-number 2}]
-                        :ongoing-inventory-item-assignment nil})
-                     {:serial-number 1}))}
-
-  [state]
-  (when (not (:ongoing-inventory-item-assignment state))
-    (first (:pending-inventory-item-assignments state))))
 
 (defn started-reassign-inventory-item-service-call
   [state {serial-number :serial-number
