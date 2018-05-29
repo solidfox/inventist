@@ -4,6 +4,14 @@ Most of the styling is local to components and
 common styling is kept in symbols directory in src.
 */
 
+html {
+    font-size: 1rem;
+}
+
+textarea, select , input, button {
+    font-size: 1rem;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     width: 100%;

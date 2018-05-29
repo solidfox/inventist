@@ -75,13 +75,16 @@
                        total-results      :total-results
                        on-change          :on-change}]
   [:div
-   [:div {:style {:width                 "100%"
-                  :height                "3rem"
-                  :backgroundColor       color/white
-                  :display               "grid"
-                  :grid-template-columns "auto 1fr auto"
-                  :align-items           "center"}}
-    [:div {:style {:margin "0.75rem" :color color/grey-normal}}
+   [:div {:style {:width           "100%"
+                  :height          "3rem"
+                  :backgroundColor color/white
+                  :display         "flex"}}
+    [:div {:style {:width           "3rem"
+                   :height          "3rem"
+                   :color           color/grey-normal
+                   :display         "flex"
+                   :align-items     "center"
+                   :justify-content "center"}}
      [:i {:class "fas fa-search"}]]
     [:input {:type        "input"
              :value       (or search-field-value "")
@@ -90,10 +93,10 @@
              :autoFocus   true
              :placeholder "Search"
              :on-change   on-change
-             :style       {:width           "100%"
-                           :margin          "0"
-                           :font-size       "1rem"
-                           :height          "100%"
+             :style       {:width           "calc(100% - 0.2rem)"
+                           :margin          ".1rem .1rem .1rem -2.9rem"
+                           :padding-left    "2.9rem"
+                           :height          "2.8rem"
                            :backgroundColor color/transparent
                            :border          0}}]]
    [:div {:style {:height          "auto" :padding "0.25rem 1rem"
