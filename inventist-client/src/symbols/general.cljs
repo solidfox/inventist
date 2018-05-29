@@ -192,7 +192,7 @@
               :required    (or required true)
               :placeholder (or placeholder "Enter here...")
               :value       value
-              :on-change   (fn [e] (.. e -target -value))}])
+              :on-change   on-change}])
 
 ;UPLOAD BUTTON
 (defc upload-button [{id       :id

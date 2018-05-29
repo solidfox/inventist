@@ -10,13 +10,13 @@
   (rem/create-event {:name :report-issue-clicked
                      :data {:device-id device-id}}))
 
-;(defn new-report-issue-file [file]
-;  (rem/create-event {:name new-report-issue-file
-;                     :data {:file file}}))
-
 (defn new-report-issue-file [file]
   (rem/create-event {:name :new-report-issue-file
                      :data {:file file}}))
+
+(defn set-report-issue-description [description]
+  (rem/create-event {:name :set-report-issue-description
+                     :data {:description description}}))
 
 (defn handle-event
   [_state event]
@@ -28,6 +28,13 @@
           (rem/append-action
             (rem/create-action {:name        :new-report-issue-file
                                 :fn-and-args [core/set-report-issue-file (get-in event [:data :file])]}))
+          (rem/create-anonymous-event))
+
+      :set-report-issue-description
+      (-> event
+          (rem/append-action
+            (rem/create-action {:name        :set-report-issue-description
+                                :fn-and-args [core/set-report-issue-description (get-in event [:data :description])]}))
           (rem/create-anonymous-event))
 
       :reassign-device-clicked
@@ -48,14 +55,14 @@
       (-> event
           (rem/append-action
             (rem/create-action {:name        :report-issue-clicked
-                                :fn-and-args [core/set-report-issue-mode true]}))
+                                :fn-and-args [core/set-show-report-issue-form true]}))
           (rem/create-anonymous-event))
 
       :close-report-issue
       (-> event
           (rem/append-action
             (rem/create-action {:name        :close-report-issue
-                                :fn-and-args [core/set-report-issue-mode false]}))
+                                :fn-and-args [core/set-show-report-issue-form false]}))
           (rem/create-anonymous-event))
 
       :clicked-user

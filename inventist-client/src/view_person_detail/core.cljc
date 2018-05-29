@@ -64,7 +64,6 @@
                      {:serial-number 1}))}
 
   [state]
-  (util/spy state)
   (when (not (:ongoing-inventory-item-assignment state))
     (first (:pending-inventory-item-assignments state))))
 

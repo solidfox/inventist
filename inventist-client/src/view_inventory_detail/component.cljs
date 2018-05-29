@@ -12,14 +12,55 @@
             [view-inventory-detail.core :as core]
             [oops.core :as oops]))
 
+(defn report-issue-form
+  [{{file        :file
+     description :description} :report-issue-form-data
+    trigger-event              :trigger-event}]
+  [:div {:id    "detail-container"
+         :style style/float-box}
+   ;Toolbar
+   (s-detailview/toolbar {:items-left  [:span {:style {:margin-left "1rem"}}
+                                        [:i {:class "fas fa-exclamation-triangle"}] " Report Issue with Device"]
+                          :items-right (s-general/button {:color    color/white
+                                                          :icon     "far fa-times-circle"
+                                                          :on-click (fn [] (trigger-event (rem/create-event {:name :close-report-issue})))})})
+   ;;Form
+   [:div {:style {:overflow-x "hidden"
+                  :overflow-y "scroll"}}
+    [:div {:style style/form-box}
+     [:div {:id    "form"
+            :style {:display         "flex"
+                    :flex-wrap       "wrap"
+                    :justify-content "space-between"}}
+      (s-general/input-section {:field "Issue"
+                                :type  "textarea"
+                                :value (or description "")
+                                :on-change (fn [e]
+                                             (trigger-event
+                                               (event/set-report-issue-description (oops/oget e [:target :value]))))
+                                :text  "Describe your issue in detail."})
+      (s-general/input-section {:field     "Photo"
+                                :type      "upload"
+                                :id        "report-image"
+                                :color     color/transparent
+                                :required  false
+                                :text      "You may upload a photo showing the problem."
+                                :on-change (fn [e] (trigger-event
+                                                     (event/new-report-issue-file (oops/oget e [:target :files :0]))))
+                                :style     {:margin 0}})]]]
+
+   [:div {:style {:display         "flex"
+                  :justify-content "space-between"}}
+    (s-general/button {:color color/link-active
+                       :text  "Report this Issue"
+                       :icon  "fas fa-paper-plane"
+                       :style {:margin "0.5rem 1rem"}})]])
+
 (defc inventory-detail < (modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [computer (get-in state [:get-inventory-details-response :data :computer])
-        {purchase_details :purchase-details
-         user             :user} computer
-        edit-mode (:edit-mode state)
-        report-issue-mode (:report-issue-mode state)]
+  (let [computer  (get-in state [:get-inventory-details-response :data :computer])
+        edit-mode (:edit-mode state)]
 
     ;INVENTORY DETAILS
     [:div {:id    "detail-container"
@@ -34,52 +75,9 @@
                                                             :icon     "fas fa-exclamation-triangle"
                                                             :on-click (fn [] (trigger-event (event/report-issue-clicked (:id computer))))})})
      ;Report Issue Box
-     (when report-issue-mode
-       [:div {:id    "detail-container"
-              :style style/float-box}
-        ;Toolbar
-        (s-detailview/toolbar {:items-left  [:span {:style {:margin-left "1rem"}}
-                                             [:i {:class "fas fa-exclamation-triangle"}] " Report Issue with Device"]
-                               :items-right (s-general/button {:color    color/white
-                                                               :icon     "far fa-times-circle"
-                                                               :on-click (fn [] (trigger-event (rem/create-event {:name :close-report-issue})))})})
-        ;;Form
-        [:div {:style {:overflow-x "hidden"
-                       :overflow-y "scroll"}}
-         [:div {:style style/form-box}
-          [:div {:id    "form"
-                 :style {:display         "flex"
-                         :flex-wrap       "wrap"
-                         :justify-content "space-between"}}
-
-           (s-general/input-section {:field "Issue:"
-                                     :type  "textarea"
-                                     :text  "Type your issue here."})
-           (s-general/input-section {:field     "Upload an Image"
-                                     :type      "upload"
-                                     :id        "report-image"
-                                     :color     color/transparent
-                                     :required  false
-                                     :text      "Upload image to show the problem (only 1 image allowed)."
-                                     ;:on-change (fn [e] (trigger-event
-                                     ;                     (event/new-report-issue-file (oops/oget e [:target :files :0]))))
-                                     :on-change (fn [e]
-                                                  (trigger-event
-                                                    (event/new-report-issue-file
-                                                      {:name (oops/oget e [:target :files :0 :name])
-                                                       :type (oops/oget e [:target :files :0 :type])
-                                                       :size (oops/oget e [:target :files :0 :size])
-                                                       :date (oops/oget e [:target :files :0 :lastModified])
-                                                       :object (oops/oget e [:target :files :0])})))
-                                     :value     "Click here"
-                                     :style     {:margin 0}})]]]
-
-        [:div {:style {:display         "flex"
-                       :justify-content "space-between"}}
-         (s-general/button {:color color/link-active
-                            :text  "Report this Issue"
-                            :icon  "fas fa-paper-plane"
-                            :style {:margin "0.5rem 1rem"}})]])
+     (when (core/should-show-report-issue-form? state)
+       (report-issue-form {:report-issue-form-data (:report-issue-form-data state)
+                           :trigger-event          trigger-event}))
 
      ;------------
 
@@ -105,17 +103,17 @@
                      {:label    "Model Identifier"
                       :value    (:model-identifier computer)
                       :editable false}
-                     (when (not-empty purchase_details) {:label    "Supplier"
-                                                         :value    (:name (:supplier (:purchase_details computer)))
-                                                         :editable false}
-                                                        {:label      "Insurance expiry"
-                                                         :value      (s-general/time-format-string {:time (:insurance_expires (:purchase_details computer))})
-                                                         :side-value (str " (" (s-general/days-to-expiry (:insurance_expires (:purchase_details computer))) " days left)")
-                                                         :editable   false}
-                                                        {:label      "Warranty expiry"
-                                                         :value      (s-general/time-format-string {:time (:warranty_expires (:purchase_details computer))})
-                                                         :side-value (str " (" (s-general/days-to-expiry (:warranty_expires (:purchase_details computer))) " days left)")
-                                                         :editable   false})]
+                     (when (not-empty (:purchase_details computer)) {:label    "Supplier"
+                                                                     :value    (:name (:supplier (:purchase_details computer)))
+                                                                     :editable false}
+                                                                    {:label      "Insurance expiry"
+                                                                     :value      (s-general/time-format-string {:time (:insurance_expires (:purchase_details computer))})
+                                                                     :side-value (str " (" (s-general/days-to-expiry (:insurance_expires (:purchase_details computer))) " days left)")
+                                                                     :editable   false}
+                                                                    {:label      "Warranty expiry"
+                                                                     :value      (s-general/time-format-string {:time (:warranty_expires (:purchase_details computer))})
+                                                                     :side-value (str " (" (s-general/days-to-expiry (:warranty_expires (:purchase_details computer))) " days left)")
+                                                                     :editable   false})]
          :edit-mode edit-mode})
 
       ;Assignee
@@ -136,29 +134,30 @@
                        :flex-direction "row"
                        :flex-wrap      "wrap"
                        :align-items    "flex-start"}}
-         (when edit-mode (s-detailview/card {:id      "reassign-device"
-                                             :style   {:display "block !important"
-                                                       :padding "1rem"}
-                                             :content [:div {:style {:display         "flex"
-                                                                     :flex-wrap       "wrap"
-                                                                     :justify-content "space-between"}}
-                                                       (s-general/input-field {:placeholder "Search new Assignee's name..."})
-                                                       ;(s-general/text-area {:required    false
-                                                       ;                      :maxWidth    "100%"
-                                                       ;                      :placeholder "Enter comment (optional)."})
-                                                       (s-general/button {:color    color/theme
-                                                                          :icon     "fas fa-check-circle"
-                                                                          :text     "Assign Device"
-                                                                          :on-click (fn [] (trigger-event (rem/create-event {:name :cancel-device-reassignment})))
-                                                                          :style    {:margin "0.5rem 0 0 0"}})
-                                                       (s-general/button {:color    color/grey-normal
-                                                                          :icon     "fas fa-times-circle"
-                                                                          :text     "Cancel"
-                                                                          :on-click (fn [] (trigger-event (rem/create-event {:name :cancel-device-reassignment})))
-                                                                          :style    {:margin "0.5rem 0 0 0"}})]}))
+         (when edit-mode
+           (s-detailview/card {:id      "reassign-device"
+                               :style   {:display "block !important"
+                                         :padding "1rem"}
+                               :content [:div {:style {:display         "flex"
+                                                       :flex-wrap       "wrap"
+                                                       :justify-content "space-between"}}
+                                         (s-general/input-field {:placeholder "Search new Assignee's name..."})
+                                         ;(s-general/text-area {:required    false
+                                         ;                      :maxWidth    "100%"
+                                         ;                      :placeholder "Enter comment (optional)."})
+                                         (s-general/button {:color    color/theme
+                                                            :icon     "fas fa-check-circle"
+                                                            :text     "Assign Device"
+                                                            :on-click (fn [] (trigger-event (rem/create-event {:name :cancel-device-reassignment})))
+                                                            :style    {:margin "0.5rem 0 0 0"}})
+                                         (s-general/button {:color    color/grey-normal
+                                                            :icon     "fas fa-times-circle"
+                                                            :text     "Cancel"
+                                                            :on-click (fn [] (trigger-event (rem/create-event {:name :cancel-device-reassignment})))
+                                                            :style    {:margin "0.5rem 0 0 0"}})]}))
 
 
-         (if user
+         (if-let [user (:user computer)]
            (s-detailview/person-card {:user     user
                                       :on-click (fn [] (trigger-event (event/clicked-user (:id user))))})
            [:div {:style {:color      color/grey-normal
