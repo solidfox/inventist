@@ -10,12 +10,13 @@
             [remodular.core :as rem]
             [view-inventory-detail.event :as event]
             [view-inventory-detail.core :as core]
-            [oops.core :as oops]))
+            [oops.core :as oops]
+            [util.inventory.core :as util]))
 
 (defn report-issue-form
-  [{{file        :file
-     description :description} :report-issue-form-data
-    trigger-event              :trigger-event}]
+  [{{file-object-url :file-object-url
+     description     :description} :report-issue-form-data
+    trigger-event                  :trigger-event}]
   [:div {:id    "detail-container"
          :style style/float-box}
    ;Toolbar
@@ -32,13 +33,16 @@
             :style {:display         "flex"
                     :flex-wrap       "wrap"
                     :justify-content "space-between"}}
-      (s-general/input-section {:field "Issue"
-                                :type  "textarea"
-                                :value (or description "")
+      (s-general/input-section {:field     "Issue"
+                                :type      "textarea"
+                                :value     (or description "")
                                 :on-change (fn [e]
                                              (trigger-event
                                                (event/set-report-issue-description (oops/oget e [:target :value]))))
-                                :text  "Describe your issue in detail."})
+                                :text      "Describe your issue in detail."})
+      (when file-object-url
+        [:img {:class (style/card-image)
+               :src   file-object-url}])
       (s-general/input-section {:field     "Photo"
                                 :type      "upload"
                                 :id        "report-image"

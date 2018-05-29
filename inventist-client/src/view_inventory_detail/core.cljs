@@ -18,9 +18,9 @@
   [state description]
   (assoc-in state [:report-issue-form-data :description] description))
 
-(defn set-report-issue-file
-  [state file]
-  (assoc-in state [:report-issue-form-data :file] file))
+(defn set-report-issue-file-url
+  [state file-object-url]
+  (assoc-in state [:report-issue-form-data :file-object-url] file-object-url))
 
 (defn started-get-inventory-detail-service-call [state]
   (assoc state :fetching-inventory-details true))

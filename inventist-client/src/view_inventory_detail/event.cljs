@@ -1,6 +1,7 @@
 (ns view-inventory-detail.event
   (:require [remodular.core :as rem]
-            [view-inventory-detail.core :as core]))
+            [view-inventory-detail.core :as core]
+            [oops.core :refer [ocall]]))
 
 (defn clicked-user [user-id]
   (rem/create-event {:name :clicked-user
@@ -24,11 +25,12 @@
     (rem/create-anonymous-event event)
     (case (:name event)
       :new-report-issue-file
-      (-> event
-          (rem/append-action
-            (rem/create-action {:name        :new-report-issue-file
-                                :fn-and-args [core/set-report-issue-file (get-in event [:data :file])]}))
-          (rem/create-anonymous-event))
+      (let [file-object-url (ocall js/window [:URL :createObjectURL] (get-in event [:data :file]))]
+        (-> event
+            (rem/append-action
+              (rem/create-action {:name        :new-report-issue-file
+                                  :fn-and-args [core/set-report-issue-file-url file-object-url]}))
+            (rem/create-anonymous-event)))
 
       :set-report-issue-description
       (-> event
