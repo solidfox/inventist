@@ -50,18 +50,28 @@
    :after  [core/receive-get-inventory-detail-service-response]})
 
 (defn send-report-issue-form
-  []
-  {:name :send-report-issue-form
+  [{item-id     :item-id
+    description :description
+    photos      :photos}]
+  {:name   :send-report-issue-form
    :before [core/started-send-report-issue-form-service-call]
-   :data {:url "http://backend.inventory.gripsholmsskolan.se:8888/graphql"
-          :params {:query (util/graphql-string {:operation {:operation/type :mutation
-                                                            :operation/name "ReassignDevice"}
-                                                :queries   [[:report-issue-with-inventory-item {:inventory-item-serial-number serial-number
-                                                                                                :new-user-id                  new-user-id}
-                                                             [[:new-user person-details-graphql]]]]})}}})
+   :data   {:url    "http://backend.inventory.gripsholmsskolan.se:8888/graphql"
+            :params {:query (util/graphql-string {:operation {:operation/type :mutation
+                                                              :operation/name "ReassignDevice"}
+                                                  :fragments reallocation-fragment
+                                                  :queries   [[:report-issue-with-inventory-item {:item_id     item-id
+                                                                                                  :description description}
+                                                               [[:inventory-item inventory-details-graph-ql]]]]})}}
+   :after  [core/receive-send-report-issue-form-service-response]})
 
 
 (defn get-services
   [{{state :state} :input}]
-  (when (core/should-get-inventory-detail? state)
-    [(get-inventory-details (:inventory-item-id state))]))
+  (as-> [] $
+        (conj $ (when (core/should-get-inventory-detail? state)
+                  (get-inventory-details (:inventory-item-id state))))
+        (conj $ (when (core/should-send-report-issue-form? state)
+                  (send-report-issue-form {:item-id     (:inventory-item-id state)
+                                           :description (get-in state [:report-issue-form :user-input :description])
+                                           :photos      [(get-in state [:report-issue-form :user-input :file])]})))
+        (remove nil? $)))

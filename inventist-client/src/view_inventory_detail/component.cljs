@@ -14,9 +14,11 @@
             [util.inventory.core :as util]))
 
 (defn report-issue-form
-  [{{file-object-url :file-object-url
-     description     :description} :report-issue-form-data
-    trigger-event                  :trigger-event}]
+  [{{{file-object-url :file-object-url
+      description     :description} :user-input
+     is-sending                     :is-sending
+     send-response                  :send-response} :report-issue-form
+    trigger-event                                   :trigger-event}]
   [:div {:id    "detail-container"
          :style style/float-box}
    ;Toolbar
@@ -58,7 +60,8 @@
     (s-general/button {:color color/link-active
                        :text  "Report this Issue"
                        :icon  "fas fa-paper-plane"
-                       :style {:margin "0.5rem 1rem"}})]])
+                       :style {:margin "0.5rem 1rem"}
+                       :on-click (fn [] (trigger-event (rem/create-event {:name :send-report-issue-form})))})]])
 
 (defc inventory-detail < (modular-component event/handle-event)
   [{{state :state} :input
@@ -80,8 +83,8 @@
                                                             :on-click (fn [] (trigger-event (event/report-issue-clicked (:id computer))))})})
      ;Report Issue Box
      (when (core/should-show-report-issue-form? state)
-       (report-issue-form {:report-issue-form-data (:report-issue-form-data state)
-                           :trigger-event          trigger-event}))
+       (report-issue-form {:report-issue-form (:report-issue-form state)
+                           :trigger-event     trigger-event}))
 
      ;------------
 
