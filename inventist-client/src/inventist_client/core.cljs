@@ -25,14 +25,16 @@
            (when (= page :people) {:selected-person-id (first tail)}))))
 
 (defn create-state
-  [{path :path}]
+  [{path :path
+    mode :mode}]
   (let [{selected-inventory-id :selected-inventory-id
          selected-person-id    :selected-person-id
          path                  :path
          :as                   initial-state} (parse-path path)]
     (-> initial-state
         (assoc :internet-reachable true
-               :path [(or (first path) :dashboard)])
+               :path [(or (first path) :dashboard)]
+               :mode mode)
         (assoc-in authentication-state-path (auth/create-state))
         (assoc-in inventory-page-state-path (inventory-page/create-state {:selected-inventory-id selected-inventory-id}))
         (assoc-in contractors-page-state-path (contractors-page/create-state))

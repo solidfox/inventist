@@ -17,7 +17,7 @@
                  [com.andrewmcveigh/cljs-time "0.5.2"]
                  [cljs-react-material-ui "0.2.48"]
                  [rum "0.11.2"]
-                 [remodular "0.1.3-SNAPSHOT"]
+                 [remodular "0.1.4-SNAPSHOT"]
                  [ysera "1.2.0"]
                  [org.roman01la/cljss "1.6.2"]
                  [sablono "0.8.4"]

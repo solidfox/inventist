@@ -22,3 +22,4 @@ pom.xml.asc
 *.sketch
 design/.DS_Store
 **/node_modules/
+inventist-client/checkouts

@@ -8,7 +8,8 @@
             [inventist-client.services :as services]
             [clojure.string :as str]
             [clojure.browser.event :as event]
-            [util.inventory.core :as util]))
+            [util.inventory.core :as util]
+            [ajax.core :refer [GET POST]]))
 
 (enable-console-print!)
 
@@ -19,7 +20,8 @@
                           (oget $ :pathname))]
            (println "reload")
            (def app-state-atom (atom (core/create-state
-                                       {:path path})))
+                                       {:path path
+                                        :mode :prod})))
            (ocall js/window :addEventListener "popstate" (fn [event]
                                                            (let [path (oget event [:target :location :pathname])]
                                                              (swap! app-state-atom
@@ -40,10 +42,29 @@
                                                          (swap! app-state-atom assoc :internet-reachable true)))
            true))
 
+(defmethod a/perform-services :prod
+  [_ services handle-event]
+  {:pre [(not-empty services)]}
+  (doseq [{{url    :url
+            params :params
+            :as    data} :data
+           on-response   :after
+           state-path    :state-path} services]
+    (POST url
+          {:body            (:query params)
+           :response-format :json
+           :keywords?       true
+           :handler         (fn [response]
+                              (handle-event {:actions
+                                             [{:fn-and-args (concat on-response [response data])
+                                               :state-path  state-path}]}))}))
+  (handle-event {:actions (map (fn [service]
+                                 {:fn-and-args (:before service)
+                                  :state-path  (or (:state-path service) [])})
+                               services)}))
 
 (a/run-modular-app! {:get-view         c/app
                      :get-services     services/get-services
-                     :perform-services services/perform-services
                      :app-state-atom   app-state-atom
                      :logging          {:state-updates true
                                         :services      true
