@@ -11,7 +11,7 @@
 (defn log-in-with-redirect
   []
   (let [google-auth-provider (oget firebase-auth :GoogleAuthProvider)
-        provider (new google-auth-provider)]
+        provider             (new google-auth-provider)]
     (js/console.log provider)
     (ocall (firebase-auth) :signInWithRedirect provider)))
 
@@ -20,25 +20,21 @@
 
 (defc login < (rem/modular-component)
   [{{state :state} :input}]
-  [:div {:style {:padding        "3rem"
-                 :display        "flex"
-                 :flex-direction "column"
-                 :color          c/black
-                 :align-items    "center"}}
-   [:h1 "Inventist"]
-   [:h2 "Reinvented inventory."]
-   (cond (= :loading (core/status state))
-         [:div {:style {:text-align "center"}}
-          (ui/raised-button {:label    "Sign in with Google"
-                             :color    "secondary"
-                             :disabled true
-                             :on-click log-in-with-redirect})
-          [:br] [:br]
-          (ui/circular-progress {:size 50})]
-         :else
-         (ui/raised-button {:label    "Sign in with Google"
-                            :color    "secondary"
-                            :on-click log-in-with-redirect}))])
+  (let [loading (= :loading (core/status state))]
+    [:div {:style {:padding        "3rem"
+                   :display        "flex"
+                   :flex-direction "column"
+                   :color          c/black
+                   :align-items    "center"}}
+     [:h1 "Inventist"]
+     [:h2 "Reinvented inventory."]
+     [:div {:style {:text-align "center"}}
+      (ui/raised-button {:label    "Sign in with Google"
+                         :primary  true
+                         :disabled loading
+                         :on-click log-in-with-redirect})
+      [:br] [:br]
+      (when loading (ui/circular-progress {:size 50}))]]))
 
 
 
