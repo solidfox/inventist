@@ -18,6 +18,13 @@
 (defn log-out []
   (ocall (firebase-auth) :signOut))
 
+(defc loading-indicator []
+  [:img {:style {:margin     "6px 0 0 8px"
+                 :max-height "24px"
+                 :max-width  "24px"
+                 :float      "left"}
+         :src   "/image/svg-loaders/tail-spin.svg"}])
+
 (defc login < (rem/modular-component)
   [{{state :state} :input}]
   (let [loading (= :loading (core/status state))]
@@ -27,16 +34,12 @@
                    :color          c/black
                    :align-items    "center"}}
      [:h1 "Inventist"]
-     [:h2 "Reinvented inventory."]
-     [:div {:style {:text-align "center"}}
-      (ui/raised-button {:label    "Sign in with Google"
-                         :primary  true
-                         :disabled loading
-                         :on-click log-in-with-redirect})
-      [:br] [:br]
-      (when loading (ui/circular-progress {:size 50}))]]))
-
-
+     [:h2 "Inventory reinvented."]
+     (ui/raised-button {:label    (if loading "Signing in with Google" "Sign in with Google")
+                        :primary  true
+                        :disabled loading
+                        :icon     (when loading (loading-indicator))
+                        :on-click log-in-with-redirect})]))
 
 (defc bar-item-login-status < (rem/modular-component)
   [{{state :state} :input
