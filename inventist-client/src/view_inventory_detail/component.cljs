@@ -14,11 +14,11 @@
             [util.inventory.core :as util]))
 
 (defn report-issue-form
-  [{{{file-object-url :file-object-url
-      description     :description} :user-input
-     is-sending                     :is-sending
-     send-response                  :send-response} :report-issue-form
-    trigger-event                                   :trigger-event}]
+  [{{{{object-url :object-url} :file
+      description              :description} :user-input
+     is-sending                              :is-sending
+     send-response                           :send-response} :report-issue-form
+    trigger-event                                            :trigger-event}]
   [:div {:id    "detail-container"
          :style style/float-box}
    ;Toolbar
@@ -42,9 +42,9 @@
                                              (trigger-event
                                                (event/set-report-issue-description (oops/oget e [:target :value]))))
                                 :text      "Describe your issue in detail."})
-      (when file-object-url
+      (when object-url
         [:img {:class (style/card-image)
-               :src   file-object-url}])
+               :src   object-url}])
       (s-general/input-section {:field     "Photo"
                                 :type      "upload"
                                 :id        "report-image"
@@ -57,15 +57,16 @@
 
    [:div {:style {:display         "flex"
                   :justify-content "space-between"}}
-    (s-general/button {:color color/link-active
-                       :text  "Report this Issue"
-                       :icon  "fas fa-paper-plane"
-                       :style {:margin "0.5rem 1rem"}
+    (s-general/button {:color    color/link-active
+                       :text     "Report this Issue"
+                       :icon     "fas fa-paper-plane"
+                       :style    {:margin "0.5rem 1rem"}
                        :on-click (fn [] (trigger-event (rem/create-event {:name :send-report-issue-form})))})]])
 
 (defc inventory-detail < (modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
+  
   (let [computer  (get-in state [:get-inventory-details-response :data :computer])
         edit-mode (:edit-mode state)]
 
