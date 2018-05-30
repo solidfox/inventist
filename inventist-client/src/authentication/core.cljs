@@ -1,11 +1,11 @@
-(ns authentication.core)
+(ns authentication.core
+  (:require [oops.core :refer [oget ocall]]))
 
 (defn create-state
   []
-  (let [firebase-auth-state (js/firebase.auth)]
-    {:fetching-login-status true
-     :logged-in-user        nil
-     :firebase-auth-state   firebase-auth-state}))
+  {:fetching-login-status true
+   :logged-in-user        nil
+   :firebase-auth-state   (oget js/firebase :auth)})
 
 (defn status
   [state]
@@ -20,9 +20,9 @@
 (defn get-authenticated-user
   [state]
   (when-let [js-user (:logged-in-user state)]
-    {:display-name (.-displayName js-user)
-     :email        (.-email js-user)
-     :photo-url    (.-photoURL js-user)}))
+    {:display-name (oget js-user :displayName)
+     :email        (oget js-user :email)
+     :photo-url    (oget js-user :photoURL)}))
 
 (defn receive-new-auth-state
   [state user]
