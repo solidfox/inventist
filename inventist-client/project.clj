@@ -11,7 +11,6 @@
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.10.238"]
                  [district0x/graphql-query "1.0.5"]
-                 [cljs-ajax "0.7.3"]
                  ;[org.clojure/core.async  "0.4.474"]
                  [binaryage/oops "0.6.1"]
                  [com.andrewmcveigh/cljs-time "0.5.2"]
@@ -20,7 +19,6 @@
                  [remodular "0.1.4-SNAPSHOT"]
                  [ysera "1.2.0"]
                  [org.roman01la/cljss "1.6.2"]
-                 [sablono "0.8.4"]
                  [camel-snake-kebab "0.4.0"]
                  [finja "0.1.0-SNAPSHOT"]]
 

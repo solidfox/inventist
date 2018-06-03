@@ -9,7 +9,7 @@
             [clojure.string :as str]
             [clojure.browser.event :as event]
             [util.inventory.core :as util]
-            [ajax.core :refer [GET POST]]))
+            [goog.net.XhrIo :as xhr]))
 
 (enable-console-print!)
 
@@ -47,25 +47,28 @@
             :as    data} :data
            on-response   :after
            state-path    :state-path} services]
-    (POST url
-          {:body            (util/spy (js/JSON.stringify (clj->js params)))
-           :response-format :json
-           :keywords?       true
-           :handler         (fn [response]
-                              (handle-event {:actions
-                                             [{:fn-and-args (concat on-response [response data])
-                                               :state-path  state-path}]}))}))
+    (xhr/send url
+              (fn [response]
+                (let [response-json (.getResponseJson (.-target response))
+                      response-edn (js->clj response-json {:key-fn keyword})]
+                  (handle-event {:actions
+                                 [{:fn-and-args (concat on-response [response-edn data])
+                                   :state-path  state-path}]})))     ;; handler
+              "POST"                                        ;; method
+              (js/JSON.stringify (clj->js params))          ;; body
+              (clj->js {:Content-Type "application/json"}))) ;; headers
+
   (handle-event {:actions (map (fn [service]
                                  {:fn-and-args (:before service)
                                   :state-path  (or (:state-path service) [])})
                                services)}))
 
-(a/run-modular-app! {:get-view         c/app
-                     :get-services     services/get-services
-                     :app-state-atom   app-state-atom
-                     :logging          {:state-updates true
-                                        :services      true
-                                        :events        true}})
+(a/run-modular-app! {:get-view       c/app
+                     :get-services   services/get-services
+                     :app-state-atom app-state-atom
+                     :logging        {:state-updates true
+                                      :services      true
+                                      :events        true}})
 
 
 
