@@ -14,7 +14,8 @@
 (defc person-list-card < rum/static
   [{person :person
     hidden :hidden}]
-  [:div {:style {:display (if hidden "none" "auto")}
+  [:div {:style (merge {}
+                       (when hidden {:display "none"}))
          :key   (:id person)
          :class (style/list-item)}
    [:div {:class (style/list-item-left-column)}

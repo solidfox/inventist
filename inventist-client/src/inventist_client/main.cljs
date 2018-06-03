@@ -27,15 +27,12 @@
                                                              (swap! app-state-atom
                                                                     core/set-path
                                                                     path))))
-           (ocall
-             (firebase-auth)
-             :onAuthStateChanged
-             (fn [user]
-               (swap! app-state-atom
-                      update-in
-                      core/authentication-state-path
-                      auth/receive-new-auth-state
-                      user)))
+           (ocall (firebase-auth) :onAuthStateChanged (fn [user]
+                                                        (swap! app-state-atom
+                                                               update-in
+                                                               core/authentication-state-path
+                                                               auth/receive-new-auth-state
+                                                               user)))
            (ocall js/window :addEventListener "offline" (fn []
                                                           (swap! app-state-atom assoc :internet-reachable false)))
            (ocall js/window :addEventListener "online" (fn []
@@ -51,7 +48,7 @@
            on-response   :after
            state-path    :state-path} services]
     (POST url
-          {:body            (:query params)
+          {:body            (util/spy (js/JSON.stringify (clj->js params)))
            :response-format :json
            :keywords?       true
            :handler         (fn [response]

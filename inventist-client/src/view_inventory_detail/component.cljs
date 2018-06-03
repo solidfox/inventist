@@ -66,7 +66,7 @@
 (defc inventory-detail < (modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  
+
   (let [computer  (get-in state [:get-inventory-details-response :data :computer])
         edit-mode (:edit-mode state)]
 
