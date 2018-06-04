@@ -91,7 +91,8 @@
                                  :content [:div {:style {:display         "flex"
                                                          :flex-wrap       "wrap"
                                                          :justify-content "space-between"}}
-
+                                           ;(ui/auto-complete {:hint-text "New device's serial number"
+                                           ;                   :dataSource ["test" "testa"]})
                                            (s-general/input-field {:placeholder "New device's serial number"
                                                                    :value       (or (core/get-new-device-serial-number state) "")
                                                                    :on-change   (fn [e] (trigger-event (event/new-device-serial-number-changed (oops/oget e [:target :value]))))

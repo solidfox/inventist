@@ -132,11 +132,11 @@
        (s-general/section-left)
 
        [:div {:style {:margin "0 0 0 1rem" :width "100%"}}
-        (s-general/section-title {:title   "Current Assignee"
-                                  :buttons (s-general/section-title-button {:icon     "fas fa-exchange-alt"
-                                                                            :text     "Reassign Device"
-                                                                            :on-click (fn [] (trigger-event (rem/create-event
-                                                                                                              {:name :reassign-device-clicked})))})})
+        (s-general/section-title {:title   "Current Assignee"})
+                                  ;:buttons (s-general/section-title-button {:icon     "fas fa-exchange-alt"
+                                  ;                                          :text     "Reassign Device"
+                                  ;                                          :on-click (fn [] (trigger-event (rem/create-event
+                                  ;                                                                            {:name :reassign-device-clicked})))})})
 
         [:div {:style {:display        "flex"
                        :flex-direction "row"
