@@ -7,7 +7,8 @@
     [symbols.style :as style]
     [util.inventory.core :as inventory]
     [cljss.core :as cljss]
-    [oops.core :as oops])
+    [oops.core :as oops]
+    [cljs-react-material-ui.rum :as ui])
   (:require-macros
     [cljss.core :refer [defstyles]]))
 
@@ -34,6 +35,14 @@
                            format :format}]
   (time-format/unparse (time-format/formatter (or format "yyyy-MM-dd hh:mm")) (time-format-object time)))
 
+(defc full-view-loading [content-description]
+  [:div {:style {:height      "100%"
+                 :display         "flex"
+                 :flex-direction  "column"
+                 :align-items     "center"
+                 :justify-content "center"}}
+   (ui/circular-progress {:size 50})
+   [:div (str "Loading " content-description "...")]])
 
 ;button general
 (defc button [{text     :text

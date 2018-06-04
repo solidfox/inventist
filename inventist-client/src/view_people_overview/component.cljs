@@ -6,7 +6,8 @@
             [remodular.core :as rem]
             [oops.core :as o]
             [view-people-overview.event :as event]
-            [cljs-react-material-ui.core :as ui]))
+            [cljs-react-material-ui.core :as ui]
+            [symbols.general :as s-general]))
 
 (defc people-list < (remodular.core/modular-component event/handle-event)
   [{{state :state} :input
@@ -25,7 +26,7 @@
                                   (rem/create-event {:name :search-string-changed
                                                      :data {:new-value (o/oget e [:target :value])}})))})
        :content
-       [:div {:style {:height       "100%"
+       [:div {:style {:height           "100%"
                       :background-color color/grey-light}}
         (let [person-selected-event (fn [person] (trigger-event (rem/create-event {:name :person-selected
                                                                                    :data {:person person}})))]
@@ -39,13 +40,7 @@
         (cond (not= n-results 0)
               nil
               (:fetching-people-list state)
-              [:div {:style {:height      "100%"
-                             :display         "flex"
-                             :flex-direction  "column"
-                             :align-items     "center"
-                             :justify-content "center"}}
-               (ui/circular-progress {:size 50})
-               [:div "Loading people..."]]
+              (s-general/full-view-loading "people")
               :else
               [:div {:style {:width            "100%"
                              :height           "100%"
@@ -53,9 +48,7 @@
                              :background-color color/transparent
                              :text-align       "left"
                              :margin           "2rem"}}
-               "No matches found!" [:br] [:br]
-               "Try with some other keyword" [:br]
-               "or check internet connection"])]
+               "No matches found!"])]
 
        :floating-footer
        (footer)})))

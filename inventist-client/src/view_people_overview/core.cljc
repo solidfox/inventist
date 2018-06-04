@@ -10,6 +10,10 @@
    :fetching-people-list     false
    :get-people-list-response nil})
 
+(defn reload [state]
+  (assoc state :get-people-list-response nil
+               :fetching-people-list false))
+
 (defn started-get-people-list-service-call [state]
   (assoc state :fetching-people-list true))
 
@@ -88,7 +92,7 @@
                        [kalle
                         scrooge])))}
   [state & [search-terms]]
-  (when-let [people       (get-in state [:get-people-list-response :data :people])]
+  (when-let [people (get-in state [:get-people-list-response :data :people])]
     (if-let [search-terms (or search-terms
                               (:search-terms state))]
       (->> people
