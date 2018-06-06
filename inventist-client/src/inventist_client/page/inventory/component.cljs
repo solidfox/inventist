@@ -40,9 +40,7 @@
                       :margin     "2rem"
                       :left       "2rem"}}
         "No item selected. Use the side-bar to" [:br]
-        "search and select an item to view details."]
+        "search and select an item to view details."]])]])
 
-       ;background image
-       (s-general/watermark)])]])
 
 

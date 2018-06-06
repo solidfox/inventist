@@ -13,7 +13,8 @@
             [inventist-client.notifications.component :as notifications]
             [cljs-react-material-ui.rum :as ui]
             [cljs-react-material-ui.core :refer [get-mui-theme color]]
-            [oops.core :as oops]))
+            [oops.core :as oops]
+            [symbols.general :as s-general]))
 
 
 (defc app < (modular-component handle-event)
@@ -26,13 +27,14 @@
     (if (not (core/logged-in? state))
       (auth/login (core/authentication-args state))
       ; Else Logged in!
-      [:div {:style {:height             "100vh"
-                     :display            "grid"
-                     :backgroundColor    c/white
-                     :grid-template-rows "calc(100% - 3.5rem) 3.5rem "}}
-       (when (not (:internet-reachable state)) (notifications/connection-bar))
-       (notifications/size-bar {:viewport-height (:viewport-height state)
-                                :viewport-width  (:viewport-width state)})
+      [:div {:style {:height              (:viewport-height state)
+                     :display             "grid"
+                     :backgroundColor     c/white
+                     :grid-template-rows  "calc(100% - 3.5rem) 3.5rem"
+                     :background-image    "url(\"/image/GHS-watermark.svg\")"
+                     :background-position "50%"
+                     :background-size     "15%"
+                     :background-repeat   "no-repeat"}}
 
        (condp = (first (:path state))
          :dashboard
@@ -53,4 +55,10 @@
           :current-path     (:path state)
           :trigger-event    trigger-event
           :viewport-height  (:viewport-height state)
-          :viewport-width   (:viewport-width state)})])))
+          :viewport-width   (:viewport-width state)})
+
+       (when (not (:internet-reachable state)) (notifications/connection-bar))
+       (notifications/size-bar {:viewport-height (:viewport-height state)
+                                :viewport-width  (:viewport-width state)})])))
+
+

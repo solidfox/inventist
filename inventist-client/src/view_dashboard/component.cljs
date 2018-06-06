@@ -28,12 +28,7 @@
     "This is the Inventist Dashboard." [:br]
     "Students & Staff with a \"gripsholmsskolan.se\" email address will be able to see their infromation and registered devices." [:br] [:br]
     "You are logged-in with a external mail-id." [:br]
-    "For non-gripsholmsskolan.se visitors, click on other sections like \"People\" and \"Inventory\" to view other's details." [:br]]
-
-   ;background image
-   (s-general/watermark)])
-
-
+    "For non-gripsholmsskolan.se visitors, click on other sections like \"People\" and \"Inventory\" to view other's details." [:br]]])
 
 
 

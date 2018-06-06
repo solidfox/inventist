@@ -47,39 +47,74 @@
                        auth-status-item :auth-status-item
                        viewport-height  :viewport-height
                        viewport-width   :viewport-width}]
-  [:div {:style
-         (merge {
-                 ;:position        "absolute"
-                 ;:bottom          0
-                 ;:left            "50%"
-                 :padding         "0.5rem"
-                 ;:maxWidth        "500px"
-                 :height          "2.5rem"
-                 :display         "flex"
-                 :flex-direction  "row"
-                 :align-items     "center"
-                 :backgroundColor color/silver
-                 :justify-content "space-between"}
-                style/z-index-top-toolbar
-                style/box-shadow)}
-   [:div {:style {:height "100%" :text-align "left"}}
-    [:span [:img {:src   "/image/GHS-logotype-horizontal.svg"
-                  :style {:height       "100%"
-                          :borderRadius "0rem"}}]]]
 
-   [:div {:style {:height "100%" :text-align "center" :display "flex"}}
-    (for [{title          :title
-           icon           :icon
-           image          :image
-           target-page-id :target-page-id} navbar-main-sections]
-      (-> (navigation-icon (merge {:title    title
-                                   :icon     icon
-                                   :image    image
-                                   :on-click (fn [] (trigger-event (event/clicked-navigation-icon {:target-page-id target-page-id})))}
-                                  (when (= (first current-path) target-page-id)
-                                    {:selected true
-                                     :color    color/theme})))
-          (with-key title)))]
+  (cond (> viewport-width 800) ;Desktop View
+        [:div {:style
+               (merge {
+                       ;:position        "absolute"
+                       ;:bottom          0
+                       ;:left            "50%"
+                       :padding         "0.5rem"
+                       ;:maxWidth        "500px"
+                       :height          "2.5rem"
+                       :display         "flex"
+                       :flex-direction  "row"
+                       :align-items     "center"
+                       :backgroundColor color/silver
+                       :justify-content "center"}
+                      style/z-index-top-toolbar
+                      style/box-shadow)}
 
-   auth-status-item])
+         [:div {:style {:height "100%" :text-align "center" :display "flex"}}
+          (for [{title          :title
+                 icon           :icon
+                 image          :image
+                 target-page-id :target-page-id} navbar-main-sections]
+            (-> (navigation-icon (merge {:title    title
+                                         :icon     icon
+                                         :image    image
+                                         :on-click (fn [] (trigger-event (event/clicked-navigation-icon {:target-page-id target-page-id})))}
+                                        (when (= (first current-path) target-page-id)
+                                          {:selected true
+                                           :color    color/theme})))
+                (with-key title)))]
+
+         auth-status-item]
+
+        (< viewport-width 800) ;Mobile View
+        [:div {:style
+               (merge {
+                       ;:position        "absolute"
+                       ;:bottom          0
+                       ;:left            "50%"
+                       :padding         "0.5rem"
+                       ;:maxWidth        "500px"
+                       :height          "2.5rem"
+                       :display         "flex"
+                       :flex-direction  "row"
+                       :align-items     "center"
+                       :backgroundColor color/silver
+                       :justify-content "space-between"}
+                      style/z-index-top-toolbar
+                      style/box-shadow)}
+         [:div {:style {:height "100%" :text-align "left"}}
+          [:span [:img {:src   "/image/GHS-logotype-horizontal.svg"
+                        :style {:height       "100%"
+                                :borderRadius "0rem"}}]]]
+
+         [:div {:style {:height "100%" :text-align "center" :display "flex"}}
+          (for [{title          :title
+                 icon           :icon
+                 image          :image
+                 target-page-id :target-page-id} navbar-main-sections]
+            (-> (navigation-icon (merge {:title    title
+                                         :icon     icon
+                                         :image    image
+                                         :on-click (fn [] (trigger-event (event/clicked-navigation-icon {:target-page-id target-page-id})))}
+                                        (when (= (first current-path) target-page-id)
+                                          {:selected true
+                                           :color    color/theme})))
+                (with-key title)))]
+
+         auth-status-item]))
 

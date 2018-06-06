@@ -20,8 +20,10 @@
                  :grid-template-rows    "100%"}}
    (people-list (assoc (core/create-people-overview-args state)
                   :trigger-parent-event trigger-event))
-   [:div {:style (merge style/z-index-details-section
-                        style/box-shadow)}
+   [:div {:style (merge
+                   {:background-color color/transparent}
+                   style/z-index-details-section
+                   style/box-shadow)}
     (if-let [selected-person-id (:selected-person-id state)]
       (person-detail (assoc (core/create-person-detail-args state selected-person-id)
                        :trigger-parent-event trigger-event))
@@ -41,8 +43,6 @@
                       :margin     "2rem"
                       :left       "2rem"}}
         "No person selected. Use the side-bar to" [:br]
-        "search and select a person to view details."]
+        "search and select a person to view details."]])]])
 
-       ;background image
-       (s-general/watermark)])]])
 

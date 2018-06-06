@@ -12,19 +12,6 @@
   (:require-macros
     [cljss.core :refer [defstyles]]))
 
-;To show school logo in background
-(defn watermark []
-  [:div {:style {:width               "100%"
-                 :height              "100%"
-                 :position            "absolute"
-                 :background-image    "url(\"/image/GHS-logotype.svg\")"
-                 :top                 0
-                 :left                0
-                 :background-position "50%"
-                 :background-size     "15%"
-                 :background-repeat   "no-repeat"
-                 :opacity             0.1}}])
-
 ;Returns brand and model icon together
 (defc device-icon-set [{item :item}]
   (let [icon-map (inventory/inventory-icon item)]
@@ -49,7 +36,7 @@
   (time-format/unparse (time-format/formatter (or format "yyyy-MM-dd hh:mm")) (time-format-object time)))
 
 (defc full-view-loading [content-description]
-  [:div {:style {:height      "100%"
+  [:div {:style {:height          "100%"
                  :display         "flex"
                  :flex-direction  "column"
                  :align-items     "center"
@@ -165,25 +152,25 @@
                     style       :style
                     on-change   :on-change
                     on-enter    :on-enter}]
-  [:input {:id          id
-           :style       (merge {:font-size       "1rem"
-                                :minWidth        minWidth
-                                :maxWidth        maxWidth
-                                :width           (or width "100%")
-                                :height          "2rem"
-                                :backgroundColor (cond (= disabled true) color/highlight
-                                                       :esle color/white)
-                                :box-shadow      "0px 0px 2px rgba(0,0,0,0.5) inset"
-                                :borderRadius    "5px"
-                                :border          0
-                                :padding-left    "0.5rem"}
-                               style)
-           :type        (or type "text")
-           :disabled    (or disabled false)
-           :required    (or required true)
-           :placeholder (or placeholder "Enter here...")
-           :value       value
-           :on-change   on-change
+  [:input {:id           id
+           :style        (merge {:font-size       "1rem"
+                                 :minWidth        minWidth
+                                 :maxWidth        maxWidth
+                                 :width           (or width "100%")
+                                 :height          "2rem"
+                                 :backgroundColor (cond (= disabled true) color/highlight
+                                                        :esle color/white)
+                                 :box-shadow      "0px 0px 2px rgba(0,0,0,0.5) inset"
+                                 :borderRadius    "5px"
+                                 :border          0
+                                 :padding-left    "0.5rem"}
+                                style)
+           :type         (or type "text")
+           :disabled     (or disabled false)
+           :required     (or required true)
+           :placeholder  (or placeholder "Enter here...")
+           :value        value
+           :on-change    on-change
            :on-key-press (fn [e]
                            (when (= (oops/oget e [:key]) "Enter")
                              (on-enter e)))}])
@@ -217,13 +204,13 @@
               :on-change   on-change}])
 
 ;UPLOAD BUTTON
-(defc upload-button [{id       :id
-                      width    :width
-                      minWidth :minWidth
-                      maxWidth :maxWidth
-                      disabled :disabled
-                      required :required
-                      style    :style
+(defc upload-button [{id        :id
+                      width     :width
+                      minWidth  :minWidth
+                      maxWidth  :maxWidth
+                      disabled  :disabled
+                      required  :required
+                      style     :style
                       on-change :on-change}]
   [:input {:id        id
            :style     (merge {:font-size "1rem"
@@ -282,7 +269,7 @@
                   :style style})
 
          (= type "upload")
-         (upload-button {:id       id
+         (upload-button {:id        id
                          :on-change on-change})
 
          :else (input-field {:width       width
