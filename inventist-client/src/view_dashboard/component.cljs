@@ -31,14 +31,7 @@
     "For non-gripsholmsskolan.se visitors, click on other sections like \"People\" and \"Inventory\" to view other's details." [:br]]
 
    ;background image
-   [:div {:style {:width               "100%"
-                  :height              "100%"
-                  :position            "absolute"
-                  :background-image    "url(\"/image/GHS-logotype-horizontal.svg\")"
-                  :background-position "35%"
-                  :background-size     "25%"
-                  :background-repeat   "no-repeat"
-                  :opacity             0.1}}]])
+   (s-general/watermark)])
 
 
 

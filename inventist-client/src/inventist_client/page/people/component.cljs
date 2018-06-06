@@ -6,6 +6,7 @@
             [rum.core :refer [defc]]
             [inventist-client.page.people.event :as event]
             [symbols.detailview :as s-detailview]
+            [symbols.general :as s-general]
             [symbols.color :as color]
             [symbols.style :as style]))
 
@@ -43,12 +44,5 @@
         "search and select a person to view details."]
 
        ;background image
-       [:div {:style {:width               "100%"
-                      :height              "100%"
-                      :position            "absolute"
-                      :background-image    "url(\"/image/GHS-logotype-horizontal.svg\")"
-                      :background-position "35%"
-                      :background-size     "25%"
-                      :background-repeat   "no-repeat"
-                      :opacity             0.1}}]])]])
+       (s-general/watermark)])]])
 

@@ -12,6 +12,19 @@
   (:require-macros
     [cljss.core :refer [defstyles]]))
 
+;To show school logo in background
+(defn watermark []
+  [:div {:style {:width               "100%"
+                 :height              "100%"
+                 :position            "absolute"
+                 :background-image    "url(\"/image/GHS-logotype.svg\")"
+                 :top                 0
+                 :left                0
+                 :background-position "50%"
+                 :background-size     "15%"
+                 :background-repeat   "no-repeat"
+                 :opacity             0.1}}])
+
 ;Returns brand and model icon together
 (defc device-icon-set [{item :item}]
   (let [icon-map (inventory/inventory-icon item)]

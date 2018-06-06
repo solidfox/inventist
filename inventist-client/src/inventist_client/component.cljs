@@ -29,14 +29,11 @@
       [:div {:style {:height             "100vh"
                      :display            "grid"
                      :backgroundColor    c/white
-                     :grid-template-rows "3.5rem calc(100% - 3.5rem)"}}
+                     :grid-template-rows "calc(100% - 3.5rem) 3.5rem "}}
        (when (not (:internet-reachable state)) (notifications/connection-bar))
-       (navbar/navigation-bar
-         {:auth-status-item (auth/bar-item-login-status (core/authentication-args state))
-          :current-path     (:path state)
-          :trigger-event    trigger-event
-          :viewport-height  (:viewport-height state)
-          :viewport-width   (:viewport-width state)})
+       (notifications/size-bar {:viewport-height (:viewport-height state)
+                                :viewport-width  (:viewport-width state)})
+
        (condp = (first (:path state))
          :dashboard
          (dashboard-page/component (assoc (core/create-dashboard-page-args state)
@@ -49,4 +46,11 @@
                                        :trigger-parent-event trigger-event))
          :inventory
          (inventory-page/component (assoc (core/create-inventory-page-args state)
-                                     :trigger-parent-event trigger-event)))])))
+                                     :trigger-parent-event trigger-event)))
+
+       (navbar/navigation-bar
+         {:auth-status-item (auth/bar-item-login-status (core/authentication-args state))
+          :current-path     (:path state)
+          :trigger-event    trigger-event
+          :viewport-height  (:viewport-height state)
+          :viewport-width   (:viewport-width state)})])))
