@@ -34,7 +34,9 @@
        (navbar/navigation-bar
          {:auth-status-item (auth/bar-item-login-status (core/authentication-args state))
           :current-path     (:path state)
-          :trigger-event    trigger-event})
+          :trigger-event    trigger-event
+          :viewport-height  (:viewport-height state)
+          :viewport-width   (:viewport-width state)})
        (condp = (first (:path state))
          :dashboard
          (dashboard-page/component (assoc (core/create-dashboard-page-args state)
