@@ -33,6 +33,11 @@
                                                                core/authentication-state-path
                                                                auth/receive-new-auth-state
                                                                user)))
+           (ocall js/window :addEventListener "resize" (fn []
+                                                           (swap! app-state-atom assoc :viewport-width (max js/document.documentElement.clientWidth js/window.innerWidth))
+                                                           (swap! app-state-atom assoc :viewport-height (max js/document.documentElement.clientHeight js/window.innerHeight))))
+
+
            (ocall js/window :addEventListener "offline" (fn []
                                                           (swap! app-state-atom assoc :internet-reachable false)))
            (ocall js/window :addEventListener "online" (fn []
@@ -53,7 +58,7 @@
                       response-edn (js->clj response-json {:key-fn keyword})]
                   (handle-event {:actions
                                  [{:fn-and-args (concat on-response [response-edn data])
-                                   :state-path  state-path}]})))     ;; handler
+                                   :state-path  state-path}]}))) ;; handler
               "POST"                                        ;; method
               (js/JSON.stringify (clj->js params))          ;; body
               (clj->js {:Content-Type "application/json"}))) ;; headers

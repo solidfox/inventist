@@ -33,6 +33,8 @@
          :as                   initial-state} (parse-path path)]
     (-> initial-state
         (assoc :internet-reachable true
+               :viewport-height (max js/document.documentElement.clientHeight js/window.innerHeight)
+               :viewport-width (max js/document.documentElement.clientWidth js/window.innerWidth)
                :path [(or (first path) :dashboard)]
                :mode mode)
         (assoc-in authentication-state-path (auth/create-state))
