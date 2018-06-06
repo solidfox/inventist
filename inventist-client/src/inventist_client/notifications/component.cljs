@@ -32,7 +32,7 @@
                  height :viewport-height}]
   [:div {:style
          (merge {:position        "absolute"
-                 :left            "1rem"
+                 :right            "1rem"
                  :bottom          "1rem"
                  :padding         "0.5rem 1rem"
                  :borderRadius    "0.5rem"

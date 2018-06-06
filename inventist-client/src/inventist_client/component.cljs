@@ -27,38 +27,71 @@
     (if (not (core/logged-in? state))
       (auth/login (core/authentication-args state))
       ; Else Logged in!
-      [:div {:style {:height              (:viewport-height state)
-                     :display             "grid"
-                     :backgroundColor     c/white
-                     :grid-template-rows  "calc(100% - 3.5rem) 3.5rem"
-                     :background-image    "url(\"/image/GHS-watermark.svg\")"
-                     :background-position "50%"
-                     :background-size     "15%"
-                     :background-repeat   "no-repeat"}}
 
-       (condp = (first (:path state))
-         :dashboard
-         (dashboard-page/component (assoc (core/create-dashboard-page-args state)
-                                     :trigger-parent-event trigger-event))
-         :people
-         (people-page/component (assoc (core/create-people-page-args state)
-                                  :trigger-parent-event trigger-event))
-         :contractors
-         (contractors-page/component (assoc (core/create-contractors-page-args state)
-                                       :trigger-parent-event trigger-event))
-         :inventory
-         (inventory-page/component (assoc (core/create-inventory-page-args state)
-                                     :trigger-parent-event trigger-event)))
+      (cond (> (:viewport-width state) 800)                 ;Desktop-view
+            [:div {:style {:height              (:viewport-height state)
+                           ;:display             "grid"
+                           :backgroundColor     c/white
+                           ;:grid-template-rows  "calc(100% - 3.5rem) 3.5rem"
+                           :background-image    "url(\"/image/GHS-watermark.svg\")"
+                           :background-position "50%"
+                           :background-size     "15%"
+                           :background-repeat   "no-repeat"}}
 
-       (navbar/navigation-bar
-         {:auth-status-item (auth/bar-item-login-status (core/authentication-args state))
-          :current-path     (:path state)
-          :trigger-event    trigger-event
-          :viewport-height  (:viewport-height state)
-          :viewport-width   (:viewport-width state)})
+             (condp = (first (:path state))
+               :dashboard
+               (dashboard-page/component (assoc (core/create-dashboard-page-args state)
+                                           :trigger-parent-event trigger-event))
+               :people
+               (people-page/component (assoc (core/create-people-page-args state)
+                                        :trigger-parent-event trigger-event))
+               :contractors
+               (contractors-page/component (assoc (core/create-contractors-page-args state)
+                                             :trigger-parent-event trigger-event))
+               :inventory
+               (inventory-page/component (assoc (core/create-inventory-page-args state)
+                                           :trigger-parent-event trigger-event)))
 
-       (when (not (:internet-reachable state)) (notifications/connection-bar))
-       (notifications/size-bar {:viewport-height (:viewport-height state)
-                                :viewport-width  (:viewport-width state)})])))
+             (navbar/navigation-bar-desktop
+               {:auth-status-item (auth/bar-item-login-status (core/authentication-args state))
+                :current-path     (:path state)
+                :trigger-event    trigger-event})
+
+             (when (not (:internet-reachable state)) (notifications/connection-bar))
+             (notifications/size-bar {:viewport-height (:viewport-height state)
+                                      :viewport-width  (:viewport-width state)})]
+
+            (< (:viewport-width state) 800)                 ;mobile-view
+            [:div {:style {:height              (:viewport-height state)
+                           :display             "grid"
+                           :backgroundColor     c/white
+                           :grid-template-rows  "calc(100% - 3.5rem) 3.5rem"
+                           :background-image    "url(\"/image/GHS-watermark.svg\")"
+                           :background-position "50%"
+                           :background-size     "15%"
+                           :background-repeat   "no-repeat"}}
+
+             (condp = (first (:path state))
+               :dashboard
+               (dashboard-page/component (assoc (core/create-dashboard-page-args state)
+                                           :trigger-parent-event trigger-event))
+               :people
+               (people-page/component (assoc (core/create-people-page-args state)
+                                        :trigger-parent-event trigger-event))
+               :contractors
+               (contractors-page/component (assoc (core/create-contractors-page-args state)
+                                             :trigger-parent-event trigger-event))
+               :inventory
+               (inventory-page/component (assoc (core/create-inventory-page-args state)
+                                           :trigger-parent-event trigger-event)))
+
+             (navbar/navigation-bar-mobile
+               {:auth-status-item (auth/bar-item-login-status (core/authentication-args state))
+                :current-path     (:path state)
+                :trigger-event    trigger-event})
+
+             (when (not (:internet-reachable state)) (notifications/connection-bar))
+             (notifications/size-bar {:viewport-height (:viewport-height state)
+                                      :viewport-width  (:viewport-width state)})]))))
 
 

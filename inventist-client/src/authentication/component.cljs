@@ -51,11 +51,12 @@
             :align-items   "center"
             :justify-items "space-between"}}
 
-     [:div {:style {:margin "0 1rem" :text-align "right" :line-height "1rem"}}
-      [:span {:style {:font-weight "500"}} (:display-name logged-in-user) [:br]]
-      [:span {:style {:font-weight "400" :font-size "0.8rem" :color c/grey-dark}} "Admin • "]
-      [:span {:style {:font-weight "400" :font-size "0.8rem" :color c/danger :cursor "pointer"} :on-click log-out} "Logout"]]
-
      [:img {:src   (:photo-url logged-in-user)
             :style {:height       "100%"
-                    :borderRadius "1.5rem"}}]]))
+                    :borderRadius "1.5rem"}}]
+     [:div {:style {:margin "0 1rem" :text-align "left" :line-height "1rem"}}
+      [:span {:style {:font-weight "500"}} (:display-name logged-in-user) [:br]]
+      [:span {:style {:font-weight "400" :font-size "0.8rem" :color c/grey-dark}} "Admin • "]
+      [:span {:style {:font-weight "400" :font-size "0.8rem" :color c/danger :cursor "pointer"} :on-click log-out} "Logout"]]]))
+
+

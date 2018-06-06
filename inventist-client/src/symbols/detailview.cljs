@@ -92,9 +92,9 @@
 
 
 ;Information Section
-(defc section-information [{title       :title
-                            fields      :fields
-                            edit-mode   :edit-mode}]
+(defc section-information [{title     :title
+                            fields    :fields
+                            edit-mode :edit-mode}]
   [:div {:style {:margin         "1rem 2.5rem 1rem"
                  :display        "flex"
                  :flex-direction "row"}
@@ -104,7 +104,7 @@
                   :display        "flex"
                   :flex-direction "column"
                   :width          "100%"}}
-    title ;Section Title
+    title                                                   ;Section Title
 
     [:div {:style {:display               "grid"
                    :grid-template-columns (str field-col-width " 1fr")
