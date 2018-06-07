@@ -18,8 +18,8 @@
     "_class": "rect",
     "constrainProportions": false,
     "do_objectID": "DADE3059-CAF3-4ABD-ABA1-E820FC4F3959",
-    "height": 34,
-    "width": 34,
+    "height": 44,
+    "width": 44,
     "x": 0,
     "y": 0
   },
@@ -39,7 +39,7 @@
     "points": [
       {
         "_class": "curvePoint",
-        "cornerRadius": 17,
+        "cornerRadius": 22,
         "curveFrom": "{0, 0}",
         "curveMode": 1,
         "curveTo": "{0, 0}",
@@ -49,7 +49,7 @@
       },
       {
         "_class": "curvePoint",
-        "cornerRadius": 17,
+        "cornerRadius": 22,
         "curveFrom": "{1, 0}",
         "curveMode": 1,
         "curveTo": "{1, 0}",
@@ -59,7 +59,7 @@
       },
       {
         "_class": "curvePoint",
-        "cornerRadius": 17,
+        "cornerRadius": 22,
         "curveFrom": "{1, 1}",
         "curveMode": 1,
         "curveTo": "{1, 1}",
@@ -69,7 +69,7 @@
       },
       {
         "_class": "curvePoint",
-        "cornerRadius": 17,
+        "cornerRadius": 22,
         "curveFrom": "{0, 1}",
         "curveMode": 1,
         "curveTo": "{0, 1}",
@@ -83,7 +83,7 @@
   "points": [
     {
       "_class": "curvePoint",
-      "cornerRadius": 17,
+      "cornerRadius": 22,
       "curveFrom": "{0, 0}",
       "curveMode": 1,
       "curveTo": "{0, 0}",
@@ -93,7 +93,7 @@
     },
     {
       "_class": "curvePoint",
-      "cornerRadius": 17,
+      "cornerRadius": 22,
       "curveFrom": "{1, 0}",
       "curveMode": 1,
       "curveTo": "{1, 0}",
@@ -103,7 +103,7 @@
     },
     {
       "_class": "curvePoint",
-      "cornerRadius": 17,
+      "cornerRadius": 22,
       "curveFrom": "{1, 1}",
       "curveMode": 1,
       "curveTo": "{1, 1}",
@@ -113,7 +113,7 @@
     },
     {
       "_class": "curvePoint",
-      "cornerRadius": 17,
+      "cornerRadius": 22,
       "curveFrom": "{0, 1}",
       "curveMode": 1,
       "curveTo": "{0, 1}",

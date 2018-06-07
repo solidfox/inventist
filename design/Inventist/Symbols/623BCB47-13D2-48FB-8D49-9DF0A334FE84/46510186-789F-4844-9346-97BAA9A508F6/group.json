@@ -13,10 +13,10 @@
   "frame": {
     "_class": "rect",
     "constrainProportions": false,
-    "height": 48,
+    "height": 40,
     "width": 80,
     "x": 0,
-    "y": 0
+    "y": 4
   },
   "hasClickThrough": false,
   "isFlippedHorizontal": false,
@@ -25,10 +25,6 @@
   "isVisible": true,
   "layerListExpandedType": 2,
   "layers": [
-    {
-      "class": "shapeGroup",
-      "id": "AC38EC69-0049-41AA-B80C-CDA74E0EB28D"
-    },
     {
       "class": "symbolInstance",
       "id": "4C76112D-9532-4A28-9847-BB17BFA277A3"
