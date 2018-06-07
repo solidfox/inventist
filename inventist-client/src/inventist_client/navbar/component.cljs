@@ -12,7 +12,7 @@
     icon          :icon
     image         :image
     color         :color
-    selected-item :selected-item
+    selected-item :selected-item                            ;name, photo, custom-text, subtitle, on-drag, on-click
     on-click      :on-click}]
   [:div {:class (style/navbar-card)}
    [:div {:style    {:width              "auto"
@@ -44,15 +44,16 @@
                           :color          color/grey-dark
                           :border-radius  "0.5rem"}
           :draggable     true
+          :on-click      (:on-click selected-item)
           :on-drag-enter (:on-drag-enter selected-item)}
     [:div {:style {:font-size   "0.5rem"
                    :font-weight "600"
                    :color       color/theme}}
-     "Selected"]
+     (or (:custom-text selected-item) "Selected")]
     [:div {:style {:font-size   "0.9rem"
                    :font-weight "600"}}
      (:name selected-item)]
-    [:div {:style {:font-size "0.8rem"
+    [:div {:style {:font-size "0.7rem"
                    :color     color/grey-normal}}
      (:subtitle selected-item)]]])
 
@@ -73,7 +74,8 @@
    [:div {:style {:height "1.75rem" :text-align "center"}}
     (cond (not= image nil) [:img {:src   image
                                   :style {:height       "100%"
-                                          :borderRadius "0rem"}}]
+                                          :borderRadius "0rem"
+                                          :object-fit   "cover"}}]
           :else [:i {:class icon :style {:font-size "1.5rem"}}])]
    [:div {:style {:font-size "0.7rem"
                   :margin    "0rem"}}
@@ -147,9 +149,10 @@
                                         (when (= (first current-path) target-page-id)
                                           {:selected true
                                            :color    color/theme}))))
-          (with-key title)))]
+          (with-key title)))
+    auth-status-item]])
 
-   auth-status-item])
+
 
 
 
