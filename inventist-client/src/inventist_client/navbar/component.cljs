@@ -46,15 +46,16 @@
     :target-page-id :profile}])
 
 
-(defc navigation-bar-desktop [{trigger-event    :trigger-event
-                               current-path     :current-path
-                               auth-status-item :auth-status-item}]
+(defc navigation-bar-mobile [{trigger-event    :trigger-event
+                              current-path     :current-path
+                              auth-status-item :auth-status-item}]
 
-  [:div {:style {:position         "absolute"
-                 :bottom           "0rem"
-                 :left             "calc(50% - 15rem)"
+  [:div {:style {
+                 ;:position         "absolute"
+                 ;:bottom           "0rem"
+                 ;:left             "calc(50% - 15rem)"
                  :padding          "0.5rem"
-                 :width            "30rem"
+                 :width            "100%"
                  :height           "2.5rem"
                  :display          "flex"
                  :flex-direction   "row"
@@ -82,9 +83,9 @@
 
    auth-status-item])
 
-(defc navigation-bar-mobile [{trigger-event    :trigger-event
-                              current-path     :current-path
-                              auth-status-item :auth-status-item}]
+(defc navigation-bar-desktop [{trigger-event    :trigger-event
+                               current-path     :current-path
+                               auth-status-item :auth-status-item}]
   [:div {:style
          (merge {:padding         "0.5rem"
                  :width           "100%"

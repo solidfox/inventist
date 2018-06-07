@@ -30,13 +30,18 @@
 
       (cond (> (:viewport-width state) 800)                 ;Desktop-view
             [:div {:style {:height              (:viewport-height state)
-                           ;:display             "grid"
+                           :display             "grid"
                            :backgroundColor     c/white
-                           ;:grid-template-rows  "calc(100% - 3.5rem) 3.5rem"
+                           :grid-template-rows  "3.5rem calc(100% - 3.5rem)"
                            :background-image    "url(\"/image/GHS-watermark.svg\")"
                            :background-position "50%"
                            :background-size     "15%"
                            :background-repeat   "no-repeat"}}
+
+             (navbar/navigation-bar-desktop
+               {:auth-status-item (auth/bar-item-login-status (core/authentication-args state))
+                :current-path     (:path state)
+                :trigger-event    trigger-event})
 
              (condp = (first (:path state))
                :dashboard
@@ -51,11 +56,6 @@
                :inventory
                (inventory-page/component (assoc (core/create-inventory-page-args state)
                                            :trigger-parent-event trigger-event)))
-
-             (navbar/navigation-bar-desktop
-               {:auth-status-item (auth/bar-item-login-status (core/authentication-args state))
-                :current-path     (:path state)
-                :trigger-event    trigger-event})
 
              (when (not (:internet-reachable state)) (notifications/connection-bar))
              (notifications/size-bar {:viewport-height (:viewport-height state)
