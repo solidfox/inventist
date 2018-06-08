@@ -1,9 +1,6 @@
 (ns inventist-client.navbar.component
   (:require [rum.core :refer [defc with-key]]
-            [remodular.core :as rem]
-            [authentication.core :as core]
             [inventist-client.event :as event]
-            [authentication.component :as auth]
             [symbols.color :as color]
             [symbols.style :as style]))
 
