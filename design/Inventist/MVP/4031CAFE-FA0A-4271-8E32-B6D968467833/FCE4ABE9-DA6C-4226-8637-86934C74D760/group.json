@@ -1,0 +1,83 @@
+{
+  "_class": "group",
+  "do_objectID": "FCE4ABE9-DA6C-4226-8637-86934C74D760",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 971,
+    "width": 400,
+    "x": 0,
+    "y": 96
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 2,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "AD3BC559-1A43-486B-8359-167F63DF2F38"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "194EEF82-2C44-4CA4-9BB7-1544412B6F44"
+    },
+    {
+      "class": "group",
+      "id": "334487E6-9237-4E01-A8ED-BDB87F07CB23"
+    },
+    {
+      "class": "group",
+      "id": "97E9F5AD-C3E6-43F1-8B35-09FB8135A0BB"
+    },
+    {
+      "class": "group",
+      "id": "96CFB968-5535-4432-9BA4-2D3F46742AD6"
+    }
+  ],
+  "name": "ListView",
+  "nameIsFixed": true,
+  "resizingConstraint": 17,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "shadows": [
+      {
+        "_class": "shadow",
+        "blurRadius": 5,
+        "color": {
+          "_class": "color",
+          "alpha": 0.25,
+          "blue": 0,
+          "green": 0,
+          "red": 0
+        },
+        "contextSettings": {
+          "_class": "graphicsContextSettings",
+          "blendMode": 0,
+          "opacity": 1
+        },
+        "isEnabled": true,
+        "offsetX": 0,
+        "offsetY": 0,
+        "spread": 0
+      }
+    ],
+    "startDecorationType": 0
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "703153F6-BBC8-4417-83B8-7A0E111ADC3E",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 37.25438876476221,
+    "width": 1073.140271493211,
+    "x": 0,
+    "y": 58
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Details/Table_Item Copy 2",
+  "nameIsFixed": false,
+  "overrideValues": [
+    {
+      "_class": "overrideValue",
+      "overrideName": "DC323D7D-4A8B-449E-BEFB-6B12FF11D9EC_stringValue",
+      "value": "Identifier"
+    },
+    {
+      "_class": "overrideValue",
+      "overrideName": "C2088DF5-805D-4935-BA54-BCC394B78D38_stringValue",
+      "value": "MacBookPro13,2"
+    }
+  ],
+  "overrides": {
+    "C2088DF5-805D-4935-BA54-BCC394B78D38": "MacBookPro13,2",
+    "DC323D7D-4A8B-449E-BEFB-6B12FF11D9EC": "Identifier"
+  },
+  "resizingConstraint": 27,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "4AE4C89B-B7E5-4723-92C1-245A67D8D66A",
+  "verticalSpacing": 0
+}
