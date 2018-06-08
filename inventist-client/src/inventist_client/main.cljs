@@ -1,14 +1,10 @@
 (ns inventist-client.main
-  (:require [inventist-client.component :as c]
-            [rum.core :as rum]
+  (:require [inventist-client.component :as component]
             [authentication.core :as auth]
-            [remodular.runtime :as a]
+            [remodular.runtime :as rem]
             [inventist-client.core :as core]
             [oops.core :refer [oget ocall]]
             [inventist-client.services :as services]
-            [clojure.string :as str]
-            [clojure.browser.event :as event]
-            [util.inventory.core :as util]
             [goog.net.XhrIo :as xhr]))
 
 (enable-console-print!)
@@ -16,35 +12,35 @@
 (def firebase-auth (oget js/firebase :auth))
 
 (defonce initialized
-         (let [path (as-> (oget js/window :location) $
-                          (oget $ :pathname))]
-           (println "reload")
-           (def app-state-atom (atom (core/create-state
-                                       {:path path
-                                        :mode :prod})))
-           (ocall js/window :addEventListener "popstate" (fn [event]
-                                                           (let [path (oget event [:target :location :pathname])]
-                                                             (swap! app-state-atom
-                                                                    core/set-path
-                                                                    path))))
-           (ocall (firebase-auth) :onAuthStateChanged (fn [user]
-                                                        (swap! app-state-atom
-                                                               update-in
-                                                               core/authentication-state-path
-                                                               auth/receive-new-auth-state
-                                                               user)))
-           (ocall js/window :addEventListener "resize" (fn []
-                                                           (swap! app-state-atom assoc :viewport-width (max js/document.documentElement.clientWidth js/window.innerWidth))
-                                                           (swap! app-state-atom assoc :viewport-height (max js/document.documentElement.clientHeight js/window.innerHeight))))
+  (let [path (as-> (oget js/window :location) $
+                   (oget $ :pathname))]
+    (println "reload")
+    (def app-state-atom (atom (core/create-state
+                                {:path path
+                                 :mode :prod})))
+    (ocall js/window :addEventListener "popstate" (fn [event]
+                                                    (let [path (oget event [:target :location :pathname])]
+                                                      (swap! app-state-atom
+                                                             core/set-path
+                                                             path))))
+    (ocall (firebase-auth) :onAuthStateChanged (fn [user]
+                                                 (swap! app-state-atom
+                                                        update-in
+                                                        core/authentication-state-path
+                                                        auth/receive-new-auth-state
+                                                        user)))
+    (ocall js/window :addEventListener "resize" (fn []
+                                                  (swap! app-state-atom assoc :viewport-width (max js/document.documentElement.clientWidth js/window.innerWidth))
+                                                  (swap! app-state-atom assoc :viewport-height (max js/document.documentElement.clientHeight js/window.innerHeight))))
 
 
-           (ocall js/window :addEventListener "offline" (fn []
-                                                          (swap! app-state-atom assoc :internet-reachable false)))
-           (ocall js/window :addEventListener "online" (fn []
-                                                         (swap! app-state-atom assoc :internet-reachable true)))
-           true))
+    (ocall js/window :addEventListener "offline" (fn []
+                                                   (swap! app-state-atom assoc :internet-reachable false)))
+    (ocall js/window :addEventListener "online" (fn []
+                                                  (swap! app-state-atom assoc :internet-reachable true)))
+    true))
 
-(defmethod a/perform-services :prod
+(defmethod rem/perform-services :prod
   [_ services handle-event]
   {:pre [(not-empty services)]}
   (doseq [{{url    :url
@@ -55,7 +51,7 @@
     (xhr/send url
               (fn [response]
                 (let [response-json (.getResponseJson (.-target response))
-                      response-edn (js->clj response-json {:key-fn keyword})]
+                      response-edn  (js->clj response-json {:key-fn keyword})]
                   (handle-event {:actions
                                  [{:fn-and-args (concat on-response [response-edn data])
                                    :state-path  state-path}]}))) ;; handler
@@ -68,12 +64,12 @@
                                   :state-path  (or (:state-path service) [])})
                                services)}))
 
-(a/run-modular-app! {:get-view       c/app
-                     :get-services   services/get-services
-                     :app-state-atom app-state-atom
-                     :logging        {:state-updates true
-                                      :services      true
-                                      :events        true}})
+(rem/run-modular-app! {:get-view       component/app
+                       :get-services   services/get-services
+                       :app-state-atom app-state-atom
+                       :logging        {:state-updates true
+                                        :services      true
+                                        :events        true}})
 
 
 
