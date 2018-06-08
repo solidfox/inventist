@@ -45,12 +45,12 @@
             :background-color color/white
             :width            "auto"
             :margin           "0rem 0.5rem"
-            :padding          "0.25rem 0.5rem"
-            :border-radius    "0.5rem"
+            :border-radius    "0.5rem 2rem 2rem 0.5rem"
             :display          "flex"
             :flex-direction   "row"
             :cursor           "pointer"
-            :&:hover          {:box-shadow "0 0 0.25rem rgba(0,0,0,0.5)"}
+            :box-shadow       "0 0 0.2rem rgba(0,0,0,0.25)"
+            :&:hover          {:box-shadow "0 0 0.5rem rgba(0,0,0,0.75)"}
             :&:active         {:box-shadow "0 0 0.25rem 0 #000000"}})
 
 (defstyles card-image []

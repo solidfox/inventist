@@ -1,6 +1,7 @@
 (ns inventist-client.navbar.component
   (:require [rum.core :refer [defc with-key]]
-            [inventist-client.event :as event]
+            [remodular.core :as rem]
+            [inventist-client.event :as client-event]
             [symbols.color :as color]
             [symbols.style :as style]))
 
@@ -9,52 +10,55 @@
     icon          :icon
     image         :image
     color         :color
+    trigger-event :trigger-event
     selected-item :selected-item                            ;name, photo, custom-text, subtitle, on-drag, on-click
     on-click      :on-click}]
   [:div {:class (style/navbar-card)}
    [:div {:style    {:width              "auto"
                      :color              (or color color/grey-normal)
                      :text-align         "center"
+                     :margin             "0.5rem"
                      :display            "grid"
                      :grid-template-rows "1fr 30%"}
           :on-click on-click}
     [:div {:style {:height "100%" :text-align "center"}}
-     (cond
-       (not= (:photo selected-item) nil) [:img {:src   (:photo selected-item)
-                                                :style {:height       "1.5rem"
-                                                        :width        "1.5rem"
-                                                        :object-fit   "cover"
-                                                        :borderRadius "1rem"}}]
-       (not= image nil) [:img {:src   image
-                               :style {:height "1.5rem"}}]
-       :else [:i {:class icon :style {:font-size "1.5rem"}}])]
+     [:i {:class icon :style {:font-size "1.5rem"}}]]
     [:div {:style {:font-size "0.7rem"
                    :margin    "0rem"}}
      title]]
-
-   [:div {:style {:margin      "0rem 0.5rem"
-                  :border-left (str "0.1rem solid " color/grey-light)}}]
-
-   [:div {:style         {:display        "flex"
-                          :flex-direction "column"
+   [:div {:class         "navbar-badge-selection"
+          :style         {:display        "flex"
+                          :flex-direction "row"
                           :margin-top     "0rem"
                           :color          color/grey-dark
                           :border-radius  "0.5rem"}
           :draggable     true
           :on-click      (:on-click selected-item)
           :on-drag-enter (:on-drag-enter selected-item)}
-    [:div {:style {:font-size   "0.5rem"
-                   :font-weight "600"
-                   :color       color/theme}}
-     (or (:custom-text selected-item) "Selected")]
-    [:div {:style {:font-size   "0.9rem"
-                   :font-weight "600"}}
-     (:name selected-item)]
-    [:div {:style {:font-size "0.7rem"
-                   :color     color/grey-normal}}
-     (:subtitle selected-item)]]])
 
+    [:div {:class "navbar-badge-selection-data"
+           :style {:display        "flex"
+                   :padding        "0.25rem 0.5rem 0rem"
+                   :border-left    (str "0.1rem solid " color/grey-light)
+                   :flex-direction "column"}}
+     [:div {:style {:font-size   "0.5rem"
+                    :font-weight "600"
+                    :color       color/theme}}
+      (or (:custom-text selected-item) "Selected")]
+     [:div {:style {:font-size   "0.9rem"
+                    :font-weight "600"}}
+      (:name selected-item)]
+     [:div {:style {:font-size "0.7rem"
+                    :color     color/grey-normal}}
+      (:subtitle selected-item)]]
 
+    [:img {:src       (:photo selected-item)
+           :draggable false
+           :style     {:height           "100%"
+                       :width            "3rem"
+                       :object-fit       "cover"
+                       :background-color color/grey-light
+                       :borderRadius     "3rem"}}]]])
 
 (defc navigation-icon
   [{title    :title
@@ -81,13 +85,14 @@
 
 (def navbar-main-sections
   [{:title          "Dashboard"
-    :image          "/image/ghs-icon.svg"
+    ;:image          "/image/ghs-icon.svg"
     :icon           "fas fa-tachometer-alt"
     :target-page-id :dashboard}
    {:title          "Inventory"
     :icon           "fas fa-sitemap"
     :selected-item  {:name          "MacBook Pro (2011)"
                      :subtitle      "Serial Number"
+                     :photo         "https://static.bhphoto.com/images/images500x500/apple_z0rf_mjlq23_b_h_15_4_macbook_pro_notebook_1432050588000_1151716.jpg"
                      :on-drag-enter ""}
     :target-page-id :inventory}
    {:title          "People"
@@ -119,9 +124,12 @@
                 style/z-index-top-toolbar
                 style/box-shadow)}
    [:div {:style {:height "100%" :text-align "left"}}
-    [:span [:img {:src   "/image/GHS-logotype-horizontal.svg"
-                  :style {:height       "100%"
-                          :borderRadius "0rem"}}]]]
+    [:span [:img {:src      "/image/GHS-logotype-horizontal.svg"
+                  :on-click (fn [] (trigger-event (client-event/clicked-navigation-icon {:target-page-id :dashboard})))
+                  :style    {:height       "100%"
+                             :borderRadius "0rem"
+                             :cursor       "pointer"}
+                  :title    "Inventist Dashboard"}]]]
 
    [:div {:style {:height "100%" :text-align "center" :display "flex"}}
     (for [{title          :title
@@ -134,7 +142,8 @@
                                           :icon          icon
                                           :selected-item selected-item
                                           :image         image
-                                          :on-click      (fn [] (trigger-event (event/clicked-navigation-icon {:target-page-id target-page-id})))}
+                                          :trigger-event trigger-event
+                                          :on-click      (fn [] (trigger-event (client-event/clicked-navigation-icon {:target-page-id target-page-id})))}
                                          (when (= (first current-path) target-page-id)
                                            {:selected true
                                             :color    color/theme})))
@@ -142,7 +151,7 @@
                 (navigation-icon (merge {:title    title
                                          :icon     icon
                                          :image    image
-                                         :on-click (fn [] (trigger-event (event/clicked-navigation-icon {:target-page-id target-page-id})))}
+                                         :on-click (fn [] (trigger-event (client-event/clicked-navigation-icon {:target-page-id target-page-id})))}
                                         (when (= (first current-path) target-page-id)
                                           {:selected true
                                            :color    color/theme}))))
@@ -184,7 +193,7 @@
       (-> (navigation-icon (merge {:title    title
                                    :icon     icon
                                    :image    image
-                                   :on-click (or on-click (fn [] (trigger-event (event/clicked-navigation-icon {:target-page-id target-page-id}))))}
+                                   :on-click (or on-click (fn [] (trigger-event (client-event/clicked-navigation-icon {:target-page-id target-page-id}))))}
                                   (when (= (first current-path) target-page-id)
                                     {:selected true
                                      :color    color/theme})))

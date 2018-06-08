@@ -49,6 +49,7 @@
   (if-let [logged-in-user (core/get-authenticated-user state)]
     (navbar/navigation-badge {:title         "Profile"
                               :on-click      log-out
+                              :icon          "fas fa-user"
                               :selected-item {:name        (:display-name logged-in-user)
                                               :photo       (:photo-url logged-in-user)
                                               :custom-text "Admin"
