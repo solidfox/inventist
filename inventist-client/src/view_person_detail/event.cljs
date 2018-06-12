@@ -38,13 +38,13 @@
       (-> event
           (rem/append-action
             (rem/create-action {:name        :cancel-new-device-assignment
-                                :fn-and-args [core/set-edit-mode false]}))
+                                :fn-and-args [core/set-should-show-item-assignment-input-box false]}))
           (rem/create-anonymous-event))
       :assign-new-device-clicked
       (-> event
           (rem/append-action
             (rem/create-action {:name        :assign-new-device-clicked
-                                :fn-and-args [core/set-edit-mode true]}))
+                                :fn-and-args [core/set-should-show-item-assignment-input-box true]}))
           (rem/create-anonymous-event))
       :clicked-device
       (rem/create-event event

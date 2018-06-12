@@ -17,10 +17,10 @@
 (defc person-detail < (modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [person    (core/get-person state)
+  (let [person                          (core/get-person state)
         {phone   :phone
          address :address} person
-        edit-mode (:edit-mode state)]
+        should-show-item-assignment-box (core/should-show-item-assignment-input-box state)]
 
     ;PEOPLE DETAILS
     [:div {:id    "detail-container"
@@ -61,7 +61,6 @@
                        {:label    "Assigned Devices"
                         :value    (count (:inventory person))
                         :editable false}]
-         :edit-mode   edit-mode
          :enable-edit false})
 
       ;Assigned Devices
@@ -73,7 +72,7 @@
        [:div {:style {:margin "0 0 0 1rem" :display "flex" :flex-direction "column"
                       :width  "100%"}}
         (s-general/section-title {:title   "Assigned Devices"
-                                  :buttons [(when (not edit-mode)
+                                  :buttons [(when (not should-show-item-assignment-box)
                                               (with-key (s-general/section-title-button
                                                           {:icon     "fas fa-plus-circle"
                                                            :text     "Assign new device"
@@ -85,7 +84,7 @@
                        :flex-wrap      "wrap"
                        :align-items    "flex-start"}}
 
-         (when edit-mode
+         (when should-show-item-assignment-box
            (let [trigger-commit-new-device-event (fn [] (trigger-event event/commit-new-device))]
              (s-detailview/card {:id      "add-device"
                                  :content [:div {:style {:display         "flex"
