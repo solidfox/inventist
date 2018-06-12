@@ -2,18 +2,21 @@
   (:require [clojure.string :as str]
             [util.inventory.core :as util]
             [ysera.test :as test]
-            [cljs-time.core :as time]
-            [cljs-time.coerce :as coerce]))
+            [#?(:cljs cljs-time.core :clj clj-time.core) :as time]
+            [#?(:cljs cljs-time.coerce :clj clj-time.coerce) :as coerce]))
 
 (defn create-empty-inventory-item-assignment []
   {:shown         false
    :serial-number ""})
 
+(defn create-long-timestamp []
+  (coerce/to-long (time/today)))
+
 (defn create-state
   [{person-id :person-id}]
   {:person-id                          person-id
    :new-inventory-item-input           {}
-   :latest-acceptable-cache-fetch-time (coerce/to-long (time/today))
+   :latest-acceptable-cache-fetch-time (create-long-timestamp)
    :fetching-person-details            false
    :user-input                         {:inventory-item-assignment (create-empty-inventory-item-assignment)}
    :pending-inventory-item-assignments []
@@ -100,8 +103,8 @@
 
 (defn cache-is-dirty?
   [state]
-  (:latest-acceptable-cache-fetch-time state)
-  false)
+  (> (:latest-acceptable-cache-fetch-time state)
+     (get-in state [:get-person-details-response ::reception-timestamp])))
 
 (defn has-good-person-details-response
   [state]
@@ -117,9 +120,11 @@
 
 (defn receive-get-person-detail-service-response
   [state response request]
-  (-> state
-      (assoc :fetching-person-details false)
-      (assoc :get-person-details-response (util/->clojure-keys response))))
+  (assoc state :fetching-person-details false
+               :get-person-details-response
+               (-> response
+                   (util/->clojure-keys)
+                   (assoc ::reception-timestamp (create-long-timestamp)))))
 
 (defn started-reassign-inventory-item-service-call
   [state {serial-number :serial-number
@@ -135,5 +140,4 @@
 
 (defn on-remote-state-mutation
   [state _]
-  (assoc state :cache-is-dirty true))
-
+  (assoc state :latest-acceptable-cache-fetch-time (create-long-timestamp)))

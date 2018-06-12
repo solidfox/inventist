@@ -8,22 +8,23 @@
 
   :min-lein-version "2.7.1"
 
-  :dependencies [[org.clojure/clojure "1.9.0"]
-                 [org.clojure/clojurescript "1.10.238"]
-                 [district0x/graphql-query "1.0.5"]
-                 ;[org.clojure/core.async  "0.4.474"]
-                 [binaryage/oops "0.6.1"]
-                 [com.andrewmcveigh/cljs-time "0.5.2"]
-                 [cljs-react-material-ui "0.2.48"]
-                 [rum "0.11.2"]
-                 [remodular "0.1.4-SNAPSHOT"]
-                 [ysera "1.2.0"]
-                 [org.roman01la/cljss "1.6.2"]
+  :dependencies [[binaryage/oops "0.6.1"]
                  [camel-snake-kebab "0.4.0"]
-                 [finja "0.1.0-SNAPSHOT"]]
+                 [cljs-react-material-ui "0.2.48"]
+                 ;[org.clojure/core.async  "0.4.474"]
+                 [org.clojars.osbert/clj-time "0.9.2"]
+                 [com.andrewmcveigh/cljs-time "0.5.2"]
+                 [district0x/graphql-query "1.0.5"]
+                 [finja "0.1.0-SNAPSHOT"]
+                 [org.clojure/clojure "1.9.0"]
+                 [org.clojure/clojurescript "1.10.238"]
+                 [org.roman01la/cljss "1.6.2"]
+                 [remodular "0.1.4-SNAPSHOT"]
+                 [rum "0.11.2"]
+                 [ysera "1.2.0"]]
 
-  :plugins [[lein-figwheel "0.5.15"]
-            [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]
+  :plugins [[lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]
+            [lein-figwheel "0.5.15"]]
 
   :source-paths ["src"]
 
