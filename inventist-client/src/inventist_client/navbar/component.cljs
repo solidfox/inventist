@@ -8,9 +8,7 @@
 (defc navigation-badge
   [{title         :title
     icon          :icon
-    image         :image
     color         :color
-    trigger-event :trigger-event
     selected-item :selected-item                            ;name, photo, custom-text, subtitle, on-drag, on-click
     on-click      :on-click}]
   [:div {:class (style/navbar-card)}
@@ -102,12 +100,6 @@
                      :subtitle      "Admin"
                      :on-drag-enter ""}
     :target-page-id :people}])
-;{:title          "Profile"
-; :icon           "fas fa-user"
-; :on-click       (fn [] (auth/log-out))
-; :target-page-id :profile}])
-
-
 
 (defc navigation-bar-desktop [{trigger-event    :trigger-event
                                current-path     :current-path
@@ -141,8 +133,6 @@
                 (navigation-badge (merge {:title         title
                                           :icon          icon
                                           :selected-item selected-item
-                                          :image         image
-                                          :trigger-event trigger-event
                                           :on-click      (fn [] (trigger-event (client-event/clicked-navigation-icon {:target-page-id target-page-id})))}
                                          (when (= (first current-path) target-page-id)
                                            {:selected true
@@ -155,8 +145,8 @@
                                         (when (= (first current-path) target-page-id)
                                           {:selected true
                                            :color    color/theme}))))
-          (with-key title)))
-    auth-status-item]])
+          (with-key title)))]
+   auth-status-item])
 
 
 
