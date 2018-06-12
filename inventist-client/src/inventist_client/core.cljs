@@ -6,7 +6,6 @@
             [inventist-client.page.contractors.core :as contractors-page]
             [cljs.pprint]
             [inventist-client.page.inventory.core :as inventory-core]
-            [remodular.core :as rem]
             [clojure.string :as str]
             [util.inventory.core :as util]))
 
@@ -113,3 +112,10 @@
       :inventory
       (show-inventory-item state selected-inventory-id)
       (set-active-page state page))))
+
+(defn on-remote-state-mutation
+  [state remote-state-uri]
+  (-> state
+      (update-in people-page-state-path people-page/on-remote-state-mutation remote-state-uri)))
+
+

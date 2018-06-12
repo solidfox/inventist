@@ -10,7 +10,7 @@
    :serial-number ""})
 
 (defn create-long-timestamp []
-  (coerce/to-long (time/today)))
+  (coerce/to-long (time/now)))
 
 (defn create-state
   [{person-id :person-id}]
@@ -119,7 +119,7 @@
   (assoc state :fetching-person-details true))
 
 (defn receive-get-person-detail-service-response
-  [state response request]
+  [state response _request]
   (assoc state :fetching-person-details false
                :get-person-details-response
                (-> response
@@ -127,16 +127,14 @@
                    (assoc ::reception-timestamp (create-long-timestamp)))))
 
 (defn started-reassign-inventory-item-service-call
-  [state {serial-number :serial-number
-          :as           assignment}]
+  [state assignment]
   (assoc state :ongoing-inventory-item-assignment assignment)
   (remove-pending-inventory-item-assignment state assignment))
 
 (defn receive-reassign-inventory-item-service-response
-  [state response request]
+  [state _response _request]
   (-> state
-      (assoc :ongoing-inventory-item-assignment nil)
-      (assoc :get-person-details-response {:data {:person (get-in (util/->clojure-keys response) [:data :set-user-of-inventory-item :new-user])}})))
+      (assoc :ongoing-inventory-item-assignment nil)))
 
 (defn on-remote-state-mutation
   [state _]

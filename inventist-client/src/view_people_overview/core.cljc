@@ -1,30 +1,53 @@
 (ns view-people-overview.core
   (:require [clojure.string :as str]
             [ysera.test :as test]
-            [util.inventory.core :as util]))
+            [util.inventory.core :as util]
+            [#?(:cljs cljs-time.core :clj clj-time.core) :as time]
+            [#?(:cljs cljs-time.coerce :clj clj-time.coerce) :as coerce]))
+
+(defn create-long-timestamp []
+  (coerce/to-long (time/now)))
 
 (defn create-state
   []
-  {:selected-person-id       nil
-   :search-terms             nil
-   :fetching-people-list     false
-   :get-people-list-response nil})
-
-(defn reload [state]
-  (assoc state :get-people-list-response nil
-               :fetching-people-list false))
+  {:selected-person-id                 nil
+   :search-terms                       nil
+   :latest-acceptable-cache-fetch-time (create-long-timestamp)
+   :fetching-people-list               false
+   :get-people-list-response           nil})
 
 (defn started-get-people-list-service-call [state]
   (assoc state :fetching-people-list true))
 
+(defn cache-dirty?
+  [state]
+  (> (:latest-acceptable-cache-fetch-time state)
+     (get-in state [:get-people-list-response ::reception-timestamp])))
+
+(defn has-good-get-people-list-response [state]
+  (and (get-in state [:get-people-list-response :data])
+       (not (cache-dirty? state))))
+
 (defn should-get-people-list? [state]
   (and (not (:fetching-people-list state))
-       (not (get-in state [:get-people-list-response :data]))))
+       (not (has-good-get-people-list-response state))))
 
 (defn receive-get-people-list-service-response [state response request]
   (-> state
-      (assoc :get-people-list-response (util/->clojure-keys response))
+      (assoc :get-people-list-response (-> (util/->clojure-keys response)
+                                           (assoc ::reception-timestamp (create-long-timestamp))))
       (assoc :fetching-people-list false)))
+
+(defn on-remote-state-mutation
+  {:test (fn []
+           (as-> (create-state) $
+                 (receive-get-people-list-service-response $ {} {})
+                 (do (test/is-not (cache-dirty? $)) $)
+                 (on-remote-state-mutation $ nil)
+                 (do (test/is (cache-dirty? $)) $)
+                 (do (test/is (should-get-people-list? $)) $)))}
+  [state _]
+  (assoc state :latest-acceptable-cache-fetch-time (create-long-timestamp)))
 
 (defn set-free-text-search
   [state free-text-search]

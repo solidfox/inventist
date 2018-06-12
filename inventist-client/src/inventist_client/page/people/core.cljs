@@ -1,7 +1,9 @@
 (ns inventist-client.page.people.core
   (:require [view-person-detail.core :as view-person-detail]
             [view-people-overview.core :as view-people-overview]
-            [clojure.string :refer [lower-case]]))
+            [clojure.string :refer [lower-case]]
+            [view-people-overview.core]
+            [view-person-detail.core]))
 
 (def any-person-detail-state-path [:view-modules :view-person-detail])
 (defn person-detail-state-path [person-id] (concat any-person-detail-state-path [person-id]))
@@ -34,3 +36,17 @@
   (let [state-path (people-overview-state-path)]
     {:input      {:state (get-in state state-path)}
      :state-path state-path}))
+
+(defn all-cached-person-detail-state-paths [state]
+  (->> (keys (get-in state any-person-detail-state-path))
+       (map person-detail-state-path)))
+
+(defn on-remote-state-mutation
+  [state remote-state-uri]
+  (as-> state $
+        (update-in $ (people-overview-state-path) view-people-overview.core/on-remote-state-mutation remote-state-uri)
+        (reduce (fn [state person-detail-state-path]
+                  (update-in state person-detail-state-path view-person-detail.core/on-remote-state-mutation remote-state-uri))
+                $ (all-cached-person-detail-state-paths state))))
+
+

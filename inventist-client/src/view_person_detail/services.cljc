@@ -54,24 +54,27 @@
 (defn reassign-inventory-item
   [{serial-number :serial-number
     new-user-id   :new-user-id}]
-  {:name   :reassign-inventory-item
-   :before [core/started-reassign-inventory-item-service-call {:serial-number serial-number}]
-   :data   {:url    "http://backend.inventory.gripsholmsskolan.se:8888/graphql"
-            :params {:query (util/graphql-string {:operation {:operation/type :mutation
-                                                              :operation/name "ReassignDevice"}
-                                                  :fragments reallocation-fragment
-                                                  :queries   [[:set-user-of-inventory-item {:inventory-item-serial-number serial-number
-                                                                                            :new-user-id                  new-user-id}
-                                                               [[:new-user person-details-graphql]]]]})}}
-   :after  [core/receive-reassign-inventory-item-service-response]})
+  {:name                  :reassign-inventory-item
+   :remote-state-mutation true
+   :before                [core/started-reassign-inventory-item-service-call {:serial-number serial-number}]
+   :data                  {:url    "http://backend.inventory.gripsholmsskolan.se:8888/graphql"
+                           :params {:query
+                                    (util/graphql-string
+                                      {:operation {:operation/type :mutation
+                                                   :operation/name "ReassignDevice"}
+                                       :fragments reallocation-fragment
+                                       :queries   [[:set-user-of-inventory-item {:inventory-item-serial-number serial-number
+                                                                                 :new-user-id                  new-user-id}
+                                                    [[:new-user person-details-graphql]]]]})}}
+   :after                 [core/receive-reassign-inventory-item-service-response]})
 
 
 (defn get-services
   [{{state :state} :input}]
   (remove nil?
-    (concat (when (core/should-get-person-detail? state)
-              [(get-person-details (:person-id state))])
-            (when-let
-              [pending-inventory-item-assignment (core/get-next-pending-inventory-item-assignment-to-perform state)]
-              [(reassign-inventory-item {:new-user-id   (:person-id state)
-                                         :serial-number (:serial-number pending-inventory-item-assignment)})]))))
+          (concat (when (core/should-get-person-detail? state)
+                    [(get-person-details (:person-id state))])
+                  (when-let
+                    [pending-inventory-item-assignment (core/get-next-pending-inventory-item-assignment-to-perform state)]
+                    [(reassign-inventory-item {:new-user-id   (:person-id state)
+                                               :serial-number (:serial-number pending-inventory-item-assignment)})]))))
