@@ -117,7 +117,7 @@
         },
         "image": {
           "_class": "MSJSONFileReference",
-          "_ref": "images/3f1eebb63100bbdc7db50efdb33ff9e121c3faa3",
+          "_ref": "images/3f1eebb63100bbdc7db50efdb33ff9e121c3faa3.png",
           "_ref_class": "MSImageData"
         },
         "isEnabled": true,

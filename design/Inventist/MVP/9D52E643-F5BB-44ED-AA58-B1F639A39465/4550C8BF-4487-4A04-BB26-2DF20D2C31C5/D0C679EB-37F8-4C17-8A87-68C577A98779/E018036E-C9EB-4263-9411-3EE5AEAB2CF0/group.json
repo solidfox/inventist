@@ -1,0 +1,49 @@
+{
+  "_class": "group",
+  "do_objectID": "E018036E-C9EB-4263-9411-3EE5AEAB2CF0",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 24,
+    "width": 86,
+    "x": 186.0000000000001,
+    "y": 16
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "04DB3576-725F-43CD-93CB-8E872869963C"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "16988DD7-F897-4E60-8D1E-F8AB44644FC7"
+    }
+  ],
+  "name": "Inventist",
+  "nameIsFixed": true,
+  "resizingConstraint": 12,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

@@ -42,12 +42,6 @@
       "value": "Setting"
     }
   ],
-  "overrides": {
-    "2DA2CC86-2EA8-4D18-9979-4775614F4D70": {
-      "symbolID": "B091DAD6-36F0-4A82-A3D3-73C1E573FD7D"
-    },
-    "83637734-A485-4C40-B28E-AEB9E0456A7C": "Setting"
-  },
   "resizingConstraint": 13,
   "resizingType": 0,
   "rotation": 0,

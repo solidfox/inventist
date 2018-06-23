@@ -30,63 +30,6 @@
   "layerListExpandedType": 0,
   "name": "Path",
   "nameIsFixed": false,
-  "path": {
-    "_class": "path",
-    "isClosed": false,
-    "pointRadiusBehaviour": 1,
-    "points": [
-      {
-        "_class": "curvePoint",
-        "cornerRadius": 0,
-        "curveFrom": "{1.0622439918285838, 0.469479732566357}",
-        "curveMode": 4,
-        "curveTo": "{0.96560062252938805, 0.14970889010076852}",
-        "hasCurveFrom": true,
-        "hasCurveTo": false,
-        "point": "{0.96560062252938805, 0.14970889010076852}"
-      },
-      {
-        "_class": "curvePoint",
-        "cornerRadius": 0,
-        "curveFrom": "{0.63257023009168067, 1.0339555208878526}",
-        "curveMode": 4,
-        "curveTo": "{0.93047483997466918, 0.65442827388429281}",
-        "hasCurveFrom": true,
-        "hasCurveTo": true,
-        "point": "{0.87332424241267015, 0.93098684034101775}"
-      },
-      {
-        "_class": "curvePoint",
-        "cornerRadius": 0,
-        "curveFrom": "{-0.036338591207097558, 0.61269756162430467}",
-        "curveMode": 4,
-        "curveTo": "{0.1673909476102709, 1.0425979760896253}",
-        "hasCurveFrom": true,
-        "hasCurveTo": true,
-        "point": "{0.041507737697958909, 0.8107332493906384}"
-      },
-      {
-        "_class": "curvePoint",
-        "cornerRadius": 0,
-        "curveFrom": "{0.25833824406276068, -0.058203889324734664}",
-        "curveMode": 4,
-        "curveTo": "{0.014166588033744586, 0.42651438384897294}",
-        "hasCurveFrom": true,
-        "hasCurveTo": true,
-        "point": "{0.041507737697958909, 0.20995914922169798}"
-      },
-      {
-        "_class": "curvePoint",
-        "cornerRadius": 0,
-        "curveFrom": "{0.96560062252938805, 0.14970889010076852}",
-        "curveMode": 4,
-        "curveTo": "{0.6984548060186353, -0.059685453073610041}",
-        "hasCurveFrom": false,
-        "hasCurveTo": true,
-        "point": "{0.96560062252938805, 0.14970889010076852}"
-      }
-    ]
-  },
   "pointRadiusBehaviour": 1,
   "points": [
     {

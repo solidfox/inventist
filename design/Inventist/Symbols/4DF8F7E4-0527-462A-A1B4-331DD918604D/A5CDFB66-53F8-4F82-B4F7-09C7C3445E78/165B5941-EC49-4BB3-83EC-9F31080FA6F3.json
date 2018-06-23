@@ -13,7 +13,7 @@
   "frame": {
     "_class": "rect",
     "constrainProportions": false,
-    "height": 89,
+    "height": 90,
     "width": 400,
     "x": 0,
     "y": 0
@@ -28,8 +28,6 @@
   "nameIsFixed": false,
   "overrideValues": [
   ],
-  "overrides": {
-  },
   "resizingConstraint": 18,
   "resizingType": 0,
   "rotation": 0,
@@ -41,6 +39,6 @@
     "miterLimit": 10,
     "startDecorationType": 0
   },
-  "symbolID": "2BA71F96-8E03-47B4-9D4C-F185101BDFA3",
+  "symbolID": "197344E6-6C7F-4933-B74F-CC20F3DDF412",
   "verticalSpacing": 0
 }

@@ -35,9 +35,6 @@
       "value": "Inventory - GripsHolmsSkolan"
     }
   ],
-  "overrides": {
-    "8E52184F-761F-41D4-868D-A9E7D1B53981": "Inventory - GripsHolmsSkolan"
-  },
   "resizingConstraint": 10,
   "resizingType": 0,
   "rotation": 0,

@@ -36,9 +36,6 @@
       "value": "password"
     }
   ],
-  "overrides": {
-    "405A5C06-9A85-424E-BD5F-B56DC8297C0E": "password"
-  },
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,

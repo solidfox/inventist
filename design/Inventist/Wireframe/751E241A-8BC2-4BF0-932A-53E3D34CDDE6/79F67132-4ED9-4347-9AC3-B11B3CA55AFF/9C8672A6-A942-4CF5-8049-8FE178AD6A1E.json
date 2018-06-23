@@ -34,9 +34,6 @@
       "value": "Login"
     }
   ],
-  "overrides": {
-    "EE7A4728-E635-4A16-984C-BF56FCFD28F8": "Login"
-  },
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,

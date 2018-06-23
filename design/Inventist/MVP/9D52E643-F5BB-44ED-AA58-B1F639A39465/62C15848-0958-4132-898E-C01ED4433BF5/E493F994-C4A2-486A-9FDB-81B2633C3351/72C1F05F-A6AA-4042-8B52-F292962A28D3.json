@@ -1,0 +1,53 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "72C1F05F-A6AA-4042-8B52-F292962A28D3",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "5561F91C-8E34-4DD3-A38D-458380B76A4D",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "0FBE01AA-8FA9-415D-9172-9295BC836772",
+    "height": 147,
+    "width": 699,
+    "x": 20,
+    "y": 140
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Details/Timeline_item Copy 2",
+  "nameIsFixed": false,
+  "overrideValues": [
+    {
+      "_class": "overrideValue",
+      "do_objectID": "2CED4C6B-C132-41C7-8C0C-6022C6FD6A9E",
+      "overrideName": "57CFB7E2-8E39-4293-86B9-81F605792F82_stringValue",
+      "value": "Purchased from MediaMarkt"
+    }
+  ],
+  "resizingConstraint": 27,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "9F43BF59-DA6F-43F2-BDBE-E9EC97054D1B",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "01591450-AA22-4309-B558-DD639D09D6C4",
+  "verticalSpacing": 0
+}

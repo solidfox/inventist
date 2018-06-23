@@ -42,12 +42,6 @@
       "value": "Contractor"
     }
   ],
-  "overrides": {
-    "2DA2CC86-2EA8-4D18-9979-4775614F4D70": {
-      "symbolID": "A42BA0EE-64A6-4FDB-A952-B0B8F60CC2B9"
-    },
-    "83637734-A485-4C40-B28E-AEB9E0456A7C": "Contractor"
-  },
   "resizingConstraint": 13,
   "resizingType": 0,
   "rotation": 0,

@@ -82,11 +82,35 @@
     },
     {
       "class": "symbolMaster",
+      "id": "DAEA5488-DB46-4DDA-90EA-4A547F1D9C4B"
+    },
+    {
+      "class": "symbolMaster",
+      "id": "5D9A8EC3-E806-4016-BDC9-6992FD82A39E"
+    },
+    {
+      "class": "symbolMaster",
       "id": "4DB62119-04A6-4771-A421-BD290186E389"
     },
     {
       "class": "symbolMaster",
       "id": "F50F376C-877F-4E46-9686-0E3F9BB88A15"
+    },
+    {
+      "class": "symbolMaster",
+      "id": "BC111C33-B5D0-46BD-ADA1-D4EBC0E48173"
+    },
+    {
+      "class": "symbolMaster",
+      "id": "ADAFA3B4-3176-4943-AC50-F73FC1E381A2"
+    },
+    {
+      "class": "symbolMaster",
+      "id": "A7FF208C-F70F-4636-98AD-7275456E787C"
+    },
+    {
+      "class": "symbolMaster",
+      "id": "4E31DE66-59D5-4BB3-B9C3-989C62D9C0D5"
     }
   ],
   "name": "Symbols",
