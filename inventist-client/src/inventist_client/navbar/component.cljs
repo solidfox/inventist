@@ -28,6 +28,7 @@
           :style         {:display        "flex"
                           :flex-direction "row"
                           :margin-top     "0rem"
+                          :position       "relative"
                           :color          color/grey-dark
                           :border-radius  "0.5rem"}
           :draggable     true
@@ -35,14 +36,23 @@
           :on-drag-enter (:on-drag-enter selected-item)}
 
     [:div {:class "navbar-badge-selection-data"
-           :style {:display        "flex"
-                   :padding        "0.25rem 0.5rem 0rem"
-                   :border-left    (str "0.1rem solid " color/grey-light)
-                   :flex-direction "column"}}
-     [:div {:style {:font-size   "0.5rem"
-                    :font-weight "600"
-                    :color       color/theme}}
-      (or (:custom-text selected-item) "Selected")]
+           :style {:display          "flex"
+                   :draggable        false
+                   :position         "absolute"
+                   :top              "3.5rem"
+                   :left             "-2rem"
+                   :minWidth         "6rem"
+                   :width            "auto"
+                   :padding          "0.25rem 0.5rem 0rem"
+                   :background-color color/white
+                   :box-shadow       "0 0 0.2rem rgba(0,0,0,0.25)"
+                   :border-radius    "0.5rem"
+                   :border-left      (str "0.1rem solid " color/grey-light)
+                   :flex-direction   "column"}}
+     ;[:div {:style {:font-size   "0.5rem"
+     ;               :font-weight "600"
+     ;               :color       color/theme}}
+     ; (or (:custom-text selected-item) "Selected")]
      [:div {:style {:font-size   "0.9rem"
                     :font-weight "600"}}
       (:name selected-item)]
@@ -56,7 +66,7 @@
                        :width            "3rem"
                        :object-fit       "cover"
                        :background-color color/grey-light
-                       :borderRadius     "3rem"}}]]])
+                       :borderRadius     "0.5rem"}}]]])     ;"0 0.5rem 0.5rem 0"}}]]])
 
 (defc navigation-icon
   [{title    :title
