@@ -40,8 +40,12 @@
       "id": "0CB6CE5F-A3B6-46F0-AA67-F60FAA313273"
     },
     {
-      "class": "shapeGroup",
-      "id": "BC26EF7C-AE3F-41E3-9E38-C69501FFBB03"
+      "class": "text",
+      "id": "ABA007DA-873B-4200-82D4-46CCE9B18ED8"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "F2E592B6-A0B1-404A-B38A-B124AF578D68"
     }
   ],
   "name": "People Copy",

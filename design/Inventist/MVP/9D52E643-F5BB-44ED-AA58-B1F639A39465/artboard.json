@@ -49,7 +49,7 @@
   "isFlowHome": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 2,
+  "layerListExpandedType": 1,
   "layers": [
     {
       "class": "group",
@@ -64,7 +64,7 @@
       "id": "4550C8BF-4487-4A04-BB26-2DF20D2C31C5"
     }
   ],
-  "name": "People",
+  "name": "Collection1",
   "nameIsFixed": true,
   "presetDictionary": {
     "allowResizedMatching": 0,

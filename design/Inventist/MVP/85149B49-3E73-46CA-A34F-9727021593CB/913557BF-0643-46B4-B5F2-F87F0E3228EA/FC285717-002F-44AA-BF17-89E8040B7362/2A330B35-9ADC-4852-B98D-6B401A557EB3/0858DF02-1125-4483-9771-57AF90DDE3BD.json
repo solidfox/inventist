@@ -1,0 +1,59 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "0858DF02-1125-4483-9771-57AF90DDE3BD",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "5F3E5441-38DD-4F20-924A-6A1C2748B6E1",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "6ACC32F8-31BD-422C-BD2B-B0CBE45CC152",
+    "height": 32,
+    "width": 288,
+    "x": 0,
+    "y": 72
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Sub-Collection",
+  "nameIsFixed": true,
+  "overrideValues": [
+    {
+      "_class": "overrideValue",
+      "do_objectID": "A0074BF5-7A35-4652-A609-C35D1D06BA9A",
+      "overrideName": "0CB6CE5F-A3B6-46F0-AA67-F60FAA313273_stringValue",
+      "value": "Teachers"
+    },
+    {
+      "_class": "overrideValue",
+      "do_objectID": "41222427-4AC8-4275-805B-47B55EEECBB3",
+      "overrideName": "ABA007DA-873B-4200-82D4-46CCE9B18ED8_stringValue",
+      "value": " "
+    }
+  ],
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "910037D8-4898-42E5-8620-142E8CCF998E",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "4C4F903F-B055-4E38-A6FD-75D5F641D1E4",
+  "verticalSpacing": 0
+}

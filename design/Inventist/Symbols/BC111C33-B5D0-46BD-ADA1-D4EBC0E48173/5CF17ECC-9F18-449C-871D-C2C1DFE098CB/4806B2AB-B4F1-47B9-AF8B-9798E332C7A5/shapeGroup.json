@@ -58,12 +58,6 @@
         "thickness": 1
       }
     ],
-    "contextSettings": {
-      "_class": "graphicsContextSettings",
-      "blendMode": 0,
-      "do_objectID": "105871AB-4EB5-4301-BCF8-96239DF5C2A8",
-      "opacity": 0.5
-    },
     "do_objectID": "B4CF6F44-2999-48AA-972D-2587FA4464C7",
     "endDecorationType": 0,
     "fills": [

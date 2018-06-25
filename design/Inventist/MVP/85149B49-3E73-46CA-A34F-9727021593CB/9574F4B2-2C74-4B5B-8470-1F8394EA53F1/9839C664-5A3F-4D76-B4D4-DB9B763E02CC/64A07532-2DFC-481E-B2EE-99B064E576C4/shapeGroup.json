@@ -1,10 +1,10 @@
 {
   "_class": "shapeGroup",
   "clippingMaskMode": 0,
-  "do_objectID": "BC26EF7C-AE3F-41E3-9E38-C69501FFBB03",
+  "do_objectID": "64A07532-2DFC-481E-B2EE-99B064E576C4",
   "exportOptions": {
     "_class": "exportOptions",
-    "do_objectID": "E10C74FE-B5AD-4DF4-8DB3-58FB8DA66C84",
+    "do_objectID": "FC58C621-840E-44DB-8713-99119A7A5388",
     "exportFormats": [
     ],
     "includedLayerIds": [
@@ -15,11 +15,11 @@
   "frame": {
     "_class": "rect",
     "constrainProportions": true,
-    "do_objectID": "2A24FEE3-4B91-42FD-B1D0-307BB192FDD3",
-    "height": 16,
-    "width": 19.2,
-    "x": 40,
-    "y": 8
+    "do_objectID": "2F3106BE-76CE-44D6-BD1A-6F0F7372BF43",
+    "height": 24.00000000000001,
+    "width": 24,
+    "x": 806,
+    "y": 12
   },
   "hasClickThrough": false,
   "hasClippingMask": false,
@@ -31,38 +31,22 @@
   "layers": [
     {
       "class": "shapePath",
-      "id": "3BB608AF-8899-4C5A-AE98-975CA45C427E"
+      "id": "854E924D-C852-4C42-B4E9-073C68155A80"
     },
     {
       "class": "shapePath",
-      "id": "C71185D1-90E9-4AC3-802F-982205D4771F"
-    },
-    {
-      "class": "shapePath",
-      "id": "DFBC1E69-F79F-47DD-B7D3-DF369478B124"
-    },
-    {
-      "class": "shapePath",
-      "id": "E52FD7AF-3EBA-4CA2-B55E-07F0C5E2CAF8"
-    },
-    {
-      "class": "shapePath",
-      "id": "C2C68F21-B01C-49E3-81D4-ACF46696427F"
-    },
-    {
-      "class": "shapePath",
-      "id": "C5FED4FB-E27F-4B8C-A30D-D6BCC097150A"
+      "id": "5B2302A2-6732-4106-B8A3-08C030AB3CE8"
     }
   ],
-  "name": "Shape",
+  "name": "Combined Shape",
   "nameIsFixed": false,
-  "resizingConstraint": 41,
+  "resizingConstraint": 59,
   "resizingType": 0,
   "rotation": 0,
   "shouldBreakMaskChain": false,
   "style": {
     "_class": "style",
-    "do_objectID": "6B495877-EB36-4B65-A834-CB7C69687877",
+    "do_objectID": "8707AEF8-C5AF-4AB5-8382-B597741A0667",
     "endDecorationType": 0,
     "fills": [
       {
@@ -70,9 +54,9 @@
         "color": {
           "_class": "color",
           "alpha": 1,
-          "blue": 0.2902374565601349,
-          "green": 0.2901752889156342,
-          "red": 0.290221631526947
+          "blue": 0.1333333333333333,
+          "green": 0.4941176470588235,
+          "red": 0.9019607843137255
         },
         "fillType": 0,
         "isEnabled": true,

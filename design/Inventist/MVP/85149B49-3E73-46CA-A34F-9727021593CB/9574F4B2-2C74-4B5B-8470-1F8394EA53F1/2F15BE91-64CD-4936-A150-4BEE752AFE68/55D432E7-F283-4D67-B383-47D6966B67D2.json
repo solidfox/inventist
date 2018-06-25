@@ -1,0 +1,59 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "55D432E7-F283-4D67-B383-47D6966B67D2",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "85674839-0A52-4A30-BFC9-E7C2B3811E80",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "631019E1-542E-4792-9527-2E23765D800A",
+    "height": 30.32237002684889,
+    "width": 698.8778280542974,
+    "x": 0,
+    "y": 29
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Details/Table_Item Copy",
+  "nameIsFixed": false,
+  "overrideValues": [
+    {
+      "_class": "overrideValue",
+      "do_objectID": "4E6735C8-A43B-4478-A08E-9AD684C206E6",
+      "overrideName": "DC323D7D-4A8B-449E-BEFB-6B12FF11D9EC_stringValue",
+      "value": "Color"
+    },
+    {
+      "_class": "overrideValue",
+      "do_objectID": "12DC9F5D-0EF9-4305-994C-E3B787A81F06",
+      "overrideName": "C2088DF5-805D-4935-BA54-BCC394B78D38_stringValue",
+      "value": "Space Grey"
+    }
+  ],
+  "resizingConstraint": 27,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "F69F3122-4D82-4F19-AB3D-59B6DE98547E",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "4AE4C89B-B7E5-4723-92C1-245A67D8D66A",
+  "verticalSpacing": 0
+}
