@@ -17,7 +17,7 @@
             "_class": "fontDescriptor",
             "attributes": {
               "name": "OpenSans",
-              "size": 16
+              "size": 12
             }
           },
           "kerning": 0,
@@ -49,12 +49,12 @@
   "frame": {
     "_class": "rect",
     "constrainProportions": false,
-    "height": 22,
-    "width": 71,
-    "x": 56,
-    "y": 9
+    "height": 17,
+    "width": 54,
+    "x": 40,
+    "y": 12
   },
-  "glyphBounds": "{{1, 5}, {70, 16}}",
+  "glyphBounds": "{{1, 4}, {53, 12}}",
   "isFlippedHorizontal": false,
   "isFlippedVertical": false,
   "isLocked": false,
@@ -86,7 +86,7 @@
           "_class": "fontDescriptor",
           "attributes": {
             "name": "OpenSans",
-            "size": 16
+            "size": 12
           }
         },
         "kerning": 0,

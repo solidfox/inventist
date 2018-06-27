@@ -18,7 +18,7 @@
     "do_objectID": "2F3106BE-76CE-44D6-BD1A-6F0F7372BF43",
     "height": 24.00000000000001,
     "width": 24,
-    "x": 806,
+    "x": 808,
     "y": 12
   },
   "hasClickThrough": false,
@@ -27,7 +27,7 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 1,
+  "layerListExpandedType": 0,
   "layers": [
     {
       "class": "shapePath",
@@ -40,7 +40,7 @@
   ],
   "name": "Combined Shape",
   "nameIsFixed": false,
-  "resizingConstraint": 59,
+  "resizingConstraint": 12,
   "resizingType": 0,
   "rotation": 0,
   "shouldBreakMaskChain": false,

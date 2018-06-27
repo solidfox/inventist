@@ -16,7 +16,7 @@
     "constrainProportions": false,
     "do_objectID": "DF277E48-5AA6-4434-9D3A-498820ECDE0B",
     "height": 48,
-    "width": 928,
+    "width": 848,
     "x": 0,
     "y": 0
   },
@@ -37,15 +37,7 @@
     },
     {
       "class": "shapeGroup",
-      "id": "423DB747-8F62-49A8-BE29-990C79A60709"
-    },
-    {
-      "class": "shapeGroup",
       "id": "64A07532-2DFC-481E-B2EE-99B064E576C4"
-    },
-    {
-      "class": "shapeGroup",
-      "id": "0053BED5-0760-430C-BDD9-A34E1B1B7F2D"
     }
   ],
   "name": "Toolbar",

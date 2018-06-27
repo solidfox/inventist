@@ -16,7 +16,7 @@
           "MSAttributedStringFontAttribute": {
             "_class": "fontDescriptor",
             "attributes": {
-              "name": "Roboto-Regular",
+              "name": "OpenSans",
               "size": 16
             }
           },
@@ -27,11 +27,11 @@
             "allowsDefaultTighteningForTruncation": 0
           }
         },
-        "length": 22,
+        "length": 25,
         "location": 0
       }
     ],
-    "string": "2018-04-14 • 10:37:46 "
+    "string": "2018-06-30 — FVFTRVSAJ1WK"
   },
   "automaticallyDrawOnUnderlyingPath": false,
   "do_objectID": "E92D242B-C0B1-42CF-9B68-25DF9C2DA936",
@@ -48,19 +48,19 @@
   "frame": {
     "_class": "rect",
     "constrainProportions": false,
-    "height": 21,
-    "width": 400,
-    "x": 0,
-    "y": 0
+    "height": 22,
+    "width": 366,
+    "x": 40,
+    "y": 28
   },
-  "glyphBounds": "{{0, 5}, {156, 13}}",
+  "glyphBounds": "{{0, 5}, {220, 16}}",
   "isFlippedHorizontal": false,
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
   "layerListExpandedType": 0,
   "lineSpacingBehaviour": 2,
-  "name": "2018-04-14 • 10:37:4",
+  "name": "2018-06-30 — FVFTRVS",
   "nameIsFixed": false,
   "resizingConstraint": 9,
   "resizingType": 0,
@@ -84,7 +84,7 @@
         "MSAttributedStringFontAttribute": {
           "_class": "fontDescriptor",
           "attributes": {
-            "name": "Roboto-Regular",
+            "name": "OpenSans",
             "size": 16
           }
         },

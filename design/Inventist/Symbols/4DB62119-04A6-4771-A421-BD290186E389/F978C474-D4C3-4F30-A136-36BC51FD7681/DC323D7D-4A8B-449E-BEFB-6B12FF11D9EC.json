@@ -9,14 +9,14 @@
           "MSAttributedStringColorAttribute": {
             "_class": "color",
             "alpha": 1,
-            "blue": 0.6509803921568628,
-            "green": 0.6470588235294118,
-            "red": 0.5843137254901961
+            "blue": 0.5529411764705883,
+            "green": 0.5490196078431373,
+            "red": 0.4980392156862745
           },
           "MSAttributedStringFontAttribute": {
             "_class": "fontDescriptor",
             "attributes": {
-              "name": "Roboto-Regular",
+              "name": "OpenSans",
               "size": 16
             }
           },
@@ -50,12 +50,12 @@
     "_class": "rect",
     "constrainProportions": false,
     "do_objectID": "5815BC82-ADED-4794-B202-96A4FA7AE979",
-    "height": 21,
-    "width": 108,
+    "height": 22,
+    "width": 160,
     "x": 0,
     "y": 0
   },
-  "glyphBounds": "{{0, 4}, {103, 14}}",
+  "glyphBounds": "{{0, 4}, {108, 14}}",
   "isFlippedHorizontal": false,
   "isFlippedVertical": false,
   "isLocked": false,
@@ -81,14 +81,14 @@
         "MSAttributedStringColorAttribute": {
           "_class": "color",
           "alpha": 1,
-          "blue": 0.6509803921568628,
-          "green": 0.6470588235294118,
-          "red": 0.5843137254901961
+          "blue": 0.5529411764705883,
+          "green": 0.5490196078431373,
+          "red": 0.4980392156862745
         },
         "MSAttributedStringFontAttribute": {
           "_class": "fontDescriptor",
           "attributes": {
-            "name": "Roboto-Regular",
+            "name": "OpenSans",
             "size": 16
           }
         },

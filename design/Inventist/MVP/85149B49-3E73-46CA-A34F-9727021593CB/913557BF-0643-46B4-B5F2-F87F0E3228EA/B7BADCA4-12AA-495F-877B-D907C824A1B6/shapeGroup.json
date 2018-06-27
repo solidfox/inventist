@@ -54,7 +54,7 @@
         },
         "fillType": 0,
         "isEnabled": false,
-        "position": 1,
+        "position": 2,
         "thickness": 1
       }
     ],
@@ -79,6 +79,28 @@
       }
     ],
     "miterLimit": 10,
+    "shadows": [
+      {
+        "_class": "shadow",
+        "blurRadius": 2,
+        "color": {
+          "_class": "color",
+          "alpha": 0.25,
+          "blue": 0,
+          "green": 0,
+          "red": 0
+        },
+        "contextSettings": {
+          "_class": "graphicsContextSettings",
+          "blendMode": 0,
+          "opacity": 1
+        },
+        "isEnabled": true,
+        "offsetX": 0,
+        "offsetY": 0,
+        "spread": 0
+      }
+    ],
     "startDecorationType": 0
   },
   "windingRule": 1

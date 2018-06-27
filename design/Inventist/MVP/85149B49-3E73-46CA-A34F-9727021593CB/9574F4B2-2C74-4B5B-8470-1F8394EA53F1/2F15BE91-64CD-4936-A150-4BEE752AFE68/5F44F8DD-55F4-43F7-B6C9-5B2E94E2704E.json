@@ -15,8 +15,8 @@
     "_class": "rect",
     "constrainProportions": false,
     "do_objectID": "76E54628-7968-43CD-8022-36B5FCE7A887",
-    "height": 27.53526970954359,
-    "width": 698.8778280542974,
+    "height": 30,
+    "width": 660.1237113402067,
     "x": 0,
     "y": 0
   },
@@ -29,6 +29,18 @@
   "name": "Details/Table_Item",
   "nameIsFixed": false,
   "overrideValues": [
+    {
+      "_class": "overrideValue",
+      "do_objectID": "8A846FA3-F97F-40BE-851A-3C0AA2C33F21",
+      "overrideName": "DC323D7D-4A8B-449E-BEFB-6B12FF11D9EC_stringValue",
+      "value": "Email Address"
+    },
+    {
+      "_class": "overrideValue",
+      "do_objectID": "20258C18-A180-4598-B5EB-6A422D7E3451",
+      "overrideName": "C2088DF5-805D-4935-BA54-BCC394B78D38_stringValue",
+      "value": "nova.stark@gripsholmsskolan.se"
+    }
   ],
   "resizingConstraint": 27,
   "resizingType": 0,

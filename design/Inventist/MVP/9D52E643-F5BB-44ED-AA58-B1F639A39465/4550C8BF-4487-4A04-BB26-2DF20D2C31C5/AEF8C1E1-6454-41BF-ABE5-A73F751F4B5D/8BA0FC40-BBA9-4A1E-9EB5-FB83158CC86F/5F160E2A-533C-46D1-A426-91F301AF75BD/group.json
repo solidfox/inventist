@@ -1,0 +1,57 @@
+{
+  "_class": "group",
+  "do_objectID": "5F160E2A-533C-46D1-A426-91F301AF75BD",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": true,
+    "height": 40,
+    "width": 288,
+    "x": 0,
+    "y": 41
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 2,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "ABC40B1D-D345-47F6-870D-7E02CAA28DD8"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "B342FD63-3EBA-4CC5-8C43-0E2543D44460"
+    },
+    {
+      "class": "text",
+      "id": "CE54365A-BC9A-42AF-AE45-2A2ADCBC8D96"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "2B552360-14D4-4A71-BFA5-29A0BBF1AE72"
+    }
+  ],
+  "name": "People Copy",
+  "nameIsFixed": true,
+  "resizingConstraint": 47,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

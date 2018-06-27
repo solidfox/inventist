@@ -1,0 +1,53 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "C4F9B8A2-99B2-4840-8E64-C5F30B9F1E1E",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "813B443F-9E7C-438A-B9A6-257EE71CF8B1",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "C746AFC5-75B0-4E41-B89B-4839ABBF6D7B",
+    "height": 24,
+    "width": 288,
+    "x": 0,
+    "y": 0
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Collection-Heading Copy",
+  "nameIsFixed": false,
+  "overrideValues": [
+    {
+      "_class": "overrideValue",
+      "do_objectID": "60A2F72A-823F-473F-BFFA-1B6C21DCC4DE",
+      "overrideName": "3F172547-BD01-416B-95C7-D048498EF6F5_stringValue",
+      "value": "Contractors"
+    }
+  ],
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "A2BC90AF-49E3-47F8-BE45-43B5E0A611CB",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "AD70FC1F-47F2-43DE-9A90-F279B7D3EB0E",
+  "verticalSpacing": 0
+}

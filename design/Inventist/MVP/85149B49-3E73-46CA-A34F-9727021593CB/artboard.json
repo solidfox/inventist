@@ -33,17 +33,18 @@
     "constrainProportions": false,
     "do_objectID": "8CD07B85-FF6D-437B-B23B-38C9AD06AC9B",
     "height": 900,
-    "width": 1600,
+    "width": 1520,
     "x": 1252,
     "y": -357
   },
-  "hasBackgroundColor": false,
-  "hasClickThrough": true,
+  "hasBackgroundColor": true,
+  "hasClickThrough": false,
   "horizontalRulerData": {
     "_class": "rulerData",
     "base": 0,
     "do_objectID": "CE011648-303D-405F-82E0-C6A84956F708",
     "guides": [
+      824
     ]
   },
   "includeBackgroundColorInExport": true,

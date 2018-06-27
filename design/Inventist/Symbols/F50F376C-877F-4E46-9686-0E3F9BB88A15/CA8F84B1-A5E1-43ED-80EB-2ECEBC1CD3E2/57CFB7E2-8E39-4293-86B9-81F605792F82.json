@@ -16,7 +16,7 @@
           "MSAttributedStringFontAttribute": {
             "_class": "fontDescriptor",
             "attributes": {
-              "name": "Roboto-Regular",
+              "name": "OpenSans",
               "size": 16
             }
           },
@@ -27,11 +27,11 @@
             "allowsDefaultTighteningForTruncation": 0
           }
         },
-        "length": 43,
+        "length": 20,
         "location": 0
       }
     ],
-    "string": "Allotted to Winston Hill (student - Vargar)"
+    "string": "Registered Charizard"
   },
   "automaticallyDrawOnUnderlyingPath": false,
   "do_objectID": "57CFB7E2-8E39-4293-86B9-81F605792F82",
@@ -48,19 +48,19 @@
   "frame": {
     "_class": "rect",
     "constrainProportions": false,
-    "height": 21,
-    "width": 400,
-    "x": 0,
-    "y": 21
+    "height": 22,
+    "width": 366,
+    "x": 40,
+    "y": 6
   },
-  "glyphBounds": "{{0, 4}, {295, 17}}",
+  "glyphBounds": "{{1, 4}, {154, 17}}",
   "isFlippedHorizontal": false,
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
   "layerListExpandedType": 0,
   "lineSpacingBehaviour": 2,
-  "name": "Allotted to Winston",
+  "name": "Registered Charizard",
   "nameIsFixed": false,
   "resizingConstraint": 11,
   "resizingType": 0,
@@ -84,7 +84,7 @@
         "MSAttributedStringFontAttribute": {
           "_class": "fontDescriptor",
           "attributes": {
-            "name": "Roboto-Regular",
+            "name": "OpenSans",
             "size": 16
           }
         },

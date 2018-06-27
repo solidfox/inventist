@@ -18,7 +18,7 @@
     "do_objectID": "E7CBFDCF-5EB6-4B8D-9FFD-70DA1658796A",
     "height": 10,
     "width": 10,
-    "x": 366.0000000000006,
+    "x": 366.0000000000007,
     "y": 20
   },
   "hasClickThrough": false,
@@ -27,7 +27,7 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 1,
+  "layerListExpandedType": 0,
   "layers": [
     {
       "class": "shapePath",

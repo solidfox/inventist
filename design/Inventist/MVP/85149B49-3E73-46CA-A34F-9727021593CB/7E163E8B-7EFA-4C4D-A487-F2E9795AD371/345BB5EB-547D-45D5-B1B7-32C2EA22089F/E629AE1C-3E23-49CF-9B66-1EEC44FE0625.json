@@ -27,11 +27,11 @@
             "allowsDefaultTighteningForTruncation": 0
           }
         },
-        "length": 13,
+        "length": 17,
         "location": 0
       }
     ],
-    "string": "Search People"
+    "string": "Search All People"
   },
   "automaticallyDrawOnUnderlyingPath": false,
   "do_objectID": "E629AE1C-3E23-49CF-9B66-1EEC44FE0625",
@@ -55,14 +55,14 @@
     "x": 36,
     "y": 14
   },
-  "glyphBounds": "{{0, 4}, {106, 17}}",
+  "glyphBounds": "{{0, 4}, {128, 17}}",
   "isFlippedHorizontal": false,
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
   "layerListExpandedType": 0,
   "lineSpacingBehaviour": 2,
-  "name": "Search People",
+  "name": "Search All People",
   "nameIsFixed": false,
   "resizingConstraint": 42,
   "resizingType": 0,

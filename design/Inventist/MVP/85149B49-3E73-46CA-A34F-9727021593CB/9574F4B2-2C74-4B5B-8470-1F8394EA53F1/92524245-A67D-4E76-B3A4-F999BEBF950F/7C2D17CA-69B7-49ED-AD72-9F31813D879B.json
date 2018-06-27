@@ -16,7 +16,7 @@
           "MSAttributedStringFontAttribute": {
             "_class": "fontDescriptor",
             "attributes": {
-              "name": "Roboto-Light",
+              "name": "OpenSans-Light",
               "size": 32
             }
           },
@@ -27,11 +27,11 @@
             "allowsDefaultTighteningForTruncation": 0
           }
         },
-        "length": 59,
+        "length": 10,
         "location": 0
       }
     ],
-    "string": "Apple MacBook Pro (13-inch, 2016, Four Thunderbolt 3 Ports)"
+    "string": "Nova Stark"
   },
   "automaticallyDrawOnUnderlyingPath": false,
   "do_objectID": "7C2D17CA-69B7-49ED-AD72-9F31813D879B",
@@ -50,19 +50,19 @@
     "_class": "rect",
     "constrainProportions": false,
     "do_objectID": "F1BB8EDC-5CD7-47FD-A13A-7A4F39FD5F73",
-    "height": 86,
-    "width": 732,
-    "x": 116,
-    "y": 4
+    "height": 43,
+    "width": 656,
+    "x": 112,
+    "y": 0
   },
-  "glyphBounds": "{{0, 8}, {563, 77}}",
+  "glyphBounds": "{{3, 9}, {152, 26}}",
   "isFlippedHorizontal": false,
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
   "layerListExpandedType": 0,
   "lineSpacingBehaviour": 2,
-  "name": "Apple MacBook Pro (1",
+  "name": "Nova Stark",
   "nameIsFixed": false,
   "resizingConstraint": 26,
   "resizingType": 0,
@@ -88,7 +88,7 @@
         "MSAttributedStringFontAttribute": {
           "_class": "fontDescriptor",
           "attributes": {
-            "name": "Roboto-Light",
+            "name": "OpenSans-Light",
             "size": 32
           }
         },

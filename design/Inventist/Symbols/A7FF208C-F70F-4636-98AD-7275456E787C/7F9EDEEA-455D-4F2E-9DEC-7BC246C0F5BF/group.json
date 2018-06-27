@@ -30,24 +30,28 @@
       "id": "FD48CDD6-C288-4247-9917-E3E45A141DB3"
     },
     {
+      "class": "symbolInstance",
+      "id": "4527E5C7-86A1-4F09-A2E5-E44301681E65"
+    },
+    {
+      "class": "text",
+      "id": "02ABE849-BA66-47F2-86DD-ED61497C0062"
+    },
+    {
       "class": "shapeGroup",
       "id": "0CA691E0-5908-4CEF-8916-74626B02DA2E"
     },
     {
-      "class": "text",
-      "id": "0D2ACAA4-9EB1-4CDB-8378-F3EE77CCEBC6"
-    },
-    {
-      "class": "shapeGroup",
-      "id": "9EB5D059-5E8A-46B4-9F2F-053831662709"
-    },
-    {
-      "class": "shapeGroup",
-      "id": "EEC34178-42FB-4E2D-B51B-5315B7CA34E6"
+      "class": "symbolInstance",
+      "id": "DD6ADB88-07D7-4AE6-AA75-B71362D69B8C"
     },
     {
       "class": "symbolInstance",
-      "id": "DD6ADB88-07D7-4AE6-AA75-B71362D69B8C"
+      "id": "534C0D51-016C-440E-8E39-7805C2EB0EFD"
+    },
+    {
+      "class": "text",
+      "id": "0D2ACAA4-9EB1-4CDB-8378-F3EE77CCEBC6"
     }
   ],
   "name": "Main Col",

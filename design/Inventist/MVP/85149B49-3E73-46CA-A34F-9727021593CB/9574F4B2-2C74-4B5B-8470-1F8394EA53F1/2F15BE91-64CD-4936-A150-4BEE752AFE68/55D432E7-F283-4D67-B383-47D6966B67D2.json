@@ -15,10 +15,10 @@
     "_class": "rect",
     "constrainProportions": false,
     "do_objectID": "631019E1-542E-4792-9527-2E23765D800A",
-    "height": 30.32237002684889,
-    "width": 698.8778280542974,
+    "height": 30,
+    "width": 660.1237113402067,
     "x": 0,
-    "y": 29
+    "y": 30
   },
   "horizontalSpacing": 0,
   "isFlippedHorizontal": false,
@@ -33,13 +33,13 @@
       "_class": "overrideValue",
       "do_objectID": "4E6735C8-A43B-4478-A08E-9AD684C206E6",
       "overrideName": "DC323D7D-4A8B-449E-BEFB-6B12FF11D9EC_stringValue",
-      "value": "Color"
+      "value": "Phone"
     },
     {
       "_class": "overrideValue",
       "do_objectID": "12DC9F5D-0EF9-4305-994C-E3B787A81F06",
       "overrideName": "C2088DF5-805D-4935-BA54-BCC394B78D38_stringValue",
-      "value": "Space Grey"
+      "value": "0702135012"
     }
   ],
   "resizingConstraint": 27,

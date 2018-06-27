@@ -18,7 +18,7 @@
     "do_objectID": "531928FF-D4A7-4293-96DC-E000971F53E1",
     "height": 40,
     "width": 40,
-    "x": 150,
+    "x": 0,
     "y": 0
   },
   "hasClickThrough": false,
@@ -27,7 +27,7 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 1,
+  "layerListExpandedType": 0,
   "layers": [
     {
       "class": "oval",

@@ -1,0 +1,73 @@
+{
+  "_class": "shapeGroup",
+  "clippingMaskMode": 0,
+  "do_objectID": "BB92D305-976B-4B5B-8B57-00E0B88C3E82",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "2694EA30-C762-4ED5-B3C1-33C5382AD0CC",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": true,
+    "do_objectID": "C21AFFA8-9167-4970-B758-11A36EBA6C39",
+    "height": 16,
+    "width": 13.07543892639273,
+    "x": 23,
+    "y": 2.000004121445272
+  },
+  "hasClickThrough": false,
+  "hasClippingMask": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 1,
+  "layers": [
+    {
+      "class": "shapePath",
+      "id": "109FFCE7-F797-4227-AD67-8AC5D06ED355"
+    },
+    {
+      "class": "shapePath",
+      "id": "4A585940-C57F-4060-B1BB-B0D34A10538A"
+    }
+  ],
+  "name": "Apple",
+  "nameIsFixed": true,
+  "resizingConstraint": 9,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "25A63FEA-C7D7-4272-B680-3F9F6E1C76FD",
+    "endDecorationType": 0,
+    "fills": [
+      {
+        "_class": "fill",
+        "color": {
+          "_class": "color",
+          "alpha": 1,
+          "blue": 0.2902374565601349,
+          "green": 0.2901752889156342,
+          "red": 0.290221631526947
+        },
+        "fillType": 0,
+        "isEnabled": true,
+        "noiseIndex": 0,
+        "noiseIntensity": 0,
+        "patternFillType": 1,
+        "patternTileScale": 1
+      }
+    ],
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "windingRule": 0
+}

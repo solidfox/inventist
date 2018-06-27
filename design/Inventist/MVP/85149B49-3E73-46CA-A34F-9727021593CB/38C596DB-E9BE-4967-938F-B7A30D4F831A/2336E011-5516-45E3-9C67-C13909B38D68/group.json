@@ -16,8 +16,8 @@
     "constrainProportions": false,
     "do_objectID": "79505C38-FA2C-4B50-ADCA-C1CC74909F0E",
     "height": 40,
-    "width": 190,
-    "x": 1402,
+    "width": 180,
+    "x": 1332.000000000001,
     "y": 8
   },
   "hasClickThrough": false,
@@ -37,7 +37,15 @@
     },
     {
       "class": "text",
-      "id": "BFA8DF31-3517-405E-B7AA-08F70AA54ED1"
+      "id": "E1AC1F6D-76BA-4263-8F87-4566B7194E86"
+    },
+    {
+      "class": "text",
+      "id": "029C9E28-64F9-4823-B14D-2DD56B0B55AE"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "B845E9FE-C34B-4E48-BC8D-7921FBFBCEA3"
     }
   ],
   "name": "Profile",

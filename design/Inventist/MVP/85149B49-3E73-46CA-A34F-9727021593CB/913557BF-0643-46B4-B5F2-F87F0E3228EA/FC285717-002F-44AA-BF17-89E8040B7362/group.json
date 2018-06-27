@@ -15,7 +15,7 @@
     "_class": "rect",
     "constrainProportions": false,
     "do_objectID": "6080F4C0-0419-44B9-ABD6-1A6E2EB53FD0",
-    "height": 375,
+    "height": 416,
     "width": 288,
     "x": 0,
     "y": 0
@@ -28,12 +28,8 @@
   "layerListExpandedType": 2,
   "layers": [
     {
-      "class": "symbolInstance",
-      "id": "D1A4E78F-4D6A-422B-8EE2-B33F812B306A"
-    },
-    {
-      "class": "symbolInstance",
-      "id": "51A74D44-55C1-42F6-92D5-208742AD3F82"
+      "class": "group",
+      "id": "159C092C-C325-4B6C-89C2-758ACF2B6886"
     },
     {
       "class": "group",
@@ -41,11 +37,11 @@
     },
     {
       "class": "group",
-      "id": "7493D028-9589-4950-887A-3198FE81E91D"
+      "id": "0B419D1E-B99A-4083-9DA6-1BBF03582E66"
     },
     {
-      "class": "group",
-      "id": "888E3EDF-19C9-4C64-AAB6-80EC2649ED9D"
+      "class": "symbolInstance",
+      "id": "B04AF237-39AB-441D-AAFC-77513D7AE857"
     }
   ],
   "name": "Collections",

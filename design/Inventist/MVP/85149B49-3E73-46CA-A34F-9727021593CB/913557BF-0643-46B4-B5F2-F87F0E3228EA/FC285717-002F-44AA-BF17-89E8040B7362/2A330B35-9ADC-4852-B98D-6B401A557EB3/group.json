@@ -15,10 +15,10 @@
     "_class": "rect",
     "constrainProportions": false,
     "do_objectID": "6DAD48AE-ECEA-43EC-BDC2-15BEB349FE7D",
-    "height": 200,
+    "height": 24,
     "width": 288,
     "x": 0,
-    "y": 93
+    "y": 280
   },
   "hasClickThrough": false,
   "isFlippedHorizontal": false,
@@ -29,30 +29,10 @@
   "layers": [
     {
       "class": "symbolInstance",
-      "id": "A04B760F-D5D8-4F89-8CC6-1760DE141834"
-    },
-    {
-      "class": "symbolInstance",
-      "id": "04BF76DC-8A88-441A-ADE8-E6768E2DEEC5"
-    },
-    {
-      "class": "symbolInstance",
-      "id": "0858DF02-1125-4483-9771-57AF90DDE3BD"
-    },
-    {
-      "class": "symbolInstance",
-      "id": "C352D037-EADB-4CC4-9DC9-ADC6F86C685E"
-    },
-    {
-      "class": "symbolInstance",
-      "id": "5CC923D8-A7BF-44FD-8BC6-630AE8C15F62"
-    },
-    {
-      "class": "symbolInstance",
-      "id": "EF164D77-C846-4B36-99F1-199E66F4ED0F"
+      "id": "6EABABC4-9CF6-4EB0-9E36-BD9624B400F6"
     }
   ],
-  "name": "People",
+  "name": "Inventory",
   "nameIsFixed": true,
   "resizingConstraint": 63,
   "resizingType": 0,

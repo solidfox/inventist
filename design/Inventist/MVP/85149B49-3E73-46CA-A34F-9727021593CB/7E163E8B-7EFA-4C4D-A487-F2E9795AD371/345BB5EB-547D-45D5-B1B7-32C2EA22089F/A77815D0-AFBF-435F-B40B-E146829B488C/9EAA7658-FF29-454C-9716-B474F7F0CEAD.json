@@ -8,15 +8,15 @@
         "attributes": {
           "MSAttributedStringColorAttribute": {
             "_class": "color",
-            "alpha": 0.25,
-            "blue": 0,
-            "green": 0,
-            "red": 0
+            "alpha": 1,
+            "blue": 0.5529411764705883,
+            "green": 0.5490196078431373,
+            "red": 0.4980392156862745
           },
           "MSAttributedStringFontAttribute": {
             "_class": "fontDescriptor",
             "attributes": {
-              "name": "OpenSans-Italic",
+              "name": "OpenSans",
               "size": 12
             }
           },
@@ -51,11 +51,11 @@
     "constrainProportions": false,
     "do_objectID": "281C1FCF-939B-4982-9B06-4379FD3EB862",
     "height": 17,
-    "width": 278,
+    "width": 184,
     "x": 8,
-    "y": 16
+    "y": 3.928571428571427
   },
-  "glyphBounds": "{{1, 3}, {87, 11}}",
+  "glyphBounds": "{{0, 3}, {92, 11}}",
   "isFlippedHorizontal": false,
   "isFlippedVertical": false,
   "isLocked": false,
@@ -64,7 +64,7 @@
   "lineSpacingBehaviour": 2,
   "name": "Total 400 results",
   "nameIsFixed": false,
-  "resizingConstraint": 10,
+  "resizingConstraint": 43,
   "resizingType": 0,
   "rotation": 0,
   "shouldBreakMaskChain": false,
@@ -80,15 +80,15 @@
       "encodedAttributes": {
         "MSAttributedStringColorAttribute": {
           "_class": "color",
-          "alpha": 0.25,
-          "blue": 0,
-          "green": 0,
-          "red": 0
+          "alpha": 1,
+          "blue": 0.5529411764705883,
+          "green": 0.5490196078431373,
+          "red": 0.4980392156862745
         },
         "MSAttributedStringFontAttribute": {
           "_class": "fontDescriptor",
           "attributes": {
-            "name": "OpenSans-Italic",
+            "name": "OpenSans",
             "size": 12
           }
         },

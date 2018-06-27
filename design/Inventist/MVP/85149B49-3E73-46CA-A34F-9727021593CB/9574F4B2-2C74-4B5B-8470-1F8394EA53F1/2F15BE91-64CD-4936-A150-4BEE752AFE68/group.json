@@ -15,10 +15,10 @@
     "_class": "rect",
     "constrainProportions": false,
     "do_objectID": "CE6264A7-3FF5-469C-A762-9A827E7E6F1C",
-    "height": 97,
-    "width": 732,
-    "x": 156,
-    "y": 236
+    "height": 139,
+    "width": 661,
+    "x": 152,
+    "y": 200
   },
   "hasClickThrough": false,
   "isFlippedHorizontal": false,
@@ -42,6 +42,10 @@
     {
       "class": "symbolInstance",
       "id": "DC39EECA-C485-4718-991D-DBD0EC8EAA71"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "6C64F04C-979A-4C97-BF52-85992ECD0ABD"
     }
   ],
   "name": "Information",

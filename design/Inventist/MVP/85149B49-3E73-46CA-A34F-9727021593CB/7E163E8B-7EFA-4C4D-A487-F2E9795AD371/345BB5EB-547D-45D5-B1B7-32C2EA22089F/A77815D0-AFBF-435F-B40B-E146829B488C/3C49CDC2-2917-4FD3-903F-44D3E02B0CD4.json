@@ -27,11 +27,11 @@
             "allowsDefaultTighteningForTruncation": 0
           }
         },
-        "length": 13,
+        "length": 28,
         "location": 0
       }
     ],
-    "string": "View as Table"
+    "string": "Sort Results | View as Table"
   },
   "automaticallyDrawOnUnderlyingPath": false,
   "do_objectID": "3C49CDC2-2917-4FD3-903F-44D3E02B0CD4",
@@ -51,20 +51,20 @@
     "constrainProportions": false,
     "do_objectID": "BC7D32DE-5E23-4114-87EA-821067ABF6F2",
     "height": 17,
-    "width": 89.99999999999994,
-    "x": 286,
-    "y": 15
+    "width": 184,
+    "x": 192,
+    "y": 3
   },
-  "glyphBounds": "{{14, 3}, {76, 11}}",
+  "glyphBounds": "{{30, 3}, {154, 13}}",
   "isFlippedHorizontal": false,
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
   "layerListExpandedType": 0,
   "lineSpacingBehaviour": 2,
-  "name": "View as Table",
+  "name": "Sort Results | View",
   "nameIsFixed": false,
-  "resizingConstraint": 12,
+  "resizingConstraint": 44,
   "resizingType": 0,
   "rotation": 0,
   "shouldBreakMaskChain": false,

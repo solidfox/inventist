@@ -15,10 +15,10 @@
     "_class": "rect",
     "constrainProportions": false,
     "do_objectID": "C700A3FB-6AA9-4DC4-8170-E8840CD54F1A",
-    "height": 48,
+    "height": 24,
     "width": 384,
     "x": 0,
-    "y": 796
+    "y": 48
   },
   "hasClickThrough": false,
   "isFlippedHorizontal": false,
@@ -38,10 +38,6 @@
     {
       "class": "text",
       "id": "3C49CDC2-2917-4FD3-903F-44D3E02B0CD4"
-    },
-    {
-      "class": "text",
-      "id": "AB461BDC-67E8-4970-8207-2B83AE57AE9D"
     }
   ],
   "name": "Group",

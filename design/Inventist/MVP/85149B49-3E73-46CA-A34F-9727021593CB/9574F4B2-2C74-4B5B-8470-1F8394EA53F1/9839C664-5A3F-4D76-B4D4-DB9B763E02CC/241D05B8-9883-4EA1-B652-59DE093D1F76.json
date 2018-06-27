@@ -27,7 +27,7 @@
             "allowsDefaultTighteningForTruncation": 0
           }
         },
-        "length": 27,
+        "length": 22,
         "location": 0
       },
       {
@@ -54,11 +54,11 @@
             "allowsDefaultTighteningForTruncation": 0
           }
         },
-        "length": 9,
-        "location": 27
+        "length": 10,
+        "location": 22
       }
     ],
-    "string": "Inventory / All MacBooks / Charizard"
+    "string": "People / All People / Nova Stark"
   },
   "automaticallyDrawOnUnderlyingPath": false,
   "do_objectID": "241D05B8-9883-4EA1-B652-59DE093D1F76",
@@ -78,18 +78,18 @@
     "constrainProportions": false,
     "do_objectID": "6EF56968-B328-4159-A566-690B05FF8C5D",
     "height": 22,
-    "width": 274,
+    "width": 238,
     "x": 16,
     "y": 13
   },
-  "glyphBounds": "{{1, 4}, {271, 17}}",
+  "glyphBounds": "{{1, 4}, {237, 17}}",
   "isFlippedHorizontal": false,
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
   "layerListExpandedType": 0,
   "lineSpacingBehaviour": 2,
-  "name": "Inventory / All MacB",
+  "name": "People / All People",
   "nameIsFixed": false,
   "resizingConstraint": 9,
   "resizingType": 0,
@@ -129,5 +129,5 @@
       "verticalAlignment": 0
     }
   },
-  "textBehaviour": 0
+  "textBehaviour": 1
 }

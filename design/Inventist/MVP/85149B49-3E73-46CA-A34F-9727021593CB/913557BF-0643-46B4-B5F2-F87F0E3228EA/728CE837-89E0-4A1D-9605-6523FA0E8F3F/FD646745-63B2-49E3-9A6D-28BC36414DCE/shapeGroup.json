@@ -27,7 +27,7 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 1,
+  "layerListExpandedType": 0,
   "layers": [
     {
       "class": "rectangle",
@@ -62,7 +62,7 @@
           "red": 0
         },
         "fillType": 0,
-        "isEnabled": true,
+        "isEnabled": false,
         "position": 2,
         "thickness": 1
       }
@@ -104,7 +104,7 @@
           "blendMode": 0,
           "opacity": 1
         },
-        "isEnabled": false,
+        "isEnabled": true,
         "offsetX": 0,
         "offsetY": 0,
         "spread": 0

@@ -15,10 +15,10 @@
     "_class": "rect",
     "constrainProportions": false,
     "do_objectID": "7C98ABE7-D315-499B-9B53-F22240299F3A",
-    "height": 257,
-    "width": 752,
-    "x": 136,
-    "y": 360
+    "height": 244,
+    "width": 695,
+    "x": 118,
+    "y": 645
   },
   "hasClickThrough": false,
   "isFlippedHorizontal": false,
@@ -30,10 +30,6 @@
     {
       "class": "shapeGroup",
       "id": "FBE14C9F-0F35-4933-970F-819C43D544F2"
-    },
-    {
-      "class": "group",
-      "id": "9D410852-906F-4A53-8A5F-A91FE69CC9EC"
     },
     {
       "class": "symbolInstance",
@@ -50,6 +46,10 @@
     {
       "class": "text",
       "id": "CFFC945F-71A3-411C-B96C-C850A217AF77"
+    },
+    {
+      "class": "group",
+      "id": "1E04A1AB-C8F4-400A-B050-E84970B39267"
     }
   ],
   "name": "Assignee Copy",

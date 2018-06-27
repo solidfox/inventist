@@ -16,7 +16,7 @@
     "_class": "rect",
     "constrainProportions": false,
     "do_objectID": "A99D6126-E2F0-492E-BC2D-CE97076A4D9E",
-    "height": 48,
+    "height": 24,
     "width": 384,
     "x": 0,
     "y": 0
@@ -27,7 +27,7 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 1,
+  "layerListExpandedType": 0,
   "layers": [
     {
       "class": "rectangle",
@@ -62,7 +62,7 @@
           "red": 0
         },
         "fillType": 0,
-        "isEnabled": true,
+        "isEnabled": false,
         "position": 2,
         "thickness": 1
       }
@@ -88,6 +88,28 @@
       }
     ],
     "miterLimit": 10,
+    "shadows": [
+      {
+        "_class": "shadow",
+        "blurRadius": 2,
+        "color": {
+          "_class": "color",
+          "alpha": 0.5,
+          "blue": 0,
+          "green": 0,
+          "red": 0
+        },
+        "contextSettings": {
+          "_class": "graphicsContextSettings",
+          "blendMode": 0,
+          "opacity": 1
+        },
+        "isEnabled": true,
+        "offsetX": 0,
+        "offsetY": 0,
+        "spread": 0
+      }
+    ],
     "startDecorationType": 0
   },
   "windingRule": 1

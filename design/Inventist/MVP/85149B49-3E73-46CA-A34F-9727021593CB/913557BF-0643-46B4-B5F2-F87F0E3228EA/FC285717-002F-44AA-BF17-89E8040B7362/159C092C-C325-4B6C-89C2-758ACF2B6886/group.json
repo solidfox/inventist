@@ -1,0 +1,53 @@
+{
+  "_class": "group",
+  "do_objectID": "159C092C-C325-4B6C-89C2-758ACF2B6886",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 104,
+    "width": 288,
+    "x": 0,
+    "y": 312
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 2,
+  "layers": [
+    {
+      "class": "symbolInstance",
+      "id": "C4F9B8A2-99B2-4840-8E64-C5F30B9F1E1E"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "B1766979-BAB5-42BE-9451-B7C79F050E4D"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "A3600869-CC30-4CDA-9CBF-3035A5C94D03"
+    }
+  ],
+  "name": "Contractors",
+  "nameIsFixed": true,
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

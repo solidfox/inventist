@@ -28,20 +28,20 @@
   "layerListExpandedType": 0,
   "layers": [
     {
-      "class": "symbolInstance",
-      "id": "2137940B-806D-484A-BC63-AE3C7E4D7C59"
+      "class": "group",
+      "id": "B6702EBE-4B37-4E92-8BDF-EB9D78BE1A8B"
     },
     {
-      "class": "symbolInstance",
-      "id": "816D26C8-0ADD-4BC1-83B3-A483D8C3CD02"
+      "class": "group",
+      "id": "5F160E2A-533C-46D1-A426-91F301AF75BD"
     },
     {
-      "class": "symbolInstance",
-      "id": "159848E8-B7FE-4135-898D-EAA48D161E04"
+      "class": "group",
+      "id": "D0533D6B-8AB8-44A5-96CB-988C383EF70B"
     },
     {
-      "class": "symbolInstance",
-      "id": "B095277F-7ACA-4DF0-81C3-65600E8645AC"
+      "class": "group",
+      "id": "B70554E8-54C0-468F-9504-C615DBF15D59"
     }
   ],
   "name": "People",

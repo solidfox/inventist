@@ -1,0 +1,74 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "B1766979-BAB5-42BE-9451-B7C79F050E4D",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 40,
+    "width": 288,
+    "x": 0,
+    "y": 24
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Collection/Item",
+  "nameIsFixed": false,
+  "overrideValues": [
+    {
+      "_class": "overrideValue",
+      "do_objectID": "112FCF73-524F-46B4-B69E-4C156F1A0D25",
+      "overrideName": "0D2ACAA4-9EB1-4CDB-8378-F3EE77CCEBC6_stringValue",
+      "value": "All Contractors"
+    },
+    {
+      "_class": "overrideValue",
+      "do_objectID": "F7631143-CCF0-4806-A552-2377B552395B",
+      "overrideName": "534C0D51-016C-440E-8E39-7805C2EB0EFD/52469398-0EC3-4CA0-AA31-08232BFDBDF7_symbolID",
+      "value": "2ABDD08C-2042-4D54-A899-617332EBF970"
+    },
+    {
+      "_class": "overrideValue",
+      "do_objectID": "36868D5D-8599-44CD-AEC5-D71B16A3E7C6",
+      "overrideName": "DD6ADB88-07D7-4AE6-AA75-B71362D69B8C_symbolID",
+      "value": ""
+    },
+    {
+      "_class": "overrideValue",
+      "do_objectID": "25ED9770-04DF-4DB2-A044-4AAFCBF18731",
+      "overrideName": "02ABE849-BA66-47F2-86DD-ED61497C0062_stringValue",
+      "value": " "
+    },
+    {
+      "_class": "overrideValue",
+      "do_objectID": "F146F36F-5A43-458F-96DC-4C88FDBF8B4C",
+      "overrideName": "4527E5C7-86A1-4F09-A2E5-E44301681E65_symbolID",
+      "value": ""
+    }
+  ],
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "5A01C25A-8FC7-4222-BAD4-DD266A5A32C5",
+  "verticalSpacing": 0
+}
