@@ -11,6 +11,7 @@
   :dependencies [[binaryage/oops "0.6.1"]
                  [camel-snake-kebab "0.4.0"]
                  [cljs-react-material-ui "0.2.48"]
+                 [cljsjs/material-ui "1.2.1-0"]
                  ;[org.clojure/core.async  "0.4.474"]
                  [org.clojars.osbert/clj-time "0.9.2"]
                  [com.andrewmcveigh/cljs-time "0.5.2"]
