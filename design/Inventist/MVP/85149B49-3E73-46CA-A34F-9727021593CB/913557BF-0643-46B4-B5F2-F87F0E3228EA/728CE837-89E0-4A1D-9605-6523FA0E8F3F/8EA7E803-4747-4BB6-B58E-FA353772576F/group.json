@@ -1,0 +1,52 @@
+{
+  "_class": "group",
+  "do_objectID": "8EA7E803-4747-4BB6-B58E-FA353772576F",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "989235C3-1140-4129-994E-A56033C8756B",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "C4087C85-3B9E-4F4C-9A18-A77B63F4054F",
+    "height": 24,
+    "width": 86,
+    "x": 12,
+    "y": 12
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "5F893E59-9589-4F69-98B7-304F44874AA3"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "0C3EAB78-DC84-426B-BFF1-4A024C102E67"
+    }
+  ],
+  "name": "Inventist",
+  "nameIsFixed": true,
+  "resizingConstraint": 33,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "477D0107-F546-49E7-972C-483F0861EAD9",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

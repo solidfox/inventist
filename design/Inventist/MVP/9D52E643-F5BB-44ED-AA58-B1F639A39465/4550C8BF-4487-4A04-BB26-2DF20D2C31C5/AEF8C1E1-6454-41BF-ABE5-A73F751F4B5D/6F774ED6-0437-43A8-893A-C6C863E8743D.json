@@ -1,0 +1,53 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "6F774ED6-0437-43A8-893A-C6C863E8743D",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "E4BCA71C-4195-4A46-9513-8E76C4390F76",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "ABB9835C-936F-43B6-9156-7FF9495D737F",
+    "height": 40,
+    "width": 288,
+    "x": 0,
+    "y": 206
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Main Col/Unselected Copy",
+  "nameIsFixed": false,
+  "overrideValues": [
+    {
+      "_class": "overrideValue",
+      "do_objectID": "12DD36E2-C72B-42FA-BBEA-FD3C4FF17FB4",
+      "overrideName": "0D2ACAA4-9EB1-4CDB-8378-F3EE77CCEBC6_stringValue",
+      "value": "Contactors"
+    }
+  ],
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "B746CE37-7B12-4738-B577-817EBE468390",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "5A01C25A-8FC7-4222-BAD4-DD266A5A32C5",
+  "verticalSpacing": 0
+}

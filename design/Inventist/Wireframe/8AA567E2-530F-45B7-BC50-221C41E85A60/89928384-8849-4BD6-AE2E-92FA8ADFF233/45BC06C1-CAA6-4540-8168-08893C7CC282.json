@@ -30,13 +30,10 @@
     {
       "_class": "overrideValue",
       "do_objectID": "44546C06-046E-4017-BE4C-6AEA9F726970",
-      "overrideName": "EE7A4728-E635-4A16-984C-BF56FCFD28F8_stringValue",
+      "overrideName": "FC9DCC22-01BF-4982-805F-31DE5114F9DD_stringValue",
       "value": "Submit"
     }
   ],
-  "overrides": {
-    "EE7A4728-E635-4A16-984C-BF56FCFD28F8": "Submit"
-  },
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,

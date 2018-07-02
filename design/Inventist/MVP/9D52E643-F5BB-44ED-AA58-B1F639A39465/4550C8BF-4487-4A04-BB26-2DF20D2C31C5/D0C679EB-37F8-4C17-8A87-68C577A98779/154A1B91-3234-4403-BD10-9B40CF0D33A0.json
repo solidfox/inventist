@@ -1,0 +1,47 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "154A1B91-3234-4403-BD10-9B40CF0D33A0",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "01940E5B-E62B-4F2F-9CA4-136163CDBDB2",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": true,
+    "do_objectID": "6A833247-B662-43C0-98C6-17BC1476C3F2",
+    "height": 40,
+    "width": 118,
+    "x": 8,
+    "y": 8
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "GHS-logotype-horizontal",
+  "nameIsFixed": false,
+  "overrideValues": [
+  ],
+  "resizingConstraint": 9,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "2DF6F3D4-CB30-4B28-BD5F-43B026F6AECC",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "1F1FE117-BC50-495A-BE36-29A3715B4F8A",
+  "verticalSpacing": 0
+}

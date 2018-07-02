@@ -1,0 +1,53 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "16988DD7-F897-4E60-8D1E-F8AB44644FC7",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "E351E500-08BC-49CF-8DC4-FEC4D83EAACB",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": true,
+    "do_objectID": "BD5E946A-F664-4228-8967-A7C413A587F2",
+    "height": 24,
+    "width": 24,
+    "x": 0,
+    "y": 0
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Inventist Icon",
+  "nameIsFixed": false,
+  "overrideValues": [
+  ],
+  "resizingConstraint": 33,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "contextSettings": {
+      "_class": "graphicsContextSettings",
+      "blendMode": 0,
+      "do_objectID": "693360F0-5A10-40E7-8CB8-29AF3A3B1BEF",
+      "opacity": 0.75
+    },
+    "do_objectID": "FDBEDEED-CB50-4305-9030-F6262DB41A33",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "2E8E9DFD-5714-4EDB-B7EA-D202FC68D9B1",
+  "verticalSpacing": 0
+}

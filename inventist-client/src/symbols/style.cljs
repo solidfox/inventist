@@ -45,7 +45,7 @@
             :background-color color/white
             :width            "auto"
             :margin           "0rem 0.5rem"
-            :border-radius    "0.5rem 2rem 2rem 0.5rem"
+            :border-radius    "0.5rem";"0.5rem 2rem 2rem 0.5rem"
             :display          "flex"
             :flex-direction   "row"
             :cursor           "pointer"

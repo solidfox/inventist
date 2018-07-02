@@ -42,12 +42,6 @@
       "value": "Inventory"
     }
   ],
-  "overrides": {
-    "2DA2CC86-2EA8-4D18-9979-4775614F4D70": {
-      "symbolID": "66F81BC2-38C1-4EFE-B1A5-2F88B7A38469"
-    },
-    "83637734-A485-4C40-B28E-AEB9E0456A7C": "Inventory"
-  },
   "resizingConstraint": 13,
   "resizingType": 0,
   "rotation": 0,

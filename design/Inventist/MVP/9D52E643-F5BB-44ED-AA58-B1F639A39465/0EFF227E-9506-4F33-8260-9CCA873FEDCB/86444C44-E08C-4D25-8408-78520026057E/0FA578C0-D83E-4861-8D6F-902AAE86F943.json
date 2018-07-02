@@ -1,0 +1,59 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "0FA578C0-D83E-4861-8D6F-902AAE86F943",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "D069EC3B-6AAD-43B8-8C4A-6FE7670FAFC6",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "9BE8EBCD-2D12-4A1D-8FDB-29439CE08359",
+    "height": 90,
+    "width": 383.9999999999997,
+    "x": 0,
+    "y": 90
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Inventory/List",
+  "nameIsFixed": false,
+  "overrideValues": [
+    {
+      "_class": "overrideValue",
+      "do_objectID": "40C1C351-590C-4D21-9F8E-05CB8A20445F",
+      "overrideName": "DA8C2015-30D5-493B-B72E-E60CC7033D13_stringValue",
+      "value": "Winston Hill - Vagner"
+    },
+    {
+      "_class": "overrideValue",
+      "do_objectID": "CFD5D6E1-16F8-4008-84F0-4C98095C01A6",
+      "overrideName": "165B5941-EC49-4BB3-83EC-9F31080FA6F3_symbolID",
+      "value": "2BA71F96-8E03-47B4-9D4C-F185101BDFA3"
+    }
+  ],
+  "resizingConstraint": 10,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "ED8A0855-5E4F-4F7D-AE97-1CEC87C7D087",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "46D99557-CA7D-4AEF-A198-4D6D29A20920",
+  "verticalSpacing": 0
+}

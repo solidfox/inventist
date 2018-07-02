@@ -1,0 +1,47 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "F6B1D55F-F7F9-4BB8-87A9-B9BC7891D8CC",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "4EAB18BA-8190-4EB7-B2A8-27521AAC1B53",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "3FDB784B-0ED1-43BC-A56C-44FCE94D599A",
+    "height": 60,
+    "width": 400,
+    "x": 0,
+    "y": 48
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Details/Timeline_item",
+  "nameIsFixed": false,
+  "overrideValues": [
+  ],
+  "resizingConstraint": 27,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "87C1917A-D985-4199-AEC8-477FBFD1CEAD",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "01591450-AA22-4309-B558-DD639D09D6C4",
+  "verticalSpacing": 0
+}

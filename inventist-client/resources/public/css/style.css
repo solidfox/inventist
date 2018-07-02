@@ -31,7 +31,7 @@ a:link, a:visited, a:hover, a:active {
 
 .navbar-badge-selection:hover .navbar-badge-selection-data {
     display: block !important;
-    animation: fade 0.55s;
+    animation: fade 0.25s;
 }
 
 

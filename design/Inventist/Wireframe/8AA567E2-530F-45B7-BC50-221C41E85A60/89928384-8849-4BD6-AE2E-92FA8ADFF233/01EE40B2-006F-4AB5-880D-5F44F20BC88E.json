@@ -34,9 +34,6 @@
       "value": "Contact"
     }
   ],
-  "overrides": {
-    "EDDA3CFD-7AE1-4CD1-A785-4D270379F01F": "Contact"
-  },
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,

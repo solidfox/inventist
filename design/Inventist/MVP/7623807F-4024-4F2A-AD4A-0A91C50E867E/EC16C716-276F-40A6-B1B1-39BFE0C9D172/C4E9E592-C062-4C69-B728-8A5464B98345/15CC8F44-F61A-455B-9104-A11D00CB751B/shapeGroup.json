@@ -27,7 +27,7 @@
   "isFlippedVertical": false,
   "isLocked": false,
   "isVisible": true,
-  "layerListExpandedType": 1,
+  "layerListExpandedType": 0,
   "layers": [
     {
       "class": "oval",
@@ -120,7 +120,7 @@
         },
         "image": {
           "_class": "MSJSONFileReference",
-          "_ref": "images/8729df48537fd1488ad19c74ac332a67d3d58662",
+          "_ref": "images/8729df48537fd1488ad19c74ac332a67d3d58662.png",
           "_ref_class": "MSImageData"
         },
         "isEnabled": true,

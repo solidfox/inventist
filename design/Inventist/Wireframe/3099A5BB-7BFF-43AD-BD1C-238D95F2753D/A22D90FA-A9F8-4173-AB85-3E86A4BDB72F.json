@@ -36,9 +36,6 @@
       "value": "Widget 2"
     }
   ],
-  "overrides": {
-    "47B7EBD9-CB97-4F1B-924D-58F9EDA508E7": "Widget 2"
-  },
   "resizingConstraint": 63,
   "resizingType": 0,
   "rotation": 0,

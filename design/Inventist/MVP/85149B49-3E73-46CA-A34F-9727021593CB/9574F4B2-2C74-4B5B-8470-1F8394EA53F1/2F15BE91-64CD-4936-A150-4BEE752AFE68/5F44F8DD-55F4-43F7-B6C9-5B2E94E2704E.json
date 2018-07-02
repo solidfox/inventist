@@ -1,0 +1,59 @@
+{
+  "_class": "symbolInstance",
+  "do_objectID": "5F44F8DD-55F4-43F7-B6C9-5B2E94E2704E",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "55E305E1-C014-49AB-AA4E-E1BBD2C88DC8",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "76E54628-7968-43CD-8022-36B5FCE7A887",
+    "height": 30,
+    "width": 660.1237113402067,
+    "x": 0,
+    "y": 0
+  },
+  "horizontalSpacing": 0,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "name": "Details/Table_Item",
+  "nameIsFixed": false,
+  "overrideValues": [
+    {
+      "_class": "overrideValue",
+      "do_objectID": "8A846FA3-F97F-40BE-851A-3C0AA2C33F21",
+      "overrideName": "DC323D7D-4A8B-449E-BEFB-6B12FF11D9EC_stringValue",
+      "value": "Email Address"
+    },
+    {
+      "_class": "overrideValue",
+      "do_objectID": "20258C18-A180-4598-B5EB-6A422D7E3451",
+      "overrideName": "C2088DF5-805D-4935-BA54-BCC394B78D38_stringValue",
+      "value": "nova.stark@gripsholmsskolan.se"
+    }
+  ],
+  "resizingConstraint": 27,
+  "resizingType": 0,
+  "rotation": 0,
+  "scale": 1,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "ECEF3161-068C-4B82-9EF3-50E65D1D880E",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "symbolID": "4AE4C89B-B7E5-4723-92C1-245A67D8D66A",
+  "verticalSpacing": 0
+}

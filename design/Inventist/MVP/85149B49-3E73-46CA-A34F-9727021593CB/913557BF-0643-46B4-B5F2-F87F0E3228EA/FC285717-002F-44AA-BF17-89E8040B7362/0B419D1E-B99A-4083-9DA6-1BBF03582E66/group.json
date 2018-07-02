@@ -1,0 +1,68 @@
+{
+  "_class": "group",
+  "do_objectID": "0B419D1E-B99A-4083-9DA6-1BBF03582E66",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "do_objectID": "CC90EC44-EFF0-4C34-AA48-DB316B73AAE0",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "do_objectID": "22B16F9E-5889-4D1C-AE9E-6613E4257278",
+    "height": 224,
+    "width": 288,
+    "x": 0,
+    "y": 48
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "symbolInstance",
+      "id": "91E84C9F-8AE0-4808-A75C-6CB6AA37F0DA"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "CD2E554C-3EBC-4368-8B64-29D77138410D"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "025BD1C6-5BD8-44FB-BF3A-D2F9EEA785B9"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "A2153A8E-B8D7-427E-A756-35BE881E8640"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "46C33B1E-E752-4477-865A-562FD52A035E"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "9D9AF93A-C3A6-4AAF-B7BF-4B6C06E4A976"
+    }
+  ],
+  "name": "People",
+  "nameIsFixed": true,
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "do_objectID": "A587AD78-2919-4A95-A118-0FDDC46A79E1",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}

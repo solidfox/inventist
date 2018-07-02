@@ -1,0 +1,170 @@
+{
+  "_class": "shapeGroup",
+  "clippingMaskMode": 0,
+  "do_objectID": "A15FC938-6564-4915-8639-9F591F2ED1CF",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": true,
+    "height": 16,
+    "width": 17.45455475205291,
+    "x": 18,
+    "y": 0
+  },
+  "hasClickThrough": false,
+  "hasClippingMask": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 1,
+  "layers": [
+    {
+      "class": "shapePath",
+      "id": "3CB1A88B-05EA-4D3C-93DB-B7B432D2AB3C"
+    },
+    {
+      "class": "shapePath",
+      "id": "500A8F6D-887E-4C8E-83E7-93DD31800D76"
+    },
+    {
+      "class": "shapePath",
+      "id": "597C6296-5427-4022-93CB-2C0817372E01"
+    },
+    {
+      "class": "shapePath",
+      "id": "A0A5ACAA-32D9-4030-9DA2-8A3F8AD836DF"
+    },
+    {
+      "class": "shapePath",
+      "id": "6C6ECA9A-790E-4433-8CFD-7ABB6FCF0F26"
+    },
+    {
+      "class": "shapePath",
+      "id": "F9B2F15D-3548-4C8A-BE2A-7D97549C89A2"
+    },
+    {
+      "class": "shapePath",
+      "id": "314E1E66-B913-4CA7-8C77-42ED27F0C05D"
+    },
+    {
+      "class": "shapePath",
+      "id": "79CB5069-CA3A-4333-96B8-22E53C2D9789"
+    },
+    {
+      "class": "shapePath",
+      "id": "0F9DFA56-06B7-4EEE-A116-CAE4DEF77D42"
+    },
+    {
+      "class": "shapePath",
+      "id": "543AF5D2-1BD4-4B7B-8F8F-A90065716E37"
+    },
+    {
+      "class": "shapePath",
+      "id": "DD36919B-8567-48EB-9191-AEB3AF3A737D"
+    },
+    {
+      "class": "shapePath",
+      "id": "FC8B09B6-B58D-4C6D-A162-77AEA44AE5F4"
+    },
+    {
+      "class": "shapePath",
+      "id": "E520F95C-0997-47FF-9AE6-A3E4F4E69FAA"
+    },
+    {
+      "class": "shapePath",
+      "id": "82827AFD-ACBD-4E2B-AAC2-F768343D24A1"
+    },
+    {
+      "class": "shapePath",
+      "id": "7F7CD392-E9FA-462E-82EB-7F31A873FB4F"
+    },
+    {
+      "class": "shapePath",
+      "id": "C20DB553-AAF4-4B8C-8A58-FF0ABA80D00E"
+    },
+    {
+      "class": "shapePath",
+      "id": "1ED4C569-86A0-4886-BB50-355E0CEF9528"
+    },
+    {
+      "class": "shapePath",
+      "id": "494BF68C-CD90-4DFD-A442-EBFD5AA4EE4F"
+    },
+    {
+      "class": "shapePath",
+      "id": "52372864-B199-4E68-ACDB-B01D659383D3"
+    },
+    {
+      "class": "shapePath",
+      "id": "CAEE2DDF-6289-44AD-BC2F-824892CF1D43"
+    },
+    {
+      "class": "shapePath",
+      "id": "99AEA16E-D01B-482E-9983-8E05B58B1836"
+    },
+    {
+      "class": "shapePath",
+      "id": "85931416-2704-414D-A126-60F8FD937167"
+    },
+    {
+      "class": "shapePath",
+      "id": "916E1F85-1D95-41F6-934A-7E1EA79B7BA0"
+    },
+    {
+      "class": "shapePath",
+      "id": "FC19FA2B-C4AC-4265-A544-A1B07A078677"
+    },
+    {
+      "class": "shapePath",
+      "id": "2B361656-B4EC-411A-80CD-65684D28021D"
+    },
+    {
+      "class": "shapePath",
+      "id": "ECAD691C-CE74-4FE2-99F9-DE52756A3E55"
+    },
+    {
+      "class": "shapePath",
+      "id": "B163974B-8F0C-4BE9-87D6-2EE2D70E1E3A"
+    }
+  ],
+  "name": "MacBook",
+  "nameIsFixed": true,
+  "resizingConstraint": 9,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "fills": [
+      {
+        "_class": "fill",
+        "color": {
+          "_class": "color",
+          "alpha": 1,
+          "blue": 0,
+          "green": 0,
+          "red": 0
+        },
+        "fillType": 0,
+        "isEnabled": true,
+        "noiseIndex": 0,
+        "noiseIntensity": 0,
+        "patternFillType": 1,
+        "patternTileScale": 1
+      }
+    ],
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "windingRule": 0
+}

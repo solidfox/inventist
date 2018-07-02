@@ -1,0 +1,61 @@
+{
+  "_class": "group",
+  "do_objectID": "8A09D3AE-BE7B-429E-AC0B-FA18101D273E",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 24,
+    "width": 288,
+    "x": 0,
+    "y": 0
+  },
+  "hasClickThrough": false,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 0,
+  "layers": [
+    {
+      "class": "shapeGroup",
+      "id": "E8EDCDA8-FBB7-4AD1-9EEC-B5B79D12BAF1"
+    },
+    {
+      "class": "text",
+      "id": "3F172547-BD01-416B-95C7-D048498EF6F5"
+    },
+    {
+      "class": "text",
+      "id": "41D1A014-B361-4285-9CF7-5F7395BEBA5D"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "4A0BE805-1BF2-4BA7-81E6-20E166716F9A"
+    },
+    {
+      "class": "symbolInstance",
+      "id": "017B0034-38FA-405C-98C4-093988E984DF"
+    }
+  ],
+  "name": "Heading-People",
+  "nameIsFixed": true,
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  }
+}
