@@ -70,7 +70,7 @@
           :style     {:background-color color/theme-500
                       :width            "2rem" :height "2rem"
                       :border-radius    "0.25rem"
-                      :cursor           "move"
+                      :cursor           "grab"
                       :border           (str "1px solid " color/theme-100)}}]])
 
 
