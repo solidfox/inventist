@@ -21,17 +21,17 @@ body {
 }
 
 a:link, a:visited, a:hover, a:active {
-    color: #4A90E2;
+    color: #003459;
+    /*4A90E2*/
     text-decoration: none;
 }
 
-.navbar-badge-selection-data {
+.collection-item-edit {
     display: none !important;
 }
 
-.navbar-badge-selection:hover .navbar-badge-selection-data {
+.collection-item:hover .collection-item-edit {
     display: block !important;
-    animation: fade 0.25s;
 }
 
 

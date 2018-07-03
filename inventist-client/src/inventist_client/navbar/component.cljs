@@ -38,7 +38,8 @@
     image    :image
     color    :color
     on-click :on-click}]
-  [:div {:style    {:height                "2rem"
+  [:div {:class    "collection-item"
+         :style    {:height                "2rem"
                     :color                 color/theme-300
                     :width                 "auto"
                     :padding               "0.5rem 1rem"
@@ -55,7 +56,14 @@
                   :align-self  "center"
                   :font-weight "500"
                   :margin      "0 1rem"}}
-    title]
+    title
+
+    ;On-Mouse-Over "style.css"
+    [:span {:class "collection-item-edit"
+            :on-click (fn [] (println "Edit " title))
+            :style {:font-weight "400"
+                    :font-size   "0.75rem"}}
+     "Edit"]]
 
    ;Selected Item
    [:div {:draggable true

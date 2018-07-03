@@ -1,6 +1,6 @@
 (ns view-inventory-overview.component
   (:require [rum.core :refer [defc]]
-            [symbols.overview :refer [scrollable search-toolbar footer inventory-list-card]]
+            [symbols.overview :refer [scrollable search-toolbar search-header inventory-list-card]]
             [view-inventory-overview.core :as core]
             [symbols.color :as color]
             [remodular.core :as rem]
@@ -14,7 +14,7 @@
   (let [inventory         (core/filtered-inventory state)
         limited-inventory (take 75 inventory)]
     (scrollable
-      {:floating-header
+      {:floating-search
        (search-toolbar
          {:search-field-value (core/get-free-text-search state)
           :shown-results      (count limited-inventory)
@@ -25,7 +25,8 @@
                                                      :data {:new-value (o/oget e [:target :value])}})))})
        :content
        [:div {:style {:height           "100%"
-                      :background-color color/grey-light}}
+                      :background-color color/transparent
+                      :padding          "0.25rem"}}
         (for [item limited-inventory]
           (inventory-list-card {:item      item
                                 :on-select (fn [] (trigger-event
@@ -44,5 +45,5 @@
                              :text-align       "left"
                              :margin           "2rem"}}
                "No matches found!"])]
-       :floating-footer
-       (footer)})))
+       :floating-header
+       (search-header "Inventory")})))

@@ -77,12 +77,13 @@
                        on-change          :on-change}]
   [:div
    [:div {:style {:width           "100%"
-                  :height          "3rem"
+                  :height          "2.5rem"
                   :backgroundColor color/white
+                  :box-shadow      (str "inset 0 0 0.25rem " color/theme-500)
                   :display         "flex"}}
     [:div {:style {:width           "3rem"
-                   :height          "3rem"
-                   :color           color/grey-normal
+                   :height          "2.5rem"
+                   :color           color/theme-500
                    :display         "flex"
                    :align-items     "center"
                    :justify-content "center"}}
@@ -96,15 +97,19 @@
              :on-change   on-change
              :style       {:width           "calc(100% - 0.2rem)"
                            :margin          ".1rem .1rem .1rem -2.9rem"
-                           :padding-left    "2.9rem"
-                           :height          "2.8rem"
+                           :padding-left    "2.4rem"
+                           :height          "2.3rem"
+                           :color           color/theme-500
                            :backgroundColor color/transparent
                            :border          0}}]]
-   [:div {:style {:height          "auto" :padding "0.25rem 1rem"
-                  :font-size       "0.9rem"
-                  :color           color/de-emphasize
-                  :backgroundColor color/silver
-                  :display         "flex" :justify-content "space-between"}}
+   [:div {:style {:height          "1rem"
+                  :padding         "0.25rem 1rem"
+                  :font-size       "0.75rem"
+                  :color           color/theme-700
+                  :backgroundColor color/theme-300
+                  :display         "flex"
+                  :justify-content "space-between"
+                  :align-items     "center"}}
     [:div (str/join " "
                     (concat (when (and shown-results (not= total-results
                                                            shown-results))
@@ -113,36 +118,40 @@
                                                                          shown-results))
                               ["of"])
                             [total-results]
-                            [" results"]))]]])
-;[:div {:style {:color color/link-active :cursor "pointer"}} (str "View Table")]]])
+                            [" results"]))]
+    [:div {:style {:color color/theme-700 :cursor "pointer"}}
+     (str "Sort Results")]]])
 
 ;Sidebar-Footer
-(defc footer []
-  [:div {:style {:width                 "calc(100% - 2rem)"
-                 :padding               "1rem"
-                 :backgroundColor       color/silver
-                 :display               "grid"
-                 :grid-template-columns "1fr auto"}}
-   ;:box-shadow            "0 0 5px rgba(0,0,0,0.25)"}}
-   [:div {:style {:color color/de-emphasize}} "Powered by inventist"]])
-;(s-general/button {:icon "fas fa-list-alt" :color color/tp :text "Powered by Inventist"})
-;[:div {:style {:margin "0.75rem" :font-size "1.2rem" :opacity "0.75" :cursor "pointer"}}
-; [:i {:class "fas fa-caret-left"}]]])
+(defc search-header [type]
+  [:div {:style {:width       "auto"
+                 :height      "3.5rem"
+                 :padding     "0 1rem"
+                 :color       color/theme-900
+                 :font-size   "1.5rem"
+                 :font-weight "400"
+                 :display     "grid"
+                 :align-items "center"}}
+   [:div (str type)]])
 
 (defc scrollable
   [{floating-header :floating-header
-    floating-footer :floating-footer
+    floating-search :floating-search
     content         :content}]
-  [:div {:style {:height             "100%"
-                 :width              "22rem"
+  [:div {:style {:height             "100vh"
+                 :width              "auto"
+                 :z-index            5
+                 :box-shadow         (str "0 0 0.25rem " color/shadow)
+                 :background-color   color/theme-100
                  :display            "grid"
-                 :grid-template-rows "auto 1fr auto"}}
+                 :grid-template-rows "auto auto 1fr"}}
    floating-header
+   floating-search
    [:div {:style {:overflow-x                 "hidden"
                   :overflow-y                 "scroll"
                   :-webkit-overflow-scrolling "touch"}}
-    content]
-   floating-footer])
+    content]])
+
 
 
 ;Footer
@@ -155,9 +164,8 @@
     list-items :list-items}]
   (scrollable
     {:floating-header (search-toolbar {:list-items list-items})
-     :floating-footer (footer)
-     :content
-                      [:div {:style {:background-color color/grey-light}}
+     :floating-footer (search-header type)
+     :content         [:div {:style {:background-color color/transparent}}
                        (for [list-item list-items]
                          (cond (= type "inventory") (inventory-list-card {:item list-item})
                                (= type "contractors") (contractor-list-card {:contractor list-item})))]}))
