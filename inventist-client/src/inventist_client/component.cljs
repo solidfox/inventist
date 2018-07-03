@@ -32,13 +32,13 @@
             [:div {:style {:height              (:viewport-height state)
                            :display             "grid"
                            :backgroundColor     c/white
-                           :grid-template-rows  "3.5rem calc(100% - 3.5rem)"
+                           :grid-template-columns  "20rem calc(100% - 20rem)"
                            :background-image    "url(\"/image/GHS-watermark.svg\")"
                            :background-position "50%"
                            :background-size     "15%"
                            :background-repeat   "no-repeat"}}
 
-             (navbar/navigation-bar-desktop
+             (navbar/collection-column
                {:auth-status-item (auth/bar-item-login-status (core/authentication-args state))
                 :current-path     (:path state)
                 :trigger-event    trigger-event})
@@ -85,7 +85,7 @@
                (inventory-page/component (assoc (core/create-inventory-page-args state)
                                            :trigger-parent-event trigger-event)))
 
-             (navbar/navigation-bar-mobile
+             (navbar/navigation-bar-desktop
                {:auth-status-item (auth/bar-item-login-status (core/authentication-args state))
                 :current-path     (:path state)
                 :trigger-event    trigger-event})

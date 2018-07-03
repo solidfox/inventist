@@ -164,22 +164,17 @@
 
 ;---------------------------Mobile Nav-----------------------------------
 
-(defc navigation-bar-mobile [{trigger-event    :trigger-event
-                              current-path     :current-path
-                              auth-status-item :auth-status-item}]
+(defc collection-column [{trigger-event    :trigger-event
+                          current-path     :current-path
+                          auth-status-item :auth-status-item}]
 
-  [:div {:style {
-                 ;:position         "absolute"
-                 ;:bottom           "0rem"
-                 ;:left             "calc(50% - 15rem)"
-                 :padding          "0.5rem"
+  [:div {:style {:padding          "0.5rem"
                  :width            "100%"
-                 :height           "2.5rem"
+                 :height           "100%"
                  :display          "flex"
                  :flex-direction   "row"
                  :align-items      "center"
-                 :background-color color/white
-                 :border-radius    "1rem 1rem 0 0"
+                 :background-color color/theme-700
                  :justify-content  "center"
                  :box-shadow       (str "0 0 1rem " color/shadow)
                  :z-index          10}}
