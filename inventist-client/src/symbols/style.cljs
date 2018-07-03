@@ -16,13 +16,13 @@
 
 (def box-shadow {:box-shadow (str "0 0 0.12rem " color/shadow)})
 
-(def card-title {:color          color/grey-dark
-                 :line-height    "1rem"
+(def card-title {:line-height    "1rem"
+                 :color          color/theme-700
                  :text-transform "capitalize"})
 
-(def card-subtitle {:font-size      ".8rem"
-                    :color          color/grey-blue
-                    :line-height    "1rem"
+(def card-subtitle {:font-size      ".75rem"
+                    :color          color/theme-500
+                    :line-height    "0.8rem"
                     :text-transform "capitalize"})
 
 (def header-title {:font-size      "2rem"
@@ -45,7 +45,7 @@
             :background-color color/white
             :width            "auto"
             :margin           "0rem 0.5rem"
-            :border-radius    "0.5rem";"0.5rem 2rem 2rem 0.5rem"
+            :border-radius    "0.5rem"                      ;"0.5rem 2rem 2rem 0.5rem"
             :display          "flex"
             :flex-direction   "row"
             :cursor           "pointer"
@@ -56,23 +56,23 @@
 (defstyles card-image []
            {:border-radius   inner-border-radius
             :width           "3rem"
-            :margin-right    "1rem"
             :height          "3rem"
             :object-fit      "cover"
             :backgroundColor color/white})
 
 (defstyles list-item []
-           {:width                 "100%"
-            :background-color      color/highlight
-            :min-height            "2rem"
-            :padding               "0.75rem 1rem"
-            :margin                "2px 0"
+           {:width                 "auto"
+            :background-color      color/transparent
+            :min-height            "3rem"
+            :padding               "0.75rem"
+            :margin                "0.125rem 0"
+            :border-radius         "0.5rem"
             :display               "grid"
             :grid-template-columns "auto 1fr"
             :grid-gap              "1rem"
             :cursor                "pointer"
-            :&:hover               {:background-color color/white}
-            :&:active              {:background-color color/white}})
+            :&:hover               {:background-color color/theme-300}
+            :&:active              {:background-color color/theme-300}})
 
 (defstyles list-item-left-column []
            {:width "3rem"})

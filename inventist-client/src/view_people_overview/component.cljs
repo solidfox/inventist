@@ -1,6 +1,6 @@
 (ns view-people-overview.component
   (:require [rum.core :refer [defc with-key] :as rum]
-            [symbols.overview :refer [scrollable search-toolbar footer person-list-card]]
+            [symbols.overview :refer [scrollable search-toolbar search-header person-list-card]]
             [view-people-overview.core :as core]
             [symbols.color :as color]
             [remodular.core :as rem]
@@ -12,12 +12,12 @@
 (defc people-list < (remodular.core/modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [people          (core/get-people state)
+  (let [people (core/get-people state)
         filtered-people (core/filtered-people state)
-        n-results       (count filtered-people)
-        search-terms    (:search-terms state)]
+        n-results (count filtered-people)
+        search-terms (:search-terms state)]
     (scrollable
-      {:floating-header
+      {:floating-search
        (search-toolbar
          {:search-field-value (core/get-free-text-search state)
           :total-results      n-results
@@ -27,7 +27,8 @@
                                                      :data {:new-value (o/oget e [:target :value])}})))})
        :content
        [:div {:style {:height           "100%"
-                      :background-color color/grey-light}}
+                      :background-color color/transparent
+                      :padding          "0.25rem"}}
         (let [person-selected-event (fn [person] (trigger-event (rem/create-event {:name :person-selected
                                                                                    :data {:person person}})))]
           (->> people
@@ -50,7 +51,7 @@
                              :margin           "2rem"}}
                "No matches found!"])]
 
-       :floating-footer
-       (footer)})))
+       :floating-header
+       (search-header "People")})))
 
 

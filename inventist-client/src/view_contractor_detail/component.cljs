@@ -18,12 +18,6 @@
            :style {:height             "100%"
                    :display            "grid"
                    :grid-template-rows "auto 1fr"}}
-     ;Toolbar
-     (s-detailview/toolbar {:items-left  (s-detailview/breadcrumb {:type "contractors"
-                                                                   :item contractor})
-                            :items-right [(s-general/button {:color color/grey-normal
-                                                             :text  "Add Order"
-                                                             :icon  "fas fa-plus-square"})]})
 
      ;Main Details Container
      [:div {:style {:overflow-x      "hidden"

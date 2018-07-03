@@ -31,8 +31,7 @@
              :style {:height             "100%"
                      :display            "grid"
                      :grid-template-rows "auto 1fr"}}
-       (s-detailview/toolbar {:items-left
-                              (s-detailview/breadcrumb {:type "people"})})
+
 
        ;Error text
        [:div {:style {:width      "100%"
