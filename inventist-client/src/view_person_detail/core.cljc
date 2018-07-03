@@ -27,7 +27,7 @@
   (create-state {:person-id :test-person-id}))
 
 (defn get-person [state]
-  (get-in state [:get-person-details-response :data :person]))
+  (get-in state [:get-person-details-response :body :data :person]))
 
 
 ; User input state logic
@@ -108,7 +108,7 @@
 
 (defn has-good-person-details-response
   [state]
-  (and (get-in state [:get-person-details-response :data])
+  (and (get-in state [:get-person-details-response :body :data])
        (not (cache-is-dirty? state))))
 
 (defn should-get-person-detail? [state]

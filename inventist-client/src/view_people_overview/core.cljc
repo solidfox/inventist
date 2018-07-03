@@ -25,7 +25,7 @@
      (get-in state [:get-people-list-response ::reception-timestamp])))
 
 (defn has-good-get-people-list-response [state]
-  (and (get-in state [:get-people-list-response :data])
+  (and (get-in state [:get-people-list-response :body :data])
        (not (cache-dirty? state))))
 
 (defn should-get-people-list? [state]
@@ -88,7 +88,7 @@
 
 (defn get-people
   [state]
-  (get-in state [:get-people-list-response :data :people]))
+  (get-in state [:get-people-list-response :body :data :people]))
 
 (defn filtered-people
   {:test (fn []
@@ -115,7 +115,7 @@
                        [kalle
                         scrooge])))}
   [state & [search-terms]]
-  (when-let [people (get-in state [:get-people-list-response :data :people])]
+  (when-let [people (get-in state [:get-people-list-response :body :data :people])]
     (if-let [search-terms (or search-terms
                               (:search-terms state))]
       (->> people

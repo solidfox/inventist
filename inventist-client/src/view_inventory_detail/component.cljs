@@ -67,7 +67,7 @@
   [{{state :state} :input
     trigger-event  :trigger-event}]
 
-  (let [computer  (get-in state [:get-inventory-details-response :data :computer])
+  (let [computer  (get-in state [:get-inventory-details-response :body :data :computer])
         edit-mode (:edit-mode state)]
 
     ;INVENTORY DETAILS

@@ -52,18 +52,21 @@
            remote-state-mutation :remote-state-mutation
            state-path            :state-path} services]
     (xhr/send url
-              (fn [response]
-                (let [response-json (.getResponseJson (.-target response))
-                      response-edn  (js->clj response-json {:key-fn keyword})]
+              (fn [xhr-event]
+                (let [xhr-request-object (.-target xhr-event)
+                      response-json      (.getResponseJson xhr-request-object)
+                      response-edn       (js->clj response-json {:key-fn keyword})
+                      service-response   {:body   response-edn
+                                          :status status}]
                   (handle-event (cond-> (rem/create-anonymous-event)
                                         true
                                         (rem/append-action
-                                          {:fn-and-args (concat on-response [response-edn data])
+                                          {:fn-and-args (concat on-response [service-response data])
                                            :state-path  state-path})
                                         remote-state-mutation
                                         (rem/append-action
                                           (rem/create-action
-                                            {:name :on-remote-state-mutation
+                                            {:name        :on-remote-state-mutation
                                              :fn-and-args [core/on-remote-state-mutation remote-state-mutation]})))))) ;; handler
               "POST"                                        ;; method
               (js/JSON.stringify (clj->js params))          ;; body

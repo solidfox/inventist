@@ -15,7 +15,7 @@
 
 (defn should-get-inventory-list? [state]
   (and (not (:fetching-inventory-list state))
-       (not (get-in state [:get-inventory-list-response :data]))))
+       (not (get-in state [:get-inventory-list-response :body :data]))))
 
 (defn receive-get-inventory-list-service-response [state response request]
   (-> state
@@ -48,7 +48,7 @@
 
 (defn filtered-inventory
   [state & [search-terms]]
-  (when-let [inventory (get-in state [:get-inventory-list-response :data :computers])]
+  (when-let [inventory (get-in state [:get-inventory-list-response :body :data :computers])]
     (if-let [search-terms (or search-terms
                               (:search-terms state))]
       (->> inventory

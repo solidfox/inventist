@@ -17,7 +17,7 @@
 (defn should-get-inventory-detail? [state]
   (and (not (:fetching-inventory-details state))
        (or (:should-refetch-get-inventory-detail state)
-           (not (get-in state [:get-inventory-details-response :data])))))
+           (not (get-in state [:get-inventory-details-response :body :data])))))
 
 (defn started-get-inventory-detail-service-call [state]
   (assoc state :fetching-inventory-details true))
