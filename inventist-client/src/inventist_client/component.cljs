@@ -38,7 +38,7 @@
                            :background-size     "15%"
                            :background-repeat   "no-repeat"}}
 
-             (navbar/collection-column
+             (navbar/collection-sidebar
                {:auth-status-item (auth/bar-item-login-status (core/authentication-args state))
                 :current-path     (:path state)
                 :trigger-event    trigger-event})

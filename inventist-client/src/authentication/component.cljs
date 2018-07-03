@@ -47,45 +47,41 @@
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (if-let [logged-in-user (core/get-authenticated-user state)]
-    (navbar/navigation-badge {:title         "Profile"
-                              :on-click      log-out
-                              :icon          "fas fa-user"
-                              :selected-item {:name        (:display-name logged-in-user)
-                                              :photo       (:photo-url logged-in-user)
-                                              :custom-text "Admin"
-                                              :on-click    log-out
-                                              :subtitle    "Logout"}})))
-;[:div {:class (style/navbar-card)
-;       :style {:height        "2.5rem"
-;               :display       "flex"
-;               :align-items   "center"
-;               :justify-items "space-between"}}
-; [:img {:src   (:photo-url logged-in-user)
-;        :style {:height       "2.5rem"
-;                :width        "2.5rem"
-;                :object-fit   "cover"
-;                :borderRadius "1.5rem"}}]
-;
-; [:div {:style        {:margin "0rem 0.5rem"}
-;        :border-right (str "0.1rem solid " color/grey-dark)}]
-;
-;
-; [:div {:style     {:display        "flex"
-;                    :flex-direction "column"
-;                    :margin-top     "0rem"
-;                    :color          color/grey-dark
-;                    :border-radius  "0.5rem"}
-;        :draggable true}
-;  [:div {:style {:font-size   "0.5rem"
-;                 :font-weight "600"
-;                 :color       color/theme}}
-;   "Admin"]
-;  [:div {:style {:font-size   "0.9rem"
-;                 :font-weight "600"}}
-;   (:display-name logged-in-user)]
-;  [:div {:style {:font-size "0.7rem"
-;                 :color     color/danger}}
-;   "Logout"]]]))
+    [:div {:style    {:height                "2.5rem"
+                      :background-color      color/white
+                      :padding               "0.5rem 1rem"
+                      :display               "grid"
+                      :grid-template-columns "3.5rem auto 2rem"
+                      :cursor                "pointer"}
+           :title    "Log-out"
+           :on-click log-out}
+     [:img {:src   (:photo-url logged-in-user)
+            :style {:height       "2.5rem"
+                    :width        "2.5rem"
+                    :object-fit   "cover"
+                    :borderRadius "1.5rem"}}]
+     [:div {:style {:display        "flex"
+                    :flex-direction "column"
+                    :margin-top     "0.25rem"}}
+      [:div {:style {:font-size   "1rem"
+                     :font-weight "500"
+                     :color       color/theme-900}}
+       (:display-name logged-in-user)]
+      [:div {:style {:font-size "0.75rem"
+                     :color     color/theme-700}}
+       "Admin"]]
+     [:div {:style {:margin "auto 1rem"}}
+      [:i {:class "fas fa-chevron-up"
+           :style {:color color/theme-500}}]]]))
+;(navbar/navigation-badge {:title         "Profile"
+;                          :on-click      log-out
+;                          :icon          "fas fa-user"
+;                          :selected-item {:name        (:display-name logged-in-user)
+;                                          :photo       (:photo-url logged-in-user)
+;                                          :custom-text "Admin"
+;                                          :on-click    log-out
+;                                          :subtitle    "Logout"}})))
+
 
 ;[:div {:style {:margin "0 1rem 0 0.5rem" :text-align "left" :line-height "1rem"}}
 ; [:span {:style {:font-weight "500"}}  [:br]]
