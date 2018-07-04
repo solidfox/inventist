@@ -92,7 +92,7 @@
      ;Main Details Container
      [:div {:style {:overflow-x      "hidden"
                     :overflow-y      "scroll"
-                    :backgroundColor color/white}}
+                    :backgroundColor color/light-context-background}}
 
       ;Information
       (s-detailview/section-information

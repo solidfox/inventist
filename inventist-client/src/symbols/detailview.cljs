@@ -42,7 +42,7 @@
                  :display         "flex"
                  :justify-content "space-between"
                  :align-items     "center"
-                 :color           color/white}}
+                 :color           color/dark-context-title-text}}
    [:div {:style {:display "flex"}}
     ;(s-general/button-light {:icon "fas fa-arrow-circle-left"}) ;back button for mobile view
     items-left]                                             ;breadcrumb for desktop view
@@ -100,34 +100,23 @@
                             edit-mode     :edit-mode
                             sub-heading-1 :sub-heading-1
                             sub-heading-2 :sub-heading-2}]
-  [:div {:style {:margin "1.5rem"
-                 :display "flex"
-                 :flex-direction "column"}}
+  [:div {:style {:display               "grid"
+                 :width                 "100%"
+                 :grid-template-columns "6rem auto"}}
    [:img {:src   (cond (and image (not= image "")) image
                        :else "/image/no-image.png")
-          :style {:width        "6rem"
-                  :height       "6rem"
-                  :borderRadius "0.5rem"
-                  :object-fit   "cover"
+          :style {:width           "6rem"
+                  :height          "6rem"
+                  :borderRadius    "0.5rem"
+                  :object-fit      "cover"
                   :backgroundColor color/light-context-secondary-text}}]
-   [:div
-    [:span {:style style/header-title}
-     (cond (= edit-mode true)
-           (s-general/input-field {:value       heading
-                                   :placeholder "Name"
-                                   :on-change   ""
-                                   :style       {:height         "3rem"
-                                                 :font-size      "2rem"
-                                                 :color          color/black
-                                                 :font-weight    "300"
-                                                 :minWidth       "40rem"
-                                                 :text-transform "capitalize"}})
-           :else heading)]]
-
-   [:div {:style {:margin "2.5rem 2.5rem 0" :display "flex" :flex-direction "row"}
-          :id    "header"}
-
-    [:div {:style {:margin "0 0 0 1rem"}}
+   [:div {:style {:display        "flex"
+                  :flex-direction "column"
+                  :margin-left    "1.5rem"
+                  :width          "calc(100% - 1.5rem"}}
+    [:div {:style {:display         "flex"
+                   :flex-direction  "row"
+                   :justify-content "space-between"}}
      [:span {:style style/header-title}
       (cond (= edit-mode true)
             (s-general/input-field {:value       heading
@@ -135,31 +124,17 @@
                                     :on-change   ""
                                     :style       {:height         "3rem"
                                                   :font-size      "2rem"
-                                                  :color          color/black
+                                                  :color          color/light-context-title-text
                                                   :font-weight    "300"
                                                   :minWidth       "40rem"
                                                   :text-transform "capitalize"}})
             :else heading)]
-     [:br]
-     [:span {:style {:font-weight    "400"
-                     :color          color/grey-blue
-                     :text-transform "capitalize"}}
-      (cond (= edit-mode true)
-            (s-general/input-field {:value       sub-heading-1
-                                    :placeholder "Type"
-                                    :on-change   ""})
-            :else
-            sub-heading-1 [:br] sub-heading-2)]]]
-   [:div {:style {:margin         "1rem 2.5rem 1rem"
-                  :display        "flex"
-                  :flex-direction "row"}
-          :id    "information"}
-    (s-general/section-left)
-    [:div {:style {:margin         "0 0 0 1rem"
+     [:div [:i {:class "fas fa-plus"}]]]
+
+    [:div {:style {:margin         "0.25rem 0 0"
                    :display        "flex"
-                   :flex-direction "column"
-                   :width          "100%"}}
-     title                                                  ;Section Title
+                   :flex-direction "column"}
+           :id    "information"}
 
      [:div {:style {:display               "grid"
                     :grid-template-columns (str field-col-width " 1fr")
@@ -169,17 +144,18 @@
            (remove nil?)
            (map (fn [field]
                   [
-                   [:div {:style {:margin "0.25rem 0"
-                                  :color  color/grey-blue}} (:label field)]
-                   [:div {:style {:margin "0.25rem 0"
-                                  :color  color/grey-dark}}
+                   [:div {:style {:margin "0.75rem 0 0"
+                                  :color  color/light-context-secondary-text}} (:label field)]
+                   [:div {:style {:margin "0.75rem 0 0"
+                                  :color  color/light-context-primary-text}}
                     (if (and (= edit-mode true) (= (:editable field) true))
                       (s-general/text-area {:value    (:value field)
                                             :maxWidth "30rem"
                                             :minWidth "20rem"})
                       [:span (:value field) " " (:side-value field)])]])))]
-
      (s-general/section-divider)]]])
+
+
 
 (defc card
   [{id        :id
@@ -194,8 +170,9 @@
          :style    (merge style/card
                           style)}
 
-   (cond (not= image-url nil) [:div [:img {:src   image-url
-                                           :class (style/card-image)}]])
+   (cond (not= image-url nil) [:img {:src   image-url
+                                     :style {:margin-right "0.75rem"}
+                                     :class (style/card-image)}])
    [:div {:class "card-content"}
     content]])
 

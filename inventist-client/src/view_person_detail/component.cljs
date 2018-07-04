@@ -27,40 +27,49 @@
            :style {:height          "100vh"
                    :overflow-x      "hidden"
                    :overflow-y      "scroll"
-                   :backgroundColor color/white}}
+                   :padding         "1.5rem"
+                   :backgroundColor color/light-context-background}}
 
      ;Detailed Information
      (s-detailview/section-information
-       {:image         (:image person)
-        :heading       (str (:first-name person) " " (:last-name person))
-        :sub-heading-1 (:occupation person)
-        :sub-heading-2 (:group person)
-        :fields        [{:label    "Email"
-                         :value    (->> (:email person)
-                                        (remove empty?)
-                                        (map (fn [email]
-                                               [:a {:key  email
-                                                    :href (str "mailto:" email)} [:div email]])))
-                         :editable false}
-                        (when (not-empty phone) {:label    "Phone"
-                                                 :value    phone
+       {:image       (:image person)
+        :heading     (str (:first-name person) " " (:last-name person))
+        :fields      [{:label    "Occupation"
+                       :value    (:occupation person)
+                       :editable false}
+                      {:label    "Group"
+                       :value    (:name (first (:groups person)))
+                                 ;(str (for [group (:groups person)]
+                                 ;       (:name group)) ", ")
+                       :editable false}
+                      {:label    "Email"
+                       :value    (->> (:email person)
+                                      (remove empty?)
+                                      (map (fn [email]
+                                             [:a {:key  email
+                                                  :href (str "mailto:" email)} [:div email]])))
+                       :editable false}
+                      (when (not-empty phone) {:label    "Phone"
+                                               :value    phone
+                                               :editable false})
+                      (when (not-empty address) {:label    "Address"
+                                                 :value    address
                                                  :editable false})
-                        (when (not-empty address) {:label    "Address"
-                                                   :value    address
-                                                   :editable false})
-                        {:label    "Assigned Devices"
-                         :value    (count (:inventory person))
-                         :editable false}]
-        :enable-edit   false})
+                      {:label    "Assigned Devices"
+                       :value    (count (:inventory person))
+                       :editable false}]
+        :edit-mode   false
+        :enable-edit false})
 
      ;Assigned Devices
-     [:div {:style {:margin         "1rem 2.5rem 1rem"
-                    :display        "flex"
+     [:div {:style {:display        "flex"
                     :flex-direction "row"}
             :id    "devices"}
       (s-general/section-left)
-      [:div {:style {:margin "0 0 0 1rem" :display "flex" :flex-direction "column"
-                     :width  "100%"}}
+      [:div {:style {:margin-left    "1.5rem"
+                     :display        "flex"
+                     :flex-direction "column"
+                     :width          "100%"}}
        (s-general/section-title {:title   "Assigned Devices"
                                  :buttons [(when (not should-show-item-assignment-box)
                                              (with-key (s-general/section-title-button
