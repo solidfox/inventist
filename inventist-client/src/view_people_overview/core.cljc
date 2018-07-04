@@ -32,7 +32,7 @@
        (not (cache-dirty? state))))
 
 (defn get-people-list-failed? [state]
-  (or (not (nil? (get-in state [:get-people-list-response :error-code])))
+  (or (not (= 0 (get-in state [:get-people-list-response :error-code])))
       (and (:get-people-list-response state)
            (not (= 200 (get-in state [:get-people-list-response :status]))))))
 

@@ -7,7 +7,8 @@
             [oops.core :as o]
             [view-people-overview.event :as event]
             [cljs-react-material-ui.icons :as icon]
-            [symbols.general :as s-general]))
+            [symbols.general :as s-general]
+            [util.inventory.core :as util]))
 
 (defc people-list < (remodular.core/modular-component event/handle-event)
   [{{state :state} :input
