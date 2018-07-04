@@ -31,7 +31,7 @@
       (cond (> (:viewport-width state) 800)                 ;Desktop-view
             [:div {:style {:height                (:viewport-height state)
                            :display               "grid"
-                           :backgroundColor       c/white
+                           :backgroundColor       c/light-context-background
                            :grid-template-columns "20rem auto"}}
 
              (navbar/collection-sidebar
@@ -60,7 +60,7 @@
             (< (:viewport-width state) 800)                 ;mobile-view
             [:div {:style {:height              (:viewport-height state)
                            :display             "grid"
-                           :backgroundColor     c/white
+                           :backgroundColor     c/light-context-background
                            :grid-template-rows  "calc(100% - 3.5rem) 3.5rem"
                            :background-image    "url(\"/image/GHS-watermark.svg\")"
                            :background-position "50%"

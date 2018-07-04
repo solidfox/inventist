@@ -33,11 +33,11 @@
                    :text-transform "capitalize"})
 
 (def card {:border-radius         outer-border-radius
-           :backgroundColor       color/grey-light
+           :backgroundColor       color/shaded-context-background
            :minHeight             "3rem"
            :width                 "20rem"
-           :padding               "1rem"
-           :margin                "0.5rem 1rem 0.5rem 0"
+           :padding               "0.75rem"
+           :margin                "0.75rem 1rem 0.25rem 0"
            :display               "grid"
            :grid-template-columns "auto 1fr"
            :cursor                "pointer"})
@@ -109,7 +109,7 @@
                :height          "auto"
                :margin          "auto"
                :padding         "1rem 1rem"
-               :backgroundColor color/white
+               :backgroundColor color/light-context-background
                :border          (str "1px solid " color/grey-light)
                :borderRadius    "0rem"})
 

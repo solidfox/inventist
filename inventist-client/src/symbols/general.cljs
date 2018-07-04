@@ -94,10 +94,10 @@
                              text     :text
                              on-click :on-click}]
   [:span {:on-click on-click
-          :style    {:color     color/link-active
-                     :margin    "0 1rem"
-                     :font-size "1rem"
-                     :cursor    "pointer"}}
+          :style    {:color       color/light-context-secondary-text
+                     :margin-left "1rem"
+                     :font-size   "1rem"
+                     :cursor      "pointer"}}
 
    [:i {:class icon}] " " text])
 
@@ -105,7 +105,12 @@
 (defc section-title [{title   :title
                       buttons :buttons}]
   [:div {:id    "header"
-         :style {:font-size "1.5rem" :color color/grey-blue}}
+         :style {:font-size       "1.25rem"
+                 :color           color/light-context-title-text
+                 :display         "flex"
+                 :flex-direction  "row"
+                 :align-items     "center"
+                 :justify-content "space-between"}}
    title
    buttons])
 
@@ -113,13 +118,13 @@
 (defc section-left []
   [:div {:style {:minWidth   "6rem"
                  :text-align "right"
-                 :margin     "3rem 0 0"}}])
+                 :margin     0}}])
 
 ;Divider after sections
 (defc section-divider []
   [:div {:id    "divider"
          :style {:margin          "1rem 0"
-                 :backgroundColor color/silver
+                 :backgroundColor color/light-context-highlight-bg
                  :width           "100%"
                  :height          "1px"}}])
 
@@ -306,12 +311,12 @@
                       title    :title
                       content  :content
                       on-click :on-click}]
-  [:div {:style    {:border-left   (str "0.1rem solid " color/grey-light)
+  [:div {:style    {:border-left   (str "0.1rem solid " color/light-context-highlight-bg)
                     :padding-top   "1rem"
                     :padding-left  "1.5rem"
                     :width         "100%"
                     :min-height    "3rem"
-                    :margin-bottom "1rem"
+                    :margin-bottom "0rem"
                     :position      "relative"
                     :cursor        "pointer"}
          :on-click on-click}
@@ -326,18 +331,18 @@
     [:div {:style {:margin      "0 0 0 .5rem"
                    :font-size   "1rem"
                    :font-weight "normal"
-                   :color       color/grey-dark}} title]]
-   [:span {:style {:color color/grey-blue}} content]])
+                   :color       color/light-context-primary-text}} title]]
+   [:span {:style {:font-size "0.75rem"
+                   :color color/light-context-secondary-text}} content]])
 
 
 (defc timeline [{timeline-items :timeline-items
                  enable-comment :enable-comment}]
-  [:div {:style {:margin         "1rem 2.5rem 1rem"
-                 :display        "flex"
+  [:div {:style {:display        "flex"
                  :flex-direction "row"}
          :id    "timeline"}
    (section-left)
-   [:div {:style {:margin         "0 0 0 1rem"
+   [:div {:style {:margin         "0 0 0 1.5rem"
                   :display        "flex"
                   :flex-direction "column"
                   :width          "100%"}}
@@ -346,7 +351,8 @@
                                     (section-title-button {:icon     "far fa-comment"
                                                            :text     "Add Comment"
                                                            :on-click ""}))]})
-    [:div {:style {:margin-left    "-1.5rem"
+    [:div {:style {:margin-top     "1rem"
+                   :margin-left    "-1.5rem"
                    :padding-top    "1rem"
                    :text-transform "capitalize"}}
      timeline-items]]])

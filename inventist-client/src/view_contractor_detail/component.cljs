@@ -22,7 +22,7 @@
      ;Main Details Container
      [:div {:style {:overflow-x      "hidden"
                     :overflow-y      "scroll"
-                    :backgroundColor color/white}}
+                    :backgroundColor color/light-context-background}}
 
       ;Page Header
       (s-detailview/detail-header
