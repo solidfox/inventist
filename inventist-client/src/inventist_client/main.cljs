@@ -54,10 +54,13 @@
     (xhr/send url
               (fn [xhr-event]
                 (let [xhr-request-object (.-target xhr-event)
-                      response-json      (.getResponseJson xhr-request-object)
-                      response-edn       (js->clj response-json {:key-fn keyword})
-                      service-response   {:body   response-edn
-                                          :status status}]
+                      status             (.getStatus xhr-request-object)
+                      service-response   {:body          (when (= status 200)
+                                                           (-> (.getResponseJson xhr-request-object)
+                                                               (js->clj {:key-fn keyword})))
+                                          :status        status
+                                          :error-code    (.getLastErrorCode xhr-request-object)
+                                          :error-message (.getLastError xhr-request-object)}]
                   (handle-event (cond-> (rem/create-anonymous-event)
                                         true
                                         (rem/append-action

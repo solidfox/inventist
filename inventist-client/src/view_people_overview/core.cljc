@@ -12,7 +12,10 @@
   []
   {:selected-person-id                 nil
    :search-terms                       nil
+
+   ;Services
    :latest-acceptable-cache-fetch-time (create-long-timestamp)
+   :should-retry-on-fetch-error        false
    :fetching-people-list               false
    :get-people-list-response           nil})
 
@@ -28,9 +31,19 @@
   (and (get-in state [:get-people-list-response :body :data])
        (not (cache-dirty? state))))
 
+(defn get-people-list-failed? [state]
+  (or (not (nil? (get-in state [:get-people-list-response :error-code])))
+      (and (:get-people-list-response state)
+           (not (= 200 (get-in state [:get-people-list-response :status]))))))
+
+(defn waiting-for-retry-impulse [state]
+  (and (get-people-list-failed? state)
+       (not (:should-retry-on-fetch-error state))))
+
 (defn should-get-people-list? [state]
   (and (not (:fetching-people-list state))
-       (not (has-good-get-people-list-response state))))
+       (not (has-good-get-people-list-response state))
+       (not (waiting-for-retry-impulse state))))
 
 (defn receive-get-people-list-service-response [state response request]
   (-> state
