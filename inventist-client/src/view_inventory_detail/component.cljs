@@ -94,14 +94,11 @@
                     :overflow-y      "scroll"
                     :backgroundColor color/white}}
 
-      ;Page Header
-      (s-detailview/detail-header
-        {:image   (:photo computer)
-         :heading (str (:brand computer) " " (:model-name computer))})
-
       ;Information
       (s-detailview/section-information
-        {:title     (s-general/section-title {:title "Information"})
+        {:image   (:photo computer)
+         :heading (str (:brand computer) " " (:model-name computer))
+         ;:title     (s-general/section-title {:title "Information"})
          ;:buttons [(s-general/section-title-button {:icon     "far fa-edit"
          ;                                           :text     "Edit"
          ;                                           :on-click ""})]})

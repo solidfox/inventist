@@ -28,9 +28,10 @@
       (person-detail (assoc (core/create-person-detail-args state selected-person-id)
                        :trigger-parent-event trigger-event))
       [:div {:id    "detail-container"
-             :style {:height             "100%"
-                     :display            "grid"
-                     :grid-template-rows "auto 1fr"}}
+             :style (merge style/watermark
+                           {:height              "100%"
+                            :display             "grid"
+                            :grid-template-rows  "1fr"})}
 
 
        ;Error text

@@ -92,7 +92,7 @@
              :value       (or search-field-value "")
              :id          "search"
              :name        "search"
-             :autoFocus   true
+             :autoFocus   false
              :placeholder "Search"
              :on-change   on-change
              :style       {:width           "100%"

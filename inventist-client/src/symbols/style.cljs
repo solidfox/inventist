@@ -16,6 +16,11 @@
 
 (def box-shadow {:box-shadow (str "0 0 0.12rem " color/shadow)})
 
+(def watermark {:background-image    "url(\"/image/GHS-watermark.svg\")"
+                :background-position "50%"
+                :background-size     "10rem"
+                :background-repeat   "no-repeat"})
+
 (def card-title {:line-height    "1rem"
                  :color          color/theme-700
                  :text-transform "capitalize"})
@@ -26,7 +31,7 @@
                     :text-transform "capitalize"})
 
 (def header-title {:font-size      "2rem"
-                   :color          color/black
+                   :color          color/theme-900
                    :font-weight    "300"
                    :text-transform "capitalize"})
 

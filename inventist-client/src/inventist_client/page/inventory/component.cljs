@@ -26,9 +26,10 @@
       (inventory-detail (assoc (core/create-inventory-detail-args state selected-inventory-id)
                           :trigger-parent-event trigger-event))
       [:div {:id    "detail-container"
-             :style {:height             "100%"
-                     :display            "grid"
-                     :grid-template-rows "auto 1fr"}}
+             :style (merge style/watermark
+                           {:height              "100%"
+                            :display             "grid"
+                            :grid-template-rows  "1fr"})}
 
        ;Error text
        [:div {:style {:width      "100%"

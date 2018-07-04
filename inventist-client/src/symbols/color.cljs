@@ -6,12 +6,28 @@
 (def transparent "transparent")                             ;Search Bar / No color
 (def shadow "rgba(0,0,0,0.25)")
 
-;Theme-Blue
-(def theme-900 "#00171F")                                   ;Darkest shade (Heading text)
-(def theme-700 "#003459")                                   ;Dark Shade (Primary text, Dark Background)
-(def theme-500 "#007EA7")                                   ;Mid Shade (Secondary text, Image background, CTA)
-(def theme-300 "#A0DEF6")                                   ;Light Shade (Highlight, Mouse-over)
-(def theme-100 "#E1F4FC")                                   ;Lightest Shade (Light Backgrounds)
+;Define Hue here to compose theme colors.
+;Blue - 200
+;Green - 100
+;Red - 0
+;Orange - 30
+;Pink - 300
+;Purple - 275
+(def theme-hue "200")
+
+;Theme Colours
+(def theme-900 (str "hsla(" theme-hue " , 100% , 10% , 1)"))      ;Darkest shade (Heading text)
+(def theme-700 (str "hsla(" theme-hue " , 100% , 25% , 1)"))      ;Dark Shade (Primary text, Dark Background)
+(def theme-500 (str "hsla(" theme-hue " , 100% , 40% , 1)"))      ;Mid Shade (Secondary text, Image background, CTA)
+(def theme-300 (str "hsla(" theme-hue " , 100% , 80% , 1)"))      ;Light Shade (Highlight, Mouse-over)
+(def theme-100 (str "hsla(" theme-hue " , 100% , 95% , 1)"))      ;Lightest Shade (Light Backgrounds)
+
+;;Theme-Blue
+;(def theme-900 "#00171F") ;Darkest shade (Heading text)
+;(def theme-700 "#003459") ;Dark Shade (Primary text, Dark Background)
+;(def theme-500 "#007EA7") ;Mid Shade (Secondary text, Image background, CTA)
+;(def theme-300 "#A0DEF6") ;Light Shade (Highlight, Mouse-over)
+;(def theme-100 "#E1F4FC") ;Lightest Shade (Light Backgrounds)
 
 (def ??? "#FF0000")                                         ;Placeholder until colors below have been set.
 

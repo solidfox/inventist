@@ -36,14 +36,17 @@
   (time-format/unparse (time-format/formatter (or format "yyyy-MM-dd hh:mm")) (time-format-object time)))
 
 (defc centered-message [{:keys [icon message actions]}]
-  [:div {:style {:height          "100%"
-                 :display         "flex"
-                 :flex-direction  "column"
-                 :align-items     "center"
-                 :justify-content "center"}}
+  [:div {:style {:height           "100%"
+                 :display          "flex"
+                 :background-color color/theme-100
+                 :z-index          5
+                 :box-shadow       (str "0 0 0.25rem " color/shadow)
+                 :flex-direction   "column"
+                 :align-items      "center"
+                 :justify-content  "center"}}
    icon
    [:div {:style {:text-align "center"
-                  :width "10rem"}} message]
+                  :width      "10rem"}} message]
    [:div actions]])
 
 (defc centered-loading-indicator [content-description]
@@ -124,10 +127,10 @@
 (defc division-title [{title :title}]
 
   [:div {:style {:margin        "2.5rem 0 0 2.5rem"
-                 :border-bottom (str "1px solid " color/silver)}
+                 :border-bottom (str "1px solid " color/theme-300)}
          :id    "header"}
    [:span {:style {:font-size      "1.5rem"
-                   :color          color/grey-normal
+                   :color          color/theme-700
                    :font-weight    "300"
                    :text-transform "capitalize"}}
     title]])
