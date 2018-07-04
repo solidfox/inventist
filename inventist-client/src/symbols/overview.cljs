@@ -78,12 +78,12 @@
   [:div
    [:div {:style {:width           "100%"
                   :height          "2.5rem"
-                  :backgroundColor color/white
-                  ;:box-shadow      (str "inset 0 0 0.25rem " color/theme-500)
+                  :backgroundColor color/light-context-background
+                  ;:box-shadow      (str "inset 0 0 0.25rem " color/light-context-secondary-text)
                   :display         "flex"}}
     [:div {:style {:width           "3rem"
                    :height          "100%"
-                   :color           color/theme-500
+                   :color           color/light-context-secondary-text
                    :display         "flex"
                    :align-items     "center"
                    :justify-content "center"}}
@@ -99,14 +99,14 @@
                            :padding         "0 0 0 3rem"
                            :margin-left     "-3rem"
                            :height          "100%"
-                           :color           color/theme-500
+                           :color           color/light-context-secondary-text
                            :backgroundColor color/transparent
                            :border          0}}]]
    [:div {:style {:height          "1rem"
                   :padding         "0.25rem 1rem"
                   :font-size       "0.75rem"
-                  :color           color/theme-700
-                  :backgroundColor color/theme-300
+                  :color           color/shaded-context-primary-text
+                  :backgroundColor color/shaded-context-highlight-bg
                   :display         "flex"
                   :justify-content "space-between"
                   :align-items     "center"}}
@@ -119,14 +119,14 @@
                               ["of"])
                             [total-results]
                             [" results"]))]
-    [:div {:style {:color color/theme-700 :cursor "pointer"}}
+    [:div {:style {:cursor "pointer"}}
      (str "Sort Results")]]])
 
 (defc second-column-header [header-text]
   [:div {:style {:width       "auto"
                  :height      "3.5rem"
                  :padding     "0 1rem"
-                 :color       color/theme-900
+                 :color       color/shaded-context-title-text
                  :font-size   "1.5rem"
                  :font-weight "400"
                  :display     "grid"
@@ -141,7 +141,7 @@
                  :width              "auto"
                  :z-index            5
                  :box-shadow         (str "0 0 0.25rem " color/shadow)
-                 :background-color   color/theme-100
+                 :background-color   color/shaded-context-background
                  :display            "grid"
                  :grid-template-rows "auto auto 1fr"}}
    floating-header

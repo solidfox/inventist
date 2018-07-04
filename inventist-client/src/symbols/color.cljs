@@ -2,6 +2,7 @@
 
 ;Common-Palette
 (def white "#FFFFFF")                                       ;Page BG
+(def black "#000000")
 (def theme "#e67e22")                                       ;Theme Color - GMS orange
 (def transparent "transparent")                             ;Search Bar / No color
 (def shadow "rgba(0,0,0,0.25)")
@@ -23,20 +24,23 @@
 (def theme-100 (str "hsla(" theme-hue " , 100% , 95% , 1)"))      ;Lightest Shade (Light Backgrounds)
 
 ;Semantic colors
+(def light-context-title-text theme-900)
 (def light-context-primary-text theme-700)
 (def light-context-secondary-text theme-500)
-(def light-context-highlight-bg theme-300)
-(def light-context-bg theme-100)
+(def light-context-highlight-bg theme-100)
+(def light-context-background white)
 
-(def shaded-context-primary-text theme-900)
-(def shaded-context-secondary-text theme-700)
-(def shaded-context-highlight-bg theme-500)
-(def shaded-context-bg theme-300)
+(def shaded-context-title-text theme-900)
+(def shaded-context-primary-text theme-700)
+(def shaded-context-secondary-text theme-500)
+(def shaded-context-highlight-bg theme-300)
+(def shaded-context-background theme-100)
 
-(def dark-context-primary-text theme-100)
-(def dark-context-secondary-text theme-300)
-(def dark-context-highlight-bg theme-700)
-(def dark-context-bg theme-900)
+(def dark-context-title-text theme-100)
+(def dark-context-primary-text theme-300)
+(def dark-context-secondary-text theme-500)
+(def dark-context-highlight-bg theme-900)
+(def dark-context-background theme-700)
 
 ;;Theme-Blue
 ;(def theme-900 "#00171F") ;Darkest shade (Heading text)
@@ -54,7 +58,6 @@
 
 ;Color-Palette
 (def silver "#ECF0F1")                                      ;Primary Color - Selected Nav-Icon
-(def black "#000000")                                       ;Page Heading & shadows
 (def grey-normal "#7F7F7F")                                 ;UnSelected Nav-Icon
 (def grey-dark "#4A4A4A")                                   ;Text-Primary
 (def grey-blue "#7F8C8D")                                   ;Text-Secondary

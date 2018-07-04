@@ -36,7 +36,7 @@
   ;Dashboard Stats
   [:div {:style {:overflow-x      "hidden"
                  :overflow-y      "scroll"
-                 :backgroundColor color/theme-100}}
+                 :backgroundColor color/shaded-context-background}}
 
    ;Division Heading
    (s-general/division-title

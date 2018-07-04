@@ -109,7 +109,7 @@
                   :height       "6rem"
                   :borderRadius "0.5rem"
                   :object-fit   "cover"
-                  :backgroundColor color/theme-500}}]
+                  :backgroundColor color/light-context-secondary-text}}]
    [:div
     [:span {:style style/header-title}
      (cond (= edit-mode true)

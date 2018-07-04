@@ -38,7 +38,7 @@
 (defc centered-message [{:keys [icon message actions]}]
   [:div {:style {:height           "100%"
                  :display          "flex"
-                 :background-color color/theme-100
+                 :background-color color/shaded-context-background
                  :z-index          5
                  :box-shadow       (str "0 0 0.25rem " color/shadow)
                  :flex-direction   "column"
@@ -127,10 +127,10 @@
 (defc division-title [{title :title}]
 
   [:div {:style {:margin        "2.5rem 0 0 2.5rem"
-                 :border-bottom (str "1px solid " color/theme-300)}
+                 :border-bottom (str "1px solid " color/light-context-highlight-bg)}
          :id    "header"}
    [:span {:style {:font-size      "1.5rem"
-                   :color          color/theme-700
+                   :color          color/light-context-primary-text
                    :font-weight    "300"
                    :text-transform "capitalize"}}
     title]])

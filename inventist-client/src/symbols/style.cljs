@@ -5,9 +5,6 @@
   (:require-macros
     [cljss.core :refer [defstyles]]))
 
-;To change listing bg color on hover.
-(def list-bg-color color/highlight)
-
 (def outer-border-radius "0.5rem")
 (def inner-border-radius "0.25rem")
 
@@ -22,16 +19,16 @@
                 :background-repeat   "no-repeat"})
 
 (def card-title {:line-height    "1rem"
-                 :color          color/theme-700
+                 :color          color/shaded-context-primary-text
                  :text-transform "capitalize"})
 
 (def card-subtitle {:font-size      ".75rem"
-                    :color          color/theme-500
+                    :color          color/shaded-context-secondary-text
                     :line-height    "0.8rem"
                     :text-transform "capitalize"})
 
 (def header-title {:font-size      "2rem"
-                   :color          color/theme-900
+                   :color          color/light-context-title-text
                    :font-weight    "300"
                    :text-transform "capitalize"})
 
@@ -76,8 +73,8 @@
             :grid-template-columns "auto 1fr"
             :grid-gap              "1rem"
             :cursor                "pointer"
-            :&:hover               {:background-color color/theme-300}
-            :&:active              {:background-color color/theme-300}})
+            :&:hover               {:background-color color/shaded-context-highlight-bg}
+            :&:active              {:background-color color/shaded-context-highlight-bg}})
 
 (defstyles list-item-left-column []
            {:width "3rem"})

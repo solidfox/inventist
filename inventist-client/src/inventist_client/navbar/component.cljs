@@ -10,7 +10,7 @@
   [{heading :heading
     id      :id}]
   [:div {:style {:height                "2rem"
-                 :color                 color/theme-300
+                 :color                 color/dark-context-title-text
                  :width                 "auto"
                  :margin-top            "1.5rem"
                  :padding               "0 1rem"
@@ -40,7 +40,7 @@
     on-click :on-click}]
   [:div {:class    "collection-item"
          :style    {:height                "2rem"
-                    :color                 color/theme-300
+                    :color                 color/dark-context-primary-text
                     :width                 "auto"
                     :padding               "0.5rem 1rem"
                     :cursor                "pointer"
@@ -67,11 +67,11 @@
 
    ;Selected Item
    [:div {:draggable true
-          :style     {:background-color color/theme-500
+          :style     {:background-color color/dark-context-secondary-text
                       :width            "2rem" :height "2rem"
                       :border-radius    "0.25rem"
                       :cursor           "grab"
-                      :border           (str "1px solid " color/theme-100)}}]])
+                      :border           (str "1px solid " color/dark-context-title-text)}}]])
 
 
 (def collections-list
@@ -105,11 +105,11 @@
                  :height             "100%"
                  :display            "grid"
                  :grid-template-rows "3.5rem auto 3.5rem"
-                 :background-color   color/theme-700
+                 :background-color   color/dark-context-background
                  :box-shadow         (str "0 0 0.5rem " color/shadow)
                  :z-index            10}}
    ;Header-Logo
-   [:div {:style {:background-color      color/white
+   [:div {:style {:background-color      color/light-context-background
                   :padding               "0.5rem"
                   :display               "grid"
                   :grid-template-columns "calc(100% - 5rem) 5rem"}}
@@ -143,7 +143,7 @@
                                    :on-click (or on-click (fn [] (trigger-event (client-event/clicked-navigation-icon {:target-page-id target-page-id}))))}
                                   (when (= (first current-path) target-page-id)
                                     {:selected true
-                                     :color    color/theme-900})))
+                                     :color    color/dark-context-highlight-bg})))
           (with-key title)))]
 
    auth-status-item])

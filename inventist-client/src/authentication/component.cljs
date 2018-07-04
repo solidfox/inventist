@@ -48,7 +48,7 @@
     trigger-event  :trigger-event}]
   (if-let [logged-in-user (core/get-authenticated-user state)]
     [:div {:style    {:height                "2.5rem"
-                      :background-color      color/white
+                      :background-color      color/light-context-background
                       :padding               "0.5rem 1rem"
                       :display               "grid"
                       :grid-template-columns "3.5rem auto 2rem"
@@ -65,14 +65,14 @@
                     :margin-top     "0.25rem"}}
       [:div {:style {:font-size   "1rem"
                      :font-weight "500"
-                     :color       color/theme-900}}
+                     :color       color/light-context-title-text}}
        (:display-name logged-in-user)]
       [:div {:style {:font-size "0.75rem"
-                     :color     color/theme-700}}
+                     :color     color/light-context-primary-text}}
        "Admin"]]
      [:div {:style {:margin "auto 1rem"}}
       [:i {:class "fas fa-chevron-up"
-           :style {:color color/theme-500}}]]]))
+           :style {:color color/light-context-secondary-text}}]]]))
 ;(navbar/navigation-badge {:title         "Profile"
 ;                          :on-click      log-out
 ;                          :icon          "fas fa-user"

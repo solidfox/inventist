@@ -27,7 +27,7 @@
                          :grid-template-rows  "auto 1fr"})}
 
     ;Toolbar
-    (s-general/button {:color    color/theme-700
+    (s-general/button {:color    color/light-context-primary-text
                        :text     "Register Device"
                        :icon     "fas fa-pen-square"
                        :on-click (fn [] (js/parent.open applescript))})
