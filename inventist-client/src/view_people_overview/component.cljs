@@ -13,32 +13,32 @@
 (defc people-list < (remodular.core/modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (cond
-    (core/get-people-list-failed? state)
-    (s-general/centered-message {:icon    (icon/alert-error-outline {:style {:height "3rem"
-                                                                             :width "3rem"}})
-                                 :message "Error while fetching people from server."
-                                 :actions (s-general/button {:text     "Retry"
-                                                             :on-click (fn [] (trigger-event (rem/create-event {:name :retry-fetching-data})))})})
-    (:fetching-people-list state)
-    (s-general/centered-loading-indicator "people")
-    :else
-    (let [people          (core/get-people state)
-          filtered-people (core/filtered-people state)
-          n-results       (count filtered-people)
-          search-terms    (:search-terms state)]
-      (scrollable
-        {:floating-header
-         [(second-column-header "People")
-          (search-toolbar
-            {:search-field-value (core/get-free-text-search state)
-             :total-results      n-results
-             :on-change          (fn [e]
-                                   (trigger-event
-                                     (rem/create-event {:name :search-string-changed
-                                                        :data {:new-value (o/oget e [:target :value])}})))})]
+  (let [people          (core/get-people state)
+        filtered-people (core/filtered-people state)
+        n-results       (count filtered-people)
+        search-terms    (:search-terms state)]
+    (scrollable
+      {:floating-header
+       [(second-column-header "People")
+        (search-toolbar
+          {:search-field-value (core/get-free-text-search state)
+           :total-results      n-results
+           :on-change          (fn [e]
+                                 (trigger-event
+                                   (rem/create-event {:name :search-string-changed
+                                                      :data {:new-value (o/oget e [:target :value])}})))})]
 
-         :content
+       :content
+       (cond
+         (core/get-people-list-failed? state)
+         (s-general/centered-message {:icon    (icon/alert-error-outline {:style {:height "3rem"
+                                                                                  :width "3rem"}})
+                                      :message "Error while fetching people from server."
+                                      :actions (s-general/button {:text     "Retry"
+                                                                  :on-click (fn [] (trigger-event (rem/create-event {:name :retry-fetching-data})))})})
+         (:fetching-people-list state)
+         (s-general/centered-loading-indicator "people")
+         :else
          [:div {:style {:height           "100%"
                         :background-color color/transparent
                         :padding          "0.25rem"}}
@@ -58,6 +58,6 @@
                            :background-color color/transparent
                            :text-align       "left"
                            :margin           "2rem"}}
-             "No matches found!"])]}))))
+             "No matches found!"])])})))
 
 
