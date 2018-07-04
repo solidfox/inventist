@@ -35,7 +35,18 @@
                            format :format}]
   (time-format/unparse (time-format/formatter (or format "yyyy-MM-dd hh:mm")) (time-format-object time)))
 
-(defc full-view-loading [content-description]
+(defc centered-message [{:keys [icon message actions]}]
+  [:div {:style {:height          "100%"
+                 :display         "flex"
+                 :flex-direction  "column"
+                 :align-items     "center"
+                 :justify-content "center"}}
+   icon
+   [:div {:style {:text-align "center"
+                  :width "10rem"}} message]
+   [:div actions]])
+
+(defc centered-loading-indicator [content-description]
   [:div {:style {:height          "100%"
                  :display         "flex"
                  :flex-direction  "column"

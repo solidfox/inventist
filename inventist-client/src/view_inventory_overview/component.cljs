@@ -1,6 +1,6 @@
 (ns view-inventory-overview.component
   (:require [rum.core :refer [defc]]
-            [symbols.overview :refer [scrollable search-toolbar search-header inventory-list-card]]
+            [symbols.overview :refer [scrollable search-toolbar second-column-header inventory-list-card]]
             [view-inventory-overview.core :as core]
             [symbols.color :as color]
             [remodular.core :as rem]
@@ -14,15 +14,16 @@
   (let [inventory         (core/filtered-inventory state)
         limited-inventory (take 75 inventory)]
     (scrollable
-      {:floating-search
-       (search-toolbar
-         {:search-field-value (core/get-free-text-search state)
-          :shown-results      (count limited-inventory)
-          :total-results      (count inventory)
-          :on-change          (fn [e]
-                                (trigger-event
-                                  (rem/create-event {:name :search-string-changed
-                                                     :data {:new-value (o/oget e [:target :value])}})))})
+      {:floating-header
+       [(second-column-header "Inventory")
+        (search-toolbar
+          {:search-field-value (core/get-free-text-search state)
+           :shown-results      (count limited-inventory)
+           :total-results      (count inventory)
+           :on-change          (fn [e]
+                                 (trigger-event
+                                   (rem/create-event {:name :search-string-changed
+                                                      :data {:new-value (o/oget e [:target :value])}})))})]
        :content
        [:div {:style {:height           "100%"
                       :background-color color/transparent
@@ -36,7 +37,7 @@
         (cond (not= (count inventory) 0)
               nil
               (:fetching-inventory-list state)
-              (s-general/full-view-loading "inventory")
+              (s-general/centered-loading-indicator "inventory")
               :else
               [:div {:style {:width            "100%"
                              :height           "100%"
@@ -44,6 +45,5 @@
                              :background-color color/transparent
                              :text-align       "left"
                              :margin           "2rem"}}
-               "No matches found!"])]
-       :floating-header
-       (search-header "Inventory")})))
+               "No matches found!"])]})))
+

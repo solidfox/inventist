@@ -122,8 +122,7 @@
     [:div {:style {:color color/theme-700 :cursor "pointer"}}
      (str "Sort Results")]]])
 
-;Sidebar-Footer
-(defc search-header [type]
+(defc second-column-header [header-text]
   [:div {:style {:width       "auto"
                  :height      "3.5rem"
                  :padding     "0 1rem"
@@ -132,11 +131,11 @@
                  :font-weight "400"
                  :display     "grid"
                  :align-items "center"}}
-   [:div (str type)]])
+   [:div (str header-text)]])
 
 (defc scrollable
   [{floating-header :floating-header
-    floating-search :floating-search
+    floating-footer :floating-footer
     content         :content}]
   [:div {:style {:height             "100vh"
                  :width              "auto"
@@ -146,11 +145,11 @@
                  :display            "grid"
                  :grid-template-rows "auto auto 1fr"}}
    floating-header
-   floating-search
    [:div {:style {:overflow-x                 "hidden"
                   :overflow-y                 "scroll"
                   :-webkit-overflow-scrolling "touch"}}
-    content]])
+    content]
+   floating-footer])
 
 
 
@@ -163,8 +162,8 @@
   [{type       :type
     list-items :list-items}]
   (scrollable
-    {:floating-header (search-toolbar {:list-items list-items})
-     :floating-footer (search-header type)
+    {:floating-header [:div (second-column-header type)
+                            (search-toolbar {:list-items list-items})]
      :content         [:div {:style {:background-color color/transparent}}
                        (for [list-item list-items]
                          (cond (= type "inventory") (inventory-list-card {:item list-item})
