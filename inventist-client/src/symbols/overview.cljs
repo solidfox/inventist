@@ -79,10 +79,10 @@
    [:div {:style {:width           "100%"
                   :height          "2.5rem"
                   :backgroundColor color/white
-                  :box-shadow      (str "inset 0 0 0.25rem " color/theme-500)
+                  ;:box-shadow      (str "inset 0 0 0.25rem " color/theme-500)
                   :display         "flex"}}
     [:div {:style {:width           "3rem"
-                   :height          "2.5rem"
+                   :height          "100%"
                    :color           color/theme-500
                    :display         "flex"
                    :align-items     "center"
@@ -95,10 +95,10 @@
              :autoFocus   true
              :placeholder "Search"
              :on-change   on-change
-             :style       {:width           "calc(100% - 0.2rem)"
-                           :margin          ".1rem .1rem .1rem -2.9rem"
-                           :padding-left    "2.4rem"
-                           :height          "2.3rem"
+             :style       {:width           "100%"
+                           :padding         "0 0 0 3rem"
+                           :margin-left     "-3rem"
+                           :height          "100%"
                            :color           color/theme-500
                            :backgroundColor color/transparent
                            :border          0}}]]
@@ -163,7 +163,7 @@
     list-items :list-items}]
   (scrollable
     {:floating-header [:div (second-column-header type)
-                            (search-toolbar {:list-items list-items})]
+                       (search-toolbar {:list-items list-items})]
      :content         [:div {:style {:background-color color/transparent}}
                        (for [list-item list-items]
                          (cond (= type "inventory") (inventory-list-card {:item list-item})
