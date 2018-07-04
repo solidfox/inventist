@@ -22,6 +22,22 @@
 (def theme-300 (str "hsla(" theme-hue " , 100% , 80% , 1)"))      ;Light Shade (Highlight, Mouse-over)
 (def theme-100 (str "hsla(" theme-hue " , 100% , 95% , 1)"))      ;Lightest Shade (Light Backgrounds)
 
+;Semantic colors
+(def light-context-primary-text theme-700)
+(def light-context-secondary-text theme-500)
+(def light-context-highlight-bg theme-300)
+(def light-context-bg theme-100)
+
+(def shaded-context-primary-text theme-900)
+(def shaded-context-secondary-text theme-700)
+(def shaded-context-highlight-bg theme-500)
+(def shaded-context-bg theme-300)
+
+(def dark-context-primary-text theme-100)
+(def dark-context-secondary-text theme-300)
+(def dark-context-highlight-bg theme-700)
+(def dark-context-bg theme-900)
+
 ;;Theme-Blue
 ;(def theme-900 "#00171F") ;Darkest shade (Heading text)
 ;(def theme-700 "#003459") ;Dark Shade (Primary text, Dark Background)
