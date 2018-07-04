@@ -92,12 +92,12 @@
              :value       (or search-field-value "")
              :id          "search"
              :name        "search"
-             :autoFocus   true
+             :autoFocus   false
              :placeholder "Search"
              :on-change   on-change
              :style       {:width           "calc(100% - 0.2rem)"
                            :margin          ".1rem .1rem .1rem -2.9rem"
-                           :padding-left    "2.4rem"
+                           :padding-left    "2.9rem"
                            :height          "2.3rem"
                            :color           color/theme-500
                            :backgroundColor color/transparent

@@ -124,10 +124,10 @@
 (defc division-title [{title :title}]
 
   [:div {:style {:margin        "2.5rem 0 0 2.5rem"
-                 :border-bottom (str "1px solid " color/silver)}
+                 :border-bottom (str "1px solid " color/theme-300)}
          :id    "header"}
    [:span {:style {:font-size      "1.5rem"
-                   :color          color/grey-normal
+                   :color          color/theme-700
                    :font-weight    "300"
                    :text-transform "capitalize"}}
     title]])
