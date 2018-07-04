@@ -31,7 +31,7 @@
                     :text-transform "capitalize"})
 
 (def header-title {:font-size      "2rem"
-                   :color          color/black
+                   :color          color/theme-900
                    :font-weight    "300"
                    :text-transform "capitalize"})
 

@@ -51,7 +51,7 @@
                   :margin         "0 1rem"}}
     items-right]])
 
-;Page Header - Image and Heading
+;Page Header - Image and Heading - Contractors Only
 (defc detail-header [{edit-mode     :edit-mode
                       on-change     :on-change
                       image         :image
@@ -92,39 +92,94 @@
 
 
 ;Information Section
-(defc section-information [{title     :title
-                            fields    :fields
-                            edit-mode :edit-mode}]
-  [:div {:style {:margin         "1rem 2.5rem 1rem"
-                 :display        "flex"
-                 :flex-direction "row"}
-         :id    "information"}
-   (s-general/section-left)
-   [:div {:style {:margin         "0 0 0 1rem"
+(defc section-information [{on-change     :on-change
+                            image         :image
+                            heading       :heading
+                            title         :title
+                            fields        :fields
+                            edit-mode     :edit-mode
+                            sub-heading-1 :sub-heading-1
+                            sub-heading-2 :sub-heading-2}]
+  [:div {:style {:margin "1.5rem"
+                 :display "flex"
+                 :flex-direction "column"}}
+   [:img {:src   (cond (and image (not= image "")) image
+                       :else "/image/no-image.png")
+          :style {:width        "6rem"
+                  :height       "6rem"
+                  :borderRadius "0.5rem"
+                  :object-fit   "cover"
+                  :backgroundColor color/theme-500}}]
+   [:div
+    [:span {:style style/header-title}
+     (cond (= edit-mode true)
+           (s-general/input-field {:value       heading
+                                   :placeholder "Name"
+                                   :on-change   ""
+                                   :style       {:height         "3rem"
+                                                 :font-size      "2rem"
+                                                 :color          color/black
+                                                 :font-weight    "300"
+                                                 :minWidth       "40rem"
+                                                 :text-transform "capitalize"}})
+           :else heading)]]
+
+   [:div {:style {:margin "2.5rem 2.5rem 0" :display "flex" :flex-direction "row"}
+          :id    "header"}
+
+    [:div {:style {:margin "0 0 0 1rem"}}
+     [:span {:style style/header-title}
+      (cond (= edit-mode true)
+            (s-general/input-field {:value       heading
+                                    :placeholder "Name"
+                                    :on-change   ""
+                                    :style       {:height         "3rem"
+                                                  :font-size      "2rem"
+                                                  :color          color/black
+                                                  :font-weight    "300"
+                                                  :minWidth       "40rem"
+                                                  :text-transform "capitalize"}})
+            :else heading)]
+     [:br]
+     [:span {:style {:font-weight    "400"
+                     :color          color/grey-blue
+                     :text-transform "capitalize"}}
+      (cond (= edit-mode true)
+            (s-general/input-field {:value       sub-heading-1
+                                    :placeholder "Type"
+                                    :on-change   ""})
+            :else
+            sub-heading-1 [:br] sub-heading-2)]]]
+   [:div {:style {:margin         "1rem 2.5rem 1rem"
                   :display        "flex"
-                  :flex-direction "column"
-                  :width          "100%"}}
-    title                                                   ;Section Title
+                  :flex-direction "row"}
+          :id    "information"}
+    (s-general/section-left)
+    [:div {:style {:margin         "0 0 0 1rem"
+                   :display        "flex"
+                   :flex-direction "column"
+                   :width          "100%"}}
+     title                                                  ;Section Title
 
-    [:div {:style {:display               "grid"
-                   :grid-template-columns (str field-col-width " 1fr")
-                   :align-items           "start"
-                   :text-align            "left"}}
-     (->> fields
-          (remove nil?)
-          (map (fn [field]
-                 [
-                  [:div {:style {:margin "0.25rem 0"
-                                 :color  color/grey-blue}} (:label field)]
-                  [:div {:style {:margin "0.25rem 0"
-                                 :color  color/grey-dark}}
-                   (if (and (= edit-mode true) (= (:editable field) true))
-                     (s-general/text-area {:value    (:value field)
-                                           :maxWidth "30rem"
-                                           :minWidth "20rem"})
-                     [:span (:value field) " " (:side-value field)])]])))]
+     [:div {:style {:display               "grid"
+                    :grid-template-columns (str field-col-width " 1fr")
+                    :align-items           "start"
+                    :text-align            "left"}}
+      (->> fields
+           (remove nil?)
+           (map (fn [field]
+                  [
+                   [:div {:style {:margin "0.25rem 0"
+                                  :color  color/grey-blue}} (:label field)]
+                   [:div {:style {:margin "0.25rem 0"
+                                  :color  color/grey-dark}}
+                    (if (and (= edit-mode true) (= (:editable field) true))
+                      (s-general/text-area {:value    (:value field)
+                                            :maxWidth "30rem"
+                                            :minWidth "20rem"})
+                      [:span (:value field) " " (:side-value field)])]])))]
 
-    (s-general/section-divider)]])
+     (s-general/section-divider)]]])
 
 (defc card
   [{id        :id

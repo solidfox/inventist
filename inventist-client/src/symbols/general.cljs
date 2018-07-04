@@ -36,14 +36,17 @@
   (time-format/unparse (time-format/formatter (or format "yyyy-MM-dd hh:mm")) (time-format-object time)))
 
 (defc centered-message [{:keys [icon message actions]}]
-  [:div {:style {:height          "100%"
-                 :display         "flex"
-                 :flex-direction  "column"
-                 :align-items     "center"
-                 :justify-content "center"}}
+  [:div {:style {:height           "100%"
+                 :display          "flex"
+                 :background-color color/theme-100
+                 :z-index          5
+                 :box-shadow       (str "0 0 0.25rem " color/shadow)
+                 :flex-direction   "column"
+                 :align-items      "center"
+                 :justify-content  "center"}}
    icon
    [:div {:style {:text-align "center"
-                  :width "10rem"}} message]
+                  :width      "10rem"}} message]
    [:div actions]])
 
 (defc centered-loading-indicator [content-description]
