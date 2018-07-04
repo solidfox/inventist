@@ -13,6 +13,23 @@
 (def theme-300 "#A0DEF6")                                   ;Light Shade (Highlight, Mouse-over)
 (def theme-100 "#E1F4FC")                                   ;Lightest Shade (Light Backgrounds)
 
+(def ??? "#FF0000")                                         ;Placeholder until colors below have been set.
+
+(def light-context-bg theme-100)
+(def light-context-primary-text theme-700)
+(def light-context-secondary-text theme-500)
+(def light-context-highlight-bg theme-300)
+
+(def shaded-context-primary-text ???)
+(def shaded-context-secondary-text ???)
+(def shaded-context-highlight-bg ???)
+
+(def dark-context-bg theme-700)
+(def dark-context-primary-text ???)
+(def dark-context-secondary-text ???)
+(def dark-context-highlight-bg ???)
+
+
 ;;Theme-Pink
 ;(def theme-900 "#442B2D") ;Darkest shade (Heading text)
 ;(def theme-700 "#84565E") ;Dark Shade (Primary text, Dark Background)
