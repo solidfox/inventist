@@ -35,8 +35,9 @@
                            format :format}]
   (time-format/unparse (time-format/formatter (or format "yyyy-MM-dd hh:mm")) (time-format-object time)))
 
-(defc centered-message [{:keys [icon message actions]}]
+(defc centered-message [{:keys [icon message text-color actions]}]
   [:div {:style {:height           "100%"
+                 :color            text-color
                  :display          "flex"
                  :background-color color/shaded-context-background
                  :z-index          5

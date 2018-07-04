@@ -20,7 +20,9 @@
    :get-people-list-response           nil})
 
 (defn started-get-people-list-service-call [state]
-  (assoc state :fetching-people-list true))
+  (-> state
+      (assoc :fetching-people-list true)
+      (assoc :should-retry-on-fetch-error false)))
 
 (defn cache-dirty?
   [state]
@@ -32,13 +34,17 @@
        (not (cache-dirty? state))))
 
 (defn get-people-list-failed? [state]
-  (or (not (= 0 (get-in state [:get-people-list-response :error-code])))
-      (and (:get-people-list-response state)
-           (not (= 200 (get-in state [:get-people-list-response :status]))))))
+  (and (not (nil? (:get-people-list-response state)))
+       (or (not (= 0 (get-in state [:get-people-list-response :error-code])))
+           (and (:get-people-list-response state)
+                (not (= 200 (get-in state [:get-people-list-response :status])))))))
 
 (defn waiting-for-retry-impulse [state]
   (and (get-people-list-failed? state)
        (not (:should-retry-on-fetch-error state))))
+
+(defn set-should-retry-on-fetch-error [state value]
+  (assoc state :should-retry-on-fetch-error value))
 
 (defn should-get-people-list? [state]
   (and (not (:fetching-people-list state))

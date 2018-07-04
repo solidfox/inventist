@@ -30,14 +30,16 @@
 
        :content
        (cond
-         (core/get-people-list-failed? state)
-         (s-general/centered-message {:icon    (icon/alert-error-outline {:style {:height "3rem"
-                                                                                  :width "3rem"}})
-                                      :message "Error while fetching people from server."
-                                      :actions (s-general/button {:text     "Retry"
-                                                                  :on-click (fn [] (trigger-event (rem/create-event {:name :retry-fetching-data})))})})
          (:fetching-people-list state)
          (s-general/centered-loading-indicator "people")
+         (core/get-people-list-failed? state)
+         (s-general/centered-message {:icon       (icon/alert-error-outline {:color color/shaded-context-primary-text
+                                                                             :style {:height "3rem"
+                                                                                     :width  "3rem"}})
+                                      :message    "Error while fetching people from server."
+                                      :text-color color/shaded-context-primary-text
+                                      :actions    (s-general/button {:text     "Retry"
+                                                                     :on-click (fn [] (trigger-event (rem/create-event {:name :retry-fetching-data})))})})
          :else
          [:div {:style {:height           "100%"
                         :background-color color/transparent
