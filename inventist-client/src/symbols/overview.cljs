@@ -29,8 +29,9 @@
      (str (:occupation person) " - " (str/join ", " (for [group (:groups person)] (:name group))))] [:br]
     [:span {:style style/card-title}
      (for [item (:inventory person)]
-       [:span {:key   (:id item)
-               :style {:margin "0 1rem 0 0"}}
+       [:span {:key       (:id item)
+               :style     {:margin "0 1rem 0 0"
+                           :font-size "0.75rem"}}
         (s-general/device-icon-set {:item item})])]]])
 
 ;Contractor-list card
@@ -137,13 +138,11 @@
   [{floating-header :floating-header
     floating-footer :floating-footer
     content         :content}]
-  [:div {:style {:height             "100vh"
-                 :width              "auto"
-                 :z-index            5
-                 :box-shadow         (str "0 0 0.25rem " color/shadow)
-                 :background-color   color/shaded-context-background
-                 :display            "grid"
-                 :grid-template-rows "auto auto 1fr"}}
+  [:div {:style (merge style/shaded-bar
+                       {:height             "100vh"
+                        :width              "auto"
+                        :display            "grid"
+                        :grid-template-rows "auto auto 1fr"})}
    floating-header
    [:div {:style {:overflow-x                 "hidden"
                   :overflow-y                 "scroll"

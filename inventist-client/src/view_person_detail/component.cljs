@@ -39,8 +39,8 @@
                        :editable false}
                       {:label    "Group"
                        :value    (:name (first (:groups person)))
-                                 ;(str (for [group (:groups person)]
-                                 ;       (:name group)) ", ")
+                       ;(str (for [group (:groups person)]
+                       ;       (:name group)) ", ")
                        :editable false}
                       {:label    "Email"
                        :value    (->> (:email person)
@@ -71,12 +71,19 @@
                      :flex-direction "column"
                      :width          "100%"}}
        (s-general/section-title {:title   "Assigned Devices"
-                                 :buttons [(when (not should-show-item-assignment-box)
-                                             (with-key (s-general/section-title-button
-                                                         {:icon     "fas fa-plus-circle"
-                                                          :text     "Assign new device"
-                                                          :on-click (fn [] (trigger-event (rem/create-event
-                                                                                            {:name :assign-new-device-clicked})))}) 42))]})
+                                 :buttons [(cond (not should-show-item-assignment-box)
+                                                 (with-key (s-general/section-title-button
+                                                             {:icon     "fas fa-plus-circle"
+                                                              :text     "Assign New Device"
+                                                              :on-click (fn [] (trigger-event (rem/create-event
+                                                                                                {:name :assign-new-device-clicked})))}) 42)
+                                                 :else
+                                                 (with-key (s-general/section-title-button
+                                                             {:icon     "fas fa-times-circle"
+                                                              :text     "Cancel Assignment"
+                                                              :color    color/light-context-secondary-negative
+                                                              :on-click (fn [] (trigger-event event/cancel-new-device-assignment))}) 43))]})
+
 
        [:div {:style {:display        "flex"
                       :flex-direction "row"
@@ -87,29 +94,51 @@
           (let [trigger-commit-new-device-event (fn [] (trigger-event event/commit-new-device))]
             (s-detailview/card {:id      "add-device"
                                 :content [:div {:style {:display         "flex"
+                                                        :width           "20rem"
+                                                        :max-height      "2.5rem"
                                                         :flex-wrap       "wrap"
                                                         :justify-content "space-between"}}
                                           ;(ui/auto-complete {:hint-text "New device's serial number"
                                           ;                   :dataSource ["test" "testa"]})
-                                          (s-general/input-field {:placeholder "New device's serial number"
-                                                                  :value       (or (core/get-new-device-serial-number state) "")
-                                                                  :on-change   (fn [e] (trigger-event (event/new-device-serial-number-changed (oops/oget e [:target :value]))))
-                                                                  :on-enter    trigger-commit-new-device-event})
-                                          (s-general/button {:color    color/theme
-                                                             :icon     "fas fa-check-circle"
-                                                             :text     "Add Device"
-                                                             :style    {:margin "0.5rem 0 0 0"}
-                                                             :on-click trigger-commit-new-device-event})
-                                          (s-general/button {:color    color/grey-normal
-                                                             :icon     "fas fa-times-circle"
-                                                             :text     "Cancel"
-                                                             :on-click (fn [] (trigger-event event/cancel-new-device-assignment))
-                                                             :style    {:margin "0.5rem 0 0 0"}})]})))
+                                          [:div
+                                           (s-general/input-field {:placeholder "New device's serial number"
+                                                                   :width       "16.25rem"
+                                                                   :height      "2.5rem"
+                                                                   :value       (or (core/get-new-device-serial-number state) "")
+                                                                   :on-change   (fn [e] (trigger-event (event/new-device-serial-number-changed (oops/oget e [:target :value]))))
+                                                                   :on-enter    trigger-commit-new-device-event})]
+                                          [:div {:on-click trigger-commit-new-device-event
+                                                 :style    {:width              "2.5rem"
+                                                            :height             "2.5rem"
+                                                            :border-radius      "0.25rem"
+                                                            :display            "grid"
+                                                            :grid-template-rows "1.5rem 1rem"
+                                                            :justify-content    "center"
+                                                            :color              color/shaded-context-background
+                                                            :background-color   color/shaded-context-secondary-text}}
+                                           [:span {:style {:font-size  "1rem"
+                                                           :text-align "center"
+                                                           :align-self "end"}}
+                                            [:i {:class "fas fa-plus-circle"}]]
+                                           [:span {:style {:font-size "0.75rem"
+                                                           :align-self "center"}} "Add"]]]})))
+        ;(s-general/button {:color    color/theme
+        ;                   :icon     "fas fa-check-circle"
+        ;                   :text     "Add Device"
+        ;                   :style    {:margin "0.5rem 0 0 0"}})
+        ;
+        ;(s-general/button {:color    color/grey-normal
+        ;                   :icon     "fas fa-times-circle"
+        ;                   :text     "Cancel"
+        ;                   :on-click (fn [] (trigger-event event/cancel-new-device-assignment))
+        ;                   :style    {:margin "0.5rem 0 0 0"}})]})))
 
-        (cond (= (count (:inventory person)) 0)
-              [:div {:style {:color      color/grey-normal
-                             :font-style "italic"}}
-               "No Devices Assigned."])
+        (when (not should-show-item-assignment-box)
+          (cond (= (count (:inventory person)) 0)
+                [:div {:style {:color      color/light-context-primary-text
+                               :font-style "italic"
+                               :margin-top "0.75rem"}}
+                 "No Devices Assigned."]))
 
         (for [item (remove nil?
                            (concat [(:ongoing-inventory-item-assignment state)]

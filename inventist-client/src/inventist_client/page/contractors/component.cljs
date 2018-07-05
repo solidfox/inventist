@@ -6,10 +6,12 @@
             [rum.core :refer [defc]]))
 
 (defc component < (modular-component)
-  [{{state :state} :input
-    trigger-event  :trigger-event}]
+  [{{state :state}  :input
+    trigger-event   :trigger-event
+    viewport-height :viewport-height
+    viewport-width  :viewport-width}]
   [:div {:id    (str ::component-id)
-         :style {:height                "100%"
+         :style {:height                viewport-height
                  :display               "grid"
                  :grid-template-columns "22rem 1fr"
                  :grid-template-rows    "100%"}}

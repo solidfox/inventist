@@ -18,6 +18,12 @@
                 :background-size     "10rem"
                 :background-repeat   "no-repeat"})
 
+(def shaded-bar {:overflow-x      "hidden"
+                 :overflow-y      "scroll"
+                 :z-index         5
+                 :box-shadow      (str "0 0 0.25rem " color/shadow)
+                 :backgroundColor color/shaded-context-background})
+
 (def card-title {:line-height    "1rem"
                  :color          color/shaded-context-primary-text
                  :text-transform "capitalize"})
@@ -32,15 +38,17 @@
                    :font-weight    "300"
                    :text-transform "capitalize"})
 
-(def card {:border-radius         outer-border-radius
-           :backgroundColor       color/shaded-context-background
-           :minHeight             "3rem"
-           :width                 "20rem"
-           :padding               "0.75rem"
-           :margin                "0.75rem 1rem 0.25rem 0"
-           :display               "grid"
-           :grid-template-columns "auto 1fr"
-           :cursor                "pointer"})
+(defstyles card []
+           {:border-radius         outer-border-radius
+            :background-color      color/shaded-context-background
+            :min-height            "2.5rem"
+            :width                 "20rem"
+            :padding               "0.75rem"
+            :margin                "0.75rem 1rem 0.25rem 0"
+            :display               "grid"
+            :grid-template-columns "auto 1fr"
+            :cursor                "pointer"
+            :&:hover               {:background-color color/shaded-context-highlight-bg}})
 
 (defstyles navbar-card []
            {:text-align       "left"
@@ -81,7 +89,7 @@
 
 (defstyles button [{bg-color   :bg-color
                     text-color :text-color}]
-           {:margin           "0.5rem"
+           {:margin           "0rem"
             :padding          "0.25rem 0.5rem"
             :cursor           "pointer"
             :border-radius    "0.25rem"

@@ -16,7 +16,7 @@
 (defc device-icon-set [{item :item}]
   (let [icon-map (inventory/inventory-icon item)]
     [:span
-     (:brand icon-map) " "
+     ;(:brand icon-map) " "
      (:model icon-map)]))
 
 (defn time-format-object [time]
@@ -92,9 +92,10 @@
 ;Edit/Comment button
 (defc section-title-button [{icon     :icon
                              text     :text
+                             color    :color
                              on-click :on-click}]
   [:span {:on-click on-click
-          :style    {:color       color/light-context-secondary-text
+          :style    {:color       (or color color/light-context-secondary-text)
                      :margin-left "1rem"
                      :font-size   "1rem"
                      :cursor      "pointer"}}
@@ -163,6 +164,7 @@
 (defc input-field [{id          :id
                     placeholder :placeholder
                     value       :value
+                    height      :height
                     width       :width
                     minWidth    :minWidth
                     maxWidth    :maxWidth
@@ -177,9 +179,10 @@
                                  :minWidth        minWidth
                                  :maxWidth        maxWidth
                                  :width           (or width "100%")
-                                 :height          "2rem"
+                                 :height          (or height "2rem")
+                                 :color           color/light-context-secondary-text
                                  :backgroundColor (cond (= disabled true) color/highlight
-                                                        :esle color/white)
+                                                        :esle color/light-context-background)
                                  :box-shadow      "0px 0px 2px rgba(0,0,0,0.5) inset"
                                  :borderRadius    "5px"
                                  :border          0
@@ -333,7 +336,7 @@
                    :font-weight "normal"
                    :color       color/light-context-primary-text}} title]]
    [:span {:style {:font-size "0.75rem"
-                   :color color/light-context-secondary-text}} content]])
+                   :color     color/light-context-secondary-text}} content]])
 
 
 (defc timeline [{timeline-items :timeline-items

@@ -42,16 +42,24 @@
              (condp = (first (:path state))
                :dashboard
                (dashboard-page/component (assoc (core/create-dashboard-page-args state)
-                                           :trigger-parent-event trigger-event))
+                                           :trigger-parent-event trigger-event
+                                           :viewport-height (:viewport-height state)
+                                           :viewport-width  (:viewport-width state)))
                :people
                (people-page/component (assoc (core/create-people-page-args state)
-                                        :trigger-parent-event trigger-event))
+                                        :trigger-parent-event trigger-event
+                                        :viewport-height (:viewport-height state)
+                                        :viewport-width  (:viewport-width state)))
                :contractors
                (contractors-page/component (assoc (core/create-contractors-page-args state)
-                                             :trigger-parent-event trigger-event))
+                                             :trigger-parent-event trigger-event
+                                             :viewport-height (:viewport-height state)
+                                             :viewport-width  (:viewport-width state)))
                :inventory
                (inventory-page/component (assoc (core/create-inventory-page-args state)
-                                           :trigger-parent-event trigger-event)))
+                                           :trigger-parent-event trigger-event
+                                           :viewport-height (:viewport-height state)
+                                           :viewport-width  (:viewport-width state))))
 
              (when (not (:internet-reachable state)) (notifications/connection-bar))
              (notifications/size-bar {:viewport-height (:viewport-height state)

@@ -166,15 +166,14 @@
     on-click  :on-click}]
   [:div {:key      key
          :id       id
-         :on-click on-click
-         :style    (merge style/card
-                          style)}
+         :class    (style/card)
+         :on-click on-click}
+   ;:style    style}
 
    (cond (not= image-url nil) [:img {:src   image-url
                                      :style {:margin-right "0.75rem"}
                                      :class (style/card-image)}])
-   [:div {:class "card-content"}
-    content]])
+   content])
 
 ;Card to show devices assigned
 (defc device-card [{item     :item

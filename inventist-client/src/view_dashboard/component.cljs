@@ -20,11 +20,9 @@
    ;Error text
    [:div {:style {:width      "100%"
                   :height     "100%"
-                  :color      color/grey-blue
+                  :color      color/light-context-secondary-text
                   :text-align "left"
-                  :top        "10rem"
-                  :margin     "2rem"
-                  :left       "2rem"}}
+                  :margin     "2.5rem 0"}}
     "This is the Inventist Dashboard." [:br]
     "Students & Staff with a \"gripsholmsskolan.se\" email address will be able to see their infromation and registered devices." [:br] [:br]
     "You are logged-in with a external mail-id." [:br]
@@ -34,9 +32,7 @@
 
 (defc dashboard-stats []
   ;Dashboard Stats
-  [:div {:style {:overflow-x      "hidden"
-                 :overflow-y      "scroll"
-                 :backgroundColor color/shaded-context-background}}
+  [:div {:style style/shaded-bar}
 
    ;Division Heading
    (s-general/division-title

@@ -11,10 +11,12 @@
             [symbols.style :as style]))
 
 (defc component < (modular-component event/handle-event)
-  [{{state :state} :input
-    trigger-event  :trigger-event}]
+  [{{state :state}  :input
+    trigger-event   :trigger-event
+    viewport-height :viewport-height
+    viewport-width  :viewport-width}]
   [:div {:id    (str ::component-id)
-         :style {:height                "100%"
+         :style {:height                viewport-height
                  :display               "grid"
                  :grid-template-columns "22rem 1fr"
                  :grid-template-rows    "100%"}}
@@ -27,18 +29,16 @@
                           :trigger-parent-event trigger-event))
       [:div {:id    "detail-container"
              :style (merge style/watermark
-                           {:height              "100%"
-                            :display             "grid"
-                            :grid-template-rows  "1fr"})}
+                           {:height             viewport-height
+                            :display            "grid"
+                            :grid-template-rows "1fr"})}
 
        ;Error text
        [:div {:style {:width      "100%"
-                      :height     "100%"
-                      :color      color/grey-blue
+                      :height     viewport-height
+                      :color      color/light-context-secondary-text
                       :text-align "left"
-                      :top        "10rem"
-                      :margin     "2rem"
-                      :left       "2rem"}}
+                      :margin     "3.5rem 1.5rem"}}
         "No item selected. Use the side-bar to" [:br]
         "search and select an item to view details."]])]])
 
