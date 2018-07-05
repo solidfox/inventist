@@ -3,7 +3,9 @@
             [symbols.general :as s-general]
             [symbols.color :as color]
             [symbols.style :as style]
-            [rum.core :as rum]))
+            [rum.core :as rum]
+            [util.inventory.core :as util]
+            [symbols.mixins :refer [hovered-mixin]]))
 
 (def field-col-width "10rem")
 
@@ -91,20 +93,23 @@
            :else
            sub-heading-1 [:br] sub-heading-2)]]])
 
-(rum/defcs section-button < (rum/local nil ::hidden-local-state-atom)
-  [{hidden-local-state-atom ::hidden-local-state-atom} {:keys [key content tooltip-text on-click]}]
-  [:div {:key            key
-         :class          "tooltip"                          ;style.css
-         :on-mouse-enter (fn [] (swap! hidden-local-state-atom assoc :hovered true))
-         :on-mouse-leave (fn [] (swap! hidden-local-state-atom assoc :hovered false))
-         :on-click       on-click
-         :style          {:margin-left "1rem"
-                          :font-size   "1.25rem"
-                          :cursor      "pointer"
-                          :color       color/light-context-secondary-text}}
+(rum/defcs section-button < (hovered-mixin :hovered)
+  [{:keys [hovered]}
+   {:keys [key content tooltip-text on-click]}]
+  [:div {:key      key
+         :on-click on-click
+         :style    {:position    "relative"
+                    :margin-left "1rem"
+                    :font-size   "1.25rem"
+                    :cursor      "pointer"
+                    :color       color/light-context-secondary-text}}
    content
-   (when (:hovered (deref hidden-local-state-atom))
-     [:span {:class "tooltiptext"} tooltip-text])])
+   (when hovered
+     [:div {:style {:position "absolute"
+                    :bottom "calc(-100%-1rem"
+                    :right "0px"}}
+      [:span {:class "tooltiptext"} tooltip-text]])])
+
 
 ;Information Section
 (defc section-information [{on-change :on-change
