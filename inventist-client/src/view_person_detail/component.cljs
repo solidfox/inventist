@@ -14,6 +14,8 @@
             [view-person-detail.core :as core]
             [util.inventory.core :as util]))
 
+;(def url (js/window (js/location.href)))
+
 (defc person-detail < (modular-component event/handle-event)
   [{{state :state}  :input
     trigger-event   :trigger-event
@@ -37,6 +39,12 @@
      (s-detailview/section-information
        {:image       (:image person)
         :heading     (str (:first-name person) " " (:last-name person))
+        :actions     [{:icon     "fas fa-qrcode"
+                       :title    "QR Code"
+                       :on-click ""}
+                      {:icon     "far fa-share-square"
+                       :title    "Share"
+                       :on-click ""}]
         :fields      [{:label    "Occupation"
                        :value    (:occupation person)
                        :editable false}
@@ -66,7 +74,8 @@
 
      ;Assigned Devices
      [:div {:style {:display        "flex"
-                    :flex-direction "row"}
+                    :flex-direction "row"
+                    :margin-top     "0.5rem"}
             :id    "devices"}
       (s-general/section-left)
       [:div {:style {:margin-left    "1.5rem"

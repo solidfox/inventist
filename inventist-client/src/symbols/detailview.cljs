@@ -92,17 +92,16 @@
 
 
 ;Information Section
-(defc section-information [{on-change     :on-change
-                            image         :image
-                            heading       :heading
-                            title         :title
-                            fields        :fields
-                            edit-mode     :edit-mode
-                            sub-heading-1 :sub-heading-1
-                            sub-heading-2 :sub-heading-2}]
+(defc section-information [{on-change :on-change
+                            image     :image
+                            heading   :heading
+                            actions   :actions
+                            fields    :fields
+                            edit-mode :edit-mode}]
   [:div {:style {:display               "grid"
                  :width                 "100%"
                  :grid-template-columns "6rem auto"}}
+   ;Image / Left Column
    [:img {:src   (cond (and image (not= image "")) image
                        :else "/image/no-image.png")
           :style {:width           "6rem"
@@ -110,13 +109,16 @@
                   :borderRadius    "0.5rem"
                   :object-fit      "cover"
                   :backgroundColor color/light-context-secondary-text}}]
+   ;Right Column
    [:div {:style {:display        "flex"
                   :flex-direction "column"
                   :margin-left    "1.5rem"
                   :width          "calc(100% - 1.5rem"}}
+    ;Header
     [:div {:style {:display         "flex"
                    :flex-direction  "row"
                    :justify-content "space-between"}}
+     ;Heading
      [:span {:style style/header-title}
       (cond (= edit-mode true)
             (s-general/input-field {:value       heading
@@ -129,8 +131,21 @@
                                                   :minWidth       "40rem"
                                                   :text-transform "capitalize"}})
             :else heading)]
-     [:div [:i {:class "fas fa-plus"}]]]
+     ;Actions
+     [:div {:style {:display        "flex"
+                    :flex-direction "row"}}
+      (for [action actions]
+        [:div {:key      (:title action)
+               :class    "tooltip"                          ;style.css
+               :on-click (:on-click action)
+               :style    {:margin-left "1rem"
+                          :font-size   "1.25rem"
+                          :cursor      "pointer"
+                          :color       color/light-context-secondary-text}}
+         [:i {:class (:icon action)}]
+         [:span {:class "tooltiptext"} (:title action)]])]]
 
+    ;Information Details
     [:div {:style {:margin         "0.25rem 0 0"
                    :display        "flex"
                    :flex-direction "column"}

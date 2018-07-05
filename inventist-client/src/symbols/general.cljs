@@ -342,7 +342,8 @@
 (defc timeline [{timeline-items :timeline-items
                  enable-comment :enable-comment}]
   [:div {:style {:display        "flex"
-                 :flex-direction "row"}
+                 :flex-direction "row"
+                 :margin-top     "0.5rem"}
          :id    "timeline"}
    (section-left)
    [:div {:style {:margin         "0 0 0 1.5rem"
@@ -358,7 +359,8 @@
                    :margin-left    "-1.5rem"
                    :padding-top    "1rem"
                    :text-transform "capitalize"}}
-     timeline-items]]])
+     timeline-items]
+    (section-divider)]])
 
 (defc circle-icon [{icon  :icon
                     color :color}]
