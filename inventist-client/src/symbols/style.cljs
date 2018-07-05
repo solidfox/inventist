@@ -9,7 +9,7 @@
 (def inner-border-radius "0.25rem")
 
 (def z-index-top-toolbar {:z-index 10})
-(def z-index-details-section {:z-index 5})
+(def z-index-details-section {:z-index 0})
 
 (def box-shadow {:box-shadow (str "0 0 0.12rem " color/shadow)})
 
@@ -20,7 +20,7 @@
 
 (def shaded-bar {:overflow-x      "hidden"
                  :overflow-y      "scroll"
-                 :z-index         5
+                 :z-index         10
                  :box-shadow      (str "0 0 0.25rem " color/shadow)
                  :backgroundColor color/shaded-context-background})
 
@@ -42,7 +42,7 @@
            {:border-radius         outer-border-radius
             :background-color      color/shaded-context-background
             :min-height            "2.5rem"
-            :width                 "20rem"
+            :width                 "18.5rem"
             :padding               "0.75rem"
             :margin                "0.75rem 1rem 0.25rem 0"
             :display               "grid"

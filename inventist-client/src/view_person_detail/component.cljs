@@ -15,8 +15,10 @@
             [util.inventory.core :as util]))
 
 (defc person-detail < (modular-component event/handle-event)
-  [{{state :state} :input
-    trigger-event  :trigger-event}]
+  [{{state :state}  :input
+    trigger-event   :trigger-event
+    viewport-height :viewport-height
+    viewport-width  :viewport-width}]
   (let [person (core/get-person state)
         {phone   :phone
          address :address} person
@@ -24,10 +26,11 @@
 
     ;PEOPLE DETAILS
     [:div {:id    "detail-container"
-           :style {:height          "100vh"
+           :style {:height          (str (- (js/parseInt viewport-height) 48) "px")
                    :overflow-x      "hidden"
                    :overflow-y      "scroll"
                    :padding         "1.5rem"
+                   :z-index         0
                    :backgroundColor color/light-context-background}}
 
      ;Detailed Information
@@ -94,7 +97,7 @@
           (let [trigger-commit-new-device-event (fn [] (trigger-event event/commit-new-device))]
             (s-detailview/card {:id      "add-device"
                                 :content [:div {:style {:display         "flex"
-                                                        :width           "20rem"
+                                                        :width           "18.5rem"
                                                         :max-height      "2.5rem"
                                                         :flex-wrap       "wrap"
                                                         :justify-content "space-between"}}
@@ -102,7 +105,7 @@
                                           ;                   :dataSource ["test" "testa"]})
                                           [:div
                                            (s-general/input-field {:placeholder "New device's serial number"
-                                                                   :width       "16.25rem"
+                                                                   :width       "15rem"
                                                                    :height      "2.5rem"
                                                                    :value       (or (core/get-new-device-serial-number state) "")
                                                                    :on-change   (fn [e] (trigger-event (event/new-device-serial-number-changed (oops/oget e [:target :value]))))
@@ -120,7 +123,7 @@
                                                            :text-align "center"
                                                            :align-self "end"}}
                                             [:i {:class "fas fa-plus-circle"}]]
-                                           [:span {:style {:font-size "0.75rem"
+                                           [:span {:style {:font-size  "0.75rem"
                                                            :align-self "center"}} "Add"]]]})))
         ;(s-general/button {:color    color/theme
         ;                   :icon     "fas fa-check-circle"

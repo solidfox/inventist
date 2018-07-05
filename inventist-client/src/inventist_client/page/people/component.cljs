@@ -28,7 +28,9 @@
                    style/box-shadow)}
     (if-let [selected-person-id (:selected-person-id state)]
       (person-detail (assoc (core/create-person-detail-args state selected-person-id)
-                       :trigger-parent-event trigger-event))
+                       :trigger-parent-event trigger-event
+                       :viewport-height viewport-height
+                       :viewport-width viewport-width))
       [:div {:id    "detail-container"
              :style (merge style/watermark
                            {:height             viewport-height
