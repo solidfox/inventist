@@ -14,6 +14,6 @@
         (assoc request :uri "/index.html")))))              ;; wrap-resource will find index.html for us
 
 (def handle-request
-  (util/spy (-> (fn [_] {:status 404 :body "static asset not found"})
-                (wrap-resource "public")
-                wrap-default-index)))
+  (-> (fn [_] {:status 404 :body "static asset not found"})
+      (wrap-resource "public")
+      wrap-default-index))
