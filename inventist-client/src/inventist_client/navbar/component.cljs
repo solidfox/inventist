@@ -38,7 +38,8 @@
     image    :image
     color    :color
     on-click :on-click}]
-  [:div {:class    "collection-item"
+  [:div {:key      title
+         :class    "collection-item"
          :style    {:height                "2rem"
                     :color                 color/dark-context-primary-text
                     :width                 "auto"
@@ -59,10 +60,10 @@
     title
 
     ;On-Mouse-Over "style.css"
-    [:span {:class "collection-item-edit"
+    [:span {:class    "collection-item-edit"
             :on-click (fn [] (println "Edit " title))
-            :style {:font-weight "400"
-                    :font-size   "0.75rem"}}
+            :style    {:font-weight "400"
+                       :font-size   "0.75rem"}}
      "Edit"]]
 
    ;Selected Item
@@ -76,7 +77,6 @@
 
 (def collections-list
   [{:title          "Dashboard"
-    ;:image          "/image/ghs-icon.svg"
     :icon           "fas fa-tachometer-alt"
     :target-page-id :dashboard}
    {:title          "Inventory"
@@ -99,14 +99,15 @@
 
 (defc collection-sidebar [{trigger-event    :trigger-event
                            current-path     :current-path
-                           auth-status-item :auth-status-item}]
+                           auth-status-item :auth-status-item
+                           viewport-height  :viewport-height
+                           viewport-width   :viewport-width}]
 
   [:div {:style {:width              "100%"
-                 :height             "100%"
+                 :height             viewport-height
                  :display            "grid"
-                 :grid-template-rows "3.5rem auto fit-content(10rem)"
+                 :grid-template-rows "3.5rem 1fr fit-content(13rem)"
                  :background-color   color/dark-context-background
-                 :box-shadow         (str "0 0 0.5rem " color/shadow)
                  :z-index            0}}
    ;Header-Logo
    [:div {:style {:background-color      color/light-context-background
@@ -126,10 +127,13 @@
                       :cursor     "pointer"}
            :title    "Inventist"}]]
 
-   [:div {:style {:height         "100%"
-                  :text-align     "left"
-                  :display        "flex"
-                  :flex-direction "column"}}
+   [:div {:style {:height                     "auto"
+                  :text-align                 "left"
+                  :display                    "flex"
+                  :overflow-x                 "hidden"
+                  :overflow-y                 "scroll"
+                  :-webkit-overflow-scrolling "touch"
+                  :flex-direction             "column"}}
     (collection-heading {:heading "Collections"
                          :id      "collection1"})
     (for [{title          :title

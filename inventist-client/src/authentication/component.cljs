@@ -74,6 +74,7 @@
   [{:keys [hovered]}
    {:keys [logged-in-user content]}]
   [:div {:style {:height           "auto"
+                 :z-index          0
                  :background-color color/light-context-background}}
    content
    (when hovered

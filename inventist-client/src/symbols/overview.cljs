@@ -29,9 +29,9 @@
      (str (:occupation person) " - " (str/join ", " (for [group (:groups person)] (:name group))))] [:br]
     [:span {:style style/card-title}
      (for [item (:inventory person)]
-       [:span {:key       (:id item)
-               :style     {:margin "0 1rem 0 0"
-                           :font-size "0.75rem"}}
+       [:span {:key   (:id item)
+               :style {:margin    "0 1rem 0 0"
+                       :font-size "0.75rem"}}
         (s-general/device-icon-set {:item item})])]]])
 
 ;Contractor-list card

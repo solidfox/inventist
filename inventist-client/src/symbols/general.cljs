@@ -85,7 +85,7 @@
                           :text-align       "center"
                           :padding          "0.25rem 0.75rem"
                           :border-radius    "0.25rem"
-                          :z-index          20})}
+                          :z-index          40})}
      ;Arrow
      [:div {:style (merge (cond (= position "top")
                                 {:top          "100%"

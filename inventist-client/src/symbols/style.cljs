@@ -21,7 +21,7 @@
 (def shaded-bar {:overflow-x      "hidden"
                  :overflow-y      "scroll"
                  :z-index         10
-                 :box-shadow      (str "0 0 0.25rem " color/shadow)
+                 ;:box-shadow      (str "0 0 0.25rem " color/shadow)
                  :backgroundColor color/shaded-context-background})
 
 (def card-title {:line-height    "1rem"
