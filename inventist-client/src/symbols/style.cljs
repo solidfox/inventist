@@ -8,8 +8,8 @@
 (def outer-border-radius "0.5rem")
 (def inner-border-radius "0.25rem")
 
-(def z-index-top-toolbar {:z-index 10})
-(def z-index-details-section {:z-index 0})
+(def z-index-top-toolbar {:z-index 0})
+(def z-index-details-section {:z-index 20})
 
 (def box-shadow {:box-shadow (str "0 0 0.12rem " color/shadow)})
 

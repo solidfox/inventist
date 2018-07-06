@@ -40,7 +40,6 @@
                  :color            text-color
                  :display          "flex"
                  :background-color color/shaded-context-background
-                 :z-index          5
                  :box-shadow       (str "0 0 0.25rem " color/shadow)
                  :flex-direction   "column"
                  :align-items      "center"
@@ -58,6 +57,62 @@
                  :justify-content "center"}}
    (ui/circular-progress {:size 50})
    [:div (str "Loading " content-description "...")]])
+
+;Tooltip
+(defc tooltip [{tooltip-text :tooltip-text                  ;Text-string
+                position     :position                      ;top, right, bottom, left
+                alignment    :alignment                     ;start, center, end
+                color-bg?    :color-bg
+                color?       :color}]
+  (let [color-bg (or color-bg? color/shaded-context-background)
+        color (or color? color/shaded-context-primary-text)
+        transparent " transparent "]
+    [:div {:style (merge (cond (= position "top") {:bottom "120%"}
+                               (= position "right") {:left "130%" :top "0.125rem"}
+                               (= position "left") {:right "130%" :top "0.125rem"}
+                               :else {:top "120%"})         ;bottom
+                         (cond (and (not= position "right") (not= position "left"))
+                               (cond (= alignment "end") {:right 0}
+                                     (= alignment "start") {:left 0}
+                                     :else {:left "-100%"})) ;center
+                         {:position         "absolute"
+                          :min-width        "2rem"
+                          :width            "max-content"
+                          :max-width        "5rem"
+                          :background-color color-bg
+                          :color            color
+                          :font-size        "0.75rem"
+                          :text-align       "center"
+                          :padding          "0.25rem 0.75rem"
+                          :border-radius    "0.25rem"
+                          :z-index          20})}
+     ;Arrow
+     [:div {:style (merge (cond (= position "top")
+                                {:top          "100%"
+                                 :border-color (str color-bg transparent transparent transparent)}
+                                (= position "right")
+                                {:right        "100%"
+                                 :top          "calc(50% - 0.25rem)"
+                                 :border-color (str transparent color-bg transparent transparent)}
+                                (= position "left")
+                                {:left         "calc(100% + 0.25rem)"
+                                 :top          "calc(50% - 0.25rem)"
+                                 :border-color (str transparent transparent transparent color-bg)}
+                                :else
+                                {:bottom       "100%"       ;bottom
+                                 :border-color (str transparent transparent color-bg transparent)})
+                          (cond (and (not= position "right") (not= position "left"))
+                                (cond (= alignment "end") {:right "0.25rem"}
+                                      (= alignment "start") {:left "0.5rem"}
+                                      :else {:left "50%"})) ;center
+                          {:position     "absolute"
+                           :margin-left  "-0.25rem"
+                           :border-width "0.25rem"
+                           :border-style "solid"})}]
+
+
+     [:span tooltip-text]]))
+
 
 ;button general
 (defc button [{text     :text
