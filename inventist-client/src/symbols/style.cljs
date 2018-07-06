@@ -38,6 +38,10 @@
                    :font-weight    "300"
                    :text-transform "capitalize"})
 
+(defstyles user-bar-item []
+           {:opacity 0.75
+            :&:hover {:opacity 1}})
+
 (defstyles card []
            {:border-radius         outer-border-radius
             :background-color      color/shaded-context-background

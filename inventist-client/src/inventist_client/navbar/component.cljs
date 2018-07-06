@@ -104,7 +104,7 @@
   [:div {:style {:width              "100%"
                  :height             "100%"
                  :display            "grid"
-                 :grid-template-rows "3.5rem auto 3.5rem"
+                 :grid-template-rows "3.5rem auto fit-content(10rem)"
                  :background-color   color/dark-context-background
                  :box-shadow         (str "0 0 0.5rem " color/shadow)
                  :z-index            0}}

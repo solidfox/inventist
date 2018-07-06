@@ -35,7 +35,7 @@
                            :grid-template-columns "20rem auto"}}
 
              (navbar/collection-sidebar
-               {:auth-status-item (auth/bar-item-login-status (core/authentication-args state))
+               {:auth-status-item (auth/user-bar (core/authentication-args state))
                 :current-path     (:path state)
                 :trigger-event    trigger-event})
 
@@ -90,7 +90,7 @@
                                            :trigger-parent-event trigger-event)))
 
              (navbar/navigation-bar-desktop
-               {:auth-status-item (auth/bar-item-login-status (core/authentication-args state))
+               {:auth-status-item (auth/user-bar (core/authentication-args state))
                 :current-path     (:path state)
                 :trigger-event    trigger-event})
 
