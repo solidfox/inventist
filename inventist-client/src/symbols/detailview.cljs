@@ -105,10 +105,21 @@
                     :color       color/light-context-secondary-text}}
    content
    (when hovered
-     [:div {:style {:position "absolute"
-                    :bottom "calc(-100%-1rem"
-                    :right "0px"}}
-      [:span {:class "tooltiptext"} tooltip-text]])])
+     [:div {:style {:position         "absolute"
+                    :top              "120%"                ;"calc(-100%-1rem)"
+                    :right            "0px"
+                    :min-width        "2rem"
+                    :width            "max-content"
+                    :max-width        "4rem"
+                    :background-color color/shaded-context-background
+                    :color            color/shaded-context-primary-text
+                    :font-size        "0.75rem"
+                    :text-align       "center"
+                    :padding          "0.25rem 0.75rem"
+                    :border-radius    "0.25rem"}}
+
+      [:span {:class "tooltiptext"
+              :style {}} tooltip-text]])])
 
 
 ;Information Section
