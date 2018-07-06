@@ -105,10 +105,9 @@
                     :color       color/light-context-secondary-text}}
    content
    (when hovered
-     [:div {:style {:position "absolute"
-                    :bottom "calc(-100%-1rem"
-                    :right "0px"}}
-      [:span {:class "tooltiptext"} tooltip-text]])])
+     (s-general/tooltip {:tooltip-text tooltip-text
+                         :position     "bottom"
+                         :alignment    "end"}))])
 
 
 ;Information Section

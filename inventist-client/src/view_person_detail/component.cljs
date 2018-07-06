@@ -32,7 +32,7 @@
                    :overflow-x      "hidden"
                    :overflow-y      "scroll"
                    :padding         "1.5rem"
-                   :z-index         0
+                   :z-index         style/z-index-details-section
                    :backgroundColor color/light-context-background}}
 
      ;Detailed Information

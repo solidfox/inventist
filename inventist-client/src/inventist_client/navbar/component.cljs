@@ -107,7 +107,7 @@
                  :grid-template-rows "3.5rem auto 3.5rem"
                  :background-color   color/dark-context-background
                  :box-shadow         (str "0 0 0.5rem " color/shadow)
-                 :z-index            20}}
+                 :z-index            0}}
    ;Header-Logo
    [:div {:style {:background-color      color/light-context-background
                   :padding               "0.5rem"

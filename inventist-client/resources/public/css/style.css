@@ -34,62 +34,13 @@ a:link, a:visited, a:hover, a:active {
     display: block !important;
 }
 
-@keyframes fade {
-    0% {
-        opacity: 0;
-    }
+/*@keyframes fade {*/
+    /*0% {*/
+        /*opacity: 0;*/
+    /*}*/
 
-    100% {
-        opacity: 1;
-    }
-}
-
-/* Tooltip container */
-.tooltip {
-    position: relative;
-    display: inline-block;
-    /*border-bottom: 1px dotted black; !* If you want dots under the hoverable text *!*/
-}
-
-/* Tooltip text */
-.tooltip .tooltiptext {
-    /*visibility: hidden;*/
-    min-width: 2rem;
-    width: max-content;
-    max-width: 4rem;
-    background-color: hsla(200, 100%, 85%, 1);
-    color: hsla(200, 100%, 25%, 1);
-    font-size: 0.75rem;
-    text-align: center;
-    padding: 05px 10px;
-    border-radius: 4px;
-
-    /* Position the tooltip text */
-    position: absolute;
-    z-index: 1;
-    top: 90%;
-    right: 0;
-    margin-left: 0;
-
-    /* Fade in tooltip */
-    /*opacity: 0;*/
-    /*transition: opacity 0.3s;*/
-}
-
-/* Tooltip arrow */
-/*.tooltip .tooltiptext::after {*/
-    /*content: "";*/
-    /*position: absolute;*/
-    /*bottom: 100%;*/
-    /*right: 10%;*/
-    /*margin-left: -5px;*/
-    /*border-width: 5px;*/
-    /*border-style: solid;*/
-    /*border-color: transparent transparent hsla(200, 100%, 85%, 1) transparent;*/
+    /*100% {*/
+        /*opacity: 1;*/
+    /*}*/
 /*}*/
 
-/* Show the tooltip text when you mouse over the tooltip container */
-/*.tooltip:hover .tooltiptext {*/
-    /*visibility: visible;*/
-    /*opacity: 1;*/
-/*}*/
