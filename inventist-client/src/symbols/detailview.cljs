@@ -5,7 +5,7 @@
             [symbols.style :as style]
             [rum.core :as rum]
             [util.inventory.core :as util]
-            [symbols.mixins :refer [hovered-mixin]]))
+            [symbols.mixin :refer [hovered-mixin]]))
 
 (def field-col-width "10rem")
 

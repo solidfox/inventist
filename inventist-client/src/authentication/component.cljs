@@ -7,7 +7,7 @@
             [cljs-react-material-ui.rum :as ui]
             [symbols.style :as style]
             [symbols.general :as s-general]
-            [symbols.mixins :refer [hovered-mixin]]
+            [symbols.mixin :refer [hovered-mixin]]
             [oops.core :refer [oget ocall]]))
 
 (def ^:private firebase-auth (oget js/firebase :auth))
