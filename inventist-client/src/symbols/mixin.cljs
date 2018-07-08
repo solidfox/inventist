@@ -10,7 +10,7 @@
                       (let [toggle-state-atom (atom nil)
                             component         (:rum/react-component state)]
                         (add-watch toggle-state-atom toggle-state-atom-key
-                                   (fn [_ _ _ _]
+                                   (fn [_ _ _old _new]
                                      (rum/request-render component)))
                         (assoc state toggle-state-atom-key toggle-state-atom)))
      :before-render (fn [state]

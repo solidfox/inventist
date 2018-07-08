@@ -18,7 +18,7 @@
                  [district0x/graphql-query "1.0.5"]
                  [finja "0.1.0-SNAPSHOT"]
                  [org.clojure/clojure "1.9.0"]
-                 [org.clojure/clojurescript "1.10.238"]
+                 [org.clojure/clojurescript "1.10.339"]
                  [org.roman01la/cljss "1.6.2"]
                  [remodular "0.1.4-SNAPSHOT"]
                  [rum "0.11.2"]

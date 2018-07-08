@@ -119,7 +119,7 @@
            :style    {:height   "100%"
                       :maxWidth "10rem"
                       :cursor   "pointer"}
-           :title    "GripsHolmsSkolan"}]
+           :title    "Gripsholmsskolan"}]
     [:img {:src      "/image/inventist-logo.svg"
            :on-click (fn [] (trigger-event (client-event/clicked-navigation-icon {:target-page-id :dashboard})))
            :style    {:width      "100%"
@@ -152,7 +152,7 @@
 
    auth-status-item])
 
-;------------------------ Old Nav-bar -------------------------
+;------------------------ Top Nav-bar -------------------------
 
 (defc navigation-badge
   [{title         :title
