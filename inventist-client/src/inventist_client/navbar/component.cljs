@@ -6,10 +6,13 @@
             [symbols.color :as color]
             [symbols.style :as style]))
 
+(def collection-item-height "2rem")
+
 (defc collection-heading
   [{heading :heading
     id      :id}]
-  [:div {:style {:height                "2rem"
+  [:div {:style {:height                collection-item-height
+                 :min-height            collection-item-height
                  :color                 color/dark-context-title-text
                  :width                 "auto"
                  :margin-top            "1.5rem"
@@ -40,7 +43,8 @@
     on-click :on-click}]
   [:div {:key      title
          :class    "collection-item"
-         :style    {:height                "2rem"
+         :style    {:height                collection-item-height
+                    :min-height            collection-item-height
                     :color                 color/dark-context-primary-text
                     :width                 "auto"
                     :padding               "0.5rem 1rem"
