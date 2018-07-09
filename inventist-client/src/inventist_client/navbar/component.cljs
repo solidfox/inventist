@@ -51,6 +51,7 @@
                     :cursor                "pointer"
                     :display               "grid"
                     :grid-template-columns "1.5rem auto 2rem"
+                    :align-items "start"
                     :background-color      (or color color/transparent)}
          :on-click on-click}
    [:i {:class icon

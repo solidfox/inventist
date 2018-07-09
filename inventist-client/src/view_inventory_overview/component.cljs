@@ -11,7 +11,7 @@
 (defc inventory-list < (remodular.core/modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [inventory         (core/filtered-inventory state)
+  (let [inventory (core/filtered-inventory state)
         limited-inventory (take 75 inventory)]
     (scrollable
       {:floating-header
@@ -25,7 +25,7 @@
                                    (rem/create-event {:name :search-string-changed
                                                       :data {:new-value (o/oget e [:target :value])}})))})]
        :content
-       [:div {:style {:height           "100%"
+       [:div {:style {:height           "auto"
                       :background-color color/transparent
                       :padding          "0.25rem"}}
         (for [item limited-inventory]
@@ -41,9 +41,9 @@
               :else
               [:div {:style {:width            "100%"
                              :height           "100%"
-                             :color            color/grey-blue
+                             :color            color/shaded-context-primary-text
                              :background-color color/transparent
-                             :text-align       "left"
-                             :margin           "2rem"}}
+                             :text-align       "center"
+                             :margin-top       "2rem"}}
                "No matches found!"])]})))
 

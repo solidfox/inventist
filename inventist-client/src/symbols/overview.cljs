@@ -49,23 +49,22 @@
     [:span {:style style/card-subtitle}
      (str (:type contractor) " - " (count (:inventory contractor)) " Products")]]])
 
-
 ;Inventory-list card
 (defc inventory-list-card [{item      :item
                             on-select :on-select}]
   [:div {:key      (:id item)
          :class    (style/list-item)
          :on-click on-select}
-   (cond (and (:photo item) (not= (:photo item) ""))
-         [:div {:style {:width "3rem"}}
+   [:div {:class (style/list-item-left-column)
+          :style {:font-size "3rem"}}
+    (cond (and (:photo item) (not= (:photo item) ""))
           [:img {:class (style/card-image)
-                 :src   (:photo item)}]]
-         :else
-         [:div {:style {:width "3rem" :font-size "1.25rem"}}
-          (s-general/device-icon-set {:item item})])
+                 :src   (:photo item)}]
+          :else
+          (s-general/device-icon-set {:item item}))]
 
    [:div {:style {:margin "0 0 0 1rem"
-                  :width  "16rem"}}
+                  :width  "auto"}}
     [:span {:style style/card-title}
      (str (:brand item) " " (:model-name item))] [:br]
     [:span {:style style/card-subtitle}

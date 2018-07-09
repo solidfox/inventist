@@ -17,14 +17,16 @@
                        class?        :class
                        serial-number :serial-number
                        :as           item-data}]
-  (let [brand      (or brand? "")
+  (let [brand (or brand? "")
         identifier (or identifier? "")
-        class      (or class? "")
-        model      (or model? "")]
+        class (or class? "")
+        model (or model? "")]
     (cond (= (lower-case brand) (lower-case "Apple"))
           {:brand ""
-           :model (cond (or (str/includes? (lower-case class) "laptop")
-                            (str/includes? (lower-case model) "macbook"))
+           :model (cond (or
+                          (or (str/includes? (lower-case class) "laptop")
+                              (str/includes? (lower-case model) "macbook"))
+                          (str/includes? (lower-case identifier) "macbook"))
                         "💻"
                         (str/includes? (lower-case class) "phone")
                         "📱"

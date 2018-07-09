@@ -14,8 +14,6 @@
             [view-person-detail.core :as core]
             [util.inventory.core :as util]))
 
-;(def url (js/window (js/location.href)))
-
 (defc person-detail < (modular-component event/handle-event)
   [{{state :state}  :input
     trigger-event   :trigger-event
@@ -104,46 +102,12 @@
 
         (when should-show-item-assignment-box
           (let [trigger-commit-new-device-event (fn [] (trigger-event event/commit-new-device))]
-            (s-detailview/card {:id      "add-device"
-                                :content [:div {:style {:display         "flex"
-                                                        :width           "18.5rem"
-                                                        :max-height      "2.5rem"
-                                                        :flex-wrap       "wrap"
-                                                        :justify-content "space-between"}}
-                                          ;(ui/auto-complete {:hint-text "New device's serial number"
-                                          ;                   :dataSource ["test" "testa"]})
-                                          [:div
-                                           (s-general/input-field {:placeholder "New device's serial number"
-                                                                   :width       "15rem"
-                                                                   :height      "2.5rem"
-                                                                   :value       (or (core/get-new-device-serial-number state) "")
-                                                                   :on-change   (fn [e] (trigger-event (event/new-device-serial-number-changed (oops/oget e [:target :value]))))
-                                                                   :on-enter    trigger-commit-new-device-event})]
-                                          [:div {:on-click trigger-commit-new-device-event
-                                                 :style    {:width              "2.5rem"
-                                                            :height             "2.5rem"
-                                                            :border-radius      "0.25rem"
-                                                            :display            "grid"
-                                                            :grid-template-rows "1.5rem 1rem"
-                                                            :justify-content    "center"
-                                                            :color              color/shaded-context-background
-                                                            :background-color   color/shaded-context-secondary-text}}
-                                           [:span {:style {:font-size  "1rem"
-                                                           :text-align "center"
-                                                           :align-self "end"}}
-                                            [:i {:class "fas fa-plus-circle"}]]
-                                           [:span {:style {:font-size  "0.75rem"
-                                                           :align-self "center"}} "Add"]]]})))
-        ;(s-general/button {:color    color/theme
-        ;                   :icon     "fas fa-check-circle"
-        ;                   :text     "Add Device"
-        ;                   :style    {:margin "0.5rem 0 0 0"}})
-        ;
-        ;(s-general/button {:color    color/grey-normal
-        ;                   :icon     "fas fa-times-circle"
-        ;                   :text     "Cancel"
-        ;                   :on-click (fn [] (trigger-event event/cancel-new-device-assignment))
-        ;                   :style    {:margin "0.5rem 0 0 0"}})]})))
+            (s-detailview/input-card {:id          "Add Device"
+                                      :placeholder "New device's serial number"
+                                      :value       (or (core/get-new-device-serial-number state) "")
+                                      :on-change   (fn [e] (trigger-event (event/new-device-serial-number-changed (oops/oget e [:target :value]))))
+                                      :on-enter    trigger-commit-new-device-event
+                                      :on-click    trigger-commit-new-device-event})))
 
         (when (not should-show-item-assignment-box)
           (cond (= (count (:inventory person)) 0)
@@ -177,9 +141,9 @@
            :else
            (s-general/timeline
              {:enable-comment false
-              :timeline-items [:div {:style {:color      color/grey-normal
+              :timeline-items [:div {:style {:color      color/light-context-primary-text
                                              :font-style "italic"
-                                             :margin     "-1rem 0 0 1.5rem"}}
+                                             :margin     "-1.5rem 0 0 1.5rem"}}
                                "No history available"]}))]))
 
 

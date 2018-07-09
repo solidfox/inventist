@@ -120,8 +120,8 @@
 (def form-box {:width           "auto"
                :height          "auto"
                :margin          "auto"
-               :padding         "1rem 1rem"
-               :backgroundColor color/light-context-background
+               :padding         "0.75rem"
+               :backgroundColor color/shaded-context-background
                :border          (str "1px solid " color/grey-light)
                :borderRadius    "0rem"})
 
@@ -129,9 +129,11 @@
                 :maxHeight          "50rem"
                 :width              "22rem"
                 :position           "absolute"
-                :top                "3.5rem"
-                :right              "0.5rem"
+                :top                "5rem"
+                :right              "1rem"
                 :display            "grid"
-                :backgroundColor    color/silver
                 :grid-template-rows "auto 1fr"
+                :backgroundColor    color/dark-context-background
+                :color              color/dark-context-primary-text
+                :border-radius      "0.5rem"
                 :box-shadow         "0rem 0.25rem 0.25rem 0 rgba(0,0,0,0.5)"})

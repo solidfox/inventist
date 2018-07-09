@@ -139,17 +139,18 @@
                    :justify-content "space-between"}}
      ;Heading
      [:span {:style style/header-title}
-      (cond (= edit-mode true)
-            (s-general/input-field {:value       heading
-                                    :placeholder "Name"
-                                    :on-change   ""
-                                    :style       {:height         "3rem"
-                                                  :font-size      "2rem"
-                                                  :color          color/light-context-title-text
-                                                  :font-weight    "300"
-                                                  :minWidth       "40rem"
-                                                  :text-transform "capitalize"}})
-            :else heading)]
+      ;(cond (= edit-mode true)
+      ;      (s-general/input-field {:value       (or heading "")
+      ;                              :placeholder "Name"
+      ;                              :on-change   ""
+      ;                              :style       {:height         "3rem"
+      ;                                            :font-size      "2rem"
+      ;                                            :color          color/light-context-title-text
+      ;                                            :font-weight    "300"
+      ;                                            :minWidth       "40rem"
+      ;                                            :text-transform "capitalize"}})
+      ;      :else
+      heading]
      ;Actions
      [:div {:style {:display        "flex"
                     :flex-direction "row"}}
@@ -184,8 +185,6 @@
                       [:span (:value field) " " (:side-value field)])]])))]
      (s-general/section-divider)]]])
 
-
-
 (defc card
   [{id        :id
     style     :style
@@ -203,6 +202,41 @@
                                      :style {:margin-right "0.75rem"}
                                      :class (style/card-image)}])
    content])
+
+(defc input-card [{id          :id
+                   placeholder :placeholder
+                   value       :value
+                   on-change   :on-change
+                   on-enter    :on-enter
+                   on-click    :on-click}]
+  (card {:id      id
+         :content [:div {:style {:display         "flex"
+                                 :width           "18.5rem"
+                                 :max-height      "2.5rem"
+                                 :flex-wrap       "wrap"
+                                 :justify-content "space-between"}}
+                   [:div
+                    (s-general/input-field {:placeholder placeholder
+                                            :width       "15rem"
+                                            :height      "2.5rem"
+                                            :value       value
+                                            :on-change   on-change
+                                            :on-enter    on-enter})]
+                   [:div {:on-click on-click
+                          :style    {:width              "2.5rem"
+                                     :height             "2.5rem"
+                                     :border-radius      "0.25rem"
+                                     :display            "grid"
+                                     :grid-template-rows "1.5rem 1rem"
+                                     :justify-content    "center"
+                                     :color              color/shaded-context-background
+                                     :background-color   color/shaded-context-secondary-text}}
+                    [:span {:style {:font-size  "1rem"
+                                    :text-align "center"
+                                    :align-self "end"}}
+                     [:i {:class "fas fa-plus-circle"}]]
+                    [:span {:style {:font-size  "0.75rem"
+                                    :align-self "center"}} "Add"]]]}))
 
 ;Card to show devices assigned
 (defc device-card [{item     :item

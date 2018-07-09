@@ -16,7 +16,7 @@
 (defn log-in-with-redirect
   []
   (let [google-auth-provider (oget firebase-auth :GoogleAuthProvider)
-        provider             (new google-auth-provider)]
+        provider (new google-auth-provider)]
     (js/console.log provider)
     (ocall (firebase-auth) :signInWithRedirect provider)))
 
@@ -46,17 +46,18 @@
                         :icon     (when loading (loading-indicator))
                         :on-click log-in-with-redirect})]))
 
-(def menu-item-height "2.5rem")
+(def menu-item-height "2rem")
 (def menu-item-y-padding "0.5rem")
-(def menu-item-total-height (str "(" menu-item-height "+" menu-item-y-padding" * 2)"))
+(def menu-item-total-height (str (+ (js/parseFloat menu-item-height) (* (js/parseFloat menu-item-y-padding) 2)) "rem"))
 
 (defc user-menu-item
   [{title    :title
     icon     :icon
     color    :color
     on-click :on-click}]
-  [:div {:class    (style/user-bar-item)
-         :style    {:height                menu-item-height
+  [:div {:key      0
+         :class    (style/user-bar-item)
+         :style    {:min-height            menu-item-height
                     :color                 (or color color/light-context-primary-text)
                     :width                 "auto"
                     :padding               (str menu-item-y-padding " 1rem")
@@ -77,11 +78,11 @@
 
 (rum/defc expandable-user-menu
   [{:keys [expanded menu-items]}]
-  [:div {:style {:padding        (if expanded "0.5rem 1rem 1rem 1rem" "0 1rem")
+  [:div {:style {:padding        (if expanded "0.5rem 1rem 0.5rem" "0 1rem")
                  :display        "flex"
                  :flex-direction "column"
-                 :max-height     (if expanded (str "calc(" (count menu-items) "*" menu-item-total-height ")") 0) ;FIXME Padding not being counted in total height.
-                 :transition     "all 0.7s"}}
+                 :height         (if expanded (str "calc(" (count menu-items) "*" menu-item-total-height ")") 0) ;FIXME Padding not being counted in total height.
+                 :transition     "all 0.5s"}}
    menu-items])
 
 
@@ -120,10 +121,11 @@
                       :color     color/light-context-primary-text}}
         "Admin"]]
       [:div {:style    {:margin "auto 1rem"
-                        :color  color/light-context-secondary-text}
+                        :color  color/light-context-secondary-text
+                        :cursor "pointer"}
              :on-click (if expanded trigger-collapse trigger-expand)}
        [:i {:class "fas fa-bars"}]]]
-     (expandable-user-menu {:expanded expanded
+     (expandable-user-menu {:expanded   expanded
                             :menu-items [(user-menu-item {:title    "Profile"
                                                           :icon     "far fa-user-circle"
                                                           :on-click (fn [] (println "Profile"))})

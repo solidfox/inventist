@@ -13,10 +13,10 @@
 (defc people-list < (remodular.core/modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [people          (core/get-people state)
+  (let [people (core/get-people state)
         filtered-people (core/filtered-people state)
-        n-results       (count filtered-people)
-        search-terms    (:search-terms state)]
+        n-results (count filtered-people)
+        search-terms (:search-terms state)]
     (scrollable
       {:floating-header
        [(second-column-header "People")
@@ -41,7 +41,7 @@
                                       :actions    (s-general/button {:text     "Retry"
                                                                      :on-click (fn [] (trigger-event (rem/create-event {:name :retry-fetching-data})))})})
          :else
-         [:div {:style {:height           "100%"
+         [:div {:style {:height           "auto"
                         :background-color color/transparent
                         :padding          "0.25rem"}}
           (let [person-selected-event (fn [person] (trigger-event (rem/create-event {:name :person-selected
@@ -56,10 +56,10 @@
           (when (= n-results 0)
             [:div {:style {:width            "100%"
                            :height           "100%"
-                           :color            color/grey-blue
+                           :color            color/shaded-context-primary-text
                            :background-color color/transparent
-                           :text-align       "left"
-                           :margin           "2rem"}}
+                           :text-align       "center"
+                           :margin-top       "2rem"}}
              "No matches found!"])])})))
 
 

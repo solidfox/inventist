@@ -118,6 +118,7 @@
 (defc button [{text     :text
                icon     :icon
                color    :color
+               bg-color :bg-color
                title    :title
                style    :style
                on-click :on-click}]
@@ -133,12 +134,13 @@
         :else
         [:div {:style    style
                :on-click on-click
-               :class    (style/button {:bg-color   (or color color/grey-dark)
-                                        :text-color (cond (= color color/white) color/grey-dark
-                                                          (= color "white") color/grey-dark
-                                                          (= color "#ffffff") color/grey-dark
-                                                          (= color color/transparent) color/grey-dark
-                                                          :else color/white)})}
+               :class    (style/button {:bg-color   (or bg-color color/grey-dark)
+                                        :text-color color})}
+                                                    ;(cond (= color color/white) color/grey-dark
+                                                    ;      (= color "white") color/grey-dark
+                                                    ;      (= color "#ffffff") color/grey-dark
+                                                    ;      (= color color/transparent) color/grey-dark
+                                                    ;      :else color)})}
          (cond (not= icon nil)
                [:span {:style {:margin "0 0.5rem 0 0"}} [:i {:class icon}]])
          [:span text]]))
@@ -247,7 +249,7 @@
            :disabled     (or disabled false)
            :required     (or required true)
            :placeholder  (or placeholder "Enter here...")
-           :value        value
+           :value        (or value "")
            :on-change    on-change
            :on-key-press (fn [e]
                            (when (= (oops/oget e [:key]) "Enter")
@@ -267,8 +269,9 @@
                             :width           (or width "100%")
                             :maxWidth        maxWidth
                             :height          "1.5rem"
+                            :color           color/light-context-secondary-text
                             :backgroundColor (cond (= disabled true) color/highlight
-                                                   :esle color/white)
+                                                   :esle color/light-context-background)
                             :box-shadow      "0px 0px 2px rgba(0,0,0,0.5) inset"
                             :borderRadius    "5px"
                             :border          0
@@ -321,10 +324,10 @@
   [:div {:style {:width  (or width "100%")
                  :margin "0 0.5rem 0.5rem 0"}}
    [:div {:style {:line-height "1.5rem"
-                  :color       color/theme
+                  :color       color/shaded-context-primary-text
                   :margin      "0"}}
     (or field "Field")
-    (cond (= required false) [:span {:style {:color      color/grey-blue
+    (cond (= required false) [:span {:style {:color      color/shaded-context-secondary-text
                                              :font-size  "0.9rem"
                                              :margin     "0"
                                              :font-style "italic"}}
@@ -340,14 +343,16 @@
                      :on-change   on-change})
 
          (= type "button")
-         (button {:id    id
-                  :text  value
-                  :color color
-                  :icon  icon
-                  :style style})
+         (button {:id       id
+                  :text     value
+                  :color    color
+                  :icon     icon
+                  :on-click on-click
+                  :style    style})
 
          (= type "upload")
          (upload-button {:id        id
+                         :style     {:color color/shaded-context-title-text}
                          :on-change on-change})
 
          :else (input-field {:width       width
@@ -359,7 +364,7 @@
                              :on-change   on-change}))
 
 
-   (cond (not= text nil) [:div {:style {:color      color/grey-blue
+   (cond (not= text nil) [:div {:style {:color      color/shaded-context-secondary-text
                                         :font-size  "0.9rem"
                                         :margin     "0"
                                         :font-style "italic"}}
