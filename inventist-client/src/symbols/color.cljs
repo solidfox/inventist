@@ -13,6 +13,7 @@
 ;Green - 100
 ;Red - 0
 ;Orange - 30
+;Yellow - 56
 ;Pink - 300
 ;Purple - 275
 (def theme-hue "200")

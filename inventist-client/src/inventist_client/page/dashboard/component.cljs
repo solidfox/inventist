@@ -18,7 +18,7 @@
   [:div {:id    (str ::component-id)
          :style {:height                viewport-height
                  :display               "grid"
-                 :grid-template-columns "22rem auto"
+                 :grid-template-columns "20rem auto"
                  :grid-template-rows    "100%"}}
    (dashboard-stats)
 

@@ -18,7 +18,9 @@
   [:div {:id    (str ::component-id)
          :style {:height                viewport-height
                  :display               "grid"
-                 :grid-template-columns "22rem 1fr"
+                 :grid-template-columns "20rem 1fr"
+                                        ;(cond (< viewport-width style/viewport-mobile) "20rem 20rem"
+                                        ;      :else "20rem 1fr") ;320x3
                  :grid-template-rows    "100%"}}
    (inventory-list (assoc (core/create-inventory-overview-args state)
                      :trigger-parent-event trigger-event))
@@ -26,7 +28,9 @@
                         style/box-shadow)}
     (if-let [selected-inventory-id (:selected-inventory-id state)]
       (inventory-detail (assoc (core/create-inventory-detail-args state selected-inventory-id)
-                          :trigger-parent-event trigger-event))
+                          :trigger-parent-event trigger-event
+                          :viewport-height viewport-height
+                          :viewport-width viewport-width))
       [:div {:id    "detail-container"
              :style (merge style/watermark
                            {:height             viewport-height

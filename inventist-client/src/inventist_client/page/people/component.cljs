@@ -18,7 +18,10 @@
   [:div {:id    (str ::component-id)
          :style {:height                viewport-height
                  :display               "grid"
-                 :grid-template-columns "22rem 1fr"
+                 :grid-template-columns "20rem 1fr"
+                                        ;(cond (< viewport-width style/viewport-mobile)
+                                        ;      (str "20rem " (- style/viewport-mobile 640) "px")
+                                        ;      :else "20rem 1fr") ;320x3
                  :grid-template-rows    "100%"}}
    (people-list (assoc (core/create-people-overview-args state)
                   :trigger-parent-event trigger-event))
@@ -36,7 +39,6 @@
                            {:height             viewport-height
                             :display            "grid"
                             :grid-template-rows "1fr"})}
-
 
        ;Error text
        [:div {:style {:width      viewport-height

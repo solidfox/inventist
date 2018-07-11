@@ -33,66 +33,68 @@
                    :z-index         style/z-index-details-section
                    :backgroundColor color/light-context-background}}
 
+
      ;Detailed Information
      (s-detailview/section-information
-       {:image       (:image person)
-        :heading     (str (:first-name person) " " (:last-name person))
-        :actions     [{:icon     "fas fa-qrcode"
-                       :title    "QR Code"
-                       :on-click ""}
-                      {:icon     "far fa-share-square"
-                       :title    "Share"
-                       :on-click ""}]
-        :fields      [{:label    "Occupation"
-                       :value    (:occupation person)
-                       :editable false}
-                      {:label    "Group"
-                       :value    (:name (first (:groups person)))
-                       ;(str (for [group (:groups person)]
-                       ;       (:name group)) ", ")
-                       :editable false}
-                      {:label    "Email"
-                       :value    (->> (:email person)
-                                      (remove empty?)
-                                      (map (fn [email]
-                                             [:a {:key  email
-                                                  :href (str "mailto:" email)} [:div email]])))
-                       :editable false}
-                      (when (not-empty phone) {:label    "Phone"
-                                               :value    phone
-                                               :editable false})
-                      (when (not-empty address) {:label    "Address"
-                                                 :value    address
-                                                 :editable false})
-                      {:label    "Assigned Devices"
-                       :value    (count (:inventory person))
-                       :editable false}]
-        :edit-mode   false
-        :enable-edit false})
+       {:image          (:image person)
+        :heading        (str (:first-name person) " " (:last-name person))
+        :actions        [{:icon     "fas fa-qrcode"
+                          :title    "QR Code"
+                          :on-click ""}
+                         {:icon     "far fa-share-square"
+                          :title    "Share"
+                          :on-click ""}]
+        :fields         [{:label    "Occupation"
+                          :value    (:occupation person)
+                          :editable false}
+                         {:label    "Group"
+                          :value    (:name (first (:groups person)))
+                          ;(str (for [group (:groups person)]
+                          ;       (:name group)) ", ")
+                          :editable false}
+                         {:label    "Email"
+                          :value    (->> (:email person)
+                                         (remove empty?)
+                                         (map (fn [email]
+                                                [:a {:key  email
+                                                     :href (str "mailto:" email)} [:div email]])))
+                          :editable false}
+                         (when (not-empty phone) {:label    "Phone"
+                                                  :value    phone
+                                                  :editable false})
+                         (when (not-empty address) {:label    "Address"
+                                                    :value    address
+                                                    :editable false})
+                         {:label    "Assigned Devices"
+                          :value    (count (:inventory person))
+                          :editable false}]
+        :edit-mode      false
+        :enable-edit    false
+        :viewport-width viewport-width})
 
      ;Assigned Devices
-     [:div {:style {:display        "flex"
-                    :flex-direction "row"
-                    :margin-top     "0.5rem"}
+     [:div {:style {:margin-top "0.5rem"}
             :id    "devices"}
-      (s-general/section-left)
-      [:div {:style {:margin-left    "1.5rem"
+      [:div {:style {:margin-left    (cond (< viewport-width style/viewport-mobile) 0
+                                           :else "7.5rem")
                      :display        "flex"
                      :flex-direction "column"
-                     :width          "100%"}}
-       (s-general/section-title {:title   "Assigned Devices"
-                                 :buttons [(cond (not should-show-item-assignment-box)
-                                                 (with-key (s-general/section-title-button
-                                                             {:icon     "fas fa-plus-circle"
-                                                              :text     "Assign New Device"
-                                                              :on-click (fn [] (trigger-event (rem/create-event
-                                                                                                {:name :assign-new-device-clicked})))}) 42)
-                                                 :else
-                                                 (with-key (s-general/section-title-button
-                                                             {:icon     "fas fa-times-circle"
-                                                              :text     "Cancel Assignment"
-                                                              :color    color/light-context-secondary-negative
-                                                              :on-click (fn [] (trigger-event event/cancel-new-device-assignment))}) 43))]})
+                     :width          "auto"}}
+       (s-general/section-title {:title    "Assigned Devices"
+                                 :viewport (cond (< viewport-width style/viewport-mobile) "mobile"
+                                                 :else "desktop")
+                                 :buttons  [(cond (not should-show-item-assignment-box)
+                                                  (with-key (s-general/section-title-button
+                                                              {:icon     "fas fa-plus-circle"
+                                                               :text     "Assign New Device"
+                                                               :on-click (fn [] (trigger-event (rem/create-event
+                                                                                                 {:name :assign-new-device-clicked})))}) 42)
+                                                  :else
+                                                  (with-key (s-general/section-title-button
+                                                              {:icon     "fas fa-times-circle"
+                                                               :text     "Cancel Assignment"
+                                                               :color    color/light-context-secondary-negative
+                                                               :on-click (fn [] (trigger-event event/cancel-new-device-assignment))}) 43))]})
 
 
        [:div {:style {:display        "flex"
@@ -129,7 +131,8 @@
      ;Timeline
      (cond (not= (:history person) [])
            (s-general/timeline
-             {:enable-comment false
+             {:viewport-width viewport-width
+              :enable-comment false
               :timeline-items (for [history-item (reverse (sort-by (fn [history-item] (:instant history-item)) (:history person)))]
                                 (-> (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-laptop" :color color/link-active})
                                                               :title    (str "Registered " (get-in history-item [:inventory-item :model-name]))
@@ -140,7 +143,8 @@
                                     (with-key (:instant history-item))))})
            :else
            (s-general/timeline
-             {:enable-comment false
+             {:viewport-width viewport-width
+              :enable-comment false
               :timeline-items [:div {:style {:color      color/light-context-primary-text
                                              :font-style "italic"
                                              :margin     "-1.5rem 0 0 1.5rem"}}

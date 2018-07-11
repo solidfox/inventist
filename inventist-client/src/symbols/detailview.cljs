@@ -98,11 +98,11 @@
    {:keys [key content tooltip-text on-click]}]
   [:div {:key      key
          :on-click on-click
-         :style    {:position    "relative"
-                    :margin-left "1rem"
-                    :font-size   "1.25rem"
-                    :cursor      "pointer"
-                    :color       color/light-context-secondary-text}}
+         :style    {:position  "relative"
+                    :margin    "0 0.5rem"
+                    :font-size "1.25rem"
+                    :cursor    "pointer"
+                    :color     color/light-context-secondary-text}}
    content
    (when hovered
      (s-general/tooltip {:tooltip-text tooltip-text
@@ -111,79 +111,145 @@
 
 
 ;Information Section
-(defc section-information [{on-change :on-change
-                            image     :image
-                            heading   :heading
-                            actions   :actions
-                            fields    :fields
-                            edit-mode :edit-mode}]
-  [:div {:style {:display               "grid"
-                 :width                 "100%"
-                 :grid-template-columns "6rem auto"}}
-   ;Image / Left Column
-   [:img {:src   (cond (and image (not= image "")) image
-                       :else "/image/no-image.png")
-          :style {:width           "6rem"
-                  :height          "6rem"
-                  :borderRadius    "0.5rem"
-                  :object-fit      "cover"
-                  :backgroundColor color/light-context-secondary-text}}]
-   ;Right Column
-   [:div {:style {:display        "flex"
-                  :flex-direction "column"
-                  :margin-left    "1.5rem"
-                  :width          "calc(100% - 1.5rem"}}
-    ;Header
-    [:div {:style {:display         "flex"
-                   :flex-direction  "row"
-                   :justify-content "space-between"}}
-     ;Heading
-     [:span {:style style/header-title}
-      ;(cond (= edit-mode true)
-      ;      (s-general/input-field {:value       (or heading "")
-      ;                              :placeholder "Name"
-      ;                              :on-change   ""
-      ;                              :style       {:height         "3rem"
-      ;                                            :font-size      "2rem"
-      ;                                            :color          color/light-context-title-text
-      ;                                            :font-weight    "300"
-      ;                                            :minWidth       "40rem"
-      ;                                            :text-transform "capitalize"}})
-      ;      :else
-      heading]
-     ;Actions
-     [:div {:style {:display        "flex"
-                    :flex-direction "row"}}
-      (for [action actions]
-        (section-button {:key          (:title action)
-                         :content      [:i {:class (:icon action)}]
-                         :tooltip-text (:title action)
-                         :on-click     (:on-click action)}))]]
+(defc section-information [{on-change      :on-change
+                            image          :image
+                            heading        :heading
+                            actions        :actions
+                            fields         :fields
+                            edit-mode      :edit-mode
+                            enable-edit    :enable-edit
+                            viewport-width :viewport-width}]
 
-    ;Information Details
-    [:div {:style {:margin         "0.25rem 0 0"
-                   :display        "flex"
-                   :flex-direction "column"}
-           :id    "information"}
+  (cond (< viewport-width style/viewport-mobile)
+        [:div {:style {:display            "grid"
+                       :height             "auto"
+                       :width              "100%"
+                       :grid-template-rows "6rem auto 1fr"
+                       :grid-gap           "0.5rem"}}
+         [:div {:style {:text-align "center"}}
+          [:img {:src   (cond (and image (not= image "")) image
+                              :else "/image/no-image.png")
+                 :style {:width           "6rem"
+                         :height          "6rem"
+                         :borderRadius    "0.5rem"
+                         :object-fit      "cover"
+                         :backgroundColor color/light-context-secondary-text}}]]
+         [:div {:style (merge style/header-title
+                              {:text-align "center"})}
+          (cond (and (= edit-mode true) (= enable-edit true))
+                (s-general/text-area {:value       (or heading "")
+                                      :placeholder "Name"
+                                      :on-change   ""
+                                      :style       {:height         "3rem"
+                                                    :font-size      "2rem"
+                                                    :color          color/light-context-title-text
+                                                    :font-weight    "300"
+                                                    :minWidth       "40rem"
+                                                    :text-transform "capitalize"}})
+                :else heading)]
+         [:div {:style {:display         "flex"
+                        :flex-direction  "row"
+                        :justify-content "center"}}
+          (for [action actions]
+            (section-button {:key          (:title action)
+                             :content      [:i {:class (:icon action)}]
+                             :tooltip-text (:title action)
+                             :on-click     (:on-click action)}))]
+         [:div {:style {:margin         "0.25rem 0 0"
+                        :display        "flex"
+                        :flex-direction "column"}
+                :id    "information"}
 
-     [:div {:style {:display               "grid"
-                    :grid-template-columns (str field-col-width " 1fr")
-                    :align-items           "start"
-                    :text-align            "left"}}
-      (->> fields
-           (remove nil?)
-           (map (fn [field]
-                  [
-                   [:div {:style {:margin "0.75rem 0 0"
-                                  :color  color/light-context-secondary-text}} (:label field)]
-                   [:div {:style {:margin "0.75rem 0 0"
-                                  :color  color/light-context-primary-text}}
-                    (if (and (= edit-mode true) (= (:editable field) true))
-                      (s-general/text-area {:value    (:value field)
-                                            :maxWidth "30rem"
-                                            :minWidth "20rem"})
-                      [:span (:value field) " " (:side-value field)])]])))]
-     (s-general/section-divider)]]])
+          [:div {:style {:display        "flex"
+                         :flex-direction "column"
+                         :align-items    "start"
+                         :text-align     "left"
+                         :overflow-x     "scroll"}}
+           (->> fields
+                (remove nil?)
+                (map (fn [field]
+                       [:div {:style {:margin-right "0.5rem"}}
+                        [:div {:style {:margin "0.75rem 0 0"
+                                       :color  color/light-context-secondary-text}} (:label field)]
+                        [:div {:style {:margin     "0.25rem 0 0"
+                                       :word-break "break-all"
+                                       :color      color/light-context-primary-text}}
+                         (if (and (= edit-mode true) (= (:editable field) true))
+                           (s-general/text-area {:value    (:value field)
+                                                 :maxWidth "30rem"
+                                                 :minWidth "20rem"})
+                           [:span (:value field) " " (:side-value field)])]])))]
+          (s-general/section-divider)]]
+
+
+        :else                                               ;Desktop Viewport
+        [:div {:style {:display               "grid"
+                       :width                 "100%"
+                       :grid-template-columns "6rem auto"}}
+         ;Image / Left Column
+         [:img {:src   (cond (and image (not= image "")) image
+                             :else "/image/no-image.png")
+                :style {:width           "6rem"
+                        :height          "6rem"
+                        :borderRadius    "0.5rem"
+                        :object-fit      "cover"
+                        :backgroundColor color/light-context-secondary-text}}]
+         ;Right Column
+         [:div {:style {:display        "flex"
+                        :flex-direction "column"
+                        :margin-left    "1.5rem"
+                        :width          "calc(100% - 1.5rem"}}
+          ;Header
+          [:div {:style {:display         "flex"
+                         :flex-direction  "row"
+                         :justify-content "space-between"}}
+           ;Heading
+           [:span {:style style/header-title}
+            (cond (and (= edit-mode true) (= enable-edit true))
+                  (s-general/input-field {:value       (or heading "")
+                                          :placeholder "Name"
+                                          :on-change   ""
+                                          :style       {:height         "3rem"
+                                                        :font-size      "2rem"
+                                                        :color          color/light-context-title-text
+                                                        :font-weight    "300"
+                                                        :minWidth       "40rem"
+                                                        :text-transform "capitalize"}})
+                  :else heading)]
+           ;Actions
+           [:div {:style {:display        "flex"
+                          :flex-direction "row"}}
+            (for [action actions]
+              (section-button {:key          (:title action)
+                               :content      [:i {:class (:icon action)}]
+                               :tooltip-text (:title action)
+                               :on-click     (:on-click action)}))]]
+
+
+          ;Information Details
+          [:div {:style {:margin         "0.25rem 0 0"
+                         :display        "flex"
+                         :flex-direction "column"}
+                 :id    "information"}
+
+           [:div {:style {:display               "grid"
+                          :grid-template-columns (str field-col-width " 1fr")
+                          :align-items           "start"
+                          :text-align            "left"}}
+            (->> fields
+                 (remove nil?)
+                 (map (fn [field]
+                        [
+                         [:div {:style {:margin "0.75rem 0 0"
+                                        :color  color/light-context-secondary-text}} (:label field)]
+                         [:div {:style {:margin "0.75rem 0 0"
+                                        :color  color/light-context-primary-text}}
+                          (if (and (= edit-mode true) (= (:editable field) true))
+                            (s-general/text-area {:value    (:value field)
+                                                  :maxWidth "30rem"
+                                                  :minWidth "20rem"})
+                            [:span (:value field) " " (:side-value field)])]])))]
+           (s-general/section-divider)]]]))
 
 (defc card
   [{id        :id

@@ -5,6 +5,7 @@
   (:require-macros
     [cljss.core :refer [defstyles]]))
 
+(def viewport-mobile 1015)                                   ;Should be ~400 but kept 980 for testing purpose
 (def outer-border-radius "0.5rem")
 (def inner-border-radius "0.25rem")
 

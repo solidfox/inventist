@@ -93,54 +93,55 @@
 
      ;Information
      (s-detailview/section-information
-       {:image     (:photo computer)
-        :heading   (str (:brand computer) " " (:model-name computer))
-        :actions   [{:title    "Report Issue with Device"
-                     :icon     "fas fa-exclamation-triangle"
-                     :on-click (fn [] (trigger-event (event/report-issue-clicked (:id computer))))}
-                    {:icon     "fas fa-qrcode"
-                     :title    "QR Code"
-                     :on-click ""}
-                    {:icon     "far fa-share-square"
-                     :title    "Share"
-                     :on-click ""}]
-        :fields    [{:label    "Serial Number"
-                     :value    (:serial-number computer)
-                     :editable false}
-                    {:label    "Brand"
-                     :value    (:brand computer)
-                     :editable false}
-                    {:label    "Model Identifier"
-                     :value    (:model-identifier computer)
-                     :editable false}
-                    {:label    "Color"
-                     :value    (:color computer)
-                     :editable false}
-                    (when (not-empty (:purchase_details computer)) {:label    "Supplier"
-                                                                    :value    (:name (:supplier (:purchase_details computer)))
-                                                                    :editable false}
-                                                                   {:label      "Insurance expiry"
-                                                                    :value      (s-general/time-format-string {:time (:insurance_expires (:purchase_details computer))})
-                                                                    :side-value (str " (" (s-general/days-to-expiry (:insurance_expires (:purchase_details computer))) " days left)")
-                                                                    :editable   false}
-                                                                   {:label      "Warranty expiry"
-                                                                    :value      (s-general/time-format-string {:time (:warranty_expires (:purchase_details computer))})
-                                                                    :side-value (str " (" (s-general/days-to-expiry (:warranty_expires (:purchase_details computer))) " days left)")
-                                                                    :editable   false})]
-        :edit-mode edit-mode})
+       {:image          (:photo computer)
+        :heading        (str (:brand computer) " " (:model-name computer))
+        :actions        [{:title    "Report Issue with Device"
+                          :icon     "fas fa-exclamation-triangle"
+                          :on-click (fn [] (trigger-event (event/report-issue-clicked (:id computer))))}
+                         {:icon     "fas fa-qrcode"
+                          :title    "QR Code"
+                          :on-click ""}
+                         {:icon     "far fa-share-square"
+                          :title    "Share"
+                          :on-click ""}]
+        :fields         [{:label    "Serial Number"
+                          :value    (:serial-number computer)
+                          :editable false}
+                         {:label    "Brand"
+                          :value    (:brand computer)
+                          :editable false}
+                         {:label    "Model Identifier"
+                          :value    (:model-identifier computer)
+                          :editable false}
+                         {:label    "Color"
+                          :value    (:color computer)
+                          :editable false}
+                         (when (not-empty (:purchase_details computer)) {:label    "Supplier"
+                                                                         :value    (:name (:supplier (:purchase_details computer)))
+                                                                         :editable false}
+                                                                        {:label      "Insurance expiry"
+                                                                         :value      (s-general/time-format-string {:time (:insurance_expires (:purchase_details computer))})
+                                                                         :side-value (str " (" (s-general/days-to-expiry (:insurance_expires (:purchase_details computer))) " days left)")
+                                                                         :editable   false}
+                                                                        {:label      "Warranty expiry"
+                                                                         :value      (s-general/time-format-string {:time (:warranty_expires (:purchase_details computer))})
+                                                                         :side-value (str " (" (s-general/days-to-expiry (:warranty_expires (:purchase_details computer))) " days left)")
+                                                                         :editable   false})]
+        :edit-mode      edit-mode
+        :enable-edit    false
+        :viewport-width viewport-width})
 
      ;Assignee
-     [:div {:style {:margin-top     "0.5rem"
-                    :display        "flex"
-                    :flex-direction "row"}
-            :id    "assignee"}
-      (s-general/section-left)
+     [:div {:style {:margin-top  "0.5rem"
+                    :margin-left (cond (< viewport-width style/viewport-mobile) 0
+                                       :else "7.5rem")}}
 
-      [:div {:style {:margin-left    "1.5rem"
-                     :display        "flex"
+      [:div {:style {:display        "flex"
                      :flex-direction "column"
                      :width          "100%"}}
        (s-general/section-title {:title   "Current Assignee"
+                                 :viewport (cond (< viewport-width style/viewport-mobile) "mobile"
+                                                 :else "desktop")
                                  :buttons (cond edit-mode
                                                 (s-general/section-title-button {:icon     "far fa-times-circle" ;
                                                                                  :text     "Cancel Reassignment"
@@ -181,7 +182,8 @@
      ;Timeline
      (cond (not= (:history computer) [])
            (s-general/timeline
-             {:enable-comment false
+             {:viewport-width viewport-width
+              :enable-comment false
               :timeline-items (for [history-item (reverse (sort-by (fn [history-item] (:instant history-item)) (:history computer)))]
                                 [:span {:key (:instant history-item)}
                                  (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-user" :color color/link-active})
@@ -196,7 +198,8 @@
            ;  (:name group)))]})])})
            :else
            (s-general/timeline
-             {:enable-comment false
+             {:viewport-width viewport-width
+              :enable-comment false
               :timeline-items [:div {:style {:color      color/light-context-primary-text
                                              :font-style "italic"
                                              :margin     "-1.5rem 0 0 1.5rem"}}

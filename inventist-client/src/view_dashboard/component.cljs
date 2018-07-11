@@ -38,7 +38,7 @@
    (s-general/division-title
      {:title "Inventist Stats"})
 
-   [:div {:style {:margin    "2.5rem"
+   [:div {:style {:margin    "1.5rem"
                   :display   "flex"
                   :flex-wrap "wrap"}}
 

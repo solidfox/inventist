@@ -136,11 +136,11 @@
                :on-click on-click
                :class    (style/button {:bg-color   (or bg-color color/grey-dark)
                                         :text-color color})}
-                                                    ;(cond (= color color/white) color/grey-dark
-                                                    ;      (= color "white") color/grey-dark
-                                                    ;      (= color "#ffffff") color/grey-dark
-                                                    ;      (= color color/transparent) color/grey-dark
-                                                    ;      :else color)})}
+         ;(cond (= color color/white) color/grey-dark
+         ;      (= color "white") color/grey-dark
+         ;      (= color "#ffffff") color/grey-dark
+         ;      (= color color/transparent) color/grey-dark
+         ;      :else color)})}
          (cond (not= icon nil)
                [:span {:style {:margin "0 0.5rem 0 0"}} [:i {:class icon}]])
          [:span text]]))
@@ -152,25 +152,28 @@
                              color    :color
                              on-click :on-click}]
   [:span {:on-click on-click
-          :style    {:color       (or color color/light-context-secondary-text)
-                     :margin-left "1rem"
-                     :font-size   "1rem"
-                     :cursor      "pointer"}}
+          :style    {:color     (or color color/light-context-secondary-text)
+                     :font-size "1rem"
+                     :cursor    "pointer"}}
 
    [:i {:class icon}] " " text])
 
 ;Title for sections
-(defc section-title [{title   :title
-                      buttons :buttons}]
+(defc section-title [{title    :title
+                      buttons  :buttons
+                      viewport :viewport}]
+
   [:div {:id    "header"
-         :style {:font-size       "1.25rem"
-                 :color           color/light-context-title-text
-                 :display         "flex"
-                 :flex-direction  "row"
-                 :align-items     "center"
-                 :justify-content "space-between"}}
-   title
-   buttons])
+         :style (merge {:font-size "1.25rem"
+                        :color     color/light-context-title-text
+                        :display   "flex"}
+                       (cond (= viewport "mobile")
+                             {:flex-direction "column"
+                              :align-items    "start"}
+                             :else {:flex-direction  "row"
+                                    :align-items     "center"
+                                    :justify-content "space-between"}))}
+   title buttons])
 
 ;Empty div on left of section
 (defc section-left []
@@ -190,7 +193,7 @@
 ;Division Title - Title
 (defc division-title [{title :title}]
 
-  [:div {:style {:margin        "2.5rem 0 0 2.5rem"
+  [:div {:style {:margin        "2.5rem 0 0 1.5rem"
                  :border-bottom (str "1px solid " color/light-context-highlight-bg)}
          :id    "header"}
    [:span {:style {:font-size      "1.5rem"
@@ -378,7 +381,7 @@
                     :padding-top   "1rem"
                     :padding-left  "1.5rem"
                     :width         "100%"
-                    :min-height    "3rem"
+                    :min-height    "2.5rem"
                     :margin-bottom "0rem"
                     :position      "relative"
                     :cursor        "pointer"}
@@ -394,19 +397,21 @@
     [:div {:style {:margin      "0 0 0 .5rem"
                    :font-size   "1rem"
                    :font-weight "normal"
-                   :color       color/light-context-primary-text}} title]]
-   [:span {:style {:font-size "0.75rem"
-                   :color     color/light-context-secondary-text}} content]])
+                   :color       color/light-context-primary-text}} title [:br]
+     [:span {:style {:margin-top "0.25rem"
+                     :font-size  "0.75rem"
+                     :color      color/light-context-secondary-text}} content]]]])
+
 
 
 (defc timeline [{timeline-items :timeline-items
-                 enable-comment :enable-comment}]
-  [:div {:style {:display        "flex"
-                 :flex-direction "row"
-                 :margin-top     "0.5rem"}
+                 enable-comment :enable-comment
+                 viewport-width :viewport-width}]
+  [:div {:style {:margin-top  "0.5rem"
+                 :margin-left (cond (< viewport-width style/viewport-mobile) 0
+                                    :else "7.5rem")}
          :id    "timeline"}
-   (section-left)
-   [:div {:style {:margin         "0 0 0 1.5rem"
+   [:div {:style {:margin         0
                   :display        "flex"
                   :flex-direction "column"
                   :width          "100%"}}
@@ -416,7 +421,8 @@
                                                            :text     "Add Comment"
                                                            :on-click ""}))]})
     [:div {:style {:margin-top     "1rem"
-                   :margin-left    "-1.5rem"
+                   :margin-left    (cond (< viewport-width style/viewport-mobile) 0
+                                         :else "-1.5rem")
                    :padding-top    "1rem"
                    :text-transform "capitalize"}}
      timeline-items]
