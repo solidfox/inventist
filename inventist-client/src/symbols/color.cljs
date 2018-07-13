@@ -13,6 +13,7 @@
 ;Green - 100
 ;Red - 0
 ;Orange - 30
+;Peach - 12
 ;Yellow - 56
 ;Pink - 300
 ;Purple - 275

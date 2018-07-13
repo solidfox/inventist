@@ -134,7 +134,7 @@
              {:viewport-width viewport-width
               :enable-comment false
               :timeline-items (for [history-item (reverse (sort-by (fn [history-item] (:instant history-item)) (:history person)))]
-                                (-> (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-laptop" :color color/link-active})
+                                (-> (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-laptop"})
                                                               :title    (str "Registered " (get-in history-item [:inventory-item :model-name]))
                                                               :on-click (fn [] (trigger-event (event/clicked-device (get-in history-item [:inventory-item :id]))))
                                                               :content  [:div (str (s-general/time-format-string {:time   (:instant history-item)

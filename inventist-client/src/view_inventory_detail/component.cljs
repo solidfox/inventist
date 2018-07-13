@@ -139,20 +139,20 @@
       [:div {:style {:display        "flex"
                      :flex-direction "column"
                      :width          "100%"}}
-       (s-general/section-title {:title   "Current Assignee"
+       (s-general/section-title {:title    "Current Assignee"
                                  :viewport (cond (< viewport-width style/viewport-mobile) "mobile"
                                                  :else "desktop")
-                                 :buttons (cond edit-mode
-                                                (s-general/section-title-button {:icon     "far fa-times-circle" ;
-                                                                                 :text     "Cancel Reassignment"
-                                                                                 :color    color/light-context-secondary-negative
-                                                                                 :on-click (fn [] (trigger-event (rem/create-event
-                                                                                                                   {:name :cancel-device-reassignment})))})
-                                                :else
-                                                (s-general/section-title-button {:icon     "fas fa-exchange-alt"
-                                                                                 :text     "Reassign Device"
-                                                                                 :on-click (fn [] (trigger-event (rem/create-event
-                                                                                                                   {:name :reassign-device-clicked})))}))})
+                                 :buttons  (cond edit-mode
+                                                 (s-general/section-title-button {:icon     "far fa-times-circle" ;
+                                                                                  :text     "Cancel Reassignment"
+                                                                                  :color    color/light-context-secondary-negative
+                                                                                  :on-click (fn [] (trigger-event (rem/create-event
+                                                                                                                    {:name :cancel-device-reassignment})))})
+                                                 :else
+                                                 (s-general/section-title-button {:icon     "fas fa-exchange-alt"
+                                                                                  :text     "Reassign Device"
+                                                                                  :on-click (fn [] (trigger-event (rem/create-event
+                                                                                                                    {:name :reassign-device-clicked})))}))})
 
 
        [:div {:style {:display        "flex"
@@ -186,7 +186,7 @@
               :enable-comment false
               :timeline-items (for [history-item (reverse (sort-by (fn [history-item] (:instant history-item)) (:history computer)))]
                                 [:span {:key (:instant history-item)}
-                                 (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-user" :color color/link-active})
+                                 (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-user"})
                                                            :title    (str "Registered to " (get-in history-item [:new-user :first-name])
                                                                           " " (get-in history-item [:new-user :last-name]))
                                                            :on-click (fn [] (trigger-event (event/clicked-user (get-in history-item [:new-user :id]))))

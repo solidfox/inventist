@@ -432,7 +432,7 @@
                     color :color}]
   [:div {:style {:maxWidth         "2rem" :maxHeight "2rem"
                  :minWidth         "2rem" :minHeight "2rem"
-                 :background-color color
+                 :background-color (or color color/light-context-secondary-text)
                  :borderRadius     "1rem"
                  :display          "flex"
                  :justify-content  "center"
