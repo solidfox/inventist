@@ -1,8 +1,6 @@
 (ns inventist-client.event
   (:require [remodular.core :as rem]
-            [inventist-client.core :as core]
-            [inventist-client.page.inventory.core :as inventory-core]
-            [inventist-client.page.people.core :as people-core]))
+            [inventist-client.core :as core]))
 
 (defn clicked-navigation-icon
   [{target-page-id :target-page-id}]

@@ -126,7 +126,6 @@
     current-path    :current-path
     collection-list :collection-list
     heading         :collection-heading}]
-
   [:div {:style {:height         "auto"
                  :text-align     "left"
                  :display        "flex"
@@ -140,21 +139,27 @@
                   :margin-top            "1.5rem"
                   :padding               "0 1rem"
                   :display               "grid"
-                  :grid-template-columns "auto 1rem"
+                  :grid-template-columns "1.5rem auto 1rem"
+                  :grid-gap              "1rem"
                   :align-items           "center"
                   :font-size             "1rem"
                   :cursor                "pointer"
                   :background-color      color/transparent}}
 
+    [:div {:style    {:text-align "center"}
+           :on-click (if expanded trigger-collapse trigger-expand)}
+     [:img {:src   "/image/arrow.svg"
+            :style {:height    "0.75rem"
+                    :opacity   "0.9"
+                    :transform (if expanded "" "rotate(-90deg)")}}]]
+
     [:div {:style    {:font-weight    "500"
                       :letter-spacing "2px"}
            :on-click (if expanded trigger-collapse trigger-expand)}
-     [:span {:style {:margin "0 1.5rem 0 0.5rem"}}
-      [:i {:class (if expanded "fas fa-caret-up" "fas fa-caret-down")}]] ;Not Working
-     [:span (upper-case heading)]]
+     (upper-case heading)]
 
     [:i {:class "fas fa-plus-circle"
-         :style {:cursor "copy"}}]]
+         :title "Add New"}]]
 
    ;List
    (if expanded (for [{title          :title
@@ -165,7 +170,9 @@
                   (-> (collection-item (merge {:title    title
                                                :icon     icon
                                                :image    image
-                                               :on-click (or on-click (fn [] (trigger-event (client-event/clicked-navigation-icon {:target-page-id target-page-id}))))}
+                                               :on-click (or on-click (fn []
+                                                                        (trigger-event (client-event/clicked-navigation-icon
+                                                                                         {:target-page-id target-page-id}))))} ;Not Working
                                               (when (= (first current-path) target-page-id)
                                                 {:selected true
                                                  :color    color/dark-context-highlight-bg})))
