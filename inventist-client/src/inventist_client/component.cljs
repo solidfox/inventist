@@ -34,11 +34,11 @@
                                  (< (:viewport-width state) 800) {:width "100%"}))}
 
        (navbar/collection-sidebar
-         {:auth-status-item (auth/user-bar (core/authentication-args state))
-          :current-path     (:path state)
-          :trigger-event    trigger-event
-          :viewport-height  (:viewport-height state)
-          :viewport-width   (:viewport-width state)})
+         {:user-bar        (auth/user-bar (core/authentication-args state))
+          :current-path    (:path state)
+          :trigger-event   trigger-event
+          :viewport-height (:viewport-height state)
+          :viewport-width  (:viewport-width state)})
 
        (condp = (first (:path state))
          :dashboard
@@ -62,8 +62,4 @@
                                      :viewport-height (:viewport-height state)
                                      :viewport-width (:viewport-width state))))
 
-       (when (not (:internet-reachable state)) (notifications/connection-bar))
-       (notifications/size-bar {:viewport-height (:viewport-height state)
-                                :viewport-width  (:viewport-width state)})])))
-
-
+       (when (not (:internet-reachable state)) (notifications/connection-bar))])))

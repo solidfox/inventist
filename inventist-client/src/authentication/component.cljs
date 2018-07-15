@@ -136,23 +136,3 @@
                                                           :icon     "fas fa-sign-out-alt"
                                                           :color    color/danger
                                                           :on-click log-out})]})]))
-
-
-
-
-;(navbar/navigation-badge {:title         "Profile"
-;                          :on-click      log-out
-;                          :icon          "fas fa-user"
-;                          :selected-item {:name        (:display-name logged-in-user)
-;                                          :photo       (:photo-url logged-in-user)
-;                                          :custom-text "Admin"
-;                                          :on-click    log-out
-;                                          :subtitle    "Logout"}})))
-
-
-;[:div {:style {:margin "0 1rem 0 0.5rem" :text-align "left" :line-height "1rem"}}
-; [:span {:style {:font-weight "500"}}  [:br]]
-; [:span {:style {:font-weight "400" :font-size "0.8rem" :color color/grey-dark}} "Admin • "]
-; [:span {:style {:font-weight "400" :font-size "0.8rem" :color color/danger :cursor "pointer"} :on-click log-out} "Logout"]]]))
-
-
