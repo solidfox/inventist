@@ -32,6 +32,7 @@
     ;Toolbar
     (s-general/button {:color    color/light-context-primary-text
                        :text     "Register Device"
+                       :bg-color color/light-context-highlight-bg
                        :icon     "fas fa-pen-square"
                        :on-click (fn [] (js/parent.open applescript))})
     (dashboard-detail (core/create-dashboard-detail-args state "mock-dashboard-id"))]])

@@ -137,7 +137,8 @@
   [{floating-header :floating-header
     floating-footer :floating-footer
     content         :content}]
-  [:div {:style (merge style/shaded-bar
+  [:div {:id "scrollable"
+         :style (merge style/shaded-bar
                        {:height             "100vh"
                         :width              "auto"
                         :display            "grid"

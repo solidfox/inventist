@@ -27,77 +27,43 @@
     (if (not (core/logged-in? state))
       (auth/login (core/authentication-args state))
       ; Else Logged in!
+      [:div {:style (merge {:height          (:viewport-height state)
+                            :backgroundColor c/light-context-background}
+                           (cond (> (:viewport-width state) 799) {:display               "grid"
+                                                                  :grid-template-columns "20rem auto"}
+                                 (< (:viewport-width state) 800) {:width "100%"}))}
 
-      (cond (> (:viewport-width state) 800)                 ;Desktop-view
-            [:div {:style {:height                (:viewport-height state)
-                           :display               "grid"
-                           :backgroundColor       c/light-context-background
-                           :grid-template-columns "20rem auto"}}
+       (navbar/collection-sidebar
+         {:auth-status-item (auth/user-bar (core/authentication-args state))
+          :current-path     (:path state)
+          :trigger-event    trigger-event
+          :viewport-height  (:viewport-height state)
+          :viewport-width   (:viewport-width state)})
 
-             (navbar/collection-sidebar
-               {:auth-status-item (auth/user-bar (core/authentication-args state))
-                :current-path     (:path state)
-                :trigger-event    trigger-event
-                :viewport-height (:viewport-height state)
-                :viewport-width  (:viewport-width state)})
+       (condp = (first (:path state))
+         :dashboard
+         (dashboard-page/component (assoc (core/create-dashboard-page-args state)
+                                     :trigger-parent-event trigger-event
+                                     :viewport-height (:viewport-height state)
+                                     :viewport-width (:viewport-width state)))
+         :people
+         (people-page/component (assoc (core/create-people-page-args state)
+                                  :trigger-parent-event trigger-event
+                                  :viewport-height (:viewport-height state)
+                                  :viewport-width (:viewport-width state)))
+         :contractors
+         (contractors-page/component (assoc (core/create-contractors-page-args state)
+                                       :trigger-parent-event trigger-event
+                                       :viewport-height (:viewport-height state)
+                                       :viewport-width (:viewport-width state)))
+         :inventory
+         (inventory-page/component (assoc (core/create-inventory-page-args state)
+                                     :trigger-parent-event trigger-event
+                                     :viewport-height (:viewport-height state)
+                                     :viewport-width (:viewport-width state))))
 
-             (condp = (first (:path state))
-               :dashboard
-               (dashboard-page/component (assoc (core/create-dashboard-page-args state)
-                                           :trigger-parent-event trigger-event
-                                           :viewport-height (:viewport-height state)
-                                           :viewport-width  (:viewport-width state)))
-               :people
-               (people-page/component (assoc (core/create-people-page-args state)
-                                        :trigger-parent-event trigger-event
-                                        :viewport-height (:viewport-height state)
-                                        :viewport-width  (:viewport-width state)))
-               :contractors
-               (contractors-page/component (assoc (core/create-contractors-page-args state)
-                                             :trigger-parent-event trigger-event
-                                             :viewport-height (:viewport-height state)
-                                             :viewport-width  (:viewport-width state)))
-               :inventory
-               (inventory-page/component (assoc (core/create-inventory-page-args state)
-                                           :trigger-parent-event trigger-event
-                                           :viewport-height (:viewport-height state)
-                                           :viewport-width  (:viewport-width state))))
-
-             (when (not (:internet-reachable state)) (notifications/connection-bar))
-             (notifications/size-bar {:viewport-height (:viewport-height state)
-                                      :viewport-width  (:viewport-width state)})]
-
-            (< (:viewport-width state) 800)                 ;mobile-view
-            [:div {:style {:height              (:viewport-height state)
-                           :display             "grid"
-                           :backgroundColor     c/light-context-background
-                           :grid-template-rows  "calc(100% - 3.5rem) 3.5rem"
-                           :background-image    "url(\"/image/GHS-watermark.svg\")"
-                           :background-position "50%"
-                           :background-size     "15%"
-                           :background-repeat   "no-repeat"}}
-
-             (condp = (first (:path state))
-               :dashboard
-               (dashboard-page/component (assoc (core/create-dashboard-page-args state)
-                                           :trigger-parent-event trigger-event))
-               :people
-               (people-page/component (assoc (core/create-people-page-args state)
-                                        :trigger-parent-event trigger-event))
-               :contractors
-               (contractors-page/component (assoc (core/create-contractors-page-args state)
-                                             :trigger-parent-event trigger-event))
-               :inventory
-               (inventory-page/component (assoc (core/create-inventory-page-args state)
-                                           :trigger-parent-event trigger-event)))
-
-             (navbar/navigation-bar-desktop
-               {:auth-status-item (auth/user-bar (core/authentication-args state))
-                :current-path     (:path state)
-                :trigger-event    trigger-event})
-
-             (when (not (:internet-reachable state)) (notifications/connection-bar))
-             (notifications/size-bar {:viewport-height (:viewport-height state)
-                                      :viewport-width  (:viewport-width state)})]))))
+       (when (not (:internet-reachable state)) (notifications/connection-bar))
+       (notifications/size-bar {:viewport-height (:viewport-height state)
+                                :viewport-width  (:viewport-width state)})])))
 
 

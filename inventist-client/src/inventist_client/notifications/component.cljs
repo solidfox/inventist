@@ -18,8 +18,8 @@
                  :align-items     "center"
                  :backgroundColor color/danger
                  :color           color/grey-light
-                 :justify-content "space-between"}
-                style/z-index-top-toolbar
+                 :justify-content "space-between"
+                 :z-index         100}
                 style/box-shadow)}
 
    [:span "No Internet Connection"]
@@ -33,7 +33,7 @@
   [:div {:style
          (merge {:position        "absolute"
                  :right           "1rem"
-                 :bottom          "1rem"
+                 :bottom          "3rem"
                  :padding         "0.5rem 1rem"
                  :borderRadius    "0.5rem"
                  :minHeight       "1rem"

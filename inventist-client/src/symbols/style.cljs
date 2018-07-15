@@ -12,7 +12,7 @@
 (def z-index-top-toolbar {:z-index 0})
 (def z-index-details-section {:z-index 20})
 
-(def box-shadow {:box-shadow (str "0 0 0.12rem " color/shadow)})
+(def box-shadow {:box-shadow (str "0 0 0.25rem " color/shadow)})
 
 (def watermark {:background-image    "url(\"/image/GHS-watermark.svg\")"
                 :background-position "50%"
@@ -22,7 +22,7 @@
 (def shaded-bar {:overflow-x      "hidden"
                  :overflow-y      "scroll"
                  :z-index         10
-                 ;:box-shadow      (str "0 0 0.25rem " color/shadow)
+                 :box-shadow      (str "0 0 0.25rem " color/shadow)
                  :backgroundColor color/shaded-context-background})
 
 (def card-title {:line-height    "1rem"

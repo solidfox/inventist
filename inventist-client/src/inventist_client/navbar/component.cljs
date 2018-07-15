@@ -113,7 +113,7 @@
                  :display            "grid"
                  :grid-template-rows "3.5rem 1fr fit-content(13rem)"
                  :background-color   color/dark-context-background
-                 :z-index            0}}
+                 :z-index            style/z-index-top-toolbar}}
    ;Header-Logo
    [:div {:style {:background-color      color/light-context-background
                   :padding               "0.5rem"
@@ -234,8 +234,8 @@
                  :align-items     "center"
                  :backgroundColor color/silver
                  :justify-content "space-between"}
-                style/z-index-top-toolbar
-                style/box-shadow)}
+                style/z-index-top-toolbar)}
+                ;style/box-shadow)}
    [:div {:style {:height "100%" :text-align "left"}}
     [:span [:img {:src      "/image/GHS-logotype-horizontal.svg"
                   :on-click (fn [] (trigger-event (client-event/clicked-navigation-icon {:target-page-id :dashboard})))

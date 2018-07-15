@@ -39,6 +39,7 @@
                                       :message    "Error while fetching people from server."
                                       :text-color color/shaded-context-primary-text
                                       :actions    (s-general/button {:text     "Retry"
+                                                                     :bg-color color/shaded-context-highlight-bg
                                                                      :on-click (fn [] (trigger-event (rem/create-event {:name :retry-fetching-data})))})})
          :else
          [:div {:style {:height           "auto"

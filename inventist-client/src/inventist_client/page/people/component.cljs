@@ -26,7 +26,7 @@
    (people-list (assoc (core/create-people-overview-args state)
                   :trigger-parent-event trigger-event))
    [:div {:style (merge
-                   {:background-color color/transparent}
+                   {:background-color color/light-context-background}
                    style/z-index-details-section
                    style/box-shadow)}
     (if-let [selected-person-id (:selected-person-id state)]
