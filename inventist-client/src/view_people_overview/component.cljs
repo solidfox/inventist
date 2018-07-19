@@ -53,6 +53,7 @@
                      [:div {:key      (:id person)
                             :on-click (fn [] (person-selected-event person))}
                       (person-list-card {:person person
+                                         :selected (= (:selected-person-id state) (:id person))
                                          :hidden (not (core/person-matches person search-terms))})]))))
           (when (= n-results 0)
             [:div {:style {:width            "100%"

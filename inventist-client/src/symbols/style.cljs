@@ -75,7 +75,9 @@
             :object-fit      "cover"
             :backgroundColor color/white})
 
-(defstyles list-item []
+(def list-item-selected {:background-color color/shaded-context-highlight-bg})
+
+(defstyles list-item-class []
            {:width                 "auto"
             :background-color      color/transparent
             :min-height            "3rem"
@@ -86,8 +88,7 @@
             :grid-template-columns "auto 1fr"
             :grid-gap              "1rem"
             :cursor                "pointer"
-            :&:hover               {:background-color color/shaded-context-highlight-bg}
-            :&:active              {:background-color color/shaded-context-highlight-bg}})
+            :&:hover               {:background-color color/shaded-context-highlight-bg}})
 
 (defstyles list-item-left-column []
            {:width "3rem"})

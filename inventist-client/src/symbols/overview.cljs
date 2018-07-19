@@ -11,34 +11,43 @@
 (def list-bg-color color/highlight)
 
 ;Person-list card
+(defc list-card [{:keys [selected
+                         hidden]
+                  :as   props}
+                 & children]
+  [:div (merge {:class (style/list-item-class)
+                :style (merge (when selected style/list-item-selected)
+                              (when hidden {:display "none"}))}
+               (dissoc props :selected))
+   children])
+
 (defc person-list-card < rum/static
-  [{person :person
-    hidden :hidden}]
-  [:div {:style (merge {}
-                       (when hidden {:display "none"}))
-         :key   (:id person)
-         :class (style/list-item)}
-   [:div {:class (style/list-item-left-column)}
-    [:img {:class (style/card-image)
-           :src   (cond (and (:image person) (not= (:image person) "")) (:image person)
-                        :else "/image/person-m-placeholder.png")}]]
-   [:div
-    [:span {:style style/card-title}
-     (str (:first-name person) " " (:last-name person))] [:br]
-    [:span {:style style/card-subtitle}
-     (str (:occupation person) " - " (str/join ", " (for [group (:groups person)] (:name group))))] [:br]
-    [:span {:style style/card-title}
-     (for [item (:inventory person)]
-       [:span {:key   (:id item)
-               :style {:margin    "0 1rem 0 0"
-                       :font-size "0.75rem"}}
-        (s-general/device-icon-set {:item item})])]]])
+  [{:keys [person
+           selected
+           hidden]}]
+  (list-card {:selected selected
+              :hidden   hidden}
+             [:div {:class (style/list-item-left-column)}
+              [:img {:class (style/card-image)
+                     :src   (cond (and (:image person) (not= (:image person) "")) (:image person)
+                                  :else "/image/person-m-placeholder.png")}]]
+             [:div
+              [:span {:style style/card-title}
+               (str (:first-name person) " " (:last-name person))] [:br]
+              [:span {:style style/card-subtitle}
+               (str (:occupation person) " - " (str/join ", " (for [group (:groups person)] (:name group))))] [:br]
+              [:span {:style style/card-title}
+               (for [item (:inventory person)]
+                 [:span {:key   (:id item)
+                         :style {:margin    "0 1rem 0 0"
+                                 :font-size "0.75rem"}}
+                  (s-general/device-icon-set {:item item})])]]))
 
 ;Contractor-list card
 (defc contractor-list-card [{contractor :contractor
                              on-click   :on-click}]
   [:div {:key   (:id contractor)
-         :class (style/list-item)}
+         :class (style/list-item-class)}
    [:div {:class (style/list-item-left-column)}
     [:img {:class (style/card-image)
            :src   (cond (and (:image contractor) (not= (:image contractor) "")) (:image contractor)
@@ -50,25 +59,26 @@
      (str (:type contractor) " - " (count (:inventory contractor)) " Products")]]])
 
 ;Inventory-list card
-(defc inventory-list-card [{item      :item
-                            on-select :on-select}]
-  [:div {:key      (:id item)
-         :class    (style/list-item)
-         :on-click on-select}
-   [:div {:class (style/list-item-left-column)
-          :style {:font-size "3rem"}}
-    (cond (and (:photo item) (not= (:photo item) ""))
-          [:img {:class (style/card-image)
-                 :src   (:photo item)}]
-          :else
-          (s-general/device-icon-set {:item item}))]
+(defc inventory-list-card [{:keys [item
+                                   selected
+                                   on-select]}]
+  (list-card {:selected selected
+              :on-click on-select}
+             [:div {:class (style/list-item-left-column)
+                    :style {:font-size "3rem"}}
+              (cond (and (:photo item) (not= (:photo item) ""))
+                    [:img {:class (style/card-image)
+                           :src   (:photo item)}]
+                    :else
+                    (s-general/device-icon-set {:item item}))]
 
-   [:div {:style {:margin "0 0 0 1rem"
-                  :width  "auto"}}
-    [:span {:style style/card-title}
-     (str (:brand item) " " (:model-name item))] [:br]
-    [:span {:style style/card-subtitle}
-     (str (:serial-number item) " - " (:color item))]]])
+             [:div {:style {:margin "0 0 0 1rem"
+                            :width  "auto"}}
+              [:span {:style style/card-title}
+               (str (:brand item) " " (:model-name item))] [:br]
+              [:span {:style style/card-subtitle}
+               (str (:serial-number item) " - " (:color item))]]))
+
 
 ;Search component
 (defc search-toolbar [{search-field-value :search-field-value
@@ -137,7 +147,7 @@
   [{floating-header :floating-header
     floating-footer :floating-footer
     content         :content}]
-  [:div {:id "scrollable"
+  [:div {:id    "scrollable"
          :style (merge style/shaded-bar
                        {:height             "100vh"
                         :width              "auto"

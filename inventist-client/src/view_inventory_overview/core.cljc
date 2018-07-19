@@ -5,7 +5,7 @@
 
 (defn create-state
   []
-  {:selected-item-id            nil
+  {:selected-inventory-id       nil
    :search-terms                nil
    :fetching-inventory-list     false
    :get-inventory-list-response nil})

@@ -6,7 +6,8 @@
             [remodular.core :as rem]
             [oops.core :as o]
             [view-inventory-overview.event :as event]
-            [symbols.general :as s-general]))
+            [symbols.general :as s-general]
+            [util.inventory.core :as util]))
 
 (defc inventory-list < (remodular.core/modular-component event/handle-event)
   [{{state :state} :input
@@ -30,6 +31,7 @@
                       :padding          "0.25rem"}}
         (for [item limited-inventory]
           (inventory-list-card {:item      item
+                                :selected  (= (:id item) (:selected-inventory-id state))
                                 :on-select (fn [] (trigger-event
                                                     (rem/create-event
                                                       {:name :inventory-item-selected
