@@ -35,7 +35,9 @@
   (let [inventory-string (-> (str/join " " (concat [(:brand inventory)
                                                     (:serial-number inventory)
                                                     (:model-name inventory)
-                                                    (:color inventory)]))
+                                                    (:color inventory)]
+                                                   (for [group (get-in inventory [:user :groups])]
+                                                     (:name group))))
                              (str/lower-case))]
     (every? (fn [search-string-word]
               (str/includes? inventory-string search-string-word))

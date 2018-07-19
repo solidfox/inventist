@@ -11,6 +11,7 @@
    :class
    :color
    :serial-number
+   [:user [[:groups [:name]]]]
    {:field/alias :photo
     :field/data  [:image-url]}])
 
@@ -20,7 +21,6 @@
    :before [core/started-get-inventory-list-service-call]
    :data   {:url    "http://backend.inventory.gripsholmsskolan.se:8888/graphql"
             :params {:query (util/graphql-string {:queries [[:computers inventory-list-graph-ql]]})}}
-
    :after  [core/receive-get-inventory-list-service-response]})
 
 (defn get-services
