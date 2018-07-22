@@ -6,7 +6,8 @@
             [inventist-client.event :as client-event]
             [symbols.mixin :refer [hovered-mixin toggle-mixin]]
             [symbols.color :as color]
-            [symbols.style :as style]))
+            [symbols.style :as style]
+            [util.inventory.core :as util]))
 
 (defc header-bar [{trigger-event   :trigger-event
                    viewport-width  :viewport-width
@@ -117,8 +118,7 @@
                      :on-drag-enter ""}
     :target-page-id :people}])
 
-(rum/defcs collections-view < (rem/modular-component)
-                              (toggle-mixin {:toggle-state-key :expanded
+(rum/defcs collections-view < (toggle-mixin {:toggle-state-key :expanded
                                              :on-fn-key        :trigger-expand
                                              :off-fn-key       :trigger-collapse})
   [{:keys [expanded trigger-expand trigger-collapse]}
@@ -172,7 +172,7 @@
                                                :image    image
                                                :on-click (or on-click (fn []
                                                                         (trigger-event (client-event/clicked-navigation-icon
-                                                                                         {:target-page-id target-page-id}))))} ;Not Working
+                                                                                         {:target-page-id target-page-id}))))}
                                               (when (= (first current-path) target-page-id)
                                                 {:selected true
                                                  :color    color/dark-context-highlight-bg})))
@@ -206,10 +206,10 @@
                   :overflow-y                 "scroll"
                   :-webkit-overflow-scrolling "touch"
                   :flex-direction             "column"}}
-    (collections-view {:trigger-event      trigger-event
-                       :current-path       current-path
-                       :collection-list    collections-list
-                       :collection-heading "Collections"})]
+    (collections-view {:trigger-event trigger-event
+                       :current-path         current-path
+                       :collection-list      collections-list
+                       :collection-heading   "Collections"})]
 
    ;Footer - User-bar
    user-bar])
