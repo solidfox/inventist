@@ -14,12 +14,13 @@
 (def firebase-auth (oget js/firebase :auth))
 
 (defonce initialized
-         (let [path (as-> (oget js/window :location) $
-                          (oget $ :pathname))]
-           (println "reload")
-           (def app-state-atom (atom (core/create-state
-                                       {:path path
-                                        :mode :prod})))
+         (let [path           (as-> (oget js/window :location) $
+                                    (oget $ :pathname))
+               app-state-atom (atom (core/create-state
+                                      {:path path
+                                       :mode :prod}))]
+           (println "Initializing Runtime")
+           (def app-state-atom app-state-atom)
            (ocall js/window :addEventListener "popstate" (fn [event]
                                                            (let [path (oget event [:target :location :pathname])]
                                                              (swap! app-state-atom
@@ -34,8 +35,6 @@
            (ocall js/window :addEventListener "resize" (fn []
                                                          (swap! app-state-atom assoc :viewport-width (max js/document.documentElement.clientWidth js/window.innerWidth))
                                                          (swap! app-state-atom assoc :viewport-height (max js/document.documentElement.clientHeight js/window.innerHeight))))
-
-
            (ocall js/window :addEventListener "offline" (fn []
                                                           (swap! app-state-atom assoc :internet-reachable false)))
            (ocall js/window :addEventListener "online" (fn []
@@ -50,6 +49,34 @@
       :state-path (:state-path req1)}
      {:data       (:data req2)
       :state-path (:state-path req2)}))
+
+(defn service-is-sane!? [service]
+  (if (same-request (:last-request (deref services-sanity-check-atom))
+                    service)
+    (swap! services-sanity-check-atom update
+           :n-rapid-fetches inc)
+    (swap! services-sanity-check-atom assoc
+           :n-rapid-fetches 0
+           :last-request service))
+  (> 10 (:n-rapid-fetches (deref services-sanity-check-atom))))
+
+(defn http-json-request [{:keys [url
+                                 body
+                                 callback]}]
+  (xhr/send url
+            (fn [xhr-event]
+              (let [xhr-request-object (.-target xhr-event)
+                    status             (.getStatus xhr-request-object)
+                    service-response   {:body          (when (= status 200)
+                                                         (-> (.getResponseJson xhr-request-object)
+                                                             (js->clj {:key-fn keyword})))
+                                        :status        status
+                                        :error-code    (.getLastErrorCode xhr-request-object)
+                                        :error-message (.getLastError xhr-request-object)}]
+                (callback service-response)))               ;; handler
+            "POST"
+            (js/JSON.stringify (clj->js body))
+            #js {:Content-Type "application/json"}))
 
 (defmethod runtime/perform-services :prod
   [_ services handle-event]
@@ -66,38 +93,23 @@
               remote-state-mutation :remote-state-mutation
               state-path            :state-path
               :as                   service} services]
-         (do
-           (if (same-request (:last-request (deref services-sanity-check-atom))
-                             service)
-             (swap! services-sanity-check-atom update :n-rapid-fetches inc)
-             (swap! services-sanity-check-atom assoc :n-rapid-fetches 0 :last-request service))
-           (when (> 30 (:n-rapid-fetches (deref services-sanity-check-atom)))
-             (do
-               (xhr/send url
-                         (fn [xhr-event]
-                           (let [xhr-request-object (.-target xhr-event)
-                                 status             (.getStatus xhr-request-object)
-                                 service-response   {:body          (when (= status 200)
-                                                                      (-> (.getResponseJson xhr-request-object)
-                                                                          (js->clj {:key-fn keyword})))
-                                                     :status        status
-                                                     :error-code    (.getLastErrorCode xhr-request-object)
-                                                     :error-message (.getLastError xhr-request-object)}]
-                             (handle-event (cond-> (rem/create-anonymous-event)
-                                                   true
-                                                   (rem/append-action
-                                                     {:fn-and-args (concat on-response [service-response data])
-                                                      :state-path  state-path})
-                                                   remote-state-mutation
-                                                   (rem/append-action
-                                                     (rem/create-action
-                                                       {:name        :on-remote-state-mutation
-                                                        :fn-and-args [core/on-remote-state-mutation remote-state-mutation]})))))) ;; handler
-                         "POST"                           ;; method
-                         (js/JSON.stringify (clj->js params)) ;; body
-                         (clj->js {:Content-Type "application/json"}))
-               {:fn-and-args before-fn
-                :state-path  (or state-path [])})))))}))
+         (when (service-is-sane!? service)
+           (do
+             (http-json-request {:url      url
+                                 :body     params
+                                 :callback (fn [service-response]
+                                             (handle-event (cond-> (rem/create-anonymous-event)
+                                                                   true
+                                                                   (rem/append-action
+                                                                     {:fn-and-args (concat on-response [service-response data])
+                                                                      :state-path  state-path})
+                                                                   remote-state-mutation
+                                                                   (rem/append-action
+                                                                     (rem/create-action
+                                                                       {:name        :on-remote-state-mutation
+                                                                        :fn-and-args [core/on-remote-state-mutation remote-state-mutation]})))))})
+             {:fn-and-args before-fn
+              :state-path  (or state-path [])}))))}))
 ;; headers
 
 
