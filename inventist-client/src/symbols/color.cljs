@@ -17,7 +17,7 @@
 ;Yellow - 56
 ;Pink - 300
 ;Purple - 275
-(def theme-hue "30")
+(def theme-hue "200")
 
 ;Complementary Hue (opposite color)
 (def theme-hue-int (js/parseInt theme-hue))

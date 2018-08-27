@@ -15,9 +15,10 @@
                          hidden]
                   :as   props}
                  & children]
-  [:div (merge {:class (style/list-item-class)
-                :style (merge (when selected style/list-item-selected)
-                              (when hidden {:display "none"}))}
+  [:div (merge {:class     (style/list-item-class)
+                :draggable true
+                :style     (merge (when selected style/list-item-selected)
+                                  (when hidden {:display "none"}))}
                (dissoc props :selected))
    children])
 
@@ -28,9 +29,20 @@
   (list-card {:selected selected
               :hidden   hidden}
              [:div {:class (style/list-item-left-column)}
-              [:img {:class (style/card-image)
-                     :src   (cond (and (:image person) (not= (:image person) "")) (:image person)
-                                  :else "/image/person-m-placeholder.png")}]]
+              (cond (and (:image person) (not= (:image person) ""))
+                    [:img {:src   (:image person)
+                           :class (style/card-image)}]
+                    :else
+                    [:span {:style {:width            "3rem"
+                                    :height           "3rem"
+                                    :background-color color/shaded-context-secondary-text
+                                    :border-radius    "0.25rem"
+                                    :display          "grid"
+                                    :font-size        "1.8rem"
+                                    :align-items      "center"
+                                    :text-align       "center"
+                                    :color            color/shaded-context-highlight-bg}}
+                     (str (subs (or (:first-name person) "") 0 1) (subs (or (:last-name person) "") 0 1))])]
              [:div
               [:span {:style style/card-title}
                (str (:first-name person) " " (:last-name person))] [:br]

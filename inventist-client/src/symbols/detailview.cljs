@@ -126,14 +126,9 @@
                        :width              "100%"
                        :grid-template-rows "6rem auto 1fr"
                        :grid-gap           "0.5rem"}}
-         [:div {:style {:text-align "center"}}
-          [:img {:src   (cond (and image (not= image "")) image
-                              :else "/image/no-image.png")
-                 :style {:width           "6rem"
-                         :height          "6rem"
-                         :borderRadius    "0.5rem"
-                         :object-fit      "cover"
-                         :backgroundColor color/light-context-secondary-text}}]]
+
+         image                                              ;Image/Initials/Icon
+
          [:div {:style (merge style/header-title
                               {:text-align "center"})}
           (cond (and (= edit-mode true) (= enable-edit true))
@@ -187,13 +182,8 @@
                        :width                 "100%"
                        :grid-template-columns "6rem auto"}}
          ;Image / Left Column
-         [:img {:src   (cond (and image (not= image "")) image
-                             :else "/image/no-image.png")
-                :style {:width           "6rem"
-                        :height          "6rem"
-                        :borderRadius    "0.5rem"
-                        :object-fit      "cover"
-                        :backgroundColor color/light-context-secondary-text}}]
+         image
+
          ;Right Column
          [:div {:style {:display        "flex"
                         :flex-direction "column"
@@ -252,21 +242,18 @@
            (s-general/section-divider)]]]))
 
 (defc card
-  [{id        :id
-    style     :style
-    key       :key
-    image-url :image-url
-    content   :content
-    on-click  :on-click}]
+  [{id       :id
+    style    :style
+    key      :key
+    image    :image
+    content  :content
+    on-click :on-click}]
   [:div {:key      key
          :id       id
          :class    (style/card)
-         :on-click on-click}
-   ;:style    style}
-
-   (cond (not= image-url nil) [:img {:src   image-url
-                                     :style {:margin-right "0.75rem"}
-                                     :class (style/card-image)}])
+         :on-click on-click
+         :draggable true}
+   image
    content])
 
 (defc input-card [{id          :id
@@ -307,34 +294,50 @@
 ;Card to show devices assigned
 (defc device-card [{item     :item
                     on-click :on-click}]
-  (card {:key       (:id item)
-         :on-click  on-click
-         :image-url (cond (and (:photo item) (not= (:photo item) "")) (:photo item)
-                          :else "/image/no-image.png")
-         :content   [:div
-                     [:span {:style style/card-title}
-                      (str (:brand item) " " (:model-name item))] [:br]
-                     [:span {:style style/card-subtitle}
-                      (str (:serial-number item) " - " (:color item)) [:br]]]}))
+  (card {:key      (:id item)
+         :on-click on-click
+         :image    [:div {:style {:font-size    "3rem"
+                                  :margin-right "0.75rem"}}
+                    (cond (and (:photo item) (not= (:photo item) ""))
+                          [:img {:class (style/card-image)
+                                 :src   (:photo item)}]
+                          :else
+                          (s-general/device-icon-set {:item item}))]
+         :content  [:div
+                    [:span {:style style/card-title}
+                     (str (:brand item) " " (:model-name item))] [:br]
+                    [:span {:style style/card-subtitle}
+                     (str (:serial-number item) " - " (:color item)) [:br]]]}))
 ;(str "Date: " (:date item))]]}))
 
 
 ;Card to show Person
 (defc person-card [{user     :user
                     on-click :on-click}]
-  (card {:key       (:id user)
-         :on-click  on-click
-         :image-url (cond (:image user) (:image user)
+  (card {:key      (:id user)
+         :on-click on-click
+         :image    [:div {:style {:margin-right "0.75rem"}}
+                    (cond (and (:image user) (not= (:image user) ""))
+                          [:img {:src   (:image user)
+                                 :class (style/card-image)}]
                           :else
-                          (when (:gender user) (cond (= (:gender user) "f") "/image/person-f-placeholder.png"
-                                                     :else "/image/person-m-placeholder.png")))
-         :content   [:div
-                     [:span {:style style/card-title}
-                      (str (:first-name user) " " (:last-name user))] [:br]
-                     [:span {:style style/card-subtitle}
-                      (str (:occupation user) " - ")
-                      (for [group (:groups user)]
-                        [:span {:key (:id group)}
-                         (str (:name group) " ")])]]}))
+                          [:span {:style {:width            "3rem"
+                                          :height           "3rem"
+                                          :background-color color/shaded-context-secondary-text
+                                          :border-radius    "0.25rem"
+                                          :display          "grid"
+                                          :font-size        "1.8rem"
+                                          :align-items      "center"
+                                          :text-align       "center"
+                                          :color            color/shaded-context-highlight-bg}}
+                           (str (subs (or (:first-name user) "") 0 1) (subs (or (:last-name user) "") 0 1))])]
+         :content  [:div
+                    [:span {:style style/card-title}
+                     (str (:first-name user) " " (:last-name user))] [:br]
+                    [:span {:style style/card-subtitle}
+                     (str (:occupation user) " - ")
+                     (for [group (:groups user)]
+                       [:span {:key (:id group)}
+                        (str (:name group) " ")])]]}))
 ;[:br]
 ;(str "Date: " (:date person))]]}))

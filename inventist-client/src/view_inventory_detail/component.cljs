@@ -93,7 +93,22 @@
 
      ;Information
      (s-detailview/section-information
-       {:image          (:photo computer)
+       {:image          [:div {:style {:text-align      "center"
+                                       :width           "6rem"
+                                       :height          "6rem"
+                                       :display         "grid"
+                                       :borderRadius    "0.5rem"}}
+                         (cond (and (:photo computer) (not= (:photo computer) ""))
+                               [:img {:src   (:photo computer)
+                                      :style {:width        "6rem"
+                                              :height       "6rem"
+                                              :borderRadius "inherit"
+                                              :object-fit   "cover"}}]
+                               :else
+                               [:span {:style {:font-size  "5.5rem"
+                                               :align-self "center"
+                                               :color      color/dark-context-primary-text}}
+                                (s-general/device-icon-set {:item computer})])]
         :heading        (str (:brand computer) " " (:model-name computer))
         :actions        [{:title    "Report Issue with Device"
                           :icon     "fas fa-exclamation-triangle"
