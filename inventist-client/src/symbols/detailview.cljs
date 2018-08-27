@@ -126,14 +126,9 @@
                        :width              "100%"
                        :grid-template-rows "6rem auto 1fr"
                        :grid-gap           "0.5rem"}}
-         [:div {:style {:text-align "center"}}
-          [:img {:src   (cond (and image (not= image "")) image
-                              :else "/image/no-image.png")
-                 :style {:width           "6rem"
-                         :height          "6rem"
-                         :borderRadius    "0.5rem"
-                         :object-fit      "cover"
-                         :backgroundColor color/light-context-secondary-text}}]]
+
+         image ;Image/Initials/Icon
+
          [:div {:style (merge style/header-title
                               {:text-align "center"})}
           (cond (and (= edit-mode true) (= enable-edit true))
@@ -187,13 +182,8 @@
                        :width                 "100%"
                        :grid-template-columns "6rem auto"}}
          ;Image / Left Column
-         [:img {:src   (cond (and image (not= image "")) image
-                             :else "/image/no-image.png")
-                :style {:width           "6rem"
-                        :height          "6rem"
-                        :borderRadius    "0.5rem"
-                        :object-fit      "cover"
-                        :backgroundColor color/light-context-secondary-text}}]
+         image
+
          ;Right Column
          [:div {:style {:display        "flex"
                         :flex-direction "column"

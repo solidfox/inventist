@@ -36,7 +36,23 @@
 
      ;Detailed Information
      (s-detailview/section-information
-       {:image          (:image person)
+       {:image          [:div {:style {:text-align      "center"
+                                       :width           "6rem"
+                                       :height          "6rem"
+                                       :display         "grid"
+                                       :borderRadius    "0.5rem"
+                                       :backgroundColor color/light-context-secondary-text}}
+                         (cond (and (:image person) (not= (:image person) ""))
+                               [:img {:src   (:image person)
+                                      :style {:width        "6rem"
+                                              :height       "6rem"
+                                              :borderRadius "inherit"
+                                              :object-fit   "cover"}}]
+                               :else
+                               [:span {:style {:font-size  "3rem"
+                                               :align-self "center"
+                                               :color      color/dark-context-primary-text}}
+                                (str (subs (or (:first-name person) "") 0 1) (subs (or (:last-name person) "") 0 1))])]
         :heading        (str (:first-name person) " " (:last-name person))
         :actions        [{:icon     "fas fa-qrcode"
                           :title    "QR Code"
