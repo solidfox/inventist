@@ -2,6 +2,7 @@
   (:require [inventist-client.core :as core]
             [authentication.component :as auth]
             [inventist-client.navbar.component :as navbar]
+            [collections.component :as collections]
             [inventist-client.page.inventory.component :as inventory-page]
             [inventist-client.page.people.component :as people-page]
             [inventist-client.page.dashboard.component :as dashboard-page]
@@ -34,7 +35,11 @@
                                  (< (:viewport-width state) 800) {:width "100%"}))}
 
        (navbar/collection-sidebar
-         {:user-bar        (auth/user-bar (core/authentication-args state))
+         {:sections        [(collections/collections-view {:trigger-event      trigger-event
+                                                           :current-path       (:path state)
+                                                           :collection-list    collections/collections-list
+                                                           :collection-heading "Collections"})]
+          :user-bar        (auth/user-bar (core/authentication-args state))
           :current-path    (:path state)
           :trigger-event   trigger-event
           :viewport-height (:viewport-height state)

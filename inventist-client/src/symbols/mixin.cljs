@@ -4,10 +4,10 @@
 
 (defn toggle-mixin
   "Injects a toggle state and two functions to alter that state into the local state of a component."
-  [{:keys [toggle-state-key on-fn-key off-fn-key]}]
+  [{:keys [toggle-state-key on-fn-key off-fn-key initial-state]}]
   (let [toggle-state-atom-key (keyword (namespace ::whatever) (str (name toggle-state-key) "-atom"))]
     {:will-mount    (fn [state]
-                      (let [toggle-state-atom (atom nil)
+                      (let [toggle-state-atom (atom initial-state)
                             component         (:rum/react-component state)]
                         (add-watch toggle-state-atom toggle-state-atom-key
                                    (fn [_ _ _old _new]
