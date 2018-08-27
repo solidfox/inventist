@@ -163,7 +163,7 @@
               :enable-comment false
               :timeline-items [:div {:style {:color      color/light-context-primary-text
                                              :font-style "italic"
-                                             :margin     "-1.5rem 0 0 1.5rem"}}
+                                             :margin-top "-1.5rem"}}
                                "No history available"]}))]))
 
 

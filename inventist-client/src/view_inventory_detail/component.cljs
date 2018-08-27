@@ -30,7 +30,7 @@
     [:span {:style {:margin-left "0rem"}}
      [:i {:class "fas fa-exclamation-triangle"}] " Report Issue with Device"]
     [:span {:style    {:font-size "1.25rem"
-                       :color     color/dark-context-secondary-negative
+                       :color     color/shaded-context-secondary-negative
                        :cursor    "pointer"}
             :on-click (fn [] (trigger-event (rem/create-event {:name :close-report-issue})))}
      [:i {:class "far fa-times-circle"}]]]
@@ -93,11 +93,11 @@
 
      ;Information
      (s-detailview/section-information
-       {:image          [:div {:style {:text-align      "center"
-                                       :width           "6rem"
-                                       :height          "6rem"
-                                       :display         "grid"
-                                       :borderRadius    "0.5rem"}}
+       {:image          [:div {:style {:text-align   "center"
+                                       :width        "6rem"
+                                       :height       "6rem"
+                                       :display      "grid"
+                                       :borderRadius "0.5rem"}}
                          (cond (and (:photo computer) (not= (:photo computer) ""))
                                [:img {:src   (:photo computer)
                                       :style {:width        "6rem"
@@ -217,7 +217,7 @@
               :enable-comment false
               :timeline-items [:div {:style {:color      color/light-context-primary-text
                                              :font-style "italic"
-                                             :margin     "-1.5rem 0 0 1.5rem"}}
+                                             :margin-top "-1.5rem"}}
                                "No history available"]}))
 
      ;Report Issue Box
