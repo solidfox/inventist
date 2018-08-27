@@ -1,7 +1,7 @@
 (ns inventist-client.main
   (:require [inventist-client.component :as component]
             [authentication.core :as auth]
-            [remodular.runtime :as runtime]
+            [remodular.engine :as engine]
             [remodular.core :as rem]
             [inventist-client.core :as core]
             [oops.core :refer [oget ocall]]
@@ -29,7 +29,7 @@
            (ocall (firebase-auth) :onAuthStateChanged (fn [user]
                                                         (swap! app-state-atom
                                                                update-in
-                                                               core/authentication-state-path
+                                                               (concat [::engine/render-input] core/authentication-state-path)
                                                                auth/receive-new-auth-state
                                                                user)))
            (ocall js/window :addEventListener "resize" (fn []
@@ -78,7 +78,7 @@
             (js/JSON.stringify (clj->js body))
             #js {:Content-Type "application/json"}))
 
-(defmethod runtime/perform-services :prod
+(defmethod engine/perform-services :prod
   [_ services handle-event]
   {:pre [(not-empty services)]}
 
@@ -114,12 +114,12 @@
 
 
 
-(runtime/run-modular-app! {:get-view       component/app
-                           :get-services   services/get-services
-                           :app-state-atom app-state-atom
-                           :logging        {:state-updates true
-                                            :services      true
-                                            :events        true}})
+(engine/run-modular-app! {:get-view        component/app
+                          :get-services   services/get-services
+                          :app-state-atom app-state-atom
+                          :logging        {:state-updates false
+                                           :services      true
+                                           :events        true}})
 
 
 

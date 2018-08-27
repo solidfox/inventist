@@ -7,7 +7,8 @@
             [cljs.pprint]
             [inventist-client.page.inventory.core :as inventory-core]
             [clojure.string :as str]
-            [util.inventory.core :as util]))
+            [util.inventory.core :as util]
+            [remodular.engine :as engine]))
 
 (def authentication-state-path [:view-modules :authentication])
 (def inventory-page-state-path [:pages :inventory])
@@ -30,17 +31,18 @@
          selected-person-id    :selected-person-id
          path                  :path
          :as                   initial-state} (parse-path path)]
-    (-> initial-state
-        (assoc :internet-reachable true
-               :viewport-height (max js/document.documentElement.clientHeight js/window.innerHeight)
-               :viewport-width (max js/document.documentElement.clientWidth js/window.innerWidth)
-               :path [(or (first path) :dashboard)]
-               :mode mode)
-        (assoc-in authentication-state-path (auth/create-state))
-        (assoc-in inventory-page-state-path (inventory-page/create-state {:selected-inventory-id selected-inventory-id}))
-        (assoc-in contractors-page-state-path (contractors-page/create-state))
-        (assoc-in dashboard-page-state-path (dashboard-page/create-state))
-        (assoc-in people-page-state-path (people-page/create-state {:selected-person-id selected-person-id})))))
+    {::engine/render-input
+     (-> initial-state
+         (assoc :internet-reachable true
+                :viewport-height (max js/document.documentElement.clientHeight js/window.innerHeight)
+                :viewport-width (max js/document.documentElement.clientWidth js/window.innerWidth)
+                :path [(or (first path) :dashboard)]
+                :mode mode)
+         (assoc-in authentication-state-path (auth/create-state))
+         (assoc-in inventory-page-state-path (inventory-page/create-state {:selected-inventory-id selected-inventory-id}))
+         (assoc-in contractors-page-state-path (contractors-page/create-state))
+         (assoc-in dashboard-page-state-path (dashboard-page/create-state))
+         (assoc-in people-page-state-path (people-page/create-state {:selected-person-id selected-person-id})))}))
 
 (defn get-selected-inventory-id [state] (:selected-inventory-id state))
 

@@ -14,7 +14,8 @@
             [cljs-react-material-ui.rum :as ui]
             [cljs-react-material-ui.core :refer [get-mui-theme color]]
             [oops.core :as oops]
-            [symbols.general :as s-general]))
+            [symbols.general :as s-general]
+            [util.inventory.core :as util]))
 
 
 (defc app < (modular-component handle-event)
