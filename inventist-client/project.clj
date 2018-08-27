@@ -20,7 +20,7 @@
                  [org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.10.339"]
                  [org.roman01la/cljss "1.6.2"]
-                 [remodular "0.1.4-SNAPSHOT"]
+                 [remodular "0.1.5-SNAPSHOT"]
                  [rum "0.11.2"]
                  [ysera "1.2.0"]]
 
