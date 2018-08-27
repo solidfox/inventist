@@ -1,6 +1,6 @@
 (ns view-inventory-overview.component
   (:require [rum.core :refer [defc]]
-            [symbols.overview :refer [scrollable search-toolbar second-column-header inventory-list-card]]
+            [symbols.overview :refer [search-toolbar second-column-header inventory-list-card]]
             [view-inventory-overview.core :as core]
             [symbols.color :as color]
             [remodular.core :as rem]
@@ -14,7 +14,7 @@
     trigger-event  :trigger-event}]
   (let [inventory (core/filtered-inventory state)
         limited-inventory (take 75 inventory)]
-    (scrollable
+    (s-general/scrollable
       {:floating-header
        [(second-column-header "Inventory")
         (search-toolbar

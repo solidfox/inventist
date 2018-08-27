@@ -14,11 +14,6 @@
 
 (def collection-item-height "2rem")
 
-(defc collection-heading
-  [{heading  :heading
-    id       :id
-    on-click :on-click}])
-
 (defc collection-item
   [{title    :title
     icon     :icon
@@ -28,6 +23,7 @@
   [:div {:key      title
          :class    "collection-item"
          :style    {:height                collection-item-height
+                    :min-height            collection-item-height
                     :max-height            collection-item-height
                     :color                 color/dark-context-primary-text
                     :width                 "auto"

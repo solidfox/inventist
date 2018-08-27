@@ -441,3 +441,20 @@
         :style {:font-size  "1rem"
                 :align-self "center"
                 :color      color/white}}]])
+
+(defc scrollable
+  [{floating-header :floating-header
+    floating-footer :floating-footer
+    content         :content}]
+  [:div {:id    "scrollable"
+         :style (merge style/shaded-bar
+                       {:height             "100vh"
+                        :width              "auto"
+                        :display            "grid"
+                        :grid-template-rows "auto 1fr auto"})}
+   floating-header
+   [:div {:style {:overflow-x                 "hidden"
+                  :overflow-y                 "scroll"
+                  :-webkit-overflow-scrolling "touch"}}
+    content]
+   floating-footer])

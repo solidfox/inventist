@@ -1,6 +1,6 @@
 (ns view-people-overview.component
   (:require [rum.core :refer [defc with-key] :as rum]
-            [symbols.overview :refer [scrollable search-toolbar second-column-header person-list-card]]
+            [symbols.overview :refer [search-toolbar second-column-header person-list-card]]
             [view-people-overview.core :as core]
             [symbols.color :as color]
             [remodular.core :as rem]
@@ -17,7 +17,7 @@
         filtered-people (core/filtered-people state)
         n-results (count filtered-people)
         search-terms (:search-terms state)]
-    (scrollable
+    (s-general/scrollable
       {:floating-header
        [(second-column-header "People")
         (search-toolbar

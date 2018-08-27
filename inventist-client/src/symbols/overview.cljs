@@ -143,34 +143,15 @@
                  :align-items "center"}}
    [:div (str header-text)]])
 
-(defc scrollable
-  [{floating-header :floating-header
-    floating-footer :floating-footer
-    content         :content}]
-  [:div {:id    "scrollable"
-         :style (merge style/shaded-bar
-                       {:height             "100vh"
-                        :width              "auto"
-                        :display            "grid"
-                        :grid-template-rows "auto auto 1fr"})}
-   floating-header
-   [:div {:style {:overflow-x                 "hidden"
-                  :overflow-y                 "scroll"
-                  :-webkit-overflow-scrolling "touch"}}
-    content]
-   floating-footer])
-
 
 
 ;Footer
-
-
 
 ;overview with search and listing
 (defc overview-list
   [{type       :type
     list-items :list-items}]
-  (scrollable
+  (s-general/scrollable
     {:floating-header [:div (second-column-header type)
                        (search-toolbar {:list-items list-items})]
      :content         [:div {:style {:background-color color/transparent}}

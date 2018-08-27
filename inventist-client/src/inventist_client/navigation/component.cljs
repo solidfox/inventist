@@ -1,4 +1,4 @@
-(ns inventist-client.navbar.component
+(ns inventist-client.navigation.component
   (:require [rum.core :refer [defc with-key]]
             [rum.core :as rum]
             [remodular.core :as rem]
@@ -7,7 +7,8 @@
             [symbols.mixin :refer [hovered-mixin toggle-mixin]]
             [symbols.color :as color]
             [symbols.style :as style]
-            [util.inventory.core :as util]))
+            [util.inventory.core :as util]
+            [symbols.general :as s-general]))
 
 (defc header-bar [{trigger-event   :trigger-event
                    viewport-width  :viewport-width
@@ -48,34 +49,26 @@
 
 
 ;---------------------------Side-nav-----------------------------------
-(defc collection-sidebar [{sections        :sections
-                           trigger-event   :trigger-event
-                           current-path    :current-path
-                           user-bar        :user-bar
-                           viewport-height :viewport-height
-                           viewport-width  :viewport-width}]
+(defc sidebar-content [sections]
+  [:div {:style {:height                     "100%"
+                 :background-color           color/dark-context-background
+                 :text-align                 "left"
+                 :display                    "flex"
+                 :overflow-x                 "hidden"
+                 :overflow-y                 "scroll"
+                 :-webkit-overflow-scrolling "touch"
+                 :flex-direction             "column"}}
+   sections])
 
-  [:div {:style {:width              "100%"
-                 :height             viewport-height
-                 :display            "grid"
-                 :grid-template-rows "3.5rem 1fr fit-content(13rem)"
-                 :background-color   color/dark-context-background
-                 :z-index            style/z-index-top-toolbar}}
-
-   ;Header-Logo
-   (header-bar {:trigger-event   trigger-event
-                :viewport-height viewport-height
-                :viewport-width  viewport-width})
-
-   ;Collections
-   [:div {:style {:height                     "auto"
-                  :text-align                 "left"
-                  :display                    "flex"
-                  :overflow-x                 "hidden"
-                  :overflow-y                 "scroll"
-                  :-webkit-overflow-scrolling "touch"
-                  :flex-direction             "column"}}
-    sections]
-
-   ;Footer - User-bar
-   user-bar])
+(defc sidebar [{sections        :sections
+                trigger-event   :trigger-event
+                current-path    :current-path
+                user-bar        :user-bar
+                viewport-height :viewport-height
+                viewport-width  :viewport-width}]
+  (s-general/scrollable
+    {:floating-header (header-bar {:trigger-event   trigger-event
+                                   :viewport-height viewport-height
+                                   :viewport-width  viewport-width})
+     :floating-footer user-bar
+     :content         (sidebar-content sections)}))
