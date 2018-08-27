@@ -33,12 +33,12 @@
                                                                auth/receive-new-auth-state
                                                                user)))
            (ocall js/window :addEventListener "resize" (fn []
-                                                         (swap! app-state-atom assoc :viewport-width (max js/document.documentElement.clientWidth js/window.innerWidth))
-                                                         (swap! app-state-atom assoc :viewport-height (max js/document.documentElement.clientHeight js/window.innerHeight))))
+                                                         (swap! app-state-atom assoc-in [::engine/render-input :viewport-width] (max js/document.documentElement.clientWidth js/window.innerWidth))
+                                                         (swap! app-state-atom assoc-in [::engine/render-input :viewport-height] (max js/document.documentElement.clientHeight js/window.innerHeight))))
            (ocall js/window :addEventListener "offline" (fn []
-                                                          (swap! app-state-atom assoc :internet-reachable false)))
+                                                          (swap! app-state-atom assoc-in [::engine/render-input :internet-reachable] false)))
            (ocall js/window :addEventListener "online" (fn []
-                                                         (swap! app-state-atom assoc :internet-reachable true)))
+                                                         (swap! app-state-atom assoc-in [::engine/render-input :internet-reachable] true)))
            true))
 
 (def services-sanity-check-atom (atom {:n-rapid-fetches 0
