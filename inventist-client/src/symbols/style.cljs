@@ -69,11 +69,11 @@
             :&:active         {:box-shadow "0 0 0.25rem 0 #000000"}})
 
 (defstyles card-image []
-           {:border-radius   inner-border-radius
-            :width           "3rem"
-            :height          "3rem"
-            :object-fit      "cover"
-            :backgroundColor color/white})
+           {:border-radius    inner-border-radius
+            :width            "3rem"
+            :height           "3rem"
+            :object-fit       "cover"
+            :background-color color/white})
 
 (def list-item-selected {:background-color color/shaded-context-highlight-bg})
 
@@ -91,8 +91,8 @@
             :&:hover               {:background-color color/shaded-context-highlight-bg}})
 
 (defstyles list-item-left-column []
-           {:width            "3rem"
-            :height           "3rem"})
+           {:width  "3rem"
+            :height "3rem"})
 
 (defstyles button [{bg-color   :bg-color
                     text-color :text-color}]

@@ -145,10 +145,11 @@
        (s-general/section-divider)]]
 
      ;Timeline
+     (s-general/section-title {:title   "Timeline"})
+
      (cond (not= (:history person) [])
            (s-general/timeline
              {:viewport-width viewport-width
-              :enable-comment false
               :timeline-items (for [history-item (reverse (sort-by (fn [history-item] (:instant history-item)) (:history person)))]
                                 (-> (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-laptop"})
                                                               :title    (str "Registered " (get-in history-item [:inventory-item :model-name]))
@@ -158,13 +159,9 @@
                                                                                    (get-in history-item [:inventory-item :serial-number]))]})
                                     (with-key (:instant history-item))))})
            :else
-           (s-general/timeline
-             {:viewport-width viewport-width
-              :enable-comment false
-              :timeline-items [:div {:style {:color      color/light-context-primary-text
-                                             :font-style "italic"
-                                             :margin-top "-1.5rem"}}
-                               "No history available"]}))]))
+           [:div {:style {:color      color/light-context-primary-text
+                          :font-style "italic"}}
+            "No history available"])]))
 
 
 

@@ -20,58 +20,50 @@
      send-response                           :send-response} :report-issue-form
     trigger-event                                            :trigger-event}]
   [:div {:id    "report-issue"
-         :style style/float-box}
-   ;Toolbar
-   [:div {:style {:padding         "0.75rem"
-                  :font-size       "1rem"
-                  :display         "flex"
-                  :justify-content "space-between"
-                  :align-items     "center"}}
-    [:span {:style {:margin-left "0rem"}}
-     [:i {:class "fas fa-exclamation-triangle"}] " Report Issue with Device"]
-    [:span {:style    {:font-size "1.25rem"
-                       :color     color/shaded-context-secondary-negative
-                       :cursor    "pointer"}
-            :on-click (fn [] (trigger-event (rem/create-event {:name :close-report-issue})))}
-     [:i {:class "far fa-times-circle"}]]]
+         :class (style/card)
+         :style {:display               "grid"
+                 :grid-gap              "0.5rem"
+                 :grid-template-columns "1fr 3rem"}}
+   ;[:img {:class (style/card-image)
+   ;       :src "/image/person-m-placeholder.png"}]
+   (s-general/input-section {:type      "textarea"
+                             :width     "14rem"
+                             :value     (or description "")
+                             :on-change (fn [e]
+                                          (trigger-event
+                                            (event/set-report-issue-description (oops/oget e [:target :value]))))
+                             :text      "Describe your issue in detail."})
 
-   ;;Form
-   [:div {:style {:overflow-x "hidden"
-                  :overflow-y "scroll"}}
-    [:div {:style style/form-box}
-     [:div {:id    "form"
-            :style {:display         "flex"
-                    :flex-wrap       "wrap"
-                    :justify-content "space-between"}}
-      (s-general/input-section {:field     "Issue"
-                                :type      "textarea"
-                                :value     (or description "")
-                                :on-change (fn [e]
-                                             (trigger-event
-                                               (event/set-report-issue-description (oops/oget e [:target :value]))))
-                                :text      "Describe your issue in detail."})
+   [:div {:on-click send-response
+          :style    {:width              "3rem"
+                     :height             "2.5rem"
+                     :border-radius      "0.25rem"
+                     :display            "grid"
+                     :grid-template-rows "1.5rem 1rem"
+                     :justify-content    "center"
+                     :color              color/shaded-context-background
+                     :background-color   color/shaded-context-secondary-text}}
+    [:span {:style {:font-size  "1rem"
+                    :text-align "center"
+                    :align-self "end"}}
+     [:i {:class "fas fa-check-circle"}]]
+    [:span {:style {:font-size  "0.75rem"
+                    :align-self "center"}} "Submit"]]
 
-      (s-general/input-section {:field     "Photo"
-                                :type      "upload"
-                                :id        "report-image"
-                                :color     color/transparent
-                                :required  false
-                                :text      "You may upload a photo showing the problem."
-                                :on-change (fn [e] (trigger-event
-                                                     (event/new-report-issue-file (oops/oget e [:target :files :0]))))
-                                :style     {:margin 0}})
-      (when object-url
-        [:img {:class (style/card-image)
-               :src   object-url}])]]]
+   (s-general/input-section {:field     "Photo"
+                             :type      "upload"
+                             :id        "report-image"
+                             :color     color/transparent
+                             :required  false
+                             :text      "You may upload a photo showing the problem."
+                             :on-change (fn [e] (trigger-event
+                                                  (event/new-report-issue-file (oops/oget e [:target :files :0]))))
+                             :style     {:margin 0}})
+   (when object-url
+     [:img {:class (style/card-image)
+            :src   object-url}])])
 
-   [:div {:style {:display         "flex"
-                  :justify-content "space-between"}}
-    (s-general/button {:color    color/shaded-context-primary-text
-                       :bg-color color/shaded-context-background
-                       :text     "Report this Issue"
-                       :icon     "fas fa-paper-plane"
-                       :style    {:margin "0.75rem"}
-                       :on-click (fn [] (trigger-event (rem/create-event {:name :send-report-issue-form})))})]])
+
 
 (defc inventory-detail < (modular-component event/handle-event)
   [{{state :state}  :input
@@ -110,9 +102,15 @@
                                                :color      color/dark-context-primary-text}}
                                 (s-general/device-icon-set {:item computer})])]
         :heading        (str (:brand computer) " " (:model-name computer))
-        :actions        [{:title    "Report Issue with Device"
-                          :icon     "fas fa-exclamation-triangle"
-                          :on-click (fn [] (trigger-event (event/report-issue-clicked (:id computer))))}
+        :actions        [{:title     "Reassign Device"
+                          :icon      "fas fa-exchange-alt"
+                          :scroll-to "#assignee"
+                          :on-click  (fn [] (trigger-event (rem/create-event
+                                                             {:name :reassign-device-clicked})))}
+                         {:title     "Report Issue with Device"
+                          :icon      "fas fa-exclamation-triangle"
+                          :scroll-to "#timeline-dev"
+                          :on-click  (fn [] (trigger-event (event/report-issue-clicked (:id computer))))}
                          {:icon     "fas fa-qrcode"
                           :title    "QR Code"
                           :on-click ""}
@@ -147,7 +145,8 @@
         :viewport-width viewport-width})
 
      ;Assignee
-     [:div {:style {:margin-top  "0.5rem"
+     [:div {:id    "assignee"
+            :style {:margin-top  "0.5rem"
                     :margin-left (cond (< viewport-width style/viewport-mobile) 0
                                        :else "7.5rem")}}
 
@@ -195,35 +194,52 @@
        (s-general/section-divider)]]
 
      ;Timeline
-     (cond (not= (:history computer) [])
-           (s-general/timeline
-             {:viewport-width viewport-width
-              :enable-comment false
-              :timeline-items (for [history-item (reverse (sort-by (fn [history-item] (:instant history-item)) (:history computer)))]
-                                [:span {:key (:instant history-item)}
-                                 (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-user"})
-                                                           :title    (str "Registered to " (get-in history-item [:new-user :first-name])
-                                                                          " " (get-in history-item [:new-user :last-name]))
-                                                           :on-click (fn [] (trigger-event (event/clicked-user (get-in history-item [:new-user :id]))))
-                                                           :content  [:div (str (s-general/time-format-string {:time   (:instant history-item)
-                                                                                                               :format "yyyy-MM-dd"}) " — "
-                                                                                (get-in history-item [:new-user :occupation]) " - "
-                                                                                (:name (first (:groups (:new-user history-item)))))]})])})
-           ;(for [group (get-in history-item [:new-user :groups])]
-           ;  (:name group)))]})])})
-           :else
-           (s-general/timeline
-             {:viewport-width viewport-width
-              :enable-comment false
-              :timeline-items [:div {:style {:color      color/light-context-primary-text
-                                             :font-style "italic"
-                                             :margin-top "-1.5rem"}}
-                               "No history available"]}))
+     [:div {:id    "timeline-dev"
+            :style {:margin-top  "0.5rem"
+                    :margin-left (cond (< viewport-width style/viewport-mobile) 0
+                                       :else "7.5rem")}}
 
-     ;Report Issue Box
-     (when (core/should-show-report-issue-form? state)
-       (report-issue-form {:report-issue-form (:report-issue-form state)
-                           :trigger-event     trigger-event}))]))
+      (s-general/section-title {:title    "Timeline"
+                                :viewport (cond (< viewport-width style/viewport-mobile) "mobile"
+                                                :else "desktop")
+                                :buttons  (cond (core/should-show-report-issue-form? state)
+                                                (s-general/section-title-button {:icon     "fas fa-exclamation-triangle" ;
+                                                                                 :text     "Cancel Issue Reporting"
+                                                                                 :color    color/light-context-secondary-negative
+                                                                                 :on-click (fn [] (trigger-event (rem/create-event {:name :close-report-issue})))})
+                                                :else
+                                                (s-general/section-title-button {:text     "Report Issue with Device"
+                                                                                 :icon     "fas fa-exclamation-triangle"
+                                                                                 :on-click (fn [] (trigger-event (event/report-issue-clicked (:id computer))))}))})
+
+      ;Report Issue Box
+      (when (core/should-show-report-issue-form? state)
+        (report-issue-form {:report-issue-form (:report-issue-form state)
+                            :trigger-event     trigger-event}))
+
+      (cond (not= (:history computer) [])
+            (s-general/timeline
+              {:viewport-width viewport-width
+               :enable-comment false
+               :timeline-items (for [history-item (reverse (sort-by (fn [history-item] (:instant history-item)) (:history computer)))]
+                                 [:span {:key (:instant history-item)}
+                                  (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-user"})
+                                                            :title    (str "Registered to " (get-in history-item [:new-user :first-name])
+                                                                           " " (get-in history-item [:new-user :last-name]))
+                                                            :on-click (fn [] (trigger-event (event/clicked-user (get-in history-item [:new-user :id]))))
+                                                            :content  [:div (str (s-general/time-format-string {:time   (:instant history-item)
+                                                                                                                :format "yyyy-MM-dd"}) " — "
+                                                                                 (get-in history-item [:new-user :occupation]) " - "
+                                                                                 (:name (first (:groups (:new-user history-item)))))]})])})
+            ;(for [group (get-in history-item [:new-user :groups])]
+            ;  (:name group)))]})])})
+            :else
+            [:div {:style {:color      color/light-context-primary-text
+                           :font-style "italic"}}
+             "No history available"])]]))
+
+
+
 
 
 

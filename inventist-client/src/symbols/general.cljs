@@ -270,7 +270,7 @@
   [:textarea {:id          id
               :style       {:font-size       "1rem"
                             :width           (or width "100%")
-                            :maxWidth        maxWidth
+                            :max-width       (or maxWidth width)
                             :height          "1.5rem"
                             :color           color/light-context-secondary-text
                             :backgroundColor (cond (= disabled true) color/highlight
@@ -325,11 +325,11 @@
                       on-change   :on-change
                       on-click    :on-click}]
   [:div {:style {:width  (or width "100%")
-                 :margin "0 0.5rem 0.5rem 0"}}
+                 :margin "0 0.5rem 0rem 0"}}
    [:div {:style {:line-height "1.5rem"
                   :color       color/shaded-context-primary-text
                   :margin      "0"}}
-    (or field "Field")
+    (or field "")
     (cond (= required false) [:span {:style {:color      color/shaded-context-secondary-text
                                              :font-size  "0.9rem"
                                              :margin     "0"
@@ -407,19 +407,12 @@
 (defc timeline [{timeline-items :timeline-items
                  enable-comment :enable-comment
                  viewport-width :viewport-width}]
-  [:div {:style {:margin-top  "0.5rem"
-                 :margin-left (cond (< viewport-width style/viewport-mobile) 0
-                                    :else "7.5rem")}
+  [:div {:style {:margin-top "0.5rem"}
          :id    "timeline"}
    [:div {:style {:margin         0
                   :display        "flex"
                   :flex-direction "column"
                   :width          "100%"}}
-    (section-title {:title   "Timeline"
-                    :buttons [(cond (= enable-comment true)
-                                    (section-title-button {:icon     "far fa-comment"
-                                                           :text     "Add Comment"
-                                                           :on-click ""}))]})
     [:div {:style {:margin-top     "1rem"
                    :margin-left    (cond (< viewport-width style/viewport-mobile) 0
                                          :else "-1.5rem")

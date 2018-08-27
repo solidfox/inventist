@@ -42,14 +42,14 @@
                   :display   "flex"
                   :flex-wrap "wrap"}}
 
-    (s-general/stat-card {:value 467
+    (s-general/stat-card {:value 469
                           :text  "Total Inventory in School"})
 
     ;(s-general/stat-card {:value   467
     ;                      :text    "Inventory per Type"
     ;                      :subtext [:select
     ;                                [:option "All"]]})
-    (s-general/stat-card {:value 508
+    (s-general/stat-card {:value 709
                           :text  "Total People in School"})]])
 
 
