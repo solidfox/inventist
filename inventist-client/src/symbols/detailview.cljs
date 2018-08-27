@@ -127,7 +127,11 @@
                        :grid-template-rows "6rem auto 1fr"
                        :grid-gap           "0.5rem"}}
 
-         image                                              ;Image/Initials/Icon
+         [:div {:style {:display         "flex"
+                        :flex-direction  "row"
+                        :justify-content "center"}}
+
+          image]                                            ;Image/Initials/Icon
 
          [:div {:style (merge style/header-title
                               {:text-align "center"})}
@@ -248,10 +252,10 @@
     image    :image
     content  :content
     on-click :on-click}]
-  [:div {:key      key
-         :id       id
-         :class    (style/card)
-         :on-click on-click
+  [:div {:key       key
+         :id        id
+         :class     (style/card)
+         :on-click  on-click
          :draggable true}
    image
    content])

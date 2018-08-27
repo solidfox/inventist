@@ -5,7 +5,7 @@
   (:require-macros
     [cljss.core :refer [defstyles]]))
 
-(def viewport-mobile 1015)                                  ;Should be ~400 but kept 980 for testing purpose
+(def viewport-mobile 1015)                                  ;Should be ~400 but kept more for testing purpose
 (def outer-border-radius "0.5rem")
 (def inner-border-radius "0.25rem")
 
@@ -124,8 +124,8 @@
                :height          "auto"
                :margin          "auto"
                :padding         "0.75rem"
-               :backgroundColor color/shaded-context-background
-               :border          (str "1px solid " color/grey-light)
+               :backgroundColor color/light-context-background
+               :border          (str "1px solid " color/light-context-highlight-bg)
                :borderRadius    "0rem"})
 
 (def float-box {:height             "auto"
@@ -136,7 +136,7 @@
                 :right              "1rem"
                 :display            "grid"
                 :grid-template-rows "auto 1fr"
-                :backgroundColor    color/dark-context-background
-                :color              color/dark-context-primary-text
+                :backgroundColor    color/shaded-context-highlight-bg
+                :color              color/shaded-context-title-text
                 :border-radius      "0.5rem"
                 :box-shadow         "0rem 0.25rem 0.25rem 0 rgba(0,0,0,0.5)"})

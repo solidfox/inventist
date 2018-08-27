@@ -22,8 +22,7 @@
     on-click :on-click}]
   [:div {:key      title
          :class    "collection-item"
-         :style    {:height                collection-item-height
-                    :min-height            collection-item-height
+         :style    {:min-height            collection-item-height
                     :max-height            collection-item-height
                     :color                 color/dark-context-primary-text
                     :width                 "auto"
@@ -31,15 +30,17 @@
                     :cursor                "pointer"
                     :display               "grid"
                     :grid-template-columns "1.5rem auto 2rem"
-                    :align-items           "center"
                     :background-color      (or color color/transparent)}
          :on-click on-click}
    [:i {:class icon
-        :style {:font-size "1.25rem"}}]
+        :style {:font-size  "1.25rem"
+                :margin-top "0.325rem"
+                :align-self "start"}}]
 
    [:div {:style {:font-size   "1rem"
                   :font-weight "500"
-                  :margin      "0 1rem"}}
+                  :margin      "0 1rem"
+                  :align-self  "center"}}
     title
 
     ;On-Mouse-Over "style.css"
@@ -58,8 +59,8 @@
                       :box-sizing         "border-box"
                       :-moz-box-sizing    "border-box"
                       :-webkit-box-sizing "border-box"
+                      :align-self         "start"
                       :border             (str "1px solid " color/dark-context-title-text)}}]])
-
 
 (def collections-list
   [{:title          "Dashboard"
