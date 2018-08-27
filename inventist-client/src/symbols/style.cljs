@@ -91,7 +91,8 @@
             :&:hover               {:background-color color/shaded-context-highlight-bg}})
 
 (defstyles list-item-left-column []
-           {:width "3rem"})
+           {:width            "3rem"
+            :height           "3rem"})
 
 (defstyles button [{bg-color   :bg-color
                     text-color :text-color}]
