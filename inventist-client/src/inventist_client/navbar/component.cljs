@@ -63,22 +63,20 @@
   [:div {:key      title
          :class    "collection-item"
          :style    {:height                collection-item-height
-                    :min-height            collection-item-height
+                    :max-height            collection-item-height
                     :color                 color/dark-context-primary-text
                     :width                 "auto"
                     :padding               "0.5rem 1rem"
                     :cursor                "pointer"
                     :display               "grid"
                     :grid-template-columns "1.5rem auto 2rem"
-                    :align-items           "start"
+                    :align-items           "center"
                     :background-color      (or color color/transparent)}
          :on-click on-click}
    [:i {:class icon
-        :style {:font-size  "1.25rem"
-                :align-self "center"}}]
+        :style {:font-size "1.25rem"}}]
 
    [:div {:style {:font-size   "1rem"
-                  :align-self  "center"
                   :font-weight "500"
                   :margin      "0 1rem"}}
     title
@@ -92,11 +90,14 @@
 
    ;Selected Item
    [:div {:draggable true
-          :style     {:background-color color/dark-context-secondary-text
-                      :width            "2rem" :height "2rem"
-                      :border-radius    "0.25rem"
-                      :cursor           "grab"
-                      :border           (str "1px solid " color/dark-context-title-text)}}]])
+          :style     {:background-color   color/dark-context-secondary-text
+                      :width              "2rem" :height "2rem"
+                      :border-radius      "0.25rem"
+                      :cursor             "grab"
+                      :box-sizing         "border-box"
+                      :-moz-box-sizing    "border-box"
+                      :-webkit-box-sizing "border-box"
+                      :border             (str "1px solid " color/dark-context-title-text)}}]])
 
 
 (def collections-list
@@ -206,10 +207,10 @@
                   :overflow-y                 "scroll"
                   :-webkit-overflow-scrolling "touch"
                   :flex-direction             "column"}}
-    (collections-view {:trigger-event trigger-event
-                       :current-path         current-path
-                       :collection-list      collections-list
-                       :collection-heading   "Collections"})]
+    (collections-view {:trigger-event      trigger-event
+                       :current-path       current-path
+                       :collection-list    collections-list
+                       :collection-heading "Collections"})]
 
    ;Footer - User-bar
    user-bar])
