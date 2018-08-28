@@ -19,15 +19,15 @@
         search-terms (:search-terms state)]
     (s-general/scrollable
       {:floating-header
-       [(second-column-header "People")
-        (-> (search-toolbar
-              {:search-field-value (core/get-free-text-search state)
-               :total-results      n-results
-               :on-change          (fn [e]
-                                     (trigger-event
-                                       (rem/create-event {:name :search-string-changed
-                                                          :data {:new-value (o/oget e [:target :value])}})))})
-            (with-key "Search-toolbar"))]
+       [:div
+        (second-column-header "People")
+        (search-toolbar
+          {:search-field-value (core/get-free-text-search state)
+           :total-results      n-results
+           :on-change          (fn [e]
+                                 (trigger-event
+                                   (rem/create-event {:name :search-string-changed
+                                                      :data {:new-value (o/oget e [:target :value])}})))})]
 
        :content
        (cond

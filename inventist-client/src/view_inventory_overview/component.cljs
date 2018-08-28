@@ -19,16 +19,16 @@
         search-terms (:search-terms state)]
     (s-general/scrollable
       {:floating-header
-       [(second-column-header "Inventory")
-        (-> (search-toolbar
-              {:search-field-value (core/get-free-text-search state)
-               :shown-results      (count limited-inventory)
-               :total-results      (count inventory)
-               :on-change          (fn [e]
-                                     (trigger-event
-                                       (rem/create-event {:name :search-string-changed
-                                                          :data {:new-value (o/oget e [:target :value])}})))})
-            (with-key 2))]
+       [:div
+        (second-column-header "Inventory")
+        (search-toolbar
+          {:search-field-value (core/get-free-text-search state)
+           :shown-results      (count limited-inventory)
+           :total-results      (count inventory)
+           :on-change          (fn [e]
+                                 (trigger-event
+                                   (rem/create-event {:name :search-string-changed
+                                                      :data {:new-value (o/oget e [:target :value])}})))})]
        :content
        (cond
          (:fetching-inventory-list state)
@@ -53,9 +53,9 @@
                    (fn [item]
                      [:div {:key      (:id item)
                             :on-click (fn [] (item-selected-event item))}
-                      (inventory-list-card {:item      item
-                                            :selected  (= (:selected-inventory-id state) (:id item))})]))))
-                                            ;:hidden    (not (core/inventory-matches item search-terms))})]))))
+                      (inventory-list-card {:item     item
+                                            :selected (= (:selected-inventory-id state) (:id item))})]))))
+          ;:hidden    (not (core/inventory-matches item search-terms))})]))))
 
           (when (= n-results 0)
             [:div {:style {:width            "100%"
