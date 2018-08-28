@@ -33,6 +33,7 @@
    [:span {:style {:align-self "start"
                    :text-align "right"
                    :font-size  "0.75rem"
+                   :opacity    "0.5"
                    :color      color/light-context-title-text}}
     (str "w." viewport-width "  h." viewport-height)]
 

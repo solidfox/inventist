@@ -22,8 +22,8 @@
                  :z-index         100}
                 style/box-shadow)}
 
-   [:span "No Internet Connection"]
-   [:i {:class "fas fa-times-circle"
-        :title "Close Alert"
-        :style {:margin-left "1rem"
-                :cursor      "pointer"}}]])
+   [:span "No Internet Connection"]])
+   ;[:i {:class "fas fa-times-circle"
+   ;     :title "Close Alert"
+   ;     :style {:margin-left "1rem"
+   ;             :cursor      "pointer"}}]])

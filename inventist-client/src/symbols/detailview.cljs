@@ -95,7 +95,7 @@
 
 (rum/defcs section-button < (hovered-mixin :hovered)
   [{:keys [hovered]}
-   {:keys [key content tooltip-text on-click]}]
+   {:keys [key content tooltip-text tooltip-position tooltip-align on-click scroll-to]}]
   [:div {:key      key
          :on-click on-click
          :style    {:position  "relative"
@@ -103,11 +103,11 @@
                     :font-size "1.25rem"
                     :cursor    "pointer"
                     :color     color/light-context-secondary-text}}
-   content
+   [:a {:href scroll-to} content]
    (when hovered
      (s-general/tooltip {:tooltip-text tooltip-text
-                         :position     "bottom"
-                         :alignment    "end"}))])
+                         :position     tooltip-position
+                         :alignment    tooltip-align}))])
 
 
 ;Information Section
@@ -121,7 +121,8 @@
                             viewport-width :viewport-width}]
 
   (cond (< viewport-width style/viewport-mobile)
-        [:div {:style {:display            "grid"
+        [:div {:id    "info"
+               :style {:display            "grid"
                        :height             "auto"
                        :width              "100%"
                        :grid-template-rows "6rem auto 1fr"
@@ -150,10 +151,13 @@
                         :flex-direction  "row"
                         :justify-content "center"}}
           (for [action actions]
-            (section-button {:key          (:title action)
-                             :content      [:i {:class (:icon action)}]
-                             :tooltip-text (:title action)
-                             :on-click     (:on-click action)}))]
+            (section-button {:key              (:title action)
+                             :content          [:i {:class (:icon action)}]
+                             :tooltip-text     (:title action)
+                             :tooltip-position "bottom"
+                             :tooltip-align    "start"
+                             :on-click         (:on-click action)
+                             :scroll-to        (:scroll-to action)}))]
          [:div {:style {:margin         "0.25rem 0 0"
                         :display        "flex"
                         :flex-direction "column"}
@@ -182,7 +186,8 @@
 
 
         :else                                               ;Desktop Viewport
-        [:div {:style {:display               "grid"
+        [:div {:id    "info"
+               :style {:display               "grid"
                        :width                 "100%"
                        :grid-template-columns "6rem auto"}}
          ;Image / Left Column
@@ -214,10 +219,12 @@
            [:div {:style {:display        "flex"
                           :flex-direction "row"}}
             (for [action actions]
-              (section-button {:key          (:title action)
-                               :content      [:i {:class (:icon action)}]
-                               :tooltip-text (:title action)
-                               :on-click     (:on-click action)}))]]
+              (section-button {:key              (:title action)
+                               :content          [:i {:class (:icon action)}]
+                               :tooltip-text     (:title action)
+                               :tooltip-position "bottom"
+                               :tooltip-align    "end"
+                               :on-click         (:on-click action)}))]]
 
 
           ;Information Details

@@ -49,11 +49,13 @@
                (str (:first-name person) " " (:last-name person))] [:br]
               [:span {:style style/card-subtitle}
                (str (:occupation person) " - " (str/join ", " (for [group (:groups person)] (:name group))))] [:br]
-              [:span {:style style/card-title}
+              [:span {:style (merge style/card-title
+                                    {:display   "flex"
+                                     :flex-wrap "wrap"})}
                (for [item (:inventory person)]
-                 [:span {:key   (:id item)
-                         :style {:margin    "0 1rem 0 0"
-                                 :font-size "0.75rem"}}
+                 [:div {:key   (:id item)
+                        :style {:margin    "0.1rem 0.5rem 0rem 0"
+                                :font-size "0.75rem"}}
                   (s-general/device-icon-set {:item item})])]]))
 
 ;Contractor-list card
@@ -75,6 +77,7 @@
 (defc inventory-list-card < {:key-fn (fn [{{id :id} :item}] id)}
   [{:keys [item
            selected
+           hidden
            on-select]}]
   (list-card {:selected selected
               :on-click on-select}
@@ -161,8 +164,6 @@
    [:div (str header-text)]])
 
 
-
-;Footer
 
 ;overview with search and listing
 (defc overview-list

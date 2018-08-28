@@ -51,6 +51,7 @@
        (not (has-good-get-people-list-response state))
        (not (waiting-for-retry-impulse state))))
 
+
 (defn receive-get-people-list-service-response [state response request]
   (-> state
       (assoc :get-people-list-response (-> (util/->clojure-keys response)
