@@ -8,13 +8,15 @@
             [inventist-client.page.inventory.core :as inventory-core]
             [clojure.string :as str]
             [util.inventory.core :as util]
-            [remodular.engine :as engine]))
+            [remodular.engine :as engine]
+            [collections.core :as collections]))
 
 (def authentication-state-path [:view-modules :authentication])
 (def inventory-page-state-path [:pages :inventory])
 (def people-page-state-path [:pages :people])
 (def dashboard-page-state-path [:pages :dashboard])
 (def contractors-page-state-path [:pages :contractors])
+(def inventory-collections-state-path [:view-modules :inventory-collections])
 
 (defn parse-path
   [path]
@@ -42,7 +44,8 @@
          (assoc-in inventory-page-state-path (inventory-page/create-state {:selected-inventory-id selected-inventory-id}))
          (assoc-in contractors-page-state-path (contractors-page/create-state))
          (assoc-in dashboard-page-state-path (dashboard-page/create-state))
-         (assoc-in people-page-state-path (people-page/create-state {:selected-person-id selected-person-id})))}))
+         (assoc-in people-page-state-path (people-page/create-state {:selected-person-id selected-person-id}))
+         (assoc-in inventory-collections-state-path (collections/create-state)))}))
 
 (defn get-selected-inventory-id [state] (:selected-inventory-id state))
 
@@ -94,6 +97,10 @@
 (defn create-contractors-page-args [state]
   {:input      {:state (get-in state contractors-page-state-path)}
    :state-path contractors-page-state-path})
+
+(defn create-inventory-collections-args [state]
+  {:input {:state (get-in state inventory-collections-state-path)}
+   :state-path inventory-collections-state-path})
 
 (defn get-authenticated-user [state]
   (auth/get-authenticated-user (get-in state authentication-state-path)))
