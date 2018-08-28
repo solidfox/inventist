@@ -6,6 +6,13 @@
   [_state event]
   (if (rem/triggered-by-me? event)
     (case (:name event)
+      :retry-fetching-data
+      (-> event
+          (rem/create-anonymous-event)
+          (rem/append-action
+            (rem/create-action {:name :retry-fetching-data
+                                :fn-and-args
+                                      [core/set-should-retry-on-fetch-error true]})))
       :search-string-changed
       (rem/append-action
         event
@@ -13,7 +20,7 @@
                             :fn-and-args
                                   [core/set-free-text-search (get-in event [:data :new-value])]}))
       :inventory-item-selected
-      (let [inventory (get-in event [:data :inventory])]
+      (let [inventory (get-in event [:data :item])]
         (-> event
             (rem/append-action
               (rem/create-action {:name :set-selected-inventory-id

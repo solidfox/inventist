@@ -24,8 +24,6 @@
          :style {:display               "grid"
                  :grid-gap              "0.5rem"
                  :grid-template-columns "1fr 3rem"}}
-   ;[:img {:class (style/card-image)
-   ;       :src "/image/person-m-placeholder.png"}]
    (s-general/input-section {:type      "textarea"
                              :width     "14rem"
                              :value     (or description "")

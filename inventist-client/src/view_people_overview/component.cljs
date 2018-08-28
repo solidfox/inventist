@@ -19,7 +19,8 @@
         search-terms (:search-terms state)]
     (s-general/scrollable
       {:floating-header
-       [(second-column-header "People")
+       [:div
+        (second-column-header "People")
         (search-toolbar
           {:search-field-value (core/get-free-text-search state)
            :total-results      n-results
@@ -52,9 +53,9 @@
                    (fn [person]
                      [:div {:key      (:id person)
                             :on-click (fn [] (person-selected-event person))}
-                      (person-list-card {:person person
+                      (person-list-card {:person   person
                                          :selected (= (:selected-person-id state) (:id person))
-                                         :hidden (not (core/person-matches person search-terms))})]))))
+                                         :hidden   (not (core/person-matches person search-terms))})]))))
           (when (= n-results 0)
             [:div {:style {:width            "100%"
                            :height           "100%"

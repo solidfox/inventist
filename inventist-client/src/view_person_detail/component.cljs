@@ -54,7 +54,12 @@
                                                :color      color/dark-context-primary-text}}
                                 (str (subs (or (:first-name person) "") 0 1) (subs (or (:last-name person) "") 0 1))])]
         :heading        (str (:first-name person) " " (:last-name person))
-        :actions        [{:icon     "fas fa-qrcode"
+        :actions        [{:icon      "fas fa-plus-circle"
+                          :title     "Assign New Device"
+                          :on-click  (fn [] (trigger-event (rem/create-event
+                                                             {:name :assign-new-device-clicked})))
+                          :scroll-to "#devices"}
+                         {:icon     "fas fa-qrcode"
                           :title    "QR Code"
                           :on-click ""}
                          {:icon     "far fa-share-square"
@@ -145,23 +150,28 @@
        (s-general/section-divider)]]
 
      ;Timeline
-     (s-general/section-title {:title   "Timeline"})
+     [:div {:id    "assignee"
+            :style {:margin-top  "0.5rem"
+                    :margin-left (cond (< viewport-width style/viewport-mobile) 0
+                                       :else "7.5rem")}}
+      (s-general/section-title {:title "Timeline"})
+      (cond (not= (:history person) [])
+            (s-general/timeline
+              {:viewport-width viewport-width
+               :timeline-items (for [history-item (reverse (sort-by (fn [history-item] (:instant history-item)) (:history person)))]
+                                 (-> (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-laptop"})
+                                                               :title    (str "Registered " (get-in history-item [:inventory-item :model-name]))
+                                                               :on-click (fn [] (trigger-event (event/clicked-device (get-in history-item [:inventory-item :id]))))
+                                                               :content  [:div (str (s-general/time-format-string {:time   (:instant history-item)
+                                                                                                                   :format "yyyy-MM-dd"}) " — "
+                                                                                    (get-in history-item [:inventory-item :serial-number]))]})
+                                     (with-key (:instant history-item))))})
+            :else
+            [:div {:style {:color      color/light-context-primary-text
+                           :font-style "italic"}}
+             "No history available"])]]))
 
-     (cond (not= (:history person) [])
-           (s-general/timeline
-             {:viewport-width viewport-width
-              :timeline-items (for [history-item (reverse (sort-by (fn [history-item] (:instant history-item)) (:history person)))]
-                                (-> (s-general/timeline-item {:icon     (s-general/circle-icon {:icon "fas fa-laptop"})
-                                                              :title    (str "Registered " (get-in history-item [:inventory-item :model-name]))
-                                                              :on-click (fn [] (trigger-event (event/clicked-device (get-in history-item [:inventory-item :id]))))
-                                                              :content  [:div (str (s-general/time-format-string {:time   (:instant history-item)
-                                                                                                                  :format "yyyy-MM-dd"}) " — "
-                                                                                   (get-in history-item [:inventory-item :serial-number]))]})
-                                    (with-key (:instant history-item))))})
-           :else
-           [:div {:style {:color      color/light-context-primary-text
-                          :font-style "italic"}}
-            "No history available"])]))
+
 
 
 

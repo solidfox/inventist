@@ -444,7 +444,9 @@
                        {:height             "100vh"
                         :width              "auto"
                         :display            "grid"
-                        :grid-template-rows "auto 1fr auto"})}
+                        :grid-template-rows "auto 1fr auto"
+                        :overflow-x         "hidden"
+                        :overflow-y         "hidden"})}
    floating-header
    [:div {:style {:overflow-x                 "hidden"
                   :overflow-y                 "scroll"

@@ -6,6 +6,7 @@
             [remodular.core :as rem]
             [oops.core :as o]
             [view-inventory-overview.event :as event]
+            [cljs-react-material-ui.icons :as icon]
             [symbols.general :as s-general]
             [util.inventory.core :as util]))
 
@@ -13,10 +14,13 @@
   [{{state :state} :input
     trigger-event  :trigger-event}]
   (let [inventory (core/filtered-inventory state)
-        limited-inventory (take 75 inventory)]
+        limited-inventory (take 75 inventory)
+        n-results (count limited-inventory)
+        search-terms (:search-terms state)]
     (s-general/scrollable
       {:floating-header
-       [(second-column-header "Inventory")
+       [:div
+        (second-column-header "Inventory")
         (search-toolbar
           {:search-field-value (core/get-free-text-search state)
            :shown-results      (count limited-inventory)
@@ -26,26 +30,65 @@
                                    (rem/create-event {:name :search-string-changed
                                                       :data {:new-value (o/oget e [:target :value])}})))})]
        :content
-       [:div {:style {:height           "auto"
-                      :background-color color/transparent
-                      :padding          "0.25rem"}}
-        (for [item limited-inventory]
-          (inventory-list-card {:item      item
-                                :selected  (= (:id item) (:selected-inventory-id state))
-                                :on-select (fn [] (trigger-event
-                                                    (rem/create-event
-                                                      {:name :inventory-item-selected
-                                                       :data {:inventory item}})))}))
-        (cond (not= (count inventory) 0)
-              nil
-              (:fetching-inventory-list state)
-              (s-general/centered-loading-indicator "inventory")
-              :else
-              [:div {:style {:width            "100%"
-                             :height           "100%"
-                             :color            color/shaded-context-primary-text
-                             :background-color color/transparent
-                             :text-align       "center"
-                             :margin-top       "2rem"}}
-               "No matches found!"])]})))
+       (cond
+         (:fetching-inventory-list state)
+         (s-general/centered-loading-indicator "inventory")
+         (core/get-inventory-list-failed? state)
+         (s-general/centered-message {:icon       (icon/alert-error-outline {:color color/shaded-context-primary-text
+                                                                             :style {:height "3rem"
+                                                                                     :width  "3rem"}})
+                                      :message    "Error while fetching inventory from server."
+                                      :text-color color/shaded-context-primary-text
+                                      :actions    (s-general/button {:text     "Retry"
+                                                                     :bg-color color/shaded-context-highlight-bg
+                                                                     :on-click (fn [] (trigger-event (rem/create-event {:name :retry-fetching-data})))})})
+         :else
+         [:div {:style {:height           "auto"
+                        :background-color color/transparent
+                        :padding          "0.25rem"}}
+          (let [item-selected-event (fn [item] (trigger-event (rem/create-event {:name :inventory-item-selected
+                                                                                 :data {:item item}})))]
+            (->> limited-inventory
+                 (map
+                   (fn [item]
+                     [:div {:key      (:id item)
+                            :on-click (fn [] (item-selected-event item))}
+                      (inventory-list-card {:item      item
+                                            :selected  (= (:selected-inventory-id state) (:id item))})]))))
+                                            ;:hidden    (not (core/inventory-matches item search-terms))})]))))
+                                            ;:on-select (fn [] (trigger-event
+                                            ;                    (rem/create-event
+                                            ;                      {:name :inventory-item-selected
+                                            ;                       :data {:inventory item}})))})]))))
+          (when (= n-results 0)
+            [:div {:style {:width            "100%"
+                           :height           "100%"
+                           :color            color/shaded-context-primary-text
+                           :background-color color/transparent
+                           :text-align       "center"
+                           :margin-top       "2rem"}}
+             "No matches found!"])])})))
+
+;[:div {:style {:height           "auto"
+;               :background-color color/transparent
+;               :padding          "0.25rem"}}
+; (for [item limited-inventory]
+;   (inventory-list-card {:item      item
+;                         :selected  (= (:id item) (:selected-inventory-id state))
+;                         :on-select (fn [] (trigger-event
+;                                             (rem/create-event
+;                                               {:name :inventory-item-selected
+;                                                :data {:inventory item}})))}))
+; (cond (not= (count inventory) 0)
+;       nil
+;       (:fetching-inventory-list state)
+;       (s-general/centered-loading-indicator "inventory")
+;       :else
+;       [:div {:style {:width            "100%"
+;                      :height           "100%"
+;                      :color            color/shaded-context-primary-text
+;                      :background-color color/transparent
+;                      :text-align       "center"
+;                      :margin-top       "2rem"}}
+;        "No matches found!"])]})))
 
