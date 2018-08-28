@@ -56,10 +56,7 @@
                       (inventory-list-card {:item      item
                                             :selected  (= (:selected-inventory-id state) (:id item))})]))))
                                             ;:hidden    (not (core/inventory-matches item search-terms))})]))))
-                                            ;:on-select (fn [] (trigger-event
-                                            ;                    (rem/create-event
-                                            ;                      {:name :inventory-item-selected
-                                            ;                       :data {:inventory item}})))})]))))
+
           (when (= n-results 0)
             [:div {:style {:width            "100%"
                            :height           "100%"
@@ -68,27 +65,4 @@
                            :text-align       "center"
                            :margin-top       "2rem"}}
              "No matches found!"])])})))
-
-;[:div {:style {:height           "auto"
-;               :background-color color/transparent
-;               :padding          "0.25rem"}}
-; (for [item limited-inventory]
-;   (inventory-list-card {:item      item
-;                         :selected  (= (:id item) (:selected-inventory-id state))
-;                         :on-select (fn [] (trigger-event
-;                                             (rem/create-event
-;                                               {:name :inventory-item-selected
-;                                                :data {:inventory item}})))}))
-; (cond (not= (count inventory) 0)
-;       nil
-;       (:fetching-inventory-list state)
-;       (s-general/centered-loading-indicator "inventory")
-;       :else
-;       [:div {:style {:width            "100%"
-;                      :height           "100%"
-;                      :color            color/shaded-context-primary-text
-;                      :background-color color/transparent
-;                      :text-align       "center"
-;                      :margin-top       "2rem"}}
-;        "No matches found!"])]})))
 
