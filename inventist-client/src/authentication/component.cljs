@@ -1,5 +1,5 @@
 (ns authentication.component
-  (:require [rum.core :refer [defc]]
+  (:require [rum.core :refer [defc with-key]]
             [rum.core :as rum]
             [remodular.core :as rem]
             [authentication.core :as core]
@@ -16,7 +16,7 @@
 (defn log-in-with-redirect
   []
   (let [google-auth-provider (oget firebase-auth :GoogleAuthProvider)
-        provider (new google-auth-provider)]
+        provider             (new google-auth-provider)]
     (js/console.log provider)
     (ocall (firebase-auth) :signInWithRedirect provider)))
 
@@ -55,8 +55,7 @@
     icon     :icon
     color    :color
     on-click :on-click}]
-  [:div {:key      0
-         :class    (style/user-bar-item)
+  [:div {:class    (style/user-bar-item)
          :style    {:min-height            menu-item-height
                     :color                 (or color color/light-context-primary-text)
                     :width                 "auto"
@@ -126,13 +125,16 @@
              :on-click (if expanded trigger-collapse trigger-expand)}
        [:i {:class "fas fa-bars"}]]]
      (expandable-user-menu {:expanded   expanded
-                            :menu-items [(user-menu-item {:title    "Profile"
-                                                          :icon     "far fa-user-circle"
-                                                          :on-click (fn [] (println "Profile"))})
-                                         (user-menu-item {:title    "Settings"
-                                                          :icon     "far fa-sun"
-                                                          :on-click (fn [] (println "Settings"))})
-                                         (user-menu-item {:title    "Logout"
-                                                          :icon     "fas fa-sign-out-alt"
-                                                          :color    color/danger
-                                                          :on-click log-out})]})]))
+                            :menu-items [(-> (user-menu-item {:title    "Profile"
+                                                              :icon     "far fa-user-circle"
+                                                              :on-click (fn [] (println "Profile"))})
+                                             (with-key "profile"))
+                                         (-> (user-menu-item {:title    "Settings"
+                                                              :icon     "far fa-sun"
+                                                              :on-click (fn [] (println "Settings"))})
+                                             (with-key "settings"))
+                                         (-> (user-menu-item {:title    "Logout"
+                                                              :icon     "fas fa-sign-out-alt"
+                                                              :color    color/danger
+                                                              :on-click log-out})
+                                             (with-key "logout"))]})]))

@@ -28,7 +28,8 @@
            hidden]}]
   (list-card {:selected selected
               :hidden   hidden}
-             [:div {:class (style/list-item-left-column)}
+             [:div {:key 1
+                    :class (style/list-item-left-column)}
               (cond (and (:image person) (not= (:image person) ""))
                     [:img {:src   (:image person)
                            :class (style/card-image)}]
@@ -43,7 +44,7 @@
                                     :text-align       "center"
                                     :color            color/shaded-context-highlight-bg}}
                      (str (subs (or (:first-name person) "") 0 1) (subs (or (:last-name person) "") 0 1))])]
-             [:div
+             [:div {:key 2}
               [:span {:style style/card-title}
                (str (:first-name person) " " (:last-name person))] [:br]
               [:span {:style style/card-subtitle}
@@ -71,12 +72,14 @@
      (str (:type contractor) " - " (count (:inventory contractor)) " Products")]]])
 
 ;Inventory-list card
-(defc inventory-list-card [{:keys [item
-                                   selected
-                                   on-select]}]
+(defc inventory-list-card < {:key-fn (fn [{{id :id} :item}] id)}
+  [{:keys [item
+           selected
+           on-select]}]
   (list-card {:selected selected
               :on-click on-select}
-             [:div {:class (style/list-item-left-column)
+             [:div {:key 1
+                    :class (style/list-item-left-column)
                     :style {:font-size "3rem"}}
               (cond (and (:photo item) (not= (:photo item) ""))
                     [:img {:class (style/card-image)
@@ -84,7 +87,8 @@
                     :else
                     (s-general/device-icon-set {:item item}))]
 
-             [:div {:style {:margin "0 0 0 1rem"
+             [:div {:key 2
+                    :style {:margin "0 0 0 1rem"
                             :width  "auto"}}
               [:span {:style style/card-title}
                (str (:brand item) " " (:model-name item))] [:br]
@@ -144,7 +148,8 @@
     [:div {:style {:cursor "pointer"}}
      (str "Sort Results")]]])
 
-(defc second-column-header [header-text]
+(defc second-column-header < {:key-fn (fn [header-text] (str header-text "-header"))}
+  [header-text]
   [:div {:style {:width       "auto"
                  :height      "3.5rem"
                  :padding     "0 1rem"

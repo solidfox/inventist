@@ -36,10 +36,11 @@
                                  (< (:viewport-width state) 800) {:width "100%"}))}
 
        (navigation/sidebar
-         {:sections        [(collections/collections-view {:trigger-event      trigger-event
-                                                           :current-path       (:path state)
-                                                           :collection-list    collections/collections-list
-                                                           :collection-heading "Collections"})]
+         {:sections        [(-> (collections/collections-view {:trigger-event      trigger-event
+                                                               :current-path       (:path state)
+                                                               :collection-list    collections/collections-list
+                                                               :collection-heading "Collections"})
+                                (with-key "main"))]
           :user-bar        (auth/user-bar (core/authentication-args state))
           :current-path    (:path state)
           :trigger-event   trigger-event

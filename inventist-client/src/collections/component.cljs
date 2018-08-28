@@ -64,9 +64,11 @@
 
 (def collections-list
   [{:title          "Dashboard"
+    :id             1
     :icon           "fas fa-tachometer-alt"
     :target-page-id :dashboard}
    {:title          "Inventory"
+    :id             2
     :icon           "fas fa-sitemap"
     :selected-item  {:name          "MacBook Pro (2011)"
                      :subtitle      "Serial Number"
@@ -74,6 +76,7 @@
                      :on-drag-enter ""}
     :target-page-id :inventory}
    {:title          "People"
+    :id             3
     :icon           "fas fa-users"
     :selected-item  {:photo         "/image/person-m-placeholder.png"
                      :name          "Daniel Schlaug"
@@ -127,6 +130,7 @@
 
    ;List
    (if expanded (for [{title          :title
+                       id             :id
                        icon           :icon
                        image          :image
                        on-click       :on-click
@@ -140,4 +144,4 @@
                                               (when (= (first current-path) target-page-id)
                                                 {:selected true
                                                  :color    color/dark-context-highlight-bg})))
-                      (with-key title))))])
+                      (with-key id))))])
