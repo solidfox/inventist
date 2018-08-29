@@ -20,7 +20,7 @@
 
     (rem/triggered-by-descendant-of-child? core/any-person-detail-state-path event)
     (case (:name event)
-      :show-inventory-item
+      :inventory-item-selected
       (rem/create-event event {:new-name (:name event) ;TODO Tomas: is this really the best naming?
                                :new-data (:data event)})
       (rem/create-anonymous-event event))

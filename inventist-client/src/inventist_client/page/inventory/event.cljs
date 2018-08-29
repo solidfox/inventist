@@ -9,10 +9,9 @@
     (rem/triggered-by-child? (core/inventory-overview-state-path) event)
     (case (:name event)
       :inventory-item-selected
-      (let [inventory-id (get-in event [:data :inventory-item-id])]
+      (let [inventory-id (get-in event [:data :inventory-item :id])]
         (-> event
-            (rem/create-event {:new-name :show-inventory-item
-                               :new-data {:inventory-item-id inventory-id}})
+            (rem/create-event)
             (rem/append-action
               (rem/create-action {:name        :set-selected-inventory-id
                                   :fn-and-args [core/set-selected-inventory-id inventory-id]}))))

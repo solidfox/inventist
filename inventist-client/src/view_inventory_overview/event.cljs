@@ -13,20 +13,22 @@
             (rem/create-action {:name :retry-fetching-data
                                 :fn-and-args
                                       [core/set-should-retry-on-fetch-error true]})))
+
       :search-string-changed
       (rem/append-action
         event
         (rem/create-action {:name :search-string-changed
                             :fn-and-args
                                   [core/set-free-text-search (get-in event [:data :new-value])]}))
+
       :inventory-item-selected
-      (let [inventory (get-in event [:data :item])]
+      (let [inventory-item (get-in event [:data :item])]
         (-> event
             (rem/append-action
-              (rem/create-action {:name :set-selected-inventory-id
-                                  :fn-and-args [core/set-selected-inventory-id (:id inventory)]}))
+              (rem/create-action {:name        :set-selected-inventory-id
+                                  :fn-and-args [core/set-selected-inventory-id (:id inventory-item)]}))
             (rem/create-event {:new-name :inventory-item-selected
-                               :new-data {:inventory-item-id (:id inventory)}})))
+                               :new-data {:inventory-item inventory-item}})))
       (rem/create-anonymous-event event))
 
     event))

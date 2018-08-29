@@ -21,7 +21,7 @@
 
    ;School Logo
    [:img {:src      "/image/GHS-logotype-horizontal.svg"
-          :on-click (fn [] (trigger-event (client-event/clicked-navigation-icon {:target-page-id :dashboard})))
+          :on-click (fn [] (trigger-event (client-event/clicked-navigation-icon {:target-path "/dashboard"})))
           :style    {:height         "100%"
                      :maxWidth       "10rem"
                      :grid-row-start 1
@@ -39,7 +39,7 @@
 
    ;Inventist Logo
    [:img {:src      "/image/inventist-logo.svg"
-          :on-click (fn [] (trigger-event (client-event/clicked-navigation-icon {:target-page-id :dashboard})))
+          :on-click (fn [] (trigger-event (client-event/clicked-navigation-icon {:target-path "/dashboard"})))
           :style    {:width          "100%"
                      :align-self     "end"
                      :grid-row-start 2

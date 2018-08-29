@@ -45,7 +45,7 @@
          (assoc-in contractors-page-state-path (contractors-page/create-state))
          (assoc-in dashboard-page-state-path (dashboard-page/create-state))
          (assoc-in people-page-state-path (people-page/create-state {:selected-person-id selected-person-id}))
-         (assoc-in inventory-collections-state-path (collections/create-state)))}))
+         (assoc-in inventory-collections-state-path (collections/create-state {:heading "Collections"})))}))
 
 (defn get-selected-inventory-id [state] (:selected-inventory-id state))
 
@@ -111,7 +111,8 @@
 
 (defn set-active-page
   [state page-id]
-  (assoc state :path [page-id]))
+  (-> state
+      (assoc :path [page-id])))
 
 (defn set-path [state path & [push-state?]]
   (let [{selected-inventory-id :selected-inventory-id
@@ -121,6 +122,9 @@
       :inventory
       (show-inventory-item state selected-inventory-id)
       (set-active-page state page))))
+
+(defn set-inventory-collection-selected-item [state inventory-item]
+  (update-in state inventory-collections-state-path collections/set-all-inventory-collection-selected-item inventory-item))
 
 (defn on-remote-state-mutation
   [state remote-state-uri]

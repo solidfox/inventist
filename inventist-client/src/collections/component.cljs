@@ -3,6 +3,7 @@
             [rum.core :as rum]
             [remodular.core :as rem]
             [collections.core :as core]
+            [collections.event :as event]
             [symbols.color :as color]
             [clojure.string :refer [lower-case upper-case]]
             [cljs-react-material-ui.rum :as ui]
@@ -63,85 +64,77 @@
                       :border             (str "1px solid " color/dark-context-title-text)}}]])
 
 (def collections-list
-  [{:title          "Dashboard"
-    :id             1
-    :icon           "fas fa-tachometer-alt"
-    :target-page-id :dashboard}
-   {:title          "Inventory"
-    :id             2
-    :icon           "fas fa-sitemap"
-    :selected-item  {:name          "MacBook Pro (2011)"
-                     :subtitle      "Serial Number"
-                     :photo         "https://static.bhphoto.com/images/images500x500/apple_z0rf_mjlq23_b_h_15_4_macbook_pro_notebook_1432050588000_1151716.jpg"
-                     :on-drag-enter ""}
-    :target-page-id :inventory}
-   {:title          "People"
-    :id             3
-    :icon           "fas fa-users"
-    :selected-item  {:photo         "/image/person-m-placeholder.png"
-                     :name          "Daniel Schlaug"
-                     :subtitle      "Admin"
-                     :on-drag-enter ""}
-    :target-page-id :people}])
+  [{:title "Dashboard"
+    :icon  "fas fa-tachometer-alt"
+    :id    :dashboard}
+   {:title         "Inventory"
+    :icon          "fas fa-sitemap"
+    :id            :inventory}
+   {:title         "People"
+    :icon          "fas fa-users"
+    :id            :people}])
 
 
-(rum/defcs collections-view < (toggle-mixin {:toggle-state-key :expanded
+(rum/defcs collections-view < (rem/modular-component event/handle-event)
+                              (toggle-mixin {:toggle-state-key :expanded
                                              :initial-state    true
                                              :on-fn-key        :trigger-expand
                                              :off-fn-key       :trigger-collapse})
   [{:keys [expanded trigger-expand trigger-collapse]}
-   {trigger-event   :trigger-event
-    current-path    :current-path
-    collection-list :collection-list
-    heading         :collection-heading}]
-  [:div {:style {:height         "auto"
-                 :text-align     "left"
-                 :display        "flex"
-                 :flex-direction "column"}}
-   ;Heading
-   [:div {:id    heading
-          :style {:height                collection-item-height
-                  :min-height            collection-item-height
-                  :color                 color/dark-context-title-text
-                  :width                 "auto"
-                  :margin-top            "1.5rem"
-                  :padding               "0 1rem"
-                  :display               "grid"
-                  :grid-template-columns "auto 1rem 1.5rem"
-                  :grid-gap              "1rem"
-                  :align-items           "center"
-                  :font-size             "1rem"
-                  :cursor                "pointer"
-                  :background-color      color/transparent}}
+   {{:keys [state]} :input
+    :keys           [trigger-event]}]
+  (let [heading                (:heading state)
+        collection-list        collections-list
+        selected-collection-id (:selected-collection-id state)]
+    [:div {:style {:height         "auto"
+                   :text-align     "left"
+                   :display        "flex"
+                   :flex-direction "column"}}
+     ;Heading
+     [:div {:id    heading
+            :style {:height                collection-item-height
+                    :min-height            collection-item-height
+                    :color                 color/dark-context-title-text
+                    :width                 "auto"
+                    :margin-top            "1.5rem"
+                    :padding               "0 1rem"
+                    :display               "grid"
+                    :grid-template-columns "auto 1rem 1.5rem"
+                    :grid-gap              "1rem"
+                    :align-items           "center"
+                    :font-size             "1rem"
+                    :cursor                "pointer"
+                    :background-color      color/transparent}}
 
-    [:div {:style    {:font-weight    "500"
-                      :letter-spacing "2px"}
-           :on-click (if expanded trigger-collapse trigger-expand)}
-     (upper-case heading)]
+      [:div {:style    {:font-weight    "500"
+                        :letter-spacing "2px"}
+             :on-click (if expanded trigger-collapse trigger-expand)}
+       (upper-case heading)]
 
-    [:i {:class "fas fa-plus-circle"
-         :title "Add New"}]
-    [:div {:style    {:text-align "center"}
-           :on-click (if expanded trigger-collapse trigger-expand)}
-     [:img {:src   "/image/arrow.svg"
-            :style {:height    "0.8rem"
-                    :opacity   "0.9"
-                    :transform (if expanded "" "rotate(90deg)")}}]]]
+      [:i {:class "fas fa-plus-circle"
+           :title "Add New"}]
+      [:div {:style    {:text-align "center"}
+             :on-click (if expanded trigger-collapse trigger-expand)}
+       [:img {:src   "/image/arrow.svg"
+              :style {:height    "0.8rem"
+                      :opacity   "0.9"
+                      :transform (if expanded "" "rotate(90deg)")}}]]]
 
-   ;List
-   (if expanded (for [{title          :title
-                       id             :id
-                       icon           :icon
-                       image          :image
-                       on-click       :on-click
-                       target-page-id :target-page-id} collection-list]
-                  (-> (collection-item (merge {:title    title
-                                               :icon     icon
-                                               :image    image
-                                               :on-click (or on-click (fn []
-                                                                        (trigger-event (client-event/clicked-navigation-icon
-                                                                                         {:target-page-id target-page-id}))))}
-                                              (when (= (first current-path) target-page-id)
-                                                {:selected true
-                                                 :color    color/dark-context-highlight-bg})))
-                      (with-key id))))])
+     ;List
+     (when expanded
+       (for [{title          :title
+              collection-id  :id
+              icon           :icon
+              image          :image
+              target-page-id :target-page-id} collection-list]
+         (-> (collection-item (merge {:title    title
+                                      :icon     icon
+                                      :image    image
+                                      :on-click (fn []
+                                                  (trigger-event (rem/create-event
+                                                                   {:name :clicked-collection
+                                                                    :data {:collection-id collection-id}})))}
+                                     (when (= selected-collection-id collection-id)
+                                       {:selected true
+                                        :color    color/dark-context-highlight-bg})))
+             (with-key collection-id))))]))
