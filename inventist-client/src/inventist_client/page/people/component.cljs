@@ -37,7 +37,6 @@
 
       (s-detailview/no-selection-view {:viewport-height viewport-height
                                        :viewport-width  viewport-width
-                                       :image-url       "/image/ghs-logotype.svg"
                                        :heading         "No person selected."
                                        :sub-heading     "Use the side-bar to search and select a person to view details."}))]])
 

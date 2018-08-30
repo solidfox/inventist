@@ -12,21 +12,8 @@
 
 (defc dashboard-detail < (modular-component)
   [{{state :state} :input
-    trigger-event  :trigger-event}]
-  [:div {:id    "detail-container"
-         :style {:height             "100%"
-                 :display            "grid"
-                 :grid-template-rows "auto 1fr"}}
-   ;Error text
-   [:div {:style {:width      "100%"
-                  :height     "100%"
-                  :color      color/light-context-secondary-text
-                  :text-align "left"
-                  :margin     "2.5rem 0"}}
-    "This is the Inventist Dashboard." [:br]
-    "Students & Staff with a \"gripsholmsskolan.se\" email address will be able to see their infromation and registered devices." [:br] [:br]
-    "You are logged-in with a external mail-id." [:br]
-    "For non-gripsholmsskolan.se visitors, click on other sections like \"People\" and \"Inventory\" to view other's details." [:br]]])
+    trigger-event  :trigger-event}])
+
 
 
 

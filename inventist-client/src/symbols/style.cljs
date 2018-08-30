@@ -1,6 +1,7 @@
 (ns symbols.style
   (:require
     [symbols.color :as color]
+    [symbols.branding :as branding]
     [cljss.core :as cljss])
   (:require-macros
     [cljss.core :refer [defstyles]]))
@@ -14,7 +15,7 @@
 
 (def box-shadow {:box-shadow (str "0 0 0.25rem " color/shadow)})
 
-(def watermark {:background-image    "url(\"/image/GHS-watermark.svg\")"
+(def watermark {:background-image    (str "url(" branding/logo-watermark-url ")")
                 :background-position "50%"
                 :background-size     "10rem"
                 :background-repeat   "no-repeat"})

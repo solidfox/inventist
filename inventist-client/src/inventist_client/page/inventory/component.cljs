@@ -33,7 +33,6 @@
                           :viewport-width viewport-width))
       (s-detailview/no-selection-view {:viewport-height viewport-height
                                        :viewport-width  viewport-width
-                                       :image-url       "/image/ghs-logotype.svg"
                                        :heading         "No item selected."
                                        :sub-heading     "Use the side-bar to search and select a item to view details."
                                        :learn-more-link "#"}))]])

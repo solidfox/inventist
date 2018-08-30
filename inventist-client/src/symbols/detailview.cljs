@@ -3,6 +3,7 @@
             [symbols.general :as s-general]
             [symbols.color :as color]
             [symbols.style :as style]
+            [symbols.branding :as branding]
             [rum.core :as rum]
             [util.inventory.core :as util]
             [clojure.string :refer [lower-case upper-case]]
@@ -273,7 +274,7 @@
                           sub-heading     :sub-heading
                           learn-more-link :learn-more-link}]
   [:div {:id    "no-selection-view"
-         :style {:height             viewport-height
+         :style {:height             (or viewport-height "auto")
                  :width              "auto"
                  :margin             "2rem"
                  :display            "grid"
@@ -282,7 +283,7 @@
                  :text-align         "center"}}
 
    [:div {:style {:align-self "end"}}
-    [:img {:src    image-url
+    [:img {:src    (or image-url branding/logo-default-url)
            :height "250rem"}]]
 
    ;Divider
@@ -293,6 +294,7 @@
                   :color      color/light-context-secondary-text}}
     [:h3 {:style {:color       color/light-context-primary-text
                   :font-weight "500"}}
-     (upper-case heading)]
-    [:span sub-heading] [:br] [:br]
-    [:span [:a {:href (or learn-more-link "#")} "Learn More."]]]])
+     (upper-case (or heading "Nothing to show here"))]
+    [:span (or sub-heading "Select something to show the details here.")]
+    [:br] [:br]
+    (when learn-more-link [:a {:href learn-more-link} "Learn More."])]])
