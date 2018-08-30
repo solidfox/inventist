@@ -20,7 +20,7 @@
                  :grid-template-rows    "1rem 1.5rem"}}
 
    ;School Logo
-   [:img {:src      "/image/GHS-logotype-horizontal.svg"
+   [:img {:src      "/image/ghs-logotype-horizontal.svg"
           :on-click (fn [] (trigger-event (client-event/clicked-navigation-icon {:target-path "/dashboard"})))
           :style    {:height         "100%"
                      :maxWidth       "10rem"

@@ -67,12 +67,12 @@
   [{:title "Dashboard"
     :icon  "fas fa-tachometer-alt"
     :id    :dashboard}
-   {:title         "Inventory"
-    :icon          "fas fa-sitemap"
-    :id            :inventory}
-   {:title         "People"
-    :icon          "fas fa-users"
-    :id            :people}])
+   {:title "Inventory"
+    :icon  "fas fa-sitemap"
+    :id    :inventory}
+   {:title "People"
+    :icon  "fas fa-users"
+    :id    :people}])
 
 
 (rum/defcs collections-view < (rem/modular-component event/handle-event)
@@ -83,8 +83,8 @@
   [{:keys [expanded trigger-expand trigger-collapse]}
    {{:keys [state]} :input
     :keys           [trigger-event]}]
-  (let [heading                (:heading state)
-        collection-list        collections-list
+  (let [heading (:heading state)
+        collection-list collections-list
         selected-collection-id (:selected-collection-id state)]
     [:div {:style {:height         "auto"
                    :text-align     "left"

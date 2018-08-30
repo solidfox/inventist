@@ -19,9 +19,9 @@
          :style {:height                viewport-height
                  :display               "grid"
                  :grid-template-columns "20rem 1fr"
-                                        ;(cond (< viewport-width style/viewport-mobile)
-                                        ;      (str "20rem " (- style/viewport-mobile 640) "px")
-                                        ;      :else "20rem 1fr") ;320x3
+                 ;(cond (< viewport-width style/viewport-mobile)
+                 ;      (str "20rem " (- style/viewport-mobile 640) "px")
+                 ;      :else "20rem 1fr") ;320x3
                  :grid-template-rows    "100%"}}
    (people-list (assoc (core/create-people-overview-args state)
                   :trigger-parent-event trigger-event))
@@ -34,19 +34,11 @@
                        :trigger-parent-event trigger-event
                        :viewport-height viewport-height
                        :viewport-width viewport-width))
-      [:div {:id    "detail-container"
-             :style (merge style/watermark
-                           {:height             viewport-height
-                            :display            "grid"
-                            :grid-template-rows "1fr"})}
 
-       ;Error text
-       [:div {:style {:width      viewport-height
-                      :height     "100%"
-                      :color      color/light-context-secondary-text
-                      :text-align "left"
-                      :margin     "3.5rem 1.5rem"}}
-        "No person selected. Use the side-bar to" [:br]
-        "search and select a person to view details."]])]])
+      (s-detailview/no-selection-view {:viewport-height viewport-height
+                                       :viewport-width  viewport-width
+                                       :image-url       "/image/ghs-logotype.svg"
+                                       :heading         "No person selected."
+                                       :sub-heading     "Use the side-bar to search and select a person to view details."}))]])
 
 
