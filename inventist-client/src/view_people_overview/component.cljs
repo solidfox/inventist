@@ -46,7 +46,7 @@
          [:div {:style {:height           "auto"
                         :background-color color/transparent
                         :padding          "0.25rem"}}
-          (let [person-selected-event (fn [person] (trigger-event (rem/create-event {:name :person-selected
+          (let [person-selected-event (fn [person] (trigger-event (rem/create-event {:name :selected-person
                                                                                      :data {:person person}})))]
             (->> people
                  (map

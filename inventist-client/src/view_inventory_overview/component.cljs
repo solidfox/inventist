@@ -71,7 +71,7 @@
          [:div {:style {:height           "auto"
                         :background-color color/transparent
                         :padding          "0.25rem"}}
-          (let [item-selected-event (fn [item] (trigger-event (rem/create-event {:name :inventory-item-selected
+          (let [item-selected-event (fn [item] (trigger-event (rem/create-event {:name :selected-inventory-item
                                                                                  :data {:item item}})))]
             (->> limited-inventory
                  (map

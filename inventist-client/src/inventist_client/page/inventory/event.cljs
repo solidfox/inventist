@@ -8,7 +8,7 @@
   (cond
     (rem/triggered-by-child? (core/inventory-overview-state-path) event)
     (case (:name event)
-      :inventory-item-selected
+      :selected-inventory-item
       (let [inventory-id (get-in event [:data :inventory-item :id])]
         (-> event
             (rem/create-event)
@@ -19,7 +19,7 @@
 
     (rem/triggered-by-descendant-of-child? core/any-inventory-detail-state-path event)
     (case (:name event)
-      :show-person
+      :selected-person
       (-> event
           (rem/create-event {:new-name (:name event)        ;TODO Tomas: is this really the best naming?
                              :new-data (:data event)}))

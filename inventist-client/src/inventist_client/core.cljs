@@ -61,22 +61,6 @@
                    (:selected-person-id state)])
     "/"))
 
-(defn show-inventory-item [state inventory-item-id]
-  (-> state
-      (assoc :selected-inventory-id inventory-item-id)
-      (assoc :path [:inventory])
-      (update-in inventory-page-state-path
-                 inventory-core/set-selected-inventory-id
-                 inventory-item-id)))
-
-(defn show-person [state person-id]
-  (-> state
-      (assoc :selected-person-id person-id)
-      (assoc :path [:people])
-      (update-in people-page-state-path
-                 people-page/set-selected-person-id
-                 person-id)))
-
 (defn authentication-args [state]
   {:input      {:state (get-in state authentication-state-path)}
    :state-path authentication-state-path})
@@ -99,7 +83,7 @@
    :state-path contractors-page-state-path})
 
 (defn create-inventory-collections-args [state]
-  {:input {:state (get-in state inventory-collections-state-path)}
+  {:input      {:state (get-in state inventory-collections-state-path)}
    :state-path inventory-collections-state-path})
 
 (defn get-authenticated-user [state]
@@ -112,7 +96,25 @@
 (defn set-active-page
   [state page-id]
   (-> state
-      (assoc :path [page-id])))
+      (assoc :path [page-id])
+      (update-in inventory-collections-state-path
+                 collections/set-selected-collection-id page-id)))
+
+(defn show-inventory-item [state inventory-item-id]
+  (-> state
+      (assoc :selected-inventory-id inventory-item-id)
+      (set-active-page :inventory)
+      (update-in inventory-page-state-path
+                 inventory-core/set-selected-inventory-id
+                 inventory-item-id)))
+
+(defn show-person [state person-id]
+  (-> state
+      (assoc :selected-person-id person-id)
+      (set-active-page :people)
+      (update-in people-page-state-path
+                 people-page/set-selected-person-id
+                 person-id)))
 
 (defn set-path [state path & [push-state?]]
   (let [{selected-inventory-id :selected-inventory-id
@@ -124,7 +126,11 @@
       (set-active-page state page))))
 
 (defn set-inventory-collection-selected-item [state inventory-item]
-  (update-in state inventory-collections-state-path collections/set-all-inventory-collection-selected-item inventory-item))
+  (update-in state
+             inventory-collections-state-path
+             collections/set-selected-collection-item
+             :inventory
+             inventory-item))
 
 (defn on-remote-state-mutation
   [state remote-state-uri]

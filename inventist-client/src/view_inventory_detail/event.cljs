@@ -77,7 +77,7 @@
 
       :clicked-user
       (-> event
-          (rem/create-event {:new-name :show-person
+          (rem/create-event {:new-name :selected-person
                              :new-data {:person-id (get-in event [:data :user-id])}})))))
 
 

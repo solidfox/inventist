@@ -48,7 +48,7 @@
           (rem/create-anonymous-event))
       :clicked-device
       (rem/create-event event
-                        {:new-name :inventory-item-selected
+                        {:new-name :selected-inventory-item
                          :new-data {:inventory-item-id (get-in event [:data :device-id])}}))))
 
 
