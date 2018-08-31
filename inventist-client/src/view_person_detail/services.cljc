@@ -1,17 +1,8 @@
 (ns view-person-detail.services
   (:require [view-person-detail.core :as core]
             [ysera.test :refer [is=]]
-            [util.inventory.core :as util]))
-
-(def reallocation-fragment
-  [{:fragment/name   :fragment/person-history-reallocation
-    :fragment/type   :Reallocation
-    :fragment/fields [:instant
-                      [:inventory_item [:id
-                                        :brand
-                                        :model-name
-                                        :model-identifier
-                                        :serial-number]]]}])
+            [util.inventory.core :as util]
+            [util.inventory.services :as inventory-services]))
 
 (def inventroy-details-graph-ql
   [:id
@@ -47,26 +38,18 @@
   {:name   :get-person-details
    :before [core/started-get-person-detail-service-call]
    :data   {:url    "http://backend.inventory.gripsholmsskolan.se:8888/graphql"
-            :params {:query (util/graphql-string {:fragments reallocation-fragment
+            :params {:query (util/graphql-string {:fragments inventory-services/reallocation-fragment
                                                   :queries   [[:person {:id person-id} person-details-graphql]]})}}
    :after  [core/receive-get-person-detail-service-response]})
 
 (defn reassign-inventory-item
   [{serial-number :serial-number
     new-user-id   :new-user-id}]
-  {:name                  :reassign-inventory-item
-   :remote-state-mutation true
-   :before                [core/started-reassign-inventory-item-service-call {:serial-number serial-number}]
-   :data                  {:url    "http://backend.inventory.gripsholmsskolan.se:8888/graphql"
-                           :params {:query
-                                    (util/graphql-string
-                                      {:operation {:operation/type :mutation
-                                                   :operation/name "ReassignDevice"}
-                                       :fragments reallocation-fragment
-                                       :queries   [[:set-user-of-inventory-item {:inventory-item-serial-number serial-number
-                                                                                 :new-user-id                  new-user-id}
-                                                    [[:new-user person-details-graphql]]]]})}}
-   :after                 [core/receive-reassign-inventory-item-service-response]})
+  (inventory-services/reassign-inventory-item {:serial-number      serial-number
+                                               :new-user-id        new-user-id
+                                               :new-user-graphql   person-details-graphql
+                                               :before-fn-and-args [core/started-reassign-inventory-item-service-call {:serial-number serial-number}]
+                                               :after-fn-and-args  [core/receive-reassign-inventory-item-service-response]}))
 
 
 (defn get-services
