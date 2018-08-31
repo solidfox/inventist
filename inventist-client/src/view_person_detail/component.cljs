@@ -29,9 +29,7 @@
            :style {:height          (str (- (js/parseInt viewport-height) 48) "px")
                    :overflow-x      "hidden"
                    :overflow-y      "scroll"
-                   :padding         "1.5rem"
-                   :z-index         style/z-index-details-section
-                   :backgroundColor color/light-context-background}}
+                   :padding         "1.5rem"}}
 
 
      ;Detailed Information

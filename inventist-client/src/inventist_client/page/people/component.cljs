@@ -25,6 +25,7 @@
                  :grid-template-rows    "100%"}}
    (people-list (assoc (core/create-people-overview-args state)
                   :trigger-parent-event trigger-event))
+
    [:div {:style (merge
                    {:background-color color/light-context-background}
                    style/z-index-details-section
@@ -37,7 +38,7 @@
 
       (s-detailview/no-selection-view {:viewport-height viewport-height
                                        :viewport-width  viewport-width
-                                       :heading         "No person selected."
+                                       :heading         "No person selected"
                                        :sub-heading     "Use the side-bar to search and select a person to view details."}))]])
 
 
