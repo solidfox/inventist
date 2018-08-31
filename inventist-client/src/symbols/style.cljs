@@ -40,6 +40,7 @@
                    :font-weight    "300"
                    :text-transform "capitalize"})
 
+;Bounce-in animation
 (def cubic-bezier "cubic-bezier(0.215, 0.61, 0.355, 1)")
 (defkeyframes bounce-in []
               {:from {:animation-timing-function cubic-bezier}
@@ -58,6 +59,7 @@
                :to   {:opacity                   1
                       :transform                 "scale3d(1, 1, 1)"
                       :animation-timing-function cubic-bezier}})
+(def bounce-animation (str (bounce-in) " 750ms ease 1"))
 
 (defstyles user-bar-item []
            {:opacity 0.75

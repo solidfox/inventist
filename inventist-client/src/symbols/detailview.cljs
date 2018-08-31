@@ -190,7 +190,7 @@
                    on-change   :on-change
                    on-enter    :on-enter
                    on-click    :on-click}]
-  [:div {:style {:animation (str (style/bounce-in) " 750ms ease 1")}}
+  [:div {:style {:animation style/bounce-animation}}
    (card {:id      id
           :content [:div {:style {:display         "flex"
                                   :width           "18.5rem"

@@ -21,7 +21,7 @@
     trigger-event                                            :trigger-event}]
   [:div {:id    "report-issue"
          :class (style/card)
-         :style {:animation             (str (style/bounce-in) " 750ms ease 1")
+         :style {:animation             style/bounce-animation
                  :display               "grid"
                  :grid-gap              "0.5rem"
                  :grid-template-columns "1fr 3rem"}}
