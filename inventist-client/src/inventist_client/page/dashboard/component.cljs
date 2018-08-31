@@ -23,11 +23,10 @@
    (dashboard-stats)
 
    [:div {:id    (str ::component-id)
-          :style (merge style/watermark
-                        {:height             viewport-height
-                         :display            "grid"
-                         :padding            "1.5rem"
-                         :grid-template-rows "auto 1fr"})}
+          :style {:height             viewport-height
+                  :display            "grid"
+                  :padding            "1.5rem"
+                  :grid-template-rows "auto 1fr"}}
 
     ;Toolbar
     (s-general/button {:color    color/light-context-primary-text
@@ -35,7 +34,10 @@
                        :bg-color color/light-context-highlight-bg
                        :icon     "fas fa-pen-square"
                        :on-click (fn [] (js/parent.open applescript))})
-    (dashboard-detail (core/create-dashboard-detail-args state "mock-dashboard-id"))]])
+
+    (s-detailview/no-selection-view {:heading     "You are logged-in with an external mail-id."
+                                     :sub-heading "For non-gripsholmsskolan.se visitors, click on other sections like \"People\" and \"Inventory\" to view other's details."})]])
+;(dashboard-detail (core/create-dashboard-detail-args state "mock-dashboard-id"))]])
 
 
 

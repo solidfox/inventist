@@ -3,95 +3,13 @@
             [symbols.general :as s-general]
             [symbols.color :as color]
             [symbols.style :as style]
+            [symbols.branding :as branding]
             [rum.core :as rum]
             [util.inventory.core :as util]
+            [clojure.string :refer [lower-case upper-case]]
             [symbols.mixin :refer [hovered-mixin]]))
 
 (def field-col-width "10rem")
-
-;Breadcrumb
-(defc breadcrumb [{type :type
-                   item :item}]
-  [:div {:style {:margin "0.75rem 2.5rem" :cursor "pointer"}}
-   (cond
-     (= type "back")
-     [:span (s-general/button {:color color/white
-                               :icon  "fas fa-arrow-circle-left"
-                               :title "Go Back"})]
-     (= type "dashboard")
-     [:span "Hi " (:first-name item) " " (:last-name item) ", welcome to Inventist."]
-     :else
-     [:span
-      ;2-Main Navigation
-      [:span {:style {:opacity "0.75"
-                      :margin  "0 0.5rem 0 0"}}
-       (cond (= type "people") "People"
-             (= type "inventory") "Inventory"
-             (= type "contractors") "Contractors")]
-      [:span {:style {:opacity "0.75"
-                      :margin  "0 0.5rem 0 0"}} "/"]
-      ;3-Current Item
-      (when item [:span
-                  (cond (= type "people") [:span (str (:first-name item) " " (:last-name item))]
-                        (= type "inventory") [:span
-                                              (str (:brand item) " " (:model-name item))]
-                        (= type "contractors") [:span (str (:name item))])])])])
-
-;Toolbar contains breadcrumb and action-buttons
-(defc toolbar [{items-left  :items-left
-                items-right :items-right}]
-  [:div {:style {:height          "3rem"
-                 :backgroundColor color/grey-dark
-                 :display         "flex"
-                 :justify-content "space-between"
-                 :align-items     "center"
-                 :color           color/dark-context-title-text}}
-   [:div {:style {:display "flex"}}
-    ;(s-general/button-light {:icon "fas fa-arrow-circle-left"}) ;back button for mobile view
-    items-left]                                             ;breadcrumb for desktop view
-   [:div {:style {:display        "flex"
-                  :flex-direction "row"
-                  :margin         "0 1rem"}}
-    items-right]])
-
-;Page Header - Image and Heading - Contractors Only
-(defc detail-header [{edit-mode     :edit-mode
-                      on-change     :on-change
-                      image         :image
-                      heading       :heading
-                      sub-heading-1 :sub-heading-1
-                      sub-heading-2 :sub-heading-2}]
-  [:div {:style {:margin "2.5rem 2.5rem 0" :display "flex" :flex-direction "row"}
-         :id    "header"}
-   [:div [:img {:src   (cond (and image (not= image "")) image
-                             :else "/image/no-image.png")
-                :style {:width        "6rem"
-                        :height       "6rem"
-                        :borderRadius "1rem"
-                        :object-fit   "cover" :backgroundColor color/grey-light}}]]
-   [:div {:style {:margin "0 0 0 1rem"}}
-    [:span {:style style/header-title}
-     (cond (= edit-mode true)
-           (s-general/input-field {:value       heading
-                                   :placeholder "Name"
-                                   :on-change   ""
-                                   :style       {:height         "3rem"
-                                                 :font-size      "2rem"
-                                                 :color          color/black
-                                                 :font-weight    "300"
-                                                 :minWidth       "40rem"
-                                                 :text-transform "capitalize"}})
-           :else heading)]
-    [:br]
-    [:span {:style {:font-weight    "400"
-                    :color          color/grey-blue
-                    :text-transform "capitalize"}}
-     (cond (= edit-mode true)
-           (s-general/input-field {:value       sub-heading-1
-                                   :placeholder "Type"
-                                   :on-change   ""})
-           :else
-           sub-heading-1 [:br] sub-heading-2)]]])
 
 (rum/defcs section-button < (hovered-mixin :hovered)
   [{:keys [hovered]}
@@ -108,7 +26,6 @@
      (s-general/tooltip {:tooltip-text tooltip-text
                          :position     tooltip-position
                          :alignment    tooltip-align}))])
-
 
 ;Information Section
 (defc section-information [{on-change      :on-change
@@ -319,8 +236,6 @@
                      (str (:brand item) " " (:model-name item))] [:br]
                     [:span {:style style/card-subtitle}
                      (str (:serial-number item) " - " (:color item)) [:br]]]}))
-;(str "Date: " (:date item))]]}))
-
 
 ;Card to show Person
 (defc person-card [{user     :user
@@ -350,5 +265,36 @@
                      (for [group (:groups user)]
                        [:span {:key (:id group)}
                         (str (:name group) " ")])]]}))
-;[:br]
-;(str "Date: " (:date person))]]}))
+
+;404 Styled Placholder
+(defc no-selection-view [{viewport-width  :viewport-width
+                          viewport-height :viewport-height
+                          image-url       :image-url
+                          heading         :heading
+                          sub-heading     :sub-heading
+                          learn-more-link :learn-more-link}]
+  [:div {:id    "no-selection-view"
+         :style {:height             (or viewport-height "auto")
+                 :width              "auto"
+                 :margin             "2rem"
+                 :display            "grid"
+                 :grid-template-rows "auto 1px auto"
+                 :grid-gap           "2rem"
+                 :text-align         "center"}}
+
+   [:div {:style {:align-self "end"}}
+    [:img {:src    (or image-url branding/logo-default-url)
+           :height "250rem"}]]
+
+   ;Divider
+   [:div {:style {:background-color color/light-context-highlight-bg}}]
+
+   ;Error text
+   [:div {:style {:align-self "start"
+                  :color      color/light-context-secondary-text}}
+    [:h3 {:style {:color       color/light-context-primary-text
+                  :font-weight "500"}}
+     (upper-case (or heading "Nothing to show here"))]
+    [:span (or sub-heading "Select something to show the details here.")]
+    [:br] [:br]
+    (when learn-more-link [:a {:href learn-more-link} "Learn More."])]])

@@ -7,6 +7,7 @@
             [symbols.mixin :refer [hovered-mixin toggle-mixin]]
             [symbols.color :as color]
             [symbols.style :as style]
+            [symbols.branding :as branding]
             [util.inventory.core :as util]
             [symbols.general :as s-general]))
 
@@ -20,14 +21,14 @@
                  :grid-template-rows    "1rem 1.5rem"}}
 
    ;School Logo
-   [:img {:src      "/image/GHS-logotype-horizontal.svg"
+   [:img {:src      branding/logo-horizontal-url
           :on-click (fn [] (trigger-event (client-event/clicked-navigation-icon {:target-path "/dashboard"})))
           :style    {:height         "100%"
                      :maxWidth       "10rem"
                      :grid-row-start 1
                      :grid-row-end   3
                      :cursor         "pointer"}
-          :title    "Gripsholmsskolan"}]
+          :title    branding/brand-name}]
 
    ;TBR - Remove in final version.
    [:span {:style {:align-self "start"
@@ -38,7 +39,7 @@
     (str "w." viewport-width "  h." viewport-height)]
 
    ;Inventist Logo
-   [:img {:src      "/image/inventist-logo.svg"
+   [:img {:src      branding/inventist-logo-url
           :on-click (fn [] (trigger-event (client-event/clicked-navigation-icon {:target-path "/dashboard"})))
           :style    {:width          "100%"
                      :align-self     "end"

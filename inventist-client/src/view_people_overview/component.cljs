@@ -37,7 +37,7 @@
          (s-general/centered-message {:icon       (icon/alert-error-outline {:color color/shaded-context-primary-text
                                                                              :style {:height "3rem"
                                                                                      :width  "3rem"}})
-                                      :message    "Error while fetching people from server."
+                                      :message    "Error while fetching people-list from server."
                                       :text-color color/shaded-context-primary-text
                                       :actions    (s-general/button {:text     "Retry"
                                                                      :bg-color color/shaded-context-highlight-bg

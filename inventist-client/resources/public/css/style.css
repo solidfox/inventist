@@ -21,8 +21,7 @@ body {
 }
 
 a:link, a:visited, a:hover, a:active {
-    color: #005580;
-    /*4A90E2*/
+    color: inherit;  /*4A90E2*/
     text-decoration: none;
 }
 

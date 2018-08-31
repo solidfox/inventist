@@ -87,8 +87,8 @@
   [{:keys [expanded trigger-expand trigger-collapse]}
    {{:keys [state]} :input
     :keys           [trigger-event]}]
-  (let [heading                (:heading state)
-        collection-list        collections-list
+  (let [heading (:heading state)
+        collection-list collections-list
         selected-collection-id (:selected-collection-id state)]
     [:div {:style {:height         "auto"
                    :text-align     "left"
