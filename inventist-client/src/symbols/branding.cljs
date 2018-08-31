@@ -7,6 +7,7 @@
 ;BRANDING - Partner
 ;Naming
 (def brand-name "Gripsholmsskolan")
+(def brand-website "gripsholmsskolan.se")
 
 ;Brand Logo - URL
 (def logo-default-url "/image/ghs-logotype.svg")

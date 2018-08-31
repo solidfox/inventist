@@ -24,8 +24,10 @@
                  :grid-template-rows    "100%"}}
    (inventory-list (assoc (core/create-inventory-overview-args state)
                      :trigger-parent-event trigger-event))
-   [:div {:style (merge style/z-index-details-section
-                        style/box-shadow)}
+   [:div {:style (merge
+                   {:background-color color/light-context-background}
+                   style/z-index-details-section
+                   style/box-shadow)}
     (if-let [selected-inventory-id (:selected-inventory-id state)]
       (inventory-detail (assoc (core/create-inventory-detail-args state selected-inventory-id)
                           :trigger-parent-event trigger-event
@@ -33,9 +35,8 @@
                           :viewport-width viewport-width))
       (s-detailview/no-selection-view {:viewport-height viewport-height
                                        :viewport-width  viewport-width
-                                       :heading         "No item selected."
-                                       :sub-heading     "Use the side-bar to search and select a item to view details."
-                                       :learn-more-link "#"}))]])
+                                       :heading         "No item selected"
+                                       :sub-heading     "Use the side-bar to search and select a item to view details."}))]])
 
 
 

@@ -287,7 +287,7 @@
            :height "250rem"}]]
 
    ;Divider
-   [:div {:style {:background-color color/light-context-highlight-bg}}]
+   ;[:div {:style {:background-color color/light-context-highlight-bg}}]
 
    ;Error text
    [:div {:style {:align-self "start"

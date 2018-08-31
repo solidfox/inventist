@@ -5,6 +5,7 @@
             [inventist-client.page.dashboard.core :as core]
             [view-dashboard.component :refer [dashboard-detail dashboard-stats]]
             [symbols.color :as color]
+            [symbols.branding :as branding]
             [symbols.style :as style]
             [rum.core :refer [defc]]))
 
@@ -35,8 +36,8 @@
                        :icon     "fas fa-pen-square"
                        :on-click (fn [] (js/parent.open applescript))})
 
-    (s-detailview/no-selection-view {:heading     "You are logged-in with an external mail-id."
-                                     :sub-heading "For non-gripsholmsskolan.se visitors, click on other sections like \"People\" and \"Inventory\" to view other's details."})]])
+    (s-detailview/no-selection-view {:heading     "You are logged-in with an external mail-id"
+                                     :sub-heading (str "For non-" branding/brand-website " visitors, click on other sections like \"People\" and \"Inventory\" to view details.")})]])
 ;(dashboard-detail (core/create-dashboard-detail-args state "mock-dashboard-id"))]])
 
 
