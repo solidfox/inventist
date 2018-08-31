@@ -12,33 +12,43 @@
             [util.inventory.core :as util]
             [symbols.mixin :as mixin]))
 
-(defcs inventory-list-card < {:key-fn (fn [{{id :id} :item}] id)}
-  [{:keys []}
+(defcs inventory-list-card < (rum/local nil :drag-data-atom)
+                             {:key-fn (fn [{{id :id} :item}] id)}
+  [{:keys [drag-data-atom]}
    {:keys [item
            selected
            hidden
-           on-drag-dropped
+           on-drop
            on-select]}]
-  (list-card {:selected selected
-              :on-drag-enter (fn [drag-data])
-              :on-drag-dropped on-drag-dropped
-              :on-click on-select}
-             [:div {:key 1
-                    :class (style/list-item-left-column)
-                    :style {:font-size "3rem"}}
-              (cond (and (:image item) (not= (:image item) ""))
-                    [:img {:class (style/card-image)
-                           :src   (:image item)}]
-                    :else
-                    (s-general/device-icon-set {:item item}))]
+  (let [drag-data (deref drag-data-atom)]
+    (list-card {:selected      selected
+                :on-drag-enter (fn [drag-data] (println "enter")
+                                 (reset! drag-data-atom drag-data))
+                :on-drag-leave (fn [drag-data] (println "left") (reset! drag-data-atom nil))
+                :on-drop       on-drop
+                :drop-zone     (cond (and drag-data (or (= (:type drag-data) "person") 1))
+                                     {:drop-area true
+                                      :drop-text (str "Assign " (str (:brand item) " " (:model-name item)) " to " (or (:name drag-data) "Max") ".")})
 
-             [:div {:key 2
-                    :style {:margin "0 0 0 1rem"
-                            :width  "auto"}}
-              [:span {:style style/card-title}
-               (str (:brand item) " " (:model-name item))] [:br]
-              [:span {:style style/card-subtitle}
-               (str (:serial-number item) " - " (:color item))]]))
+
+                :on-click      on-select}
+               [:div {:key   1
+                      :class (style/list-item-left-column)
+                      :style {:font-size "3rem"}}
+                (cond (and (:image item) (not= (:image item) ""))
+                      [:img {:class (style/card-image)
+                             :src   (:image item)}]
+                      :else
+                      (s-general/device-icon-set {:item item}))]
+               [:div {:key   2
+                      :style {:margin "0 0 0 1rem"
+                              :width  "auto"}}
+                [:span {:style style/card-title}
+                 (str (:brand item) " " (:model-name item))] [:br]
+                [:span {:style style/card-subtitle}
+                 (str (:serial-number item) " - " (:color item))]])))
+
+
 
 (defc inventory-list < (remodular.core/modular-component event/handle-event)
   [{{state :state} :input

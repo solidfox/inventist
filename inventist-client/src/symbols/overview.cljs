@@ -17,24 +17,27 @@
   (util/spy (transit/read reader (.getData (.-dataTransfer event) "text/json"))))
 
 
-(def list-card-drag-over
-  [:div {:style {:width         "18rem"
-                 :height        "100%"
-                 :display       "grid"
-                 :text-align    "center"
-                 :align-self    "center"
-                 :align-items   "center"
-                 :color         color/shaded-context-primary-text
+(defc list-card-drag-over [drop-text]
+  [:div {:style {:position         "absolute"
+                 :width            "18rem"
+                 :height           "calc(100% - 1.5rem)"
+                 :display          "flex"
+                 :text-align       "center"
+                 :justify-content  "center"
+                 :opacity          "0.95"
+                 :color            color/shaded-context-primary-text
                  :background-color color/shaded-context-background
-                 :border-radius "0.25rem"
-                 :border        (str "2px dashed " color/shaded-context-secondary-text)}}
-   [:div [:span {:style {:font-size "2rem"}} [:i {:class "fas fa-box-open"}]]
-    [:br] "Drop here to assign value."]])
+                 :border-radius    "0.25rem"
+                 :border           (str "2px dashed " color/shaded-context-secondary-text)}}
+   ;[:div [:span {:style {:font-size "2.8rem"}} [:i {:class "fas fa-box-open"}]]]
+   drop-text])
+
 
 (defc list-card [{:keys [selected
                          on-drag-enter
                          on-drag-leave
-                         on-drag-drop
+                         on-drop
+                         drop-zone
                          hidden]
                   :as   props}
                  & children]
@@ -42,11 +45,19 @@
                 :draggable     true
                 :on-drag-enter (fn [event] (on-drag-enter (get-drag-data event)))
                 :on-drag-leave (fn [event] (on-drag-leave (get-drag-data event)))
-                :on-drag-drop  (fn [event] (on-drag-drop (get-drag-data event)))
-                :style         (merge (when selected style/list-item-selected)
-                                      (when hidden {:display "none"}))}
+                :on-drop       (fn [event] (on-drop (get-drag-data event)))
+                :style         (merge
+                                 {:position "relative"}
+                                 (when selected style/list-item-selected)
+                                 (when hidden {:display "none"}))}
                (dissoc props :selected))
-   children])
+   (when (:drop-area drop-zone)
+      (list-card-drag-over (:drop-text drop-zone)))
+
+   [:div {:style {:display               "grid"
+                  :grid-template-columns "auto 1fr"
+                  :grid-gap              "1rem"}}
+    children]])
 
 ;Search component
 (defc search-toolbar [{search-field-value :search-field-value
