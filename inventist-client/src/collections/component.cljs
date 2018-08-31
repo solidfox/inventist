@@ -74,28 +74,31 @@
            text-icon
            title
            subtitle]}]
-  [:div {:on-drag   (fn [event] (.setData (.dataTransfer event) "text/edn" "todo"))
-         :style     {:position         "relative"
-                     :background-color color/dark-context-secondary-text
-                     :width            collection-list-item-height
-                     :height           collection-list-item-height
-                     :border-radius    "0.25rem"
-                     :cursor           "grab"
-                     :align-self       "start"}}
+  [:div {:on-drag (fn [event] (.setData (.dataTransfer event) "text/edn" "todo"))
+         :style   {:position         "relative"
+                   :background-color color/dark-context-secondary-text
+                   :width            collection-list-item-height
+                   :height           collection-list-item-height
+                   :border-radius    "0.25rem"
+                   :cursor           "grab"
+                   :align-self       "start"}}
    ;:overflow         "hidden"}}
    (cond image-url [:img {:draggable true
-                          :src   image-url
-                          :style {:height     "100%"
-                                  :width      "100%"
-                                  :object-fit :cover}}]
+                          :src       image-url
+                          :style     {:height        "100%"
+                                      :border-radius "inherit"
+                                      :width         "100%"
+                                      :object-fit    :cover}}]
          :else [:span {:draggable true
-                       :style     {:width       "100%"
-                                   :height      "100%"
-                                   :display     "grid"
-                                   :font-size   "1.1rem"
-                                   :align-items "center"
-                                   :text-align  "center"
-                                   :color       color/dark-context-primary-text}}
+                       :style     {:width            "inherit"
+                                   :height           "inherit"
+                                   :border-radius    "inherit"
+                                   :display          "grid"
+                                   :font-size        "1.1rem"
+                                   :align-items      "center"
+                                   :text-align       "center"
+                                   :background-color "inherit"
+                                   :color            color/dark-context-primary-text}}
                 text-icon])
    (when hovered
      (s-general/tooltip {:tooltip-text "Drag me"
