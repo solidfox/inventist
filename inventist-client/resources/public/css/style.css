@@ -25,6 +25,10 @@ a:link, a:visited, a:hover, a:active {
     text-decoration: none;
 }
 
+.drag * {
+    pointer-events: none;
+}
+
 /*.collection-item-edit {*/
     /*display: none;*/
 /*}*/
