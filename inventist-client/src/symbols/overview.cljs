@@ -39,7 +39,7 @@
                                     :background-color color/shaded-context-secondary-text
                                     :border-radius    "0.25rem"
                                     :display          "grid"
-                                    :font-size        "1.8rem"
+                                    :font-size        "1.5rem"
                                     :align-items      "center"
                                     :text-align       "center"
                                     :color            color/shaded-context-highlight-bg}}

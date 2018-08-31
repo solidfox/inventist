@@ -68,6 +68,7 @@
 
 (rum/defc widget-selected-collection-item
   [{:keys [image-url
+           text-icon
            title
            subtitle]}]
   [:div {:draggable true
@@ -85,11 +86,11 @@
          :else [:span {:style {:width       "100%"
                                :height      "100%"
                                :display     "grid"
-                               :font-size   "1rem"
+                               :font-size   "1.1rem"
                                :align-items "center"
                                :text-align  "center"
                                :color       color/dark-context-primary-text}}
-                "💻"])])
+                text-icon])])
 
 (rum/defcs collections-view < (rem/modular-component event/handle-event)
                               (toggle-mixin {:toggle-state-key :expanded
