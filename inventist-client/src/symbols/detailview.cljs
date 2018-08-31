@@ -309,9 +309,9 @@
          :on-click on-click
          :image    [:div {:style {:font-size    "3rem"
                                   :margin-right "0.75rem"}}
-                    (cond (and (:photo item) (not= (:photo item) ""))
+                    (cond (and (:image item) (not= (:image item) ""))
                           [:img {:class (style/card-image)
-                                 :src   (:photo item)}]
+                                 :src   (:image item)}]
                           :else
                           (s-general/device-icon-set {:item item}))]
          :content  [:div

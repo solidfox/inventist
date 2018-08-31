@@ -19,7 +19,7 @@
                  :model-identifier "MacBookPro13,2"
                  :serial-number    "C02SVXXXXF1R"
                  :class            "macbook"
-                 :photo            "https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP748/SP748-mbp13touch-gray.jpeg"}
+                 :image            "https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP748/SP748-mbp13touch-gray.jpeg"}
                 {:id               02
                  :date             "2018-04-14T10:37:46Z"
                  :brand            "Apple"
@@ -29,7 +29,7 @@
                  :model-identifier "MacBookPro13,2"
                  :serial-number    "C02SVXXXXF1R"
                  :class            "macbook"
-                 :photo            "https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP748/SP748-mbp13touch-gray.jpeg"}
+                 :image            "https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP748/SP748-mbp13touch-gray.jpeg"}
                 {:id               03
                  :date             "2018-04-14T10:37:46Z"
                  :brand            "Android"
@@ -39,7 +39,7 @@
                  :model-identifier "Phone"
                  :serial-number    "C02SVXXXXF1R"
                  :class            "phone"
-                 :photo            "https://i.gadgets360cdn.com/products/large/1519585124_635_samsung_galaxy_s9_blue.jpg"}]
+                 :image            "https://i.gadgets360cdn.com/products/large/1519585124_635_samsung_galaxy_s9_blue.jpg"}]
    :history    [{:inventory-item-id 01
                  :date              "2018-04-14T10:37:46Z"
                  :brand             "Apple"

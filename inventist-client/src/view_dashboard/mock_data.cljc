@@ -22,7 +22,7 @@
                  :model-identifier "MacBookPro13,2"
                  :serial-number    "C02SVXXXXF1R"
                  :class            "macbook"
-                 :photo            "https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP748/SP748-mbp13touch-gray.jpeg"}
+                 :image            "https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP748/SP748-mbp13touch-gray.jpeg"}
                 {:id               02
                  :date             "2018-04-14T10:37:46Z"
                  :brand            "Android"
@@ -32,7 +32,7 @@
                  :model-identifier "Phone"
                  :serial-number    "C02SVXXXXF1R"
                  :class            "phone"
-                 :photo            ""}]
+                 :image            ""}]
    :history    [{:inventory-item-id 01
                  :date              "2018-04-14T10:37:46Z"
                  :brand             "Apple"

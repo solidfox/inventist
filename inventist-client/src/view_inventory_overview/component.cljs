@@ -1,6 +1,7 @@
 (ns view-inventory-overview.component
   (:require [rum.core :refer [defc with-key]]
-            [symbols.overview :refer [search-toolbar second-column-header inventory-list-card]]
+            [symbols.overview :refer [search-toolbar second-column-header list-card]]
+            [symbols.style :as style]
             [view-inventory-overview.core :as core]
             [symbols.color :as color]
             [remodular.core :as rem]
@@ -9,6 +10,30 @@
             [cljs-react-material-ui.icons :as icon]
             [symbols.general :as s-general]
             [util.inventory.core :as util]))
+
+(defc inventory-list-card < {:key-fn (fn [{{id :id} :item}] id)}
+  [{:keys [item
+           selected
+           hidden
+           on-select]}]
+  (list-card {:selected selected
+              :on-click on-select}
+             [:div {:key 1
+                    :class (style/list-item-left-column)
+                    :style {:font-size "3rem"}}
+              (cond (and (:image item) (not= (:image item) ""))
+                    [:img {:class (style/card-image)
+                           :src   (:image item)}]
+                    :else
+                    (s-general/device-icon-set {:item item}))]
+
+             [:div {:key 2
+                    :style {:margin "0 0 0 1rem"
+                            :width  "auto"}}
+              [:span {:style style/card-title}
+               (str (:brand item) " " (:model-name item))] [:br]
+              [:span {:style style/card-subtitle}
+               (str (:serial-number item) " - " (:color item))]]))
 
 (defc inventory-list < (remodular.core/modular-component event/handle-event)
   [{{state :state} :input

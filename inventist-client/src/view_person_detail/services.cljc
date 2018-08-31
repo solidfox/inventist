@@ -21,7 +21,7 @@
    :model-identifier
    :serial-number
    :class
-   {:field/alias :photo
+   {:field/alias :image
     :field/data  [:image-url]}])
 
 

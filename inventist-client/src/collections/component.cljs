@@ -13,18 +13,18 @@
             [inventist-client.event :as client-event]))
 
 
-(def collection-item-height "2rem")
+(def collection-list-item-height "2rem")
 
-(defc collection-item
-  [{title    :title
-    icon     :icon
-    image    :image
-    color    :color
-    on-click :on-click}]
+(defc collection-list-item
+  [{:keys [title
+           icon
+           widget
+           color
+           on-click]}]
   [:div {:key      title
          :class    "collection-item"
-         :style    {:min-height            collection-item-height
-                    :max-height            collection-item-height
+         :style    {:min-height            collection-list-item-height
+                    :max-height            collection-list-item-height
                     :color                 color/dark-context-primary-text
                     :width                 "auto"
                     :padding               "0.5rem 1rem"
@@ -52,28 +52,32 @@
      "Edit"]]
 
    ;Selected Item
-   [:div {:draggable true
-          :style     {:background-color   color/dark-context-secondary-text
-                      :width              "2rem" :height "2rem"
-                      :border-radius      "0.25rem"
-                      :cursor             "grab"
-                      :box-sizing         "border-box"
-                      :-moz-box-sizing    "border-box"
-                      :-webkit-box-sizing "border-box"
-                      :align-self         "start"
-                      :border             (str "1px solid " color/dark-context-title-text)}}]])
+   widget])
 
 (def collections-list
   [{:title "Dashboard"
     :icon  "fas fa-tachometer-alt"
     :id    :dashboard}
-   {:title         "Inventory"
-    :icon          "fas fa-sitemap"
-    :id            :inventory}
-   {:title         "People"
-    :icon          "fas fa-users"
-    :id            :people}])
+   {:title "Inventory"
+    :icon  "fas fa-sitemap"
+    :id    :inventory}
+   {:title "People"
+    :icon  "fas fa-users"
+    :id    :people}])
 
+(rum/defc widget-selected-collection-item [collection-item]
+  [:div {:draggable true
+         :style     {:background-color   color/dark-context-secondary-text
+                     :width              collection-list-item-height
+                     :height             collection-list-item-height
+                     :border-radius      "0.25rem"
+                     :cursor             "grab"
+                     :box-sizing         "border-box"
+                     :-moz-box-sizing    "border-box"
+                     :-webkit-box-sizing "border-box"
+                     :align-self         "start"
+                     :border             (str "1px solid " color/dark-context-title-text)}}
+   [:img {:src (:image collection-item)}]])
 
 (rum/defcs collections-view < (rem/modular-component event/handle-event)
                               (toggle-mixin {:toggle-state-key :expanded
@@ -92,8 +96,8 @@
                    :flex-direction "column"}}
      ;Heading
      [:div {:id    heading
-            :style {:height                collection-item-height
-                    :min-height            collection-item-height
+            :style {:height                collection-list-item-height
+                    :min-height            collection-list-item-height
                     :color                 color/dark-context-title-text
                     :width                 "auto"
                     :margin-top            "1.5rem"
@@ -122,19 +126,20 @@
 
      ;List
      (when expanded
-       (for [{title          :title
-              collection-id  :id
-              icon           :icon
-              image          :image
-              target-page-id :target-page-id} collection-list]
-         (-> (collection-item (merge {:title    title
-                                      :icon     icon
-                                      :image    image
-                                      :on-click (fn []
-                                                  (trigger-event (rem/create-event
-                                                                   {:name :clicked-collection
-                                                                    :data {:collection-id collection-id}})))}
-                                     (when (= selected-collection-id collection-id)
-                                       {:selected true
-                                        :color    color/dark-context-highlight-bg})))
+       (for [{title         :title
+              collection-id :id
+              icon          :icon} collection-list]
+         (-> (collection-list-item
+               (merge {:title    title
+                       :icon     icon
+                       :widget   (when-let [item (core/get-selected-collection-item state
+                                                                                    {:collection-id collection-id})]
+                                   (widget-selected-collection-item item))
+                       :on-click (fn []
+                                   (trigger-event (rem/create-event
+                                                    {:name :clicked-collection
+                                                     :data {:collection-id collection-id}})))}
+                      (when (= selected-collection-id collection-id)
+                        {:selected true
+                         :color    color/dark-context-highlight-bg})))
              (with-key collection-id))))]))

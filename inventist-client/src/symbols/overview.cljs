@@ -73,31 +73,6 @@
     [:span {:style style/card-subtitle}
      (str (:type contractor) " - " (count (:inventory contractor)) " Products")]]])
 
-;Inventory-list card
-(defc inventory-list-card < {:key-fn (fn [{{id :id} :item}] id)}
-  [{:keys [item
-           selected
-           hidden
-           on-select]}]
-  (list-card {:selected selected
-              :on-click on-select}
-             [:div {:key 1
-                    :class (style/list-item-left-column)
-                    :style {:font-size "3rem"}}
-              (cond (and (:photo item) (not= (:photo item) ""))
-                    [:img {:class (style/card-image)
-                           :src   (:photo item)}]
-                    :else
-                    (s-general/device-icon-set {:item item}))]
-
-             [:div {:key 2
-                    :style {:margin "0 0 0 1rem"
-                            :width  "auto"}}
-              [:span {:style style/card-title}
-               (str (:brand item) " " (:model-name item))] [:br]
-              [:span {:style style/card-subtitle}
-               (str (:serial-number item) " - " (:color item))]]))
-
 
 ;Search component
 (defc search-toolbar [{search-field-value :search-field-value
@@ -174,8 +149,7 @@
                        (search-toolbar {:list-items list-items})]
      :content         [:div {:style {:background-color color/transparent}}
                        (for [list-item list-items]
-                         (cond (= type "inventory") (inventory-list-card {:item list-item})
-                               (= type "contractors") (contractor-list-card {:contractor list-item})))]}))
+                         (cond (= type "contractors") (contractor-list-card {:contractor list-item})))]}))
 
 
 

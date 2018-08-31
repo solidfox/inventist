@@ -30,7 +30,7 @@
                                  :brand
                                  :class
                                  :model-name
-                                 {:field/alias :photo
+                                 {:field/alias :image
                                   :field/data  [:image-url]}
                                  :model-identifier
                                  :color

@@ -88,8 +88,8 @@
                                        :height       "6rem"
                                        :display      "grid"
                                        :borderRadius "0.5rem"}}
-                         (cond (and (:photo computer) (not= (:photo computer) ""))
-                               [:img {:src   (:photo computer)
+                         (cond (and (:image computer) (not= (:image computer) ""))
+                               [:img {:src   (:image computer)
                                       :style {:width        "6rem"
                                               :height       "6rem"
                                               :borderRadius "inherit"

@@ -12,7 +12,7 @@
    :color
    :serial-number
    [:user [[:groups [:name]]]]
-   {:field/alias :photo
+   {:field/alias :image
     :field/data  [:image-url]}])
 
 (defn get-inventory-list
