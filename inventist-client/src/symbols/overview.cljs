@@ -22,58 +22,6 @@
                (dissoc props :selected))
    children])
 
-(defc person-list-card < rum/static
-  [{:keys [person
-           selected
-           hidden]}]
-  (list-card {:selected selected
-              :hidden   hidden}
-             [:div {:key 1
-                    :class (style/list-item-left-column)}
-              (cond (and (:image person) (not= (:image person) ""))
-                    [:img {:src   (:image person)
-                           :class (style/card-image)}]
-                    :else
-                    [:span {:style {:width            "3rem"
-                                    :height           "3rem"
-                                    :background-color color/shaded-context-secondary-text
-                                    :border-radius    "0.25rem"
-                                    :display          "grid"
-                                    :font-size        "1.5rem"
-                                    :align-items      "center"
-                                    :text-align       "center"
-                                    :color            color/shaded-context-highlight-bg}}
-                     (str (subs (or (:first-name person) "") 0 1) (subs (or (:last-name person) "") 0 1))])]
-             [:div {:key 2}
-              [:span {:style style/card-title}
-               (str (:first-name person) " " (:last-name person))] [:br]
-              [:span {:style style/card-subtitle}
-               (str (:occupation person) " - " (str/join ", " (for [group (:groups person)] (:name group))))] [:br]
-              [:span {:style (merge style/card-title
-                                    {:display   "flex"
-                                     :flex-wrap "wrap"})}
-               (for [item (:inventory person)]
-                 [:div {:key   (:id item)
-                        :style {:margin    "0.1rem 0.5rem 0rem 0"
-                                :font-size "0.75rem"}}
-                  (s-general/device-icon-set {:item item})])]]))
-
-;Contractor-list card
-(defc contractor-list-card [{contractor :contractor
-                             on-click   :on-click}]
-  [:div {:key   (:id contractor)
-         :class (style/list-item-class)}
-   [:div {:class (style/list-item-left-column)}
-    [:img {:class (style/card-image)
-           :src   (cond (and (:image contractor) (not= (:image contractor) "")) (:image contractor)
-                        :else "/image/contractor-placeholder.png")}]]
-   [:div
-    [:span {:style style/card-title}
-     (str (:name contractor))] [:br]
-    [:span {:style style/card-subtitle}
-     (str (:type contractor) " - " (count (:inventory contractor)) " Products")]]])
-
-
 ;Search component
 (defc search-toolbar [{search-field-value :search-field-value
                        shown-results      :shown-results
@@ -139,8 +87,23 @@
    [:div (str header-text)]])
 
 
+;Contractor-list card
+(defc contractor-list-card [{contractor :contractor
+                             on-click   :on-click}]
+  [:div {:key   (:id contractor)
+         :class (style/list-item-class)}
+   [:div {:class (style/list-item-left-column)}
+    [:img {:class (style/card-image)
+           :src   (cond (and (:image contractor) (not= (:image contractor) "")) (:image contractor)
+                        :else "/image/contractor-placeholder.png")}]]
+   [:div
+    [:span {:style style/card-title}
+     (str (:name contractor))] [:br]
+    [:span {:style style/card-subtitle}
+     (str (:type contractor) " - " (count (:inventory contractor)) " Products")]]])
 
-;overview with search and listing
+
+;overview with search and listing For Contractors
 (defc overview-list
   [{type       :type
     list-items :list-items}]

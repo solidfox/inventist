@@ -22,35 +22,37 @@
            widget
            color
            on-click]}]
-  [:div {:key      title
-         :class    "collection-item"
-         :style    {:min-height            collection-list-item-height
-                    :max-height            collection-list-item-height
-                    :color                 color/dark-context-primary-text
-                    :width                 "auto"
-                    :padding               "0.5rem 1rem"
-                    :cursor                "pointer"
-                    :display               "grid"
-                    :grid-template-columns "1.5rem auto 2rem"
-                    :background-color      (or color color/transparent)}
-         :on-click on-click}
+  [:div {:key       title
+         ;:class    "collection-item"
+         :draggable false
+         :style     {:min-height            collection-list-item-height
+                     :max-height            collection-list-item-height
+                     :color                 color/dark-context-primary-text
+                     :width                 "auto"
+                     :padding               "0.5rem 1rem"
+                     :cursor                "pointer"
+                     :display               "grid"
+                     :grid-template-columns "1.5rem auto 2rem"
+                     :background-color      (or color color/transparent)}
+         :on-click  on-click}
    [:i {:class icon
         :style {:font-size  "1.25rem"
                 :margin-top "0.325rem"
                 :align-self "start"}}]
 
-   [:div {:style {:font-size   "1rem"
-                  :font-weight "500"
-                  :margin      "0 1rem"
-                  :align-self  "center"}}
-    title
+   [:div {:draggable false
+          :style     {:font-size   "1rem"
+                      :font-weight "500"
+                      :margin      "0 1rem"
+                      :align-self  "center"}}
+    title]
 
-    ;On-Mouse-Over "style.css"
-    [:span {:class    "collection-item-edit"
-            :on-click (fn [] (println "Edit " title))
-            :style    {:font-weight "400"
-                       :font-size   "0.75rem"}}
-     "Edit"]]
+   ;;On-Mouse-Over "style.css"
+   ;[:span {:class    "collection-item-edit"
+   ;        :on-click (fn [] (println "Edit " title))
+   ;        :style    {:font-weight "400"
+   ;                   :font-size   "0.75rem"}}
+   ; "Edit"]]
 
    ;Selected Item
    widget])
@@ -66,32 +68,40 @@
     :icon  "fas fa-users"
     :id    :people}])
 
-(rum/defc widget-selected-collection-item
-  [{:keys [image-url
+(rum/defcs widget-selected-collection-item < (hovered-mixin :hovered)
+  [{:keys [hovered]}
+   {:keys [image-url
            text-icon
            title
            subtitle]}]
-  [:div {:draggable true
-         :on-drag (fn [event] (.setData (.dataTransfer event) "text/edn" "todo"))
-         :style     {:background-color color/dark-context-secondary-text
+  [:div {:on-drag   (fn [event] (.setData (.dataTransfer event) "text/edn" "todo"))
+         :style     {:position         "relative"
+                     :background-color color/dark-context-secondary-text
                      :width            collection-list-item-height
                      :height           collection-list-item-height
                      :border-radius    "0.25rem"
                      :cursor           "grab"
-                     :align-self       "start"
-                     :overflow         "hidden"}}
-   (cond image-url [:img {:src   image-url
+                     :align-self       "start"}}
+   ;:overflow         "hidden"}}
+   (cond image-url [:img {:draggable true
+                          :src   image-url
                           :style {:height     "100%"
                                   :width      "100%"
                                   :object-fit :cover}}]
-         :else [:span {:style {:width       "100%"
-                               :height      "100%"
-                               :display     "grid"
-                               :font-size   "1.1rem"
-                               :align-items "center"
-                               :text-align  "center"
-                               :color       color/dark-context-primary-text}}
-                text-icon])])
+         :else [:span {:draggable true
+                       :style     {:width       "100%"
+                                   :height      "100%"
+                                   :display     "grid"
+                                   :font-size   "1.1rem"
+                                   :align-items "center"
+                                   :text-align  "center"
+                                   :color       color/dark-context-primary-text}}
+                text-icon])
+   (when hovered
+     (s-general/tooltip {:tooltip-text "Drag me"
+                         :position     "bottom"
+                         :alignment    "end"}))])
+
 
 (rum/defcs collections-view < (rem/modular-component event/handle-event)
                               (toggle-mixin {:toggle-state-key :expanded
