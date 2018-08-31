@@ -4,7 +4,7 @@
     [symbols.branding :as branding]
     [cljss.core :as cljss])
   (:require-macros
-    [cljss.core :refer [defstyles]]))
+    [cljss.core :refer [defstyles defkeyframes]]))
 
 (def viewport-mobile 1015)                                  ;Should be ~400 but kept more for testing purpose
 (def outer-border-radius "0.5rem")
@@ -39,6 +39,27 @@
                    :color          color/light-context-title-text
                    :font-weight    "300"
                    :text-transform "capitalize"})
+
+;Bounce-in animation
+(def cubic-bezier "cubic-bezier(0.215, 0.61, 0.355, 1)")
+(defkeyframes bounce-in []
+              {:from {:animation-timing-function cubic-bezier}
+               :0%   {:opacity                   0
+                      :transform                 "scale3d(0.3, 0.3, 0.3)"
+                      :animation-timing-function cubic-bezier}
+               :20%  {:transform                 "scale3d(1.1, 1.1, 1.1)"
+                      :animation-timing-function cubic-bezier}
+               :40%  {:transform                 "scale3d(0.9, 0.9, 0.9)"
+                      :animation-timing-function cubic-bezier}
+               :60%  {:opacity                   1
+                      :transform                 "scale3d(1.03, 1.03, 1.03)"
+                      :animation-timing-function cubic-bezier}
+               :80%  {:transform                 "scale3d(0.97, 0.97, 0.97)"
+                      :animation-timing-function cubic-bezier}
+               :to   {:opacity                   1
+                      :transform                 "scale3d(1, 1, 1)"
+                      :animation-timing-function cubic-bezier}})
+(def bounce-animation (str (bounce-in) " 750ms ease 1"))
 
 (defstyles user-bar-item []
            {:opacity 0.75

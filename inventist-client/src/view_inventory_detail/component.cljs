@@ -21,7 +21,8 @@
     trigger-event                                            :trigger-event}]
   [:div {:id    "report-issue"
          :class (style/card)
-         :style {:display               "grid"
+         :style {:animation             style/bounce-animation
+                 :display               "grid"
                  :grid-gap              "0.5rem"
                  :grid-template-columns "1fr 3rem"}}
    (s-general/input-section {:type      "textarea"
@@ -74,10 +75,10 @@
 
     ;INVENTORY DETAILS
     [:div {:id    "detail-container"
-           :style {:height          (str (- (js/parseInt viewport-height) 48) "px")
-                   :overflow-x      "hidden"
-                   :overflow-y      "scroll"
-                   :padding         "1.5rem"}}
+           :style {:height     (str (- (js/parseInt viewport-height) 48) "px")
+                   :overflow-x "hidden"
+                   :overflow-y "scroll"
+                   :padding    "1.5rem"}}
 
      ;Information
      (s-detailview/section-information
