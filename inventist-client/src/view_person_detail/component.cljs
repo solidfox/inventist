@@ -19,6 +19,7 @@
     trigger-event   :trigger-event
     viewport-height :viewport-height
     viewport-width  :viewport-width}]
+  (js/console.log state)
   (let [person (core/get-person state)
         {phone   :phone
          address :address} person

@@ -101,7 +101,9 @@
                                              (handle-event (cond-> (rem/create-anonymous-event)
                                                                    true
                                                                    (rem/append-action
-                                                                     {:fn-and-args (concat on-response [service-response data])
+                                                                     {:fn-and-args (concat (first on-response)
+                                                                                           [service-response data]
+                                                                                           (rest on-response))
                                                                       :state-path  state-path})
                                                                    remote-state-mutation
                                                                    (rem/append-action
