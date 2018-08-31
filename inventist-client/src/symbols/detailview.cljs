@@ -27,6 +27,25 @@
                          :position     tooltip-position
                          :alignment    tooltip-align}))])
 
+(defc detail-drag-zone []
+  [:div {:style {:position         "absolute"
+                 :width            "calc(100% - 48px)"                ;(str (- (js/parseInt viewport-width) 690) "px")
+                 :height           "calc(100% - 96px)"
+                 :display          "grid"
+                 :text-align       "center"
+                 :align-self       "center"
+                 :align-items      "center"
+                 :color            color/shaded-context-primary-text
+                 :background-color color/shaded-context-background
+                 :opacity          "0.95"
+                 :border-radius    "0.25rem"
+                 :border           (str "2px dashed " color/shaded-context-secondary-text)
+                 :z-index          100
+                 :cursor           "pointer"}}
+   [:div
+    [:span {:style {:font-size "3rem"}} [:i {:class "fas fa-box-open"}]]
+    [:br] "Drop here to assign value."]])
+
 ;Information Section
 (defc section-information [{on-change      :on-change
                             image          :image

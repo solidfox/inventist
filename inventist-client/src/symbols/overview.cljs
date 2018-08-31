@@ -16,7 +16,21 @@
 (defn get-drag-data [event]
   (util/spy (transit/read reader (.getData (.-dataTransfer event) "text/json"))))
 
-;Person-list card
+
+(def list-card-drag-over
+  [:div {:style {:width         "18rem"
+                 :height        "100%"
+                 :display       "grid"
+                 :text-align    "center"
+                 :align-self    "center"
+                 :align-items   "center"
+                 :color         color/shaded-context-primary-text
+                 :background-color color/shaded-context-background
+                 :border-radius "0.25rem"
+                 :border        (str "2px dashed " color/shaded-context-secondary-text)}}
+   [:div [:span {:style {:font-size "2rem"}} [:i {:class "fas fa-box-open"}]]
+    [:br] "Drop here to assign value."]])
+
 (defc list-card [{:keys [selected
                          on-drag-enter
                          on-drag-leave
