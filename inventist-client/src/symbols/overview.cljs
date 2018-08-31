@@ -5,20 +5,32 @@
             [symbols.style :as style]
             [clojure.string :as str]
             [oops.core :as o]
-            [util.inventory.core :as util]))
+            [util.inventory.core :as util]
+            [cognitect.transit :as transit]))
 
 ;To change listing bg color on hover.
 (def list-bg-color color/highlight)
 
+(def reader (transit/reader :json))
+
+(defn get-drag-data [event]
+  (util/spy (transit/read reader (.getData (.-dataTransfer event) "text/json"))))
+
 ;Person-list card
 (defc list-card [{:keys [selected
+                         on-drag-enter
+                         on-drag-leave
+                         on-drag-drop
                          hidden]
                   :as   props}
                  & children]
-  [:div (merge {:class     (style/list-item-class)
-                :draggable true
-                :style     (merge (when selected style/list-item-selected)
-                                  (when hidden {:display "none"}))}
+  [:div (merge {:class         (style/list-item-class)
+                :draggable     true
+                :on-drag-enter (fn [event] (on-drag-enter (get-drag-data event)))
+                :on-drag-leave (fn [event] (on-drag-leave (get-drag-data event)))
+                :on-drag-drop  (fn [event] (on-drag-drop (get-drag-data event)))
+                :style         (merge (when selected style/list-item-selected)
+                                      (when hidden {:display "none"}))}
                (dissoc props :selected))
    children])
 
@@ -28,7 +40,7 @@
            hidden]}]
   (list-card {:selected selected
               :hidden   hidden}
-             [:div {:key 1
+             [:div {:key   1
                     :class (style/list-item-left-column)}
               (cond (and (:image person) (not= (:image person) ""))
                     [:img {:src   (:image person)

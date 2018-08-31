@@ -1,5 +1,5 @@
 (ns view-inventory-overview.component
-  (:require [rum.core :refer [defc with-key]]
+  (:require [rum.core :as rum :refer [defc defcs with-key]]
             [symbols.overview :refer [search-toolbar second-column-header list-card]]
             [symbols.style :as style]
             [view-inventory-overview.core :as core]
@@ -9,14 +9,19 @@
             [view-inventory-overview.event :as event]
             [cljs-react-material-ui.icons :as icon]
             [symbols.general :as s-general]
-            [util.inventory.core :as util]))
+            [util.inventory.core :as util]
+            [symbols.mixin :as mixin]))
 
-(defc inventory-list-card < {:key-fn (fn [{{id :id} :item}] id)}
-  [{:keys [item
+(defcs inventory-list-card < {:key-fn (fn [{{id :id} :item}] id)}
+  [{:keys []}
+   {:keys [item
            selected
            hidden
+           on-drag-dropped
            on-select]}]
   (list-card {:selected selected
+              :on-drag-enter (fn [drag-data])
+              :on-drag-dropped on-drag-dropped
               :on-click on-select}
              [:div {:key 1
                     :class (style/list-item-left-column)

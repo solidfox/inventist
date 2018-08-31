@@ -11,8 +11,10 @@
             [symbols.general :as s-general]
             [symbols.mixin :refer [hovered-mixin toggle-mixin]]
             [inventist-client.event :as client-event]
-            [util.inventory.core :as util]))
+            [util.inventory.core :as util]
+            [cognitect.transit :as transit]))
 
+(def writer (transit/writer :json))
 
 (def collection-list-item-height "2rem")
 
@@ -70,9 +72,12 @@
   [{:keys [image-url
            text-icon
            title
-           subtitle]}]
+           subtitle
+           drag-data
+           on-drag-enter]}]
+
   [:div {:draggable true
-         :on-drag (fn [event] (.setData (.dataTransfer event) "text/edn" "todo"))
+         :on-drag (fn [event] (.setData (.-dataTransfer event) "text/json" (transit/write writer drag-data)))
          :style     {:background-color color/dark-context-secondary-text
                      :width            collection-list-item-height
                      :height           collection-list-item-height

@@ -22,7 +22,8 @@
                  [org.roman01la/cljss "1.6.2"]
                  [remodular "0.1.6-SNAPSHOT"]
                  [rum "0.11.2"]
-                 [ysera "1.2.0"]]
+                 [ysera "1.2.0"]
+                 [com.cognitect/transit-cljs "0.8.256"]]
 
   :plugins [[lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]
             [lein-figwheel "0.5.15"]]
