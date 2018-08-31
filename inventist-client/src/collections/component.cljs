@@ -69,6 +69,7 @@
 (rum/defc widget-selected-collection-item
   [item-peek-data]
   [:div {:draggable true
+         :on-drag (fn [event] (.setData (.dataTransfer event) "text/edn" "todo"))
          :style     {:background-color color/dark-context-secondary-text
                      :width            collection-list-item-height
                      :height           collection-list-item-height
@@ -76,6 +77,7 @@
                      :cursor           "grab"
                      :align-self       "start"
                      :overflow         "hidden"}}
+
    [:img {:src   (:image-url item-peek-data)
           :style {:height     "100%"
                   :width      "100%"
