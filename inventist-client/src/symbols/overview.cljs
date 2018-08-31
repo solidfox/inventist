@@ -41,7 +41,8 @@
                          hidden]
                   :as   props}
                  & children]
-  [:div (merge {:class         (style/list-item-class)
+  [:div (merge {:class         [(style/list-item-class)
+                                "drag"]
                 :draggable     true
                 :on-drag-enter (fn [event] (on-drag-enter (get-drag-data event)))
                 :on-drag-leave (fn [event] (on-drag-leave (get-drag-data event)))
@@ -52,7 +53,7 @@
                                  (when hidden {:display "none"}))}
                (dissoc props :selected))
    (when (:drop-area drop-zone)
-      (list-card-drag-over (:drop-text drop-zone)))
+     (list-card-drag-over (:drop-text drop-zone)))
 
    [:div {:style {:display               "grid"
                   :grid-template-columns "auto 1fr"

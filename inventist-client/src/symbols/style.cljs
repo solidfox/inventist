@@ -99,14 +99,14 @@
 (def list-item-selected {:background-color color/shaded-context-highlight-bg})
 
 (defstyles list-item-class []
-           {:width                 "auto"
-            :background-color      color/transparent
-            :min-height            "3rem"
-            :padding               "0.75rem"
-            :margin                "0.125rem 0"
-            :border-radius         "0.5rem"
-            :cursor                "pointer"
-            :&:hover               {:background-color color/shaded-context-highlight-bg}})
+           {:width            "auto"
+            :background-color color/transparent
+            :min-height       "3rem"
+            :padding          "0.75rem"
+            :margin           "0.125rem 0"
+            :border-radius    "0.5rem"
+            :cursor           "pointer"
+            :&:hover          {:background-color color/shaded-context-highlight-bg}})
 
 (defstyles list-item-left-column []
            {:width  "3rem"
