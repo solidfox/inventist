@@ -67,25 +67,26 @@
   (let [color-bg (or color-bg? color/shaded-context-background)
         color (or color? color/shaded-context-primary-text)
         transparent " transparent "]
-    [:div {:style (merge (cond (= position "top") {:bottom "120%"}
-                               (= position "right") {:left "130%" :top "0.125rem"}
-                               (= position "left") {:right "130%" :top "0.125rem"}
-                               :else {:top "120%"})         ;bottom
-                         (cond (and (not= position "right") (not= position "left"))
-                               (cond (= alignment "end") {:right 0}
-                                     (= alignment "start") {:left 0}
-                                     :else {:left "-100%"})) ;center
-                         {:position         "absolute"
-                          :min-width        "2rem"
-                          :width            "max-content"
-                          :max-width        "5rem"
-                          :background-color color-bg
-                          :color            color
-                          :font-size        "0.75rem"
-                          :text-align       "center"
-                          :padding          "0.25rem 0.75rem"
-                          :border-radius    "0.25rem"
-                          :z-index          40})}
+    [:div {:draggable false
+           :style     (merge (cond (= position "top") {:bottom "120%"}
+                                   (= position "right") {:left "130%" :top "0.125rem"}
+                                   (= position "left") {:right "130%" :top "0.125rem"}
+                                   :else {:top "120%"})     ;bottom
+                             (cond (and (not= position "right") (not= position "left"))
+                                   (cond (= alignment "end") {:right 0}
+                                         (= alignment "start") {:left 0}
+                                         :else {:left "-100%"})) ;center
+                             {:position         "absolute"
+                              :min-width        "2rem"
+                              :width            "max-content"
+                              :max-width        "5rem"
+                              :background-color color-bg
+                              :color            color
+                              :font-size        "0.75rem"
+                              :text-align       "center"
+                              :padding          "0.25rem 0.75rem"
+                              :border-radius    "0.25rem"
+                              :z-index          1000})}
      ;Arrow
      [:div {:style (merge (cond (= position "top")
                                 {:top          "100%"
@@ -438,11 +439,13 @@
 (defc scrollable
   [{floating-header :floating-header
     floating-footer :floating-footer
-    content         :content}]
+    content         :content
+    z-index         :z-index}]
   [:div {:id    "scrollable"
          :style (merge style/shaded-bar
                        {:height             "100vh"
                         :width              "auto"
+                        :z-index            (or z-index 10)
                         :display            "grid"
                         :grid-template-rows "auto 1fr auto"
                         :overflow-x         "hidden"

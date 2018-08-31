@@ -25,13 +25,13 @@ a:link, a:visited, a:hover, a:active {
     text-decoration: none;
 }
 
-.collection-item-edit {
-    display: none;
-}
+/*.collection-item-edit {*/
+    /*display: none;*/
+/*}*/
 
-.collection-item:hover .collection-item-edit {
-    display: block !important;
-}
+/*.collection-item:hover .collection-item-edit {*/
+    /*display: block !important;*/
+/*}*/
 
 /*@keyframes fade {*/
     /*0% {*/

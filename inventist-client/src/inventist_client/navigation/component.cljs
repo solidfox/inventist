@@ -55,12 +55,14 @@
   [:div {:style {:height                     "100%"
                  :background-color           color/dark-context-background
                  :text-align                 "left"
+                 :z-index                    0
                  :display                    "flex"
                  :overflow-x                 "hidden"
                  :overflow-y                 "scroll"
                  :-webkit-overflow-scrolling "touch"
                  :flex-direction             "column"}}
    sections])
+
 
 (defc sidebar [{sections        :sections
                 trigger-event   :trigger-event
@@ -73,4 +75,5 @@
                                    :viewport-height viewport-height
                                    :viewport-width  viewport-width})
      :floating-footer user-bar
-     :content         (sidebar-content sections)}))
+     :content         (sidebar-content sections)
+     :z-index         0}))
