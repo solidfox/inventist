@@ -83,7 +83,9 @@
    :state-path contractors-page-state-path})
 
 (defn create-inventory-collections-args [state]
-  {:input      {:state (get-in state inventory-collections-state-path)}
+  {:input      {:state (get-in state inventory-collections-state-path)
+                :selected-item-peek-data-map {:people (people-page/get-selected-item-peek-data
+                                                        (get-in state people-page-state-path))}}
    :state-path inventory-collections-state-path})
 
 (defn get-authenticated-user [state]

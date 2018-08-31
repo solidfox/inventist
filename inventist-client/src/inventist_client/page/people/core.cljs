@@ -49,4 +49,6 @@
                   (update-in state person-detail-state-path view-person-detail.core/on-remote-state-mutation remote-state-uri))
                 $ (all-cached-person-detail-state-paths state))))
 
-
+(defn get-selected-item-peek-data [state]
+  (view-people-overview/get-selected-item-peek-data
+    (get-in state (people-overview-state-path))))

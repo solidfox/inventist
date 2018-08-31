@@ -10,7 +10,8 @@
             [symbols.style :as style]
             [symbols.general :as s-general]
             [symbols.mixin :refer [hovered-mixin toggle-mixin]]
-            [inventist-client.event :as client-event]))
+            [inventist-client.event :as client-event]
+            [util.inventory.core :as util]))
 
 
 (def collection-list-item-height "2rem")
@@ -65,19 +66,20 @@
     :icon  "fas fa-users"
     :id    :people}])
 
-(rum/defc widget-selected-collection-item [collection-item]
+(rum/defc widget-selected-collection-item
+  [item-peek-data]
   [:div {:draggable true
-         :style     {:background-color   color/dark-context-secondary-text
-                     :width              collection-list-item-height
-                     :height             collection-list-item-height
-                     :border-radius      "0.25rem"
-                     :cursor             "grab"
-                     :box-sizing         "border-box"
-                     :-moz-box-sizing    "border-box"
-                     :-webkit-box-sizing "border-box"
-                     :align-self         "start"
-                     :border             (str "1px solid " color/dark-context-title-text)}}
-   [:img {:src (:image collection-item)}]])
+         :style     {:background-color color/dark-context-secondary-text
+                     :width            collection-list-item-height
+                     :height           collection-list-item-height
+                     :border-radius    "0.25rem"
+                     :cursor           "grab"
+                     :align-self       "start"
+                     :overflow         "hidden"}}
+   [:img {:src   (:image-url item-peek-data)
+          :style {:height     "100%"
+                  :width      "100%"
+                  :object-fit :cover}}]])
 
 (rum/defcs collections-view < (rem/modular-component event/handle-event)
                               (toggle-mixin {:toggle-state-key :expanded
@@ -85,10 +87,11 @@
                                              :on-fn-key        :trigger-expand
                                              :off-fn-key       :trigger-collapse})
   [{:keys [expanded trigger-expand trigger-collapse]}
-   {{:keys [state]} :input
-    :keys           [trigger-event]}]
-  (let [heading (:heading state)
-        collection-list collections-list
+   {{:keys [state
+            selected-item-peek-data-map]} :input
+    :keys                                 [trigger-event]}]
+  (let [heading                (:heading state)
+        collection-list        collections-list
         selected-collection-id (:selected-collection-id state)]
     [:div {:style {:height         "auto"
                    :text-align     "left"
@@ -132,9 +135,8 @@
          (-> (collection-list-item
                (merge {:title    title
                        :icon     icon
-                       :widget   (when-let [item (core/get-selected-collection-item state
-                                                                                    {:collection-id collection-id})]
-                                   (widget-selected-collection-item item))
+                       :widget   (when-let [selected-item-peek-data (get selected-item-peek-data-map collection-id)]
+                                   (widget-selected-collection-item selected-item-peek-data))
                        :on-click (fn []
                                    (trigger-event (rem/create-event
                                                     {:name :clicked-collection

@@ -141,3 +141,18 @@
       (->> people
            (filter (fn [person] (person-matches person search-terms))))
       people)))
+
+(defn get-person [state person-id]
+  (as-> state $
+        (get-people $)
+        (filter (fn [person] (= (:id person) person-id)) $)
+        (first $)))
+
+(defn get-selected-item-peek-data [state]
+  (let [person (get-person state (:selected-person-id state))]
+    {:image-url (:image person)
+     :title (str (:first-name person) " " (:last-name person))
+     :subtitle (->> (:groups person)
+                    (map :name)
+                    (str/join " "))}))
+
