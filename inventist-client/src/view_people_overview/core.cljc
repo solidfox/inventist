@@ -151,6 +151,7 @@
 (defn get-selected-item-peek-data [state]
   (let [person (get-person state (:selected-person-id state))]
     {:image-url (:image person)
+     :text-icon (str (subs (or (:first-name person) "") 0 1) (subs (or (:last-name person) "") 0 1))
      :title (str (:first-name person) " " (:last-name person))
      :subtitle (->> (:groups person)
                     (map :name)
