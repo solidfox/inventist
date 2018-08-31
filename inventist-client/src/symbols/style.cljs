@@ -105,9 +105,6 @@
             :padding               "0.75rem"
             :margin                "0.125rem 0"
             :border-radius         "0.5rem"
-            :display               "grid"
-            :grid-template-columns "auto 1fr"
-            :grid-gap              "1rem"
             :cursor                "pointer"
             :&:hover               {:background-color color/shaded-context-highlight-bg}})
 
