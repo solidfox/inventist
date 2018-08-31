@@ -67,7 +67,9 @@
     :id    :people}])
 
 (rum/defc widget-selected-collection-item
-  [item-peek-data]
+  [{:keys [image-url
+           title
+           subtitle]}]
   [:div {:draggable true
          :style     {:background-color color/dark-context-secondary-text
                      :width            collection-list-item-height
@@ -76,10 +78,18 @@
                      :cursor           "grab"
                      :align-self       "start"
                      :overflow         "hidden"}}
-   [:img {:src   (:image-url item-peek-data)
-          :style {:height     "100%"
-                  :width      "100%"
-                  :object-fit :cover}}]])
+   (cond image-url [:img {:src   image-url
+                          :style {:height     "100%"
+                                  :width      "100%"
+                                  :object-fit :cover}}]
+         :else [:span {:style {:width       "100%"
+                               :height      "100%"
+                               :display     "grid"
+                               :font-size   "1rem"
+                               :align-items "center"
+                               :text-align  "center"
+                               :color       color/dark-context-primary-text}}
+                "💻"])])
 
 (rum/defcs collections-view < (rem/modular-component event/handle-event)
                               (toggle-mixin {:toggle-state-key :expanded
@@ -90,8 +100,8 @@
    {{:keys [state
             selected-item-peek-data-map]} :input
     :keys                                 [trigger-event]}]
-  (let [heading                (:heading state)
-        collection-list        collections-list
+  (let [heading (:heading state)
+        collection-list collections-list
         selected-collection-id (:selected-collection-id state)]
     [:div {:style {:height         "auto"
                    :text-align     "left"
