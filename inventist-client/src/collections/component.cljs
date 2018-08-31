@@ -75,8 +75,8 @@
    {:keys [image-url
            text-icon
            title
-           drag-data
-           subtitle]}]
+           subtitle
+           drag-data]}]
   [:div {:on-drag (fn [event] (.setData (.-dataTransfer event) "text/json" (transit/write writer drag-data)))
          :style   {:position         "relative"
                    :background-color color/dark-context-secondary-text
@@ -104,7 +104,7 @@
                                    :color            color/dark-context-primary-text}}
                 text-icon])
    (when hovered
-     (s-general/tooltip {:tooltip-text "Drag me"
+     (s-general/tooltip {:tooltip-text (str title "\n" subtitle "\nDrag to reassign")
                          :position     "bottom"
                          :alignment    "end"}))])
 

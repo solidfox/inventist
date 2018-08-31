@@ -22,13 +22,12 @@
            on-select]}]
   (let [drag-data (deref drag-data-atom)]
     (list-card {:selected      selected
-                :on-drag-enter (fn [drag-data] (println "enter")
-                                 (reset! drag-data-atom drag-data))
-                :on-drag-leave (fn [drag-data] (println "left") (reset! drag-data-atom nil))
+                :on-drag-enter (fn [drag-data] (reset! drag-data-atom drag-data))
+                :on-drag-leave (fn [drag-data] (reset! drag-data-atom nil))
                 :on-drop       on-drop
                 :drop-zone     (cond (and drag-data (or (= (:type drag-data) "person") 1))
                                      {:drop-area true
-                                      :drop-text (str "Assign " (str (:brand item) " " (:model-name item)) " to " (or (:name drag-data) "Max") ".")})
+                                      :drop-text (str "Assign " (str (:brand item) " " (:model-name item)) " to " (or (:name drag-data) "dragged person.") ".")})
 
 
                 :on-click      on-select}
