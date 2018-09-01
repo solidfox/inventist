@@ -22,7 +22,7 @@
               :on-drop   on-drop
               :drop-zone [{:drag-data-type "inventist/person"
                            :drop-zone-text (str "Assign " (:class item) " to the dragged person.")
-                           :drop-effect "link"}]
+                           :drop-effect    "link"}]
               :on-click  on-select}
              [:div {:key   1
                     :class (style/list-item-left-column)
@@ -86,7 +86,10 @@
                      [:div {:key      (:id item)
                             :on-click (fn [] (item-selected-event item))}
                       (inventory-list-card {:item     item
-                                            :on-drop  (fn [drag-data] (util/spy drag-data))
+                                            :on-drop  (fn [drag-data] (trigger-event
+                                                                        (rem/create-event {:name :dropped-person-on-inventory-item
+                                                                                           :data {:inventory-item-id (:id item)
+                                                                                                  :new-assignee-id   (:id drag-data)}})))
                                             :selected (= (:selected-inventory-id state) (:id item))})]))))
           ;:hidden    (not (core/inventory-matches item search-terms))})]))))
 

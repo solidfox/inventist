@@ -6,6 +6,17 @@
   [_state event]
   (if (rem/triggered-by-me? event)
     (case (:name event)
+      :dropped-person-on-inventory-item
+      (let [{:keys [inventory-item-id
+                    new-assignee-id]} (:data event)]
+        (-> event
+            (rem/create-anonymous-event)
+            (rem/append-action
+              (rem/create-action {:name        :add-pending-inventory-item-reassignment
+                                  :fn-and-args [core/add-pending-item-reassignment
+                                                {:inventory-item-id inventory-item-id
+                                                 :new-assignee-id   new-assignee-id}]}))))
+
       :retry-fetching-data
       (-> event
           (rem/create-anonymous-event)

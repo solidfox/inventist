@@ -47,6 +47,7 @@
     new-user-id   :new-user-id}]
   (inventory-services/reassign-inventory-item {:serial-number      serial-number
                                                :new-user-id        new-user-id
+                                               :fragments          inventory-services/reallocation-fragment
                                                :new-user-graphql   person-details-graphql
                                                :before-fn-and-args [core/started-reassign-inventory-item-service-call {:serial-number serial-number}]
                                                :after-fn-and-args  [core/receive-reassign-inventory-item-service-response]}))
