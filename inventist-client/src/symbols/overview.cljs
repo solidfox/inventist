@@ -11,8 +11,6 @@
 ;To change listing bg color on hover.
 (def list-bg-color color/highlight)
 
-(def reader (transit/reader :json))
-
 (defc list-card-drag-over [drop-text]
   [:div {:style {:position         "absolute"
                  :width            "18rem"
@@ -27,6 +25,8 @@
                  :border           (str "2px dashed " color/shaded-context-secondary-text)}}
    ;[:div [:span {:style {:font-size "2.8rem"}} [:i {:class "fas fa-box-open"}]]]
    drop-text])
+
+(def reader (transit/reader :json))
 
 (defn get-drag-data [event type]
   (transit/read reader (.getData (.-dataTransfer event) type)))
@@ -53,14 +53,10 @@
    & children]
   (let [drop-zone-data (deref current-drag-metadata-atom)]
     [:div (merge (when drop-zone
-                   {:on-drag-enter (fn [event] (if-let [drop-zone-data (first (drop-zone-data-for-event drop-zone event))]
-                                                 (do (.preventDefault event)
-                                                     (aset event "dropEffect" "link")
-                                                     (reset! current-drag-metadata-atom drop-zone-data))))
-                    :on-drag-over  (fn [event] (if-let [drop-zone-data (first (drop-zone-data-for-event drop-zone event))]
-                                                 (do (.preventDefault event)
-                                                     (aset event "dropEffect" "link")
-                                                     (reset! current-drag-metadata-atom drop-zone-data))))
+                   {:on-drag-over (fn [event] (if-let [drop-zone-data (first (drop-zone-data-for-event drop-zone event))]
+                                                (do (.preventDefault event)
+                                                    (aset event "dropEffect" "link")
+                                                    (reset! current-drag-metadata-atom drop-zone-data))))
                     :on-drag-leave (fn [_event] (reset! current-drag-metadata-atom nil))
                     :on-drop       (fn [event]
                                      (on-drop (get-drag-data event (:drag-data-type @current-drag-metadata-atom)))

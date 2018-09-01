@@ -21,7 +21,7 @@
   (list-card {:selected  selected
               :on-drop   on-drop
               :drop-zone [{:drag-data-type "inventist/person"
-                           :drop-zone-text "Assign this computer to the dragged person."
+                           :drop-zone-text (str "Assign " (:class item) " to the dragged person.")
                            :drop-effect "link"}]
               :on-click  on-select}
              [:div {:key   1

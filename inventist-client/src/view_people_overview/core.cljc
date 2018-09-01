@@ -159,7 +159,7 @@
 
 (defn get-selected-item-drag-data [state]
   (when-let [person (get-person state (:selected-person-id state))]
-    {:type       :inventist/person
+    {:type       "inventist/person"
      :id         (:id person)
      :first-name (:first-name person)
      :last-name  (:last-name person)

@@ -78,7 +78,7 @@
            subtitle
            drag-data]}]
   [:div {:on-drag-start (fn [event]
-                          (.setData (.-dataTransfer event) "inventist/person" (transit/write writer drag-data)))
+                          (.setData (.-dataTransfer event) (:type drag-data) (transit/write writer drag-data)))
          :style   {:position         "relative"
                    :background-color color/dark-context-secondary-text
                    :width            collection-list-item-height
