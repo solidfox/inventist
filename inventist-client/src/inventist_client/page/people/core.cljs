@@ -52,3 +52,7 @@
 (defn get-selected-item-peek-data [state]
   (view-people-overview/get-selected-item-peek-data
     (get-in state (people-overview-state-path))))
+
+(defn get-selected-item-drag-data [state]
+  (view-people-overview/get-selected-item-drag-data
+    (get-in state (people-overview-state-path))))

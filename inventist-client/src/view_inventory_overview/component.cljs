@@ -12,50 +12,43 @@
             [util.inventory.core :as util]
             [symbols.mixin :as mixin]))
 
-(defcs inventory-list-card < (rum/local nil :drag-data-atom)
-                             {:key-fn (fn [{{id :id} :item}] id)}
-  [{:keys [drag-data-atom]}
-   {:keys [item
+(defc inventory-list-card < {:key-fn (fn [{{id :id} :item}] id)}
+  [{:keys [item
            selected
            hidden
            on-drop
            on-select]}]
-  (let [drag-data (deref drag-data-atom)]
-    (list-card {:selected      selected
-                :on-drag-enter (fn [drag-data] (reset! drag-data-atom drag-data))
-                :on-drag-leave (fn [drag-data] (reset! drag-data-atom nil))
-                :on-drop       on-drop
-                :drop-zone     (cond (and drag-data (or (= (:type drag-data) "person") 1))
-                                     {:drop-area true
-                                      :drop-text (str "Assign " (str (:brand item) " " (:model-name item)) " to " (or (:name drag-data) "dragged person.") ".")})
-
-
-                :on-click      on-select}
-               [:div {:key   1
-                      :class (style/list-item-left-column)
-                      :style {:font-size "3rem"}}
-                (cond (and (:image item) (not= (:image item) ""))
-                      [:img {:class (style/card-image)
-                             :src   (:image item)}]
-                      :else
-                      (s-general/device-icon-set {:item item}))]
-               [:div {:key   2
-                      :style {:margin "0 0 0 1rem"
-                              :width  "auto"}}
-                [:span {:style style/card-title}
-                 (str (:brand item) " " (:model-name item))] [:br]
-                [:span {:style style/card-subtitle}
-                 (str (:serial-number item) " - " (:color item))]])))
+  (list-card {:selected  selected
+              :on-drop   on-drop
+              :drop-zone [{:drag-data-type "inventist/person"
+                           :drop-zone-text "Assign this computer to the dragged person."
+                           :drop-effect "link"}]
+              :on-click  on-select}
+             [:div {:key   1
+                    :class (style/list-item-left-column)
+                    :style {:font-size "3rem"}}
+              (cond (and (:image item) (not= (:image item) ""))
+                    [:img {:class (style/card-image)
+                           :src   (:image item)}]
+                    :else
+                    (s-general/device-icon-set {:item item}))]
+             [:div {:key   2
+                    :style {:margin "0 0 0 1rem"
+                            :width  "auto"}}
+              [:span {:style style/card-title}
+               (str (:brand item) " " (:model-name item))] [:br]
+              [:span {:style style/card-subtitle}
+               (str (:serial-number item) " - " (:color item))]]))
 
 
 
 (defc inventory-list < (remodular.core/modular-component event/handle-event)
   [{{state :state} :input
     trigger-event  :trigger-event}]
-  (let [inventory (core/filtered-inventory state)
+  (let [inventory         (core/filtered-inventory state)
         limited-inventory (take 75 inventory)
-        n-results (count limited-inventory)
-        search-terms (:search-terms state)]
+        n-results         (count limited-inventory)
+        search-terms      (:search-terms state)]
     (s-general/scrollable
       {:floating-header
        [:div
@@ -93,6 +86,7 @@
                      [:div {:key      (:id item)
                             :on-click (fn [] (item-selected-event item))}
                       (inventory-list-card {:item     item
+                                            :on-drop  (fn [drag-data] (util/spy drag-data))
                                             :selected (= (:selected-inventory-id state) (:id item))})]))))
           ;:hidden    (not (core/inventory-matches item search-terms))})]))))
 

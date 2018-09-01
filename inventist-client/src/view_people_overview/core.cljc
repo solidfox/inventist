@@ -152,8 +152,15 @@
   (when-let [person (get-person state (:selected-person-id state))]
     {:image-url (:image person)
      :text-icon (str (subs (or (:first-name person) "") 0 1) (subs (or (:last-name person) "") 0 1))
-     :title (str (:first-name person) " " (:last-name person))
-     :subtitle (->> (:groups person)
-                    (map :name)
-                    (str/join " "))}))
+     :title     (str (:first-name person) " " (:last-name person))
+     :subtitle  (->> (:groups person)
+                     (map :name)
+                     (str/join " "))}))
 
+(defn get-selected-item-drag-data [state]
+  (when-let [person (get-person state (:selected-person-id state))]
+    {:type       :inventist/person
+     :id         (:id person)
+     :first-name (:first-name person)
+     :last-name  (:last-name person)
+     :groups     (:groups person)}))

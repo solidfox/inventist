@@ -1,5 +1,5 @@
 (ns symbols.overview
-  (:require [rum.core :refer [defc] :as rum]
+  (:require [rum.core :refer [defc defcs] :as rum]
             [symbols.general :as s-general]
             [symbols.color :as color]
             [symbols.style :as style]
@@ -12,10 +12,6 @@
 (def list-bg-color color/highlight)
 
 (def reader (transit/reader :json))
-
-(defn get-drag-data [event]
-  (util/spy (transit/read reader (.getData (.-dataTransfer event) "text/json"))))
-
 
 (defc list-card-drag-over [drop-text]
   [:div {:style {:position         "absolute"
@@ -32,33 +28,58 @@
    ;[:div [:span {:style {:font-size "2.8rem"}} [:i {:class "fas fa-box-open"}]]]
    drop-text])
 
+(defn get-drag-data [event type]
+  (js/console.log (.-dataTransfer event))
+  (transit/read reader (util/spy (.getData (.-dataTransfer event) type))))
 
-(defc list-card [{:keys [selected
-                         on-drag-enter
-                         on-drag-leave
-                         on-drop
-                         drop-zone
-                         hidden]
-                  :as   props}
-                 & children]
-  [:div (merge {:class         [(style/list-item-class)
-                                "drag"]
-                :draggable     true
-                :on-drag-enter (fn [event] (on-drag-enter (get-drag-data event)))
-                :on-drag-leave (fn [event] (on-drag-leave (get-drag-data event)))
-                :on-drop       (fn [event] (on-drop (get-drag-data event)))
-                :style         (merge
-                                 {:position "relative"}
-                                 (when selected style/list-item-selected)
-                                 (when hidden {:display "none"}))}
-               (dissoc props :selected))
-   (when (:drop-area drop-zone)
-     (list-card-drag-over (:drop-text drop-zone)))
+(defn drop-zone-data-for-event [drop-zone event]
+  (filter (fn [{:keys [drag-data-type]}] (-> event .-dataTransfer .-types (.includes drag-data-type)))
+          drop-zone))
 
-   [:div {:style {:display               "grid"
-                  :grid-template-columns "auto 1fr"
-                  :grid-gap              "1rem"}}
-    children]])
+
+(defcs list-card < (rum/local nil :current-drag-metadata-atom)
+                   "drop-zone expects a map like this
+                    [{{:drag-data-type \"text/plain\"
+                       :drop-zone-text \"Drop plain text here.\"
+                       :drop-effect    \"copy\"}}
+                   The list-card will only react to dragged content of the specified drag-data-type
+                   and the drop-zone will then display the provided text and set the given drop-effect (if provided)."
+  [{:keys [current-drag-metadata-atom]}
+   {:keys [selected
+           on-drop
+           drop-zone
+           hidden
+           is-drag-over]
+    :as   props}
+   & children]
+  (let [drop-zone-data (deref current-drag-metadata-atom)]
+    [:div (merge (when drop-zone
+                   {:on-drag-enter (fn [event] (if-let [drop-zone-data (first (drop-zone-data-for-event drop-zone event))]
+                                                 (do (.preventDefault event)
+                                                     (aset event "dropEffect" "link")
+                                                     (reset! current-drag-metadata-atom drop-zone-data))))
+                    :on-drag-over  (fn [event] (if-let [drop-zone-data (first (drop-zone-data-for-event drop-zone event))]
+                                                 (do (.preventDefault event)
+                                                     (aset event "dropEffect" "link")
+                                                     (reset! current-drag-metadata-atom drop-zone-data))))
+                    :on-drag-leave (fn [_event] (reset! current-drag-metadata-atom nil))
+                    :on-drop       (fn [event]
+                                     (on-drop (get-drag-data event (:drag-data-type @current-drag-metadata-atom)))
+                                     (reset! current-drag-metadata-atom nil))})
+                 {:class     [(style/list-item-class)
+                              (when is-drag-over "drag")]
+                  :hidden    hidden
+                  :draggable true
+                  :style     (merge
+                               {:position "relative"}
+                               (when (or selected drop-zone-data) style/list-item-selected)
+                               (when hidden {:display "none"}))})
+     (when drop-zone-data
+       (list-card-drag-over (:drop-zone-text drop-zone-data)))
+     [:div {:style {:display               "grid"
+                    :grid-template-columns "auto 1fr"
+                    :grid-gap              "1rem"}}
+      children]]))
 
 ;Search component
 (defc search-toolbar [{search-field-value :search-field-value

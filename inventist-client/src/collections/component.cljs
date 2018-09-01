@@ -77,7 +77,8 @@
            title
            subtitle
            drag-data]}]
-  [:div {:on-drag (fn [event] (.setData (.-dataTransfer event) "text/json" (transit/write writer drag-data)))
+  [:div {:on-drag-start (fn [event]
+                          (.setData (.-dataTransfer event) "inventist/person" (transit/write writer drag-data)))
          :style   {:position         "relative"
                    :background-color color/dark-context-secondary-text
                    :width            collection-list-item-height
@@ -115,10 +116,11 @@
                                              :off-fn-key       :trigger-collapse})
   [{:keys [expanded trigger-expand trigger-collapse]}
    {{:keys [state
-            selected-item-peek-data-map]} :input
-    :keys                                 [trigger-event]}]
-  (let [heading (:heading state)
-        collection-list collections-list
+            selected-item-metadata-map]} :input
+    :keys                                [trigger-event]}]
+  (println selected-item-metadata-map)
+  (let [heading                (:heading state)
+        collection-list        collections-list
         selected-collection-id (:selected-collection-id state)]
     [:div {:style {:height         "auto"
                    :text-align     "left"
@@ -162,8 +164,11 @@
          (-> (collection-list-item
                (merge {:title    title
                        :icon     icon
-                       :widget   (when-let [selected-item-peek-data (get selected-item-peek-data-map collection-id)]
-                                   (widget-selected-collection-item selected-item-peek-data))
+                       :widget   (let [{:keys [peek-data
+                                               drag-data]} (get selected-item-metadata-map collection-id)]
+                                   (when peek-data
+                                     (widget-selected-collection-item (merge peek-data
+                                                                             {:drag-data drag-data}))))
                        :on-click (fn []
                                    (trigger-event (rem/create-event
                                                     {:name :clicked-collection
