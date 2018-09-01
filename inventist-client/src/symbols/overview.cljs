@@ -29,8 +29,7 @@
    drop-text])
 
 (defn get-drag-data [event type]
-  (js/console.log (.-dataTransfer event))
-  (transit/read reader (util/spy (.getData (.-dataTransfer event) type))))
+  (transit/read reader (.getData (.-dataTransfer event) type)))
 
 (defn drop-zone-data-for-event [drop-zone event]
   (filter (fn [{:keys [drag-data-type]}] (-> event .-dataTransfer .-types (.includes drag-data-type)))
