@@ -77,35 +77,35 @@
            title
            subtitle
            drag-data]}]
-  [:div {:on-drag-start (fn [event]
-                          (.setData (.-dataTransfer event) (:type drag-data) (transit/write writer drag-data)))
-         :style   {:position         "relative"
-                   :background-color color/dark-context-secondary-text
-                   :width            collection-list-item-height
-                   :height           collection-list-item-height
-                   :border-radius    "0.25rem"
-                   :cursor           "grab"
-                   :align-self       "start"}}
-   ;:overflow         "hidden"}}
-   (cond image-url [:img {:draggable true
-                          :src       image-url
-                          :style     {:height        "100%"
-                                      :border-radius "inherit"
-                                      :width         "100%"
-                                      :object-fit    :cover}}]
-         :else [:span {:draggable true
-                       :style     {:width            "inherit"
-                                   :height           "inherit"
-                                   :border-radius    "inherit"
-                                   :display          "grid"
-                                   :font-size        "1.1rem"
-                                   :align-items      "center"
-                                   :text-align       "center"
-                                   :background-color "inherit"
-                                   :color            color/dark-context-primary-text}}
-                text-icon])
+  [:div {:style {:position "relative"}}
+   [:div {:on-drag-start (when drag-data
+                           (fn [event]
+                             (.setData (.-dataTransfer event) (:type drag-data) (transit/write writer drag-data))))
+          :draggable     (not (nil? drag-data))
+          :style         {:background-color color/dark-context-secondary-text
+                          :width            collection-list-item-height
+                          :height           collection-list-item-height
+                          :border-radius    "0.25rem"
+                          :cursor           "grab"
+                          :align-self       "start"}}
+    ;:overflow         "hidden"}}
+    (cond image-url [:img {:src   image-url
+                           :style {:height        "100%"
+                                   :border-radius "inherit"
+                                   :width         "100%"
+                                   :object-fit    :cover}}]
+          :else [:span {:style {:width            "inherit"
+                                :height           "inherit"
+                                :border-radius    "inherit"
+                                :display          "grid"
+                                :font-size        "1.1rem"
+                                :align-items      "center"
+                                :text-align       "center"
+                                :background-color "inherit"
+                                :color            color/dark-context-primary-text}}
+                 text-icon])]
    (when hovered
-     (s-general/tooltip {:tooltip-text (str title "\n" subtitle "\nDrag to reassign")
+     (s-general/tooltip {:tooltip-text (str title "\n" subtitle)
                          :position     "bottom"
                          :alignment    "end"}))])
 

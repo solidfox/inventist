@@ -10,35 +10,8 @@
             [cljs-react-material-ui.icons :as icon]
             [symbols.general :as s-general]
             [util.inventory.core :as util]
-            [symbols.mixin :as mixin]))
-
-(defc inventory-list-card < {:key-fn (fn [{{id :id} :item}] id)}
-  [{:keys [item
-           selected
-           hidden
-           on-drop
-           on-select]}]
-  (list-card {:selected  selected
-              :on-drop   on-drop
-              :drop-zone [{:drag-data-type "inventist/person"
-                           :drop-zone-text (str "Assign " (:class item) " to the dragged person.")
-                           :drop-effect    "link"}]
-              :on-click  on-select}
-             [:div {:key   1
-                    :class (style/list-item-left-column)
-                    :style {:font-size "3rem"}}
-              (cond (and (:image item) (not= (:image item) ""))
-                    [:img {:class (style/card-image)
-                           :src   (:image item)}]
-                    :else
-                    (s-general/device-icon-set {:item item}))]
-             [:div {:key   2
-                    :style {:margin "0 0 0 1rem"
-                            :width  "auto"}}
-              [:span {:style style/card-title}
-               (str (:brand item) " " (:model-name item))] [:br]
-              [:span {:style style/card-subtitle}
-               (str (:serial-number item) " - " (:color item))]]))
+            [symbols.mixin :as mixin]
+            [symbols.inventory :as s-inventory]))
 
 
 
@@ -85,12 +58,12 @@
                    (fn [item]
                      [:div {:key      (:id item)
                             :on-click (fn [] (item-selected-event item))}
-                      (inventory-list-card {:item     item
-                                            :on-drop  (fn [drag-data] (trigger-event
-                                                                        (rem/create-event {:name :dropped-person-on-inventory-item
-                                                                                           :data {:inventory-item-id (:id item)
-                                                                                                  :new-assignee-id   (:id drag-data)}})))
-                                            :selected (= (:selected-inventory-id state) (:id item))})]))))
+                      (s-inventory/inventory-list-card {:item     item
+                                                        :on-drop  (fn [drag-data] (trigger-event
+                                                                                    (rem/create-event {:name :dropped-person-on-inventory-item
+                                                                                                       :data {:inventory-item-id (:id item)
+                                                                                                              :new-assignee-id   (:id drag-data)}})))
+                                                        :selected (= (:selected-inventory-id state) (:id item))})]))))
           ;:hidden    (not (core/inventory-matches item search-terms))})]))))
 
           (when (= n-results 0)

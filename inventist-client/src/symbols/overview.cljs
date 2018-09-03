@@ -8,6 +8,8 @@
             [util.inventory.core :as util]
             [cognitect.transit :as transit]))
 
+(def writer (transit/writer :json))
+
 ;To change listing bg color on hover.
 (def list-bg-color color/highlight)
 
@@ -49,6 +51,7 @@
    {:keys [selected
            on-drop
            drop-zone
+           drag-data
            hidden
            is-drag-over]
     :as   props}
@@ -63,10 +66,13 @@
                     :on-drop       (fn [event]
                                      (on-drop (get-drag-data event (:drag-data-type @current-drag-metadata-atom)))
                                      (reset! current-drag-metadata-atom nil))})
+                 (when drag-data
+                   {:draggable     true
+                    :on-drag-start (fn [event]
+                                     (.setData (.-dataTransfer event) (:type drag-data) (transit/write writer drag-data)))})
                  {:class     [(style/list-item-class)
                               (when is-drag-over "drag")]
                   :hidden    hidden
-                  :draggable true
                   :style     (merge
                                {:position "relative"}
                                (when (or selected drop-zone-data) style/list-item-selected)
