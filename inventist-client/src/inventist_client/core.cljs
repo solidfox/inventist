@@ -140,6 +140,7 @@
 (defn on-remote-state-mutation
   [state remote-state-uri]
   (-> state
-      (update-in people-page-state-path people-page/on-remote-state-mutation remote-state-uri)))
+      (update-in people-page-state-path people-page/on-remote-state-mutation remote-state-uri)
+      (update-in inventory-page-state-path inventory-page/on-remote-state-mutation remote-state-uri)))
 
 

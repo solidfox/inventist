@@ -8,7 +8,7 @@
   (concat
     (a/prepend-state-path-to-services
       (inventory-overview/get-services (core/create-inventory-overview-args state))
-      (core/inventory-overview-state-path))
+      core/inventory-overview-state-path)
     (when (:selected-inventory-id state)
       (a/prepend-state-path-to-services
         (inventory-detail/get-services (core/create-inventory-detail-args state (:selected-inventory-id state)))

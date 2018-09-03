@@ -5,11 +5,16 @@
 
 (defn create-state
   [{inventory-id :inventory-item-id}]
-  {:inventory-item-id              inventory-id
-   :edit-mode                      false
-   :report-issue-form              nil
-   :fetching-inventory-details     false
-   :get-inventory-details-response nil})
+  {:inventory-item-id                   inventory-id
+   :edit-mode                           false
+   :report-issue-form                   nil
+
+   :should-refetch-get-inventory-detail false
+   :fetching-inventory-details          false
+   :get-inventory-details-response      nil})
+
+(defn on-remote-state-mutation [state _]
+  (assoc state :should-refetch-get-inventory-detail true))
 
 
 ;;;;;;;;;;;;;;; Inventory detail fetching
@@ -20,7 +25,9 @@
            (not (get-in state [:get-inventory-details-response :body :data])))))
 
 (defn started-get-inventory-detail-service-call [state]
-  (assoc state :fetching-inventory-details true))
+  (-> state
+      (assoc :fetching-inventory-details true)
+      (assoc :should-refetch-get-inventory-detail false)))
 
 (defn receive-get-inventory-detail-service-response [state response request]
   (-> state

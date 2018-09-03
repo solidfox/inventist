@@ -69,6 +69,7 @@
   [{{state :state} :input}]
   (as-> [] $
         (conj $ (when (core/should-get-inventory-detail? state)
+                  (util/spy state)
                   (get-inventory-details (:inventory-item-id state))))
         (conj $ (when (core/should-send-report-issue-form? state)
                   (send-report-issue-form {:item-id     (:inventory-item-id state)

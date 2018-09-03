@@ -6,7 +6,7 @@
 (defn handle-event
   [_state event]
   (cond
-    (rem/triggered-by-child? (core/inventory-overview-state-path) event)
+    (rem/triggered-by-child? core/inventory-overview-state-path event)
     (case (:name event)
       :selected-inventory-item
       (let [inventory-id (get-in event [:data :inventory-item :id])]

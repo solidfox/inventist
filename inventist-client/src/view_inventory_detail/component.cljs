@@ -69,7 +69,6 @@
     trigger-event   :trigger-event
     viewport-height :viewport-height
     viewport-width  :viewport-width}]
-
   (let [computer (get-in state [:get-inventory-details-response :body :data :computer])
         edit-mode (:edit-mode state)]
 
