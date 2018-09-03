@@ -13,18 +13,20 @@
 
 (defc list-card-drag-over [drop-text]
   [:div {:style {:position         "absolute"
-                 :width            "18rem"
-                 :height           "calc(100% - 1.5rem)"
+                 :width            "calc(100% - 4.5rem - 4px)"
+                 :height           "calc(100% - 4.5rem - 4px)"
+                 :padding          "1.5rem"
                  :display          "flex"
                  :text-align       "center"
+                 :align-items      "center"
                  :justify-content  "center"
-                 :opacity          "0.95"
+                 :opacity          "0.85"
                  :color            color/shaded-context-primary-text
                  :background-color color/shaded-context-background
-                 :border-radius    "0.25rem"
+                 :border-radius    style/inner-border-radius
                  :border           (str "2px dashed " color/shaded-context-secondary-text)}}
    ;[:div [:span {:style {:font-size "2.8rem"}} [:i {:class "fas fa-box-open"}]]]
-   drop-text])
+   [:div drop-text]])
 
 (def reader (transit/reader :json))
 
@@ -53,10 +55,10 @@
    & children]
   (let [drop-zone-data (deref current-drag-metadata-atom)]
     [:div (merge (when drop-zone
-                   {:on-drag-over (fn [event] (if-let [drop-zone-data (first (drop-zone-data-for-event drop-zone event))]
-                                                (do (.preventDefault event)
-                                                    (aset event "dropEffect" "link")
-                                                    (reset! current-drag-metadata-atom drop-zone-data))))
+                   {:on-drag-over  (fn [event] (if-let [drop-zone-data (first (drop-zone-data-for-event drop-zone event))]
+                                                 (do (.preventDefault event)
+                                                     (aset event "dropEffect" "link")
+                                                     (reset! current-drag-metadata-atom drop-zone-data))))
                     :on-drag-leave (fn [_event] (reset! current-drag-metadata-atom nil))
                     :on-drop       (fn [event]
                                      (on-drop (get-drag-data event (:drag-data-type @current-drag-metadata-atom)))

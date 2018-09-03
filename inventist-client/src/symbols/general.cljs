@@ -64,8 +64,8 @@
                 alignment    :alignment                     ;start, center, end
                 color-bg?    :color-bg
                 color?       :color}]
-  (let [color-bg (or color-bg? color/shaded-context-background)
-        color (or color? color/shaded-context-primary-text)
+  (let [color-bg    (or color-bg? color/shaded-context-background)
+        color       (or color? color/shaded-context-primary-text)
         transparent " transparent "]
     [:div {:draggable false
            :style     (merge (cond (= position "top") {:bottom "120%"}
@@ -151,11 +151,14 @@
 (defc section-title-button [{icon     :icon
                              text     :text
                              color    :color
-                             on-click :on-click}]
-  [:span {:on-click on-click
+                             active   :active
+                             on-click :on-click
+                             :or {active true}}]
+  [:span {:on-click (when active on-click)
           :style    {:color     (or color color/light-context-secondary-text)
+                     :opacity   (if active 1 0.2)
                      :font-size "1rem"
-                     :cursor    "pointer"}}
+                     :cursor    (when active "pointer")}}
 
    [:i {:class icon}] " " text])
 

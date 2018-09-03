@@ -13,6 +13,8 @@
             [oops.core :as oops]
             [util.inventory.core :as util]))
 
+(def reassign-device-icon "fa-ambulance")
+
 (defn report-issue-form
   [{{{{object-url :object-url} :file
       description              :description} :user-input
@@ -69,7 +71,7 @@
     trigger-event   :trigger-event
     viewport-height :viewport-height
     viewport-width  :viewport-width}]
-  (let [computer (get-in state [:get-inventory-details-response :body :data :computer])
+  (let [computer  (get-in state [:get-inventory-details-response :body :data :computer])
         edit-mode (:edit-mode state)]
 
     ;INVENTORY DETAILS
@@ -106,13 +108,7 @@
                          {:title     "Report Issue with Device"
                           :icon      "fas fa-exclamation-triangle"
                           :scroll-to "#timeline-dev"
-                          :on-click  (fn [] (trigger-event (event/report-issue-clicked (:id computer))))}
-                         {:icon     "fas fa-qrcode"
-                          :title    "QR Code"
-                          :on-click ""}
-                         {:icon     "far fa-share-square"
-                          :title    "Share"
-                          :on-click ""}]
+                          :on-click  (fn [] (trigger-event (event/report-issue-clicked (:id computer))))}]
         :fields         [{:label    "Serial Number"
                           :value    (:serial-number computer)
                           :editable false}
@@ -198,15 +194,10 @@
       (s-general/section-title {:title    "Timeline"
                                 :viewport (cond (< viewport-width style/viewport-mobile) "mobile"
                                                 :else "desktop")
-                                :buttons  (cond (core/should-show-report-issue-form? state)
-                                                (s-general/section-title-button {:icon     "fas fa-exclamation-triangle" ;
-                                                                                 :text     "Cancel Issue Reporting"
-                                                                                 :color    color/light-context-secondary-negative
-                                                                                 :on-click (fn [] (trigger-event (rem/create-event {:name :close-report-issue})))})
-                                                :else
-                                                (s-general/section-title-button {:text     "Report Issue with Device"
-                                                                                 :icon     "fas fa-exclamation-triangle"
-                                                                                 :on-click (fn [] (trigger-event (event/report-issue-clicked (:id computer))))}))})
+                                :buttons  (s-general/section-title-button {:text     "Report Problem"
+                                                                           :icon     (str "fas " reassign-device-icon)
+                                                                           :active   (not (core/should-show-report-issue-form? state))
+                                                                           :on-click (fn [] (trigger-event (event/report-issue-clicked (:id computer))))})})
 
       ;Report Issue Box
       (when (core/should-show-report-issue-form? state)
