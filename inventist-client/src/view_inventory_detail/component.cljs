@@ -176,17 +176,17 @@
 
 
         (if-let [user (:user computer)]
-          (s-people/person-list-card {:person   user
-                                      :on-click (fn [] (trigger-event (event/clicked-user (:id user))))
+          (s-people/person-list-card {:person    user
+                                      :on-click  (fn [] (trigger-event (event/clicked-user (:id user))))
                                       :drop-zone [{:drag-data-type "inventist/inventory-item"
                                                    :drop-zone-text (str "Assign "
                                                                         (:first-name user) " " (:last-name user)
                                                                         " to the dragged inventory-item.")
                                                    :drop-effect    "link"}]
-                                      :on-drop  (fn [drag-data] (trigger-event
-                                                                  (rem/create-event {:name :dropped-inventory-item-on-person
-                                                                                     :data {:inventory-item-id (:id drag-data)
-                                                                                            :new-assignee-id   (:id user)}})))})
+                                      :on-drop   (fn [drag-data] (trigger-event
+                                                                   (event/dropped-inventory-item-on-person
+                                                                     {:inventory-item-id (:id drag-data)
+                                                                      :person-id         (:id user)})))})
           (when (not edit-mode)
             [:div {:style {:color      color/light-context-primary-text
                            :font-style "italic"

@@ -1,7 +1,9 @@
 (ns view-inventory-detail.services
   (:require [view-inventory-detail.core :as core]
             [ysera.test :refer [is=]]
-            [util.inventory.core :as util]))
+            [util.inventory.core :as util]
+            [service-reassign-inventory-item.services :as reassign]
+            [remodular.core :as rem]))
 
 (def reallocation-fragment
   [{:fragment/name   :fragment/inventory-history-reallocation
@@ -74,4 +76,7 @@
                   (send-report-issue-form {:item-id     (:inventory-item-id state)
                                            :description (get-in state [:report-issue-form :user-input :description])
                                            :photos      [(get-in state [:report-issue-form :user-input :file])]})))
+        (concat $ (rem/prepend-state-path-to-services
+                    (reassign/get-services {:input {:state (get-in state core/service-reassign-inventory-item-state-path)}})
+                    core/service-reassign-inventory-item-state-path))
         (remove nil? $)))

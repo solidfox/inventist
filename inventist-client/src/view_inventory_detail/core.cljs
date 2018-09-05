@@ -1,17 +1,22 @@
 (ns view-inventory-detail.core
   (:require [clojure.string :as str]
             [util.inventory.core :as util]
-            [oops.core :refer [ocall oget]]))
+            [oops.core :refer [ocall oget]]
+            [service-reassign-inventory-item.core :as reassign]))
+
+(def service-reassign-inventory-item-state-path
+  [:modules :service-reassign-inventory-item])
 
 (defn create-state
   [{inventory-id :inventory-item-id}]
-  {:inventory-item-id                   inventory-id
-   :edit-mode                           false
-   :report-issue-form                   nil
+  (-> {:inventory-item-id                   inventory-id
+       :edit-mode                           false
+       :report-issue-form                   nil
 
-   :should-refetch-get-inventory-detail false
-   :fetching-inventory-details          false
-   :get-inventory-details-response      nil})
+       :should-refetch-get-inventory-detail false
+       :fetching-inventory-details          false
+       :get-inventory-details-response      nil}
+      (assoc-in service-reassign-inventory-item-state-path (reassign/create-state))))
 
 (defn on-remote-state-mutation [state _]
   (assoc state :should-refetch-get-inventory-detail true))

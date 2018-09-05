@@ -2,7 +2,14 @@
   (:require [remodular.core :as rem]
             [view-inventory-detail.core :as core]
             [oops.core :refer [ocall]]
-            [util.inventory.core :as util]))
+            [util.inventory.core :as util]
+            [service-reassign-inventory-item.core :as reassign]))
+
+(defn dropped-inventory-item-on-person [{:keys [inventory-item-id
+                                                person-id]
+                                         :as   data}]
+  (rem/create-event {:name :dropped-inventory-item-on-person
+                     :data data}))
 
 (defn clicked-user [user-id]
   (rem/create-event {:name :clicked-user
@@ -50,7 +57,7 @@
       :send-report-issue-form
       (-> event
           (rem/append-action
-            (rem/create-action {:name :send-report-issue-form
+            (rem/create-action {:name        :send-report-issue-form
                                 :fn-and-args [core/set-should-send-report-issue-form true]}))
           (rem/create-anonymous-event))
 
@@ -78,7 +85,19 @@
       :clicked-user
       (-> event
           (rem/create-event {:new-name :selected-person
-                             :new-data {:person-id (get-in event [:data :user-id])}})))))
+                             :new-data {:person-id (get-in event [:data :user-id])}}))
+
+      :dropped-inventory-item-on-person
+      (let [{:keys [inventory-item-id
+                    person-id]} (:data event)]
+        (-> event
+            (rem/create-anonymous-event)
+            (rem/append-action
+              (rem/create-action {:name        :add-pending-inventory-item-reassignment
+                                  :state-path  core/service-reassign-inventory-item-state-path
+                                  :fn-and-args [reassign/add-pending-item-reassignment
+                                                {:inventory-item-id inventory-item-id
+                                                 :new-assignee-id   person-id}]})))))))
 
 
 
