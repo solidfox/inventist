@@ -8,13 +8,16 @@
   [{:keys [item
            selected
            hidden
+           drop-zone
            on-drop
            on-select]}]
   (s-overview/list-card {:selected  selected
                          :on-drop   on-drop
-                         :drop-zone [{:drag-data-type "inventist/person"
-                                      :drop-zone-text (str "Assign " (:class item) " to the dragged person.")
-                                      :drop-effect    "link"}]
+                         :drag-data {:type                "inventist/inventory-item"
+                                     :id                  (:id item)
+                                     :name                (:name item)
+                                     :physical-identifier (:serial-number item)}
+                         :drop-zone drop-zone
                          :on-click  on-select}
                         [:div {:key   1
                                :style {:display "flex"}}

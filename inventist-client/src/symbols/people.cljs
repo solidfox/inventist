@@ -11,18 +11,19 @@
            selected
            hidden
            data-attributes
+           drop-zone
+           on-drop
            on-click]}]
   (s-overview/list-card
     {:selected        selected
      :hidden          hidden
      :data-attributes data-attributes
-     :drag-data {:type       "inventist/person"
-                 :id         (:id person)
-                 :first-name (:first-name person)
-                 :last-name  (:last-name person)
-                 :groups     (:groups person)}
+     :drop-zone       drop-zone
+     :on-drop         on-drop
+     :drag-data       {:type       "inventist/person"
+                       :id         (:id person)}
      :on-click        on-click}
-    [:div {:key 1
+    [:div {:key   1
            :style {:display     "flex"
                    :align-items "top"}}
      [:div {:class (style/list-item-left-column)}

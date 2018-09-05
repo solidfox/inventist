@@ -59,6 +59,9 @@
                      [:div {:key      (:id item)
                             :on-click (fn [] (item-selected-event item))}
                       (s-inventory/inventory-list-card {:item     item
+                                                        :drop-zone [{:drag-data-type "inventist/person"
+                                                                     :drop-zone-text (str "Assign " (:class item) " to the dragged person.")
+                                                                     :drop-effect    "link"}]
                                                         :on-drop  (fn [drag-data] (trigger-event
                                                                                     (rem/create-event {:name :dropped-person-on-inventory-item
                                                                                                        :data {:inventory-item-id (:id item)
