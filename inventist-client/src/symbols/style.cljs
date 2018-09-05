@@ -25,14 +25,10 @@
                  :box-shadow      (str "0 0 0.25rem " color/shadow)
                  :backgroundColor color/shaded-context-background})
 
-(def card-title {:line-height    "1rem"
-                 :color          color/shaded-context-primary-text
-                 :text-transform "capitalize"})
+(def card-title {:color          color/shaded-context-primary-text})
 
 (def card-subtitle {:font-size      ".75rem"
-                    :color          color/shaded-context-secondary-text
-                    :line-height    "0.8rem"
-                    :text-transform "capitalize"})
+                    :color          color/shaded-context-secondary-text})
 
 (def header-title {:font-size      "2rem"
                    :color          color/light-context-title-text
@@ -100,7 +96,7 @@
 
 (defstyles list-item-class []
            {:width            "auto"
-            :background-color color/transparent
+            :background-color color/shaded-context-background
             :min-height       "3rem"
             :padding          "0.75rem"
             :margin           "0.125rem 0"

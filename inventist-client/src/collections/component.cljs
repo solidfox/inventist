@@ -118,7 +118,6 @@
    {{:keys [state
             selected-item-metadata-map]} :input
     :keys                                [trigger-event]}]
-  (println selected-item-metadata-map)
   (let [heading                (:heading state)
         collection-list        collections-list
         selected-collection-id (:selected-collection-id state)]

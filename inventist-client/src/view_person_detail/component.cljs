@@ -12,7 +12,8 @@
             [view-person-detail.event :as event]
             [oops.core :as oops]
             [view-person-detail.core :as core]
-            [util.inventory.core :as util]))
+            [util.inventory.core :as util]
+            [symbols.inventory :as s-inventory]))
 
 (defc person-detail < (modular-component event/handle-event)
   [{{state :state}  :input
@@ -20,14 +21,14 @@
     viewport-height :viewport-height
     viewport-width  :viewport-width}]
   (js/console.log state)
-  (let [person (core/get-person state)
+  (let [person                          (core/get-person state)
         {phone   :phone
          address :address} person
         should-show-item-assignment-box (core/should-show-item-assignment-input-box state)]
 
     ;PEOPLE DETAILS
     [:div {:id    "detail-container"
-           :style {:height     "100%"          ;(str (- (js/parseInt viewport-height) 48) "px")
+           :style {:height     "100%"                       ;(str (- (js/parseInt viewport-height) 48) "px")
                    :overflow-x "hidden"
                    :overflow-y "hidden"
                    :padding    "1.5rem"
@@ -147,8 +148,8 @@
          (for [item (remove nil?
                             (concat [(:ongoing-inventory-item-assignment state)]
                                     (:inventory person)))]
-           (-> (s-detailview/device-card {:item     item
-                                          :on-click (fn [] (trigger-event (event/clicked-device (:id item))))})
+           (-> (s-inventory/inventory-list-card {:item      item
+                                                 :on-select (fn [] (trigger-event (event/clicked-device (:id item))))})
                (with-key (:id item))))]
 
 

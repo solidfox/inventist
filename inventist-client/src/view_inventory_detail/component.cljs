@@ -11,9 +11,10 @@
             [view-inventory-detail.event :as event]
             [view-inventory-detail.core :as core]
             [oops.core :as oops]
-            [util.inventory.core :as util]))
+            [util.inventory.core :as util]
+            [symbols.people :as s-people]))
 
-(def reassign-device-icon "fa-ambulance")
+(def report-issue-icon "fa-ambulance")
 
 (defn report-issue-form
   [{{{{object-url :object-url} :file
@@ -106,7 +107,7 @@
                           :on-click  (fn [] (trigger-event (rem/create-event
                                                              {:name :reassign-device-clicked})))}
                          {:title     "Report Issue with Device"
-                          :icon      "fas fa-exclamation-triangle"
+                          :icon      (str "fas " report-issue-icon)
                           :scroll-to "#timeline-dev"
                           :on-click  (fn [] (trigger-event (event/report-issue-clicked (:id computer))))}]
         :fields         [{:label    "Serial Number"
@@ -175,8 +176,8 @@
 
 
         (if-let [user (:user computer)]
-          (s-detailview/person-card {:user     user
-                                     :on-click (fn [] (trigger-event (event/clicked-user (:id user))))})
+          (s-people/person-list-card {:person   user
+                                      :on-click (fn [] (trigger-event (event/clicked-user (:id user))))})
           (when (not edit-mode)
             [:div {:style {:color      color/light-context-primary-text
                            :font-style "italic"
@@ -195,7 +196,7 @@
                                 :viewport (cond (< viewport-width style/viewport-mobile) "mobile"
                                                 :else "desktop")
                                 :buttons  (s-general/section-title-button {:text     "Report Problem"
-                                                                           :icon     (str "fas " reassign-device-icon)
+                                                                           :icon     (str "fas " report-issue-icon)
                                                                            :active   (not (core/should-show-report-issue-form? state))
                                                                            :on-click (fn [] (trigger-event (event/report-issue-clicked (:id computer))))})})
 

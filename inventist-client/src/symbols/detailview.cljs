@@ -239,53 +239,6 @@
                      [:span {:style {:font-size  "0.75rem"
                                      :align-self "center"}} "Add"]]]})])
 
-;Card to show devices assigned
-(defc device-card [{item     :item
-                    on-click :on-click}]
-  (card {:key      (:id item)
-         :on-click on-click
-         :image    [:div {:style {:font-size    "3rem"
-                                  :margin-right "0.75rem"}}
-                    (cond (and (:image item) (not= (:image item) ""))
-                          [:img {:class (style/card-image)
-                                 :src   (:image item)}]
-                          :else
-                          (s-general/device-icon-set {:item item}))]
-         :content  [:div
-                    [:span {:style style/card-title}
-                     (str (:brand item) " " (:model-name item))] [:br]
-                    [:span {:style style/card-subtitle}
-                     (str (:serial-number item) " - " (:color item)) [:br]]]}))
-
-;Card to show Person
-(defc person-card [{user     :user
-                    on-click :on-click}]
-  (card {:key      (:id user)
-         :on-click on-click
-         :image    [:div {:style {:margin-right "0.75rem"}}
-                    (cond (and (:image user) (not= (:image user) ""))
-                          [:img {:src   (:image user)
-                                 :class (style/card-image)}]
-                          :else
-                          [:span {:style {:width            "3rem"
-                                          :height           "3rem"
-                                          :background-color color/shaded-context-secondary-text
-                                          :border-radius    "0.25rem"
-                                          :display          "grid"
-                                          :font-size        "1.8rem"
-                                          :align-items      "center"
-                                          :text-align       "center"
-                                          :color            color/shaded-context-highlight-bg}}
-                           (str (subs (or (:first-name user) "") 0 1) (subs (or (:last-name user) "") 0 1))])]
-         :content  [:div
-                    [:span {:style style/card-title}
-                     (str (:first-name user) " " (:last-name user))] [:br]
-                    [:span {:style style/card-subtitle}
-                     (str (:occupation user) " - ")
-                     (for [group (:groups user)]
-                       [:span {:key (:id group)}
-                        (str (:name group) " ")])]]}))
-
 ;404 Styled Placholder
 (defc no-selection-view [{viewport-width  :viewport-width
                           viewport-height :viewport-height

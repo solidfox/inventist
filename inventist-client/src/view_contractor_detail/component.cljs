@@ -4,7 +4,8 @@
             [symbols.general :as s-general]
             [remodular.core :refer [modular-component]]
             [symbols.color :as color]
-            [symbols.style :as style]))
+            [symbols.style :as style]
+            [symbols.inventory :as s-inventory]))
 
 (def edit-mode false)
 
@@ -82,7 +83,7 @@
                       :flex-wrap      "wrap"
                       :align-items    "flex-start"}}
         (for [item (:inventory contractor)]
-          (s-detailview/device-card {:item item}))]
+          (s-inventory/inventory-list-card {:item item}))]
        (s-general/section-divider)]]]))
 
 ;Timeline
