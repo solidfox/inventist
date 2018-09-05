@@ -1,5 +1,6 @@
 (ns view-inventory-overview.event
   (:require [remodular.core :as rem]
+            [service-reassign-inventory-item.core :as reassign]
             [view-inventory-overview.core :as core]))
 
 (defn handle-event
@@ -13,7 +14,8 @@
             (rem/create-anonymous-event)
             (rem/append-action
               (rem/create-action {:name        :add-pending-inventory-item-reassignment
-                                  :fn-and-args [core/add-pending-item-reassignment
+                                  :state-path  core/service-reassign-inventory-item-state-path
+                                  :fn-and-args [reassign/add-pending-item-reassignment
                                                 {:inventory-item-id inventory-item-id
                                                  :new-assignee-id   new-assignee-id}]}))))
 

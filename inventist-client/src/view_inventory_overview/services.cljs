@@ -3,7 +3,9 @@
             [ysera.test :refer [is=]]
             [clojure.string :as str]
             [util.inventory.core :as util]
-            [util.inventory.services :as inventory-services]))
+            [util.inventory.services :as inventory-services]
+            [remodular.core :as rem]
+            [service-reassign-inventory-item.services :as reassign]))
 
 (def inventory-list-graph-ql
   [:id
@@ -24,19 +26,11 @@
             :params {:query (util/graphql-string {:queries [[:computers inventory-list-graph-ql]]})}}
    :after  [core/receive-get-inventory-list-service-response]})
 
-(defn reassign-inventory-item
-  [{inventory-item-id :inventory-item-id
-    new-user-id       :new-assignee-id}]
-  (inventory-services/reassign-inventory-item {:inventory-item-id  inventory-item-id
-                                               :new-user-id        new-user-id
-                                               :new-user-graphql   [:id]
-                                               :before-fn-and-args [core/started-fetching-reassign-inventory-item inventory-item-id]
-                                               :after-fn-and-args  [core/receive-reassign-inventory-item-response {:inventory-item-id inventory-item-id}]}))
-
 (defn get-services
   [{{state :state} :input}]
   (concat (when (core/should-get-inventory-list? state)
             [(get-inventory-list)])
-          (->> (core/get-unstarted-reassign-inventory-item-requests state)
-               (map reassign-inventory-item))))
+          (rem/prepend-state-path-to-services
+            (reassign/get-services {:input {:state (get-in state core/service-reassign-inventory-item-state-path)}})
+            core/service-reassign-inventory-item-state-path)))
 
