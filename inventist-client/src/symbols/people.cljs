@@ -16,6 +16,11 @@
     {:selected        selected
      :hidden          hidden
      :data-attributes data-attributes
+     :drag-data {:type       "inventist/person"
+                 :id         (:id person)
+                 :first-name (:first-name person)
+                 :last-name  (:last-name person)
+                 :groups     (:groups person)}
      :on-click        on-click}
     [:div {:key 1
            :style {:display     "flex"
