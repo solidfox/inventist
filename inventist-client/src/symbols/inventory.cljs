@@ -16,7 +16,8 @@
                                       :drop-zone-text (str "Assign " (:class item) " to the dragged person.")
                                       :drop-effect    "link"}]
                          :on-click  on-select}
-                        [:div {:style {:display "flex"}}
+                        [:div {:key   1
+                               :style {:display "flex"}}
                          [:div {:key   1
                                 :class (style/list-item-left-column)
                                 :style {:font-size "3rem"}}

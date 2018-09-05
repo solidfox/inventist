@@ -17,7 +17,8 @@
      :hidden          hidden
      :data-attributes data-attributes
      :on-click        on-click}
-    [:div {:style {:display     "flex"
+    [:div {:key 1
+           :style {:display     "flex"
                    :align-items "top"}}
      [:div {:class (style/list-item-left-column)}
       (cond (and (:image person) (not= (:image person) ""))
