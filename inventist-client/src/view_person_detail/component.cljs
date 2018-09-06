@@ -64,13 +64,13 @@
                            :title     "Assign New Device"
                            :on-click  (fn [] (trigger-event (rem/create-event
                                                               {:name :assign-new-device-clicked})))
-                           :scroll-to "#devices"}
-                          {:icon     "fas fa-qrcode"
-                           :title    "QR Code"
-                           :on-click ""}
-                          {:icon     "far fa-share-square"
-                           :title    "Share"
-                           :on-click ""}]
+                           :scroll-to "#devices"}]
+         ;{:icon     "fas fa-qrcode"
+         ; :title    "QR Code"
+         ; :on-click ""}
+         ;{:icon     "far fa-share-square"
+         ; :title    "Share"
+         ; :on-click ""}]
          :fields         [{:label    "Occupation"
                            :value    (:occupation person)
                            :editable false}
@@ -127,16 +127,15 @@
         [:div {:style {:display        "flex"
                        :flex-direction "row"
                        :flex-wrap      "wrap"
-                       :align-items    "flex-start"}}
+                       :align-items    "fill"
+                       :justify-items  "fill"}}
 
          (when should-show-item-assignment-box
-           (let [trigger-commit-new-device-event (fn [] (trigger-event event/commit-new-device))]
-             (s-detailview/input-card {:id          "Add Device"
-                                       :placeholder "New device's serial number"
-                                       :value       (or (core/get-new-device-serial-number state) "")
-                                       :on-change   (fn [e] (trigger-event (event/new-device-serial-number-changed (oops/oget e [:target :value]))))
-                                       :on-enter    trigger-commit-new-device-event
-                                       :on-click    trigger-commit-new-device-event})))
+           (s-detailview/card {:id      "Add Device"
+                               :animate true
+                               :style   {:display     "flex"
+                                         :align-items "center"}
+                               :content (str "To assign new devices to a person, drag the device and drop it on the desired asignee.")}))
 
          (when (not should-show-item-assignment-box)
            (cond (= (count (:inventory person)) 0)
@@ -149,6 +148,13 @@
                             (concat [(:ongoing-inventory-item-assignment state)]
                                     (:inventory person)))]
            (-> (s-inventory/inventory-list-card {:item      item
+                                                 :drop-zone [{:drag-data-type "inventist/person"
+                                                              :drop-zone-text (str "Assign " (:class item) " to the dragged person.")
+                                                              :drop-effect    "link"}]
+                                                 :on-drop   (fn [drag-data] (trigger-event
+                                                                              (event/reassign-inventory-item
+                                                                                {:inventory-item-id (:id item)
+                                                                                 :person-id         (:id drag-data)})))
                                                  :on-select (fn [] (trigger-event (event/clicked-device (:id item))))})
                (with-key (:id item))))]
 

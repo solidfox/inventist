@@ -2,7 +2,9 @@
   (:require [view-person-detail.core :as core]
             [ysera.test :refer [is=]]
             [util.inventory.core :as util]
-            [util.inventory.services :as inventory-services]))
+            [util.inventory.services :as inventory-services]
+            [remodular.core :as rem]
+            [service-reassign-inventory-item.services :as reassign]))
 
 (def inventroy-details-graph-ql
   [:id
@@ -42,23 +44,12 @@
                                                   :queries   [[:person {:id person-id} person-details-graphql]]})}}
    :after  [core/receive-get-person-detail-service-response]})
 
-(defn reassign-inventory-item
-  [{serial-number :serial-number
-    new-user-id   :new-user-id}]
-  (inventory-services/reassign-inventory-item {:serial-number      serial-number
-                                               :new-user-id        new-user-id
-                                               :fragments          inventory-services/reallocation-fragment
-                                               :new-user-graphql   person-details-graphql
-                                               :before-fn-and-args [core/started-reassign-inventory-item-service-call {:serial-number serial-number}]
-                                               :after-fn-and-args  [core/receive-reassign-inventory-item-service-response]}))
-
 
 (defn get-services
   [{{state :state} :input}]
   (remove nil?
           (concat (when (core/should-get-person-detail? state)
                     [(get-person-details (:person-id state))])
-                  (when-let
-                    [pending-inventory-item-assignment (core/get-next-pending-inventory-item-assignment-to-perform state)]
-                    [(reassign-inventory-item {:new-user-id   (:person-id state)
-                                               :serial-number (:serial-number pending-inventory-item-assignment)})]))))
+                  (rem/prepend-state-path-to-services
+                    (reassign/get-services {:input {:state (get-in state core/service-reassign-inventory-item-state-path)}})
+                    core/service-reassign-inventory-item-state-path))))

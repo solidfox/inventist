@@ -65,7 +65,7 @@
              :css-dirs       ["resources/public/css"]       ;; watch and update CSS
 
              :ring-handler   server.router/handle-request
-             :server-logfile "/tmp/figwheel-log.txt"}
+             :server-logfile "/tmp/figwheel-log.txt"
   ;; Start an nREPL server into the running figwheel process
   ;; :nrepl-port 7888
 
@@ -84,7 +84,7 @@
   ;; #! /bin/sh
   ;; emacsclient -n +$2 $1
   ;;
-  ;; :open-file-command "myfile-opener"
+             :open-file-command "open-in-intellij"}
 
   ;; if you are using emacsclient you can just use
   ;; :open-file-command "emacsclient"

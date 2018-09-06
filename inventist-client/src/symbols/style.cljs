@@ -25,10 +25,10 @@
                  :box-shadow      (str "0 0 0.25rem " color/shadow)
                  :backgroundColor color/shaded-context-background})
 
-(def card-title {:color          color/shaded-context-primary-text})
+(def card-title {:color color/shaded-context-primary-text})
 
-(def card-subtitle {:font-size      ".75rem"
-                    :color          color/shaded-context-secondary-text})
+(def card-subtitle {:font-size ".75rem"
+                    :color     color/shaded-context-secondary-text})
 
 (def header-title {:font-size      "2rem"
                    :color          color/light-context-title-text
@@ -60,17 +60,15 @@
            {:opacity 0.75
             :&:hover {:opacity 1}})
 
-(defstyles card []
+(defstyles card [{:keys [actionable]}]
            {:border-radius         outer-border-radius
             :background-color      color/shaded-context-background
+            :color                 color/shaded-context-primary-text
             :min-height            "2.5rem"
-            :width                 "18.5rem"
             :padding               "0.75rem"
             :margin                "0.75rem 1rem 0.25rem 0"
-            :display               "grid"
-            :grid-template-columns "auto 1fr"
-            :cursor                "pointer"
-            :&:hover               {:background-color color/shaded-context-highlight-bg}})
+            :&:hover               (when actionable
+                                     {:background-color color/shaded-context-highlight-bg})})
 
 (defstyles navbar-card []
            {:text-align       "left"

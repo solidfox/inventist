@@ -23,7 +23,7 @@
      send-response                           :send-response} :report-issue-form
     trigger-event                                            :trigger-event}]
   [:div {:id    "report-issue"
-         :class (style/card)
+         :class (style/card {:actionable false})
          :style {:animation             style/bounce-animation
                  :display               "grid"
                  :grid-gap              "0.5rem"

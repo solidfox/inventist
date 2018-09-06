@@ -15,18 +15,20 @@
 
 (defc list-card-drag-over [drop-text]
   [:div {:style {:position         "absolute"
-                 :width            "calc(100% - 4.5rem - 4px)"
-                 :height           "calc(100% - 4.5rem - 4px)"
+                 :top              0
+                 :left             0
+                 :width            "calc(100% - 3rem)"
+                 :height           "calc(100% - 3rem)"
                  :padding          "1.5rem"
                  :display          "flex"
                  :text-align       "center"
                  :align-items      "center"
                  :justify-content  "center"
                  :opacity          "0.85"
-                 :color            color/shaded-context-primary-text
-                 :background-color color/shaded-context-background
-                 :border-radius    style/inner-border-radius
-                 :border           (str "2px dashed " color/shaded-context-secondary-text)}}
+                 :font-size        "0.7rem"
+                 :color            color/dark-context-primary-text
+                 :background-color color/dark-context-background
+                 :border-radius    style/inner-border-radius}}
    ;[:div [:span {:style {:font-size "2.8rem"}} [:i {:class "fas fa-box-open"}]]]
    [:div drop-text]])
 
@@ -47,11 +49,11 @@
            (or (:drop-zone props)
                (:on-drop props)
                (:on-click props)))
-         (let [state     (if (::args-atom state)
-                           state
-                           (assoc state ::args-atom (atom nil)))
-               args-atom (::args-atom state)]
-           (reset! args-atom (:rum/args state)))))})
+       (let [state     (if (::args-atom state)
+                         state
+                         (assoc state ::args-atom (atom nil)))
+             args-atom (::args-atom state)]
+         (reset! args-atom (:rum/args state)))))})
 
 (defcs list-card < (rum/local nil :current-drag-metadata-atom)
                    "drop-zone expects a map like this

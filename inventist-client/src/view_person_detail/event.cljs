@@ -1,5 +1,6 @@
 (ns view-person-detail.event
   (:require [remodular.core :as rem]
+            [service-reassign-inventory-item.core :as reassign]
             [view-person-detail.core :as core]
             [util.inventory.core :as util]))
 
@@ -17,23 +18,28 @@
 (def commit-new-device
   (rem/create-event {:name :commit-new-device}))
 
+(defn reassign-inventory-item [{:keys [inventory-item-id
+                                       person-id]
+                                :as   data}]
+  (rem/create-event {:name :reassign-inventory-item
+                     :data data}))
+
 (defn handle-event
   [_state event]
   (if (not (rem/triggered-by-me? event))
     (rem/create-anonymous-event event)
     (case (:name event)
-      :new-device-serial-number-changed
-      (-> event
-          (rem/append-action
-            (rem/create-action {:name        :new-device-serial-number-changed
-                                :fn-and-args [core/set-new-device-serial-number (get-in event [:data :new-value])]}))
-          (rem/create-anonymous-event))
-      :commit-new-device
-      (-> event
-          (rem/append-action
-            (rem/create-action {:name        :commit-new-device
-                                :fn-and-args [core/commit-new-pending-inventory-item-assignment]}))
-          (rem/create-anonymous-event))
+      :reassign-inventory-item
+      (let [{:keys [inventory-item-id
+                    person-id]} (:data event)]
+        (-> event
+            (rem/create-anonymous-event)
+            (rem/append-action
+              (rem/create-action {:name        :reassign-inventory-item
+                                  :state-path  core/service-reassign-inventory-item-state-path
+                                  :fn-and-args [reassign/add-pending-item-reassignment
+                                                {:inventory-item-id inventory-item-id
+                                                 :new-assignee-id   person-id}]}))))
       :cancel-new-device-assignment
       (-> event
           (rem/append-action

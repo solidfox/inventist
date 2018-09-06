@@ -19,7 +19,7 @@
   (get-in state [:selected-collection-items collection-id]))
 
 (defn should-get-collections? [state]
-  (not= 200 (get-in state [:get-collections-service-response :status])))
+  (get-in state [:get-collections-service-response]))
 
 (defn started-get-collections-service-call [state]
   (assoc state :get-collections-service-fetching true))

@@ -29,7 +29,7 @@
 
 (defc detail-drag-zone []
   [:div {:style {:position         "absolute"
-                 :width            "calc(100% - 48px)"                ;(str (- (js/parseInt viewport-width) 690) "px")
+                 :width            "calc(100% - 48px)"      ;(str (- (js/parseInt viewport-width) 690) "px")
                  :height           "calc(100% - 96px)"
                  :display          "grid"
                  :text-align       "center"
@@ -192,12 +192,15 @@
   [{id       :id
     style    :style
     key      :key
+    animate  :animate
     image    :image
     content  :content
     on-click :on-click}]
   [:div {:key       key
          :id        id
-         :class     (style/card)
+         :style     (merge style
+                           (when animate {:animation style/bounce-animation}))
+         :class     (style/card {:actionable (and on-click true)})
          :on-click  on-click
          :draggable true}
    image
@@ -209,35 +212,35 @@
                    on-change   :on-change
                    on-enter    :on-enter
                    on-click    :on-click}]
-  [:div {:style {:animation style/bounce-animation}}
-   (card {:id      id
-          :content [:div {:style {:display         "flex"
-                                  :width           "18.5rem"
-                                  :max-height      "2.5rem"
-                                  :flex-wrap       "wrap"
-                                  :justify-content "space-between"}}
-                    [:div
-                     (s-general/input-field {:placeholder placeholder
-                                             :width       "15rem"
-                                             :height      "2.5rem"
-                                             :value       value
-                                             :on-change   on-change
-                                             :on-enter    on-enter})]
-                    [:div {:on-click on-click
-                           :style    {:width              "2.5rem"
-                                      :height             "2.5rem"
-                                      :border-radius      "0.25rem"
-                                      :display            "grid"
-                                      :grid-template-rows "1.5rem 1rem"
-                                      :justify-content    "center"
-                                      :color              color/shaded-context-background
-                                      :background-color   color/shaded-context-secondary-text}}
-                     [:span {:style {:font-size  "1rem"
-                                     :text-align "center"
-                                     :align-self "end"}}
-                      [:i {:class "fas fa-plus-circle"}]]
-                     [:span {:style {:font-size  "0.75rem"
-                                     :align-self "center"}} "Add"]]]})])
+  (card {:id      id
+         :animate true
+         :content [:div {:style {:display         "flex"
+                                 :width           "18.5rem"
+                                 :max-height      "2.5rem"
+                                 :flex-wrap       "wrap"
+                                 :justify-content "space-between"}}
+                   [:div
+                    (s-general/input-field {:placeholder placeholder
+                                            :width       "15rem"
+                                            :height      "2.5rem"
+                                            :value       value
+                                            :on-change   on-change
+                                            :on-enter    on-enter})]
+                   [:div {:on-click on-click
+                          :style    {:width              "2.5rem"
+                                     :height             "2.5rem"
+                                     :border-radius      "0.25rem"
+                                     :display            "grid"
+                                     :grid-template-rows "1.5rem 1rem"
+                                     :justify-content    "center"
+                                     :color              color/shaded-context-background
+                                     :background-color   color/shaded-context-secondary-text}}
+                    [:span {:style {:font-size  "1rem"
+                                    :text-align "center"
+                                    :align-self "end"}}
+                     [:i {:class "fas fa-plus-circle"}]]
+                    [:span {:style {:font-size  "0.75rem"
+                                    :align-self "center"}} "Add"]]]}))
 
 ;404 Styled Placholder
 (defc no-selection-view [{viewport-width  :viewport-width
