@@ -58,15 +58,15 @@
                    (fn [item]
                      [:div {:key      (:id item)
                             :on-click (fn [] (item-selected-event item))}
-                      (s-inventory/inventory-list-card {:item     item
+                      (s-inventory/inventory-list-card {:item      item
                                                         :drop-zone [{:drag-data-type "inventist/person"
                                                                      :drop-zone-text (str "Assign " (:class item) " to the dragged person.")
                                                                      :drop-effect    "link"}]
-                                                        :on-drop  (fn [drag-data] (trigger-event
-                                                                                    (rem/create-event {:name :dropped-person-on-inventory-item
-                                                                                                       :data {:inventory-item-id (:id item)
-                                                                                                              :new-assignee-id   (:id drag-data)}})))
-                                                        :selected (= (:selected-inventory-id state) (:id item))})]))))
+                                                        :on-drop   (fn [drag-data] (trigger-event
+                                                                                     (rem/create-event {:name :reassign-inventory-item
+                                                                                                        :data {:inventory-item-id (:id item)
+                                                                                                               :new-assignee-id   (:id drag-data)}})))
+                                                        :selected  (= (:selected-inventory-id state) (:id item))})]))))
           ;:hidden    (not (core/inventory-matches item search-terms))})]))))
 
           (when (= n-results 0)

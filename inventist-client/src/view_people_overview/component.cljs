@@ -57,6 +57,13 @@
                      [:div {:key      (:id person)
                             :on-click (fn [] (person-selected-event person))}
                       (s-people/person-list-card {:person   person
+                                                  :drop-zone [{:drag-data-type "inventist/inventory-item"
+                                                               :drop-zone-text (str "Assign dragged item to " (:first-name person) ".")
+                                                               :drop-effect    "link"}]
+                                                  :on-drop  (fn [drag-data] (trigger-event
+                                                                              (rem/create-event {:name :reassign-inventory-item
+                                                                                                 :data {:inventory-item-id (:id drag-data)
+                                                                                                        :person-id   (:id person)}})))
                                                   :selected (= (:selected-person-id state) (:id person))
                                                   :hidden   (not (core/person-matches person search-terms))})]))))
           (when (= n-results 0)

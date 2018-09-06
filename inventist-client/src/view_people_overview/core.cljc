@@ -2,22 +2,26 @@
   (:require [clojure.string :as str]
             [ysera.test :as test]
             [util.inventory.core :as util]
+            [service-reassign-inventory-item.core :as reassign]
             [#?(:cljs cljs-time.core :clj clj-time.core) :as time]
             [#?(:cljs cljs-time.coerce :clj clj-time.coerce) :as coerce]))
 
 (defn create-long-timestamp []
   (coerce/to-long (time/now)))
 
+(def service-reassign-inventory-item-state-path [:modules :service-reassign-inventory-item])
+
 (defn create-state
   []
-  {:selected-person-id                 nil
-   :search-terms                       nil
+  (-> {:selected-person-id                 nil
+       :search-terms                       nil
 
-   ;Services
-   :latest-acceptable-cache-fetch-time (create-long-timestamp)
-   :should-retry-on-fetch-error        false
-   :fetching-people-list               false
-   :get-people-list-response           nil})
+       ;Services
+       :latest-acceptable-cache-fetch-time (create-long-timestamp)
+       :should-retry-on-fetch-error        false
+       :fetching-people-list               false
+       :get-people-list-response           nil}
+      (assoc-in service-reassign-inventory-item-state-path (reassign/create-state))))
 
 (defn started-get-people-list-service-call [state]
   (-> state

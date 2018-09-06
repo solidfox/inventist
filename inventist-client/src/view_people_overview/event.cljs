@@ -1,11 +1,24 @@
 (ns view-people-overview.event
   (:require [remodular.core :as rem]
-            [view-people-overview.core :as core]))
+            [view-people-overview.core :as core]
+            [service-reassign-inventory-item.core :as reassign]))
 
 (defn handle-event
   [_state event]
   (if (rem/triggered-by-me? event)
     (case (:name event)
+      :reassign-inventory-item
+      (let [{:keys [inventory-item-id
+                    person-id]} (:data event)]
+        (-> event
+            (rem/create-anonymous-event)
+            (rem/append-action
+              (rem/create-action {:name        :add-pending-inventory-item-reassignment
+                                  :state-path  core/service-reassign-inventory-item-state-path
+                                  :fn-and-args [reassign/add-pending-item-reassignment
+                                                {:inventory-item-id inventory-item-id
+                                                 :new-assignee-id   person-id}]}))))
+
       :retry-fetching-data
       (-> event
           (rem/create-anonymous-event)

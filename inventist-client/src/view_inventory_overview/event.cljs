@@ -7,7 +7,7 @@
   [_state event]
   (if (rem/triggered-by-me? event)
     (case (:name event)
-      :dropped-person-on-inventory-item
+      :reassign-inventory-item
       (let [{:keys [inventory-item-id
                     new-assignee-id]} (:data event)]
         (-> event

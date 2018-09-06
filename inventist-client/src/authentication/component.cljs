@@ -21,7 +21,7 @@
     (ocall (firebase-auth) :signInWithRedirect provider)))
 
 (defn log-out []
-  (cond (js/confirm "Do you wish to logout?") (ocall (firebase-auth) :signOut)))
+  (ocall (firebase-auth) :signOut))
 
 (defc loading-indicator []
   [:img {:style {:margin     "6px 0 0 8px"

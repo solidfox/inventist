@@ -2,7 +2,9 @@
   (:require [view-people-overview.core :as core]
             [ysera.test :refer [is=]]
             [clojure.string :as str]
-            [util.inventory.core :as util]))
+            [service-reassign-inventory-item.services :as reassign]
+            [util.inventory.core :as util]
+            [remodular.core :as rem]))
 
 
 (def people-overview-graph-ql
@@ -30,7 +32,11 @@
 
 (defn get-services
   [{{state :state} :input}]
-  (when (core/should-get-people-list? state)
-    [(get-people-list)]))
+  (concat (when (core/should-get-people-list? state)
+            [(get-people-list)])
+          (rem/prepend-state-path-to-services
+            (reassign/get-services
+              {:input {:state (util/spy (get-in state core/service-reassign-inventory-item-state-path))}})
+            core/service-reassign-inventory-item-state-path)))
 
 

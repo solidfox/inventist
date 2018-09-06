@@ -24,19 +24,20 @@
            widget
            color
            on-click]}]
-  [:div {:key       title
+  [:div {:key           title
          ;:class    "collection-item"
-         :draggable false
-         :style     {:min-height            collection-list-item-height
-                     :max-height            collection-list-item-height
-                     :color                 color/dark-context-primary-text
-                     :width                 "auto"
-                     :padding               "0.5rem 1rem"
-                     :cursor                "pointer"
-                     :display               "grid"
-                     :grid-template-columns "1.5rem auto 2rem"
-                     :background-color      (or color color/transparent)}
-         :on-click  on-click}
+         :draggable     false
+         :style         {:min-height            collection-list-item-height
+                         :max-height            collection-list-item-height
+                         :color                 color/dark-context-primary-text
+                         :width                 "auto"
+                         :padding               "0.5rem 1rem"
+                         :cursor                "pointer"
+                         :display               "grid"
+                         :grid-template-columns "1.5rem auto 2rem"
+                         :background-color      (or color color/transparent)}
+         :on-drag-enter on-click
+         :on-click      on-click}
    [:i {:class icon
         :style {:font-size  "1.25rem"
                 :margin-top "0.325rem"
@@ -60,10 +61,7 @@
    widget])
 
 (def collections-list
-  [{:title "Dashboard"
-    :icon  "fas fa-tachometer-alt"
-    :id    :dashboard}
-   {:title "Inventory"
+  [{:title "Inventory"
     :icon  "fas fa-sitemap"
     :id    :inventory}
    {:title "People"
