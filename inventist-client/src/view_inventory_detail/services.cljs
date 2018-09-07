@@ -74,8 +74,8 @@
                   (get-inventory-details (:inventory-item-id state))))
         (conj $ (when (core/should-send-report-issue-form? state)
                   (send-report-issue-form {:item-id     (:inventory-item-id state)
-                                           :description (get-in state [:report-issue-form :user-input :description])
-                                           :photos      [(get-in state [:report-issue-form :user-input :file])]})))
+                                           :description (get-in state [:report-issue-form :user-input :description])})))
+                                           ;:photos      [(get-in state [:report-issue-form :user-input :file])]})))
         (concat $ (rem/prepend-state-path-to-services
                     (reassign/get-services {:input {:state (get-in state core/service-reassign-inventory-item-state-path)}})
                     core/service-reassign-inventory-item-state-path))

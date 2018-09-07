@@ -153,7 +153,7 @@
                              color    :color
                              active   :active
                              on-click :on-click
-                             :or {active true}}]
+                             :or      {active true}}]
   [:span {:on-click (when active on-click)
           :style    {:color     (or color color/light-context-secondary-text)
                      :opacity   (if active 1 0.2)
@@ -242,7 +242,7 @@
            :style        (merge {:font-size       "1rem"
                                  :minWidth        minWidth
                                  :maxWidth        maxWidth
-                                 :width           (or width "100%")
+                                 :width           (str "calc(" (or width "100%") " - 0.5rem)")
                                  :height          (or height "2rem")
                                  :color           color/light-context-secondary-text
                                  :backgroundColor (cond (= disabled true) color/highlight
@@ -273,12 +273,12 @@
                   on-change   :on-change}]
   [:textarea {:id          id
               :style       {:font-size       "1rem"
-                            :width           (or width "100%")
+                            :width           (str "calc(" (or width "100%") " - 0.5rem)")
                             :max-width       (or maxWidth width)
                             :height          "1.5rem"
-                            :color           color/light-context-secondary-text
-                            :backgroundColor (cond (= disabled true) color/highlight
-                                                   :esle color/light-context-background)
+                            :backgroundColor (if disabled
+                                               color/highlight
+                                               color/light-context-background)
                             :box-shadow      "0px 0px 2px rgba(0,0,0,0.5) inset"
                             :borderRadius    "5px"
                             :border          0
@@ -328,10 +328,11 @@
                       required    :required
                       on-change   :on-change
                       on-click    :on-click}]
-  [:div {:style {:width  (or width "100%")
-                 :margin "0 0.5rem 0rem 0"}}
+  [:div
    [:div {:style {:line-height "1.5rem"
-                  :color       color/shaded-context-primary-text
+                  :color       (if disabled
+                                 "grey"
+                                 color/shaded-context-primary-text)
                   :margin      "0"}}
     (or field "")
     (cond (= required false) [:span {:style {:color      color/shaded-context-secondary-text

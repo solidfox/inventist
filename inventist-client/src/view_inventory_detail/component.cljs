@@ -16,54 +16,52 @@
 
 (def report-issue-icon "fa-ambulance")
 
-(defn report-issue-form
-  [{{{{object-url :object-url} :file
-      description              :description} :user-input
-     is-sending                              :is-sending
-     send-response                           :send-response} :report-issue-form
-    trigger-event                                            :trigger-event}]
-  [:div {:id    "report-issue"
-         :class (style/card {:actionable false})
-         :style {:animation             style/bounce-animation
-                 :display               "grid"
-                 :grid-gap              "0.5rem"
-                 :grid-template-columns "1fr 3rem"}}
-   (s-general/input-section {:type      "textarea"
-                             :width     "14rem"
-                             :value     (or description "")
-                             :on-change (fn [e]
-                                          (trigger-event
-                                            (event/set-report-issue-description (oops/oget e [:target :value]))))
-                             :text      "Describe your issue in detail."})
+(defc report-issue-form
+  [{{{object-url :object-url} :file
+     description              :description} :user-input
+    is-sending                              :is-sending
+    send-response                           :send-response
+    trigger-event                           :trigger-event}]
+  (let [successfully-sent send-response                     ;(= (:status send-response) 200)
+        can-send          (and (not is-sending)
+                               (not successfully-sent))]
+    [:div {:id    "report-issue"
+           :class (style/card {:actionable false})
+           :style {:animation             style/bounce-animation
+                   :display               "grid"
+                   :grid-gap              "0.5rem"
+                   :grid-template-columns "1fr 3rem"}}
+     (s-general/input-section {:type      "textarea"
+                               :disabled  (not can-send)
+                               :value     (or description "")
+                               :on-change (fn [e]
+                                            (trigger-event
+                                              (event/set-report-issue-description (oops/oget e [:target :value]))))
+                               :text      "Describe your issue in detail."})
 
-   [:div {:on-click send-response
-          :style    {:width              "3rem"
-                     :height             "2.5rem"
-                     :border-radius      "0.25rem"
-                     :display            "grid"
-                     :grid-template-rows "1.5rem 1rem"
-                     :justify-content    "center"
-                     :color              color/shaded-context-background
-                     :background-color   color/shaded-context-secondary-text}}
-    [:span {:style {:font-size  "1rem"
-                    :text-align "center"
-                    :align-self "end"}}
-     [:i {:class "fas fa-check-circle"}]]
-    [:span {:style {:font-size  "0.75rem"
-                    :align-self "center"}} "Submit"]]
+     [:div {:on-click (when (not is-sending)
+                        (fn [] (trigger-event
+                                 (event/send-report-issue-form))))
+            :style    {:width              "3rem"
+                       :height             "2.5rem"
+                       :border-radius      "0.25rem"
+                       :opacity            (if can-send 1 0.3)
+                       :display            "grid"
+                       :grid-template-rows "1.5rem 1rem"
+                       :justify-content    "center"
+                       :color              color/shaded-context-background
+                       :background-color   color/shaded-context-secondary-text}}
+      [:span {:style {:font-size  "1rem"
+                      :text-align "center"
+                      :align-self "end"}}
+       [:i {:class "fas fa-check-circle"}]]
+      [:span {:style {:font-size  "0.75rem"
+                      :align-self "center"}}
+       "Send"]]
 
-   (s-general/input-section {:field     "Photo"
-                             :type      "upload"
-                             :id        "report-image"
-                             :color     color/transparent
-                             :required  false
-                             :text      "You may upload a photo showing the problem."
-                             :on-change (fn [e] (trigger-event
-                                                  (event/new-report-issue-file (oops/oget e [:target :files :0]))))
-                             :style     {:margin 0}})
-   (when object-url
-     [:img {:class (style/card-image)
-            :src   object-url}])])
+     (when successfully-sent
+       [:div {:style {:text-align "center"}}
+        "Successfully sent!"])]))
 
 
 
@@ -211,8 +209,8 @@
 
       ;Report Issue Box
       (when (core/should-show-report-issue-form? state)
-        (report-issue-form {:report-issue-form (:report-issue-form state)
-                            :trigger-event     trigger-event}))
+        (report-issue-form (merge (:report-issue-form state)
+                                  {:trigger-event trigger-event})))
 
       (cond (not= (:history computer) [])
             (s-general/timeline

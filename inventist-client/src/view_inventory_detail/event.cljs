@@ -27,6 +27,9 @@
   (rem/create-event {:name :set-report-issue-description
                      :data {:description description}}))
 
+(defn send-report-issue-form []
+  (rem/create-event {:name :send-report-issue-form}))
+
 (defn handle-event
   [_state event]
   (if (not (rem/triggered-by-me? event))
