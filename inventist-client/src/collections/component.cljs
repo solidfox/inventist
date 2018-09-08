@@ -132,7 +132,7 @@
                     :margin-top            "1.5rem"
                     :padding               "0 1rem"
                     :display               "grid"
-                    :grid-template-columns "auto 1rem 1.5rem"
+                    :grid-template-columns "auto 1.5rem"
                     :grid-gap              "1rem"
                     :align-items           "center"
                     :font-size             "1rem"
@@ -144,8 +144,6 @@
              :on-click (if expanded trigger-collapse trigger-expand)}
        (upper-case heading)]
 
-      [:i {:class "fas fa-plus-circle"
-           :title "Add New"}]
       [:div {:style    {:text-align "center"}
              :on-click (if expanded trigger-collapse trigger-expand)}
        [:img {:src   "/image/arrow.svg"
